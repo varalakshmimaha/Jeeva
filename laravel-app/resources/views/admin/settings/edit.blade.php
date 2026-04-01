@@ -88,6 +88,14 @@
                     style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; resize: vertical; transition: border-color 0.2s;"
                     onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">{{ old('company_address', $settings['company_address'] ?? '') }}</textarea>
             </div>
+            <div style="margin-top: 20px;">
+                <label for="map_embed" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Google Maps Embed HTML</label>
+                <textarea id="map_embed" name="map_embed" rows="3"
+                    placeholder='<iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+                    style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit', monospace; font-size: 14px; color: #555; background: #fafcfe; box-sizing: border-box; resize: vertical; transition: border-color 0.2s;"
+                    onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">{{ old('map_embed', $settings['map_embed'] ?? '') }}</textarea>
+                <p style="margin: 6px 0 0 0; font-size: 13px; color: var(--muted);">Paste the full HTML embed code provided by Google Maps.</p>
+            </div>
         </div>
 
         {{-- Social Media Links --}}

@@ -27,6 +27,7 @@ class SettingsController extends Controller
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
             'twitter_link' => 'nullable|url|max:500',
+            'map_embed' => 'nullable|string',
         ]);
 
         // Handle logo upload
@@ -45,6 +46,7 @@ class SettingsController extends Controller
         $this->saveSetting('instagram_link', $validated['instagram_link'] ?? null);
         $this->saveSetting('facebook_link', $validated['facebook_link'] ?? null);
         $this->saveSetting('twitter_link', $validated['twitter_link'] ?? null);
+        $this->saveSetting('map_embed', $validated['map_embed'] ?? null);
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
     }

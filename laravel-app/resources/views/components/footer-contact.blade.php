@@ -6,13 +6,13 @@
       <div class="site-footer-brand">
         <h3 class="site-footer-title">About Us</h3>
         <a href="{{ route('home') }}" class="site-footer-brand-link">
-          <div class="site-footer-brand-mark">
-            @if(!empty($siteSettings['logo_url']))
-              <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" class="site-footer-brand-image">
-            @else
+          @if(!empty($siteSettings['logo_url']))
+            <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" style="height: 56px; width: auto; object-fit: contain; margin-right: 12px; margin-bottom: 8px;">
+          @else
+            <div class="site-footer-brand-mark">
               &#127973;
-            @endif
-          </div>
+            </div>
+          @endif
           <div>
             <div class="site-footer-brand-name">{{ $siteSettings['company_name'] }}</div>
             <div class="site-footer-brand-tag">Orthodontics</div>

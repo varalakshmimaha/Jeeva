@@ -16,13 +16,13 @@
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="{{ route('home') }}" class="logo">
-      <div class="logo-mark">
-        @if(!empty($siteSettings['logo_url']))
-          <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" class="logo-image">
-        @else
+      @if(!empty($siteSettings['logo_url']))
+        <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" style="height: 50px; width: auto; object-fit: contain; margin-right: 4px;">
+      @else
+        <div class="logo-mark">
           &#127973;
-        @endif
-      </div>
+        </div>
+      @endif
       <div class="logo-words">
         <span class="logo-name">{{ $siteSettings['company_name'] }}</span>
         <span class="logo-tag">Orthodontics</span>
