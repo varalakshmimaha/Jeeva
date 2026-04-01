@@ -4,8 +4,8 @@
 :root {
   --navy:      #0a1628;
   --navy-mid:  #0d1f3c;
-  --teal:      #38bdf8;
-  --teal-2:    #7dd3fc;
+  --teal:      #7dd3fc;
+  --teal-2:    #38bdf8;
   --teal-pale: #f0f9ff;
   --gold:      #f0a030;
   --gold-2:    #f5c842;
@@ -16,11 +16,11 @@
   --muted:     #5a6e8a;
   --border:    #dce6f0;
   --grad-hero: linear-gradient(135deg, #0a1628 0%, #0d2a4a 50%, #0a2240 100%);
-  --grad-teal: linear-gradient(135deg, #38bdf8 0%, #7dd3fc 100%);
+  --grad-teal: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
   --grad-gold: linear-gradient(135deg, #f0a030 0%, #f5c842 100%);
-  --shadow-sm: 0 2px 12px rgba(14, 165, 233, .07);
-  --shadow:    0 6px 32px rgba(14, 165, 233, .10);
-  --shadow-lg: 0 16px 60px rgba(14, 165, 233, .15);
+  --shadow-sm: 0 2px 12px rgba(125, 211, 252, .12);
+  --shadow:    0 6px 32px rgba(125, 211, 252, .18);
+  --shadow-lg: 0 16px 60px rgba(125, 211, 252, .25);
   --radius:    16px;
   --radius-lg: 24px;
 }
@@ -3126,7 +3126,7 @@ footer{
   padding:70px 40px;
   text-align:center;
   background: var(--grad-teal);
-  box-shadow: 0 25px 60px -12px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 25px 60px -12px rgba(125, 211, 252, 0.4);
 }
 .cta-modern-card h2{
   font-family:'Playfair Display',serif;
