@@ -23,6 +23,10 @@ class SettingsController extends Controller
             'company_address' => 'nullable|string',
             'company_hours' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'whatsapp_link' => 'nullable|url|max:500',
+            'instagram_link' => 'nullable|url|max:500',
+            'facebook_link' => 'nullable|url|max:500',
+            'twitter_link' => 'nullable|url|max:500',
         ]);
 
         // Handle logo upload
@@ -37,6 +41,10 @@ class SettingsController extends Controller
         $this->saveSetting('company_phone', $validated['company_phone'] ?? null);
         $this->saveSetting('company_address', $validated['company_address'] ?? null);
         $this->saveSetting('company_hours', $validated['company_hours'] ?? null);
+        $this->saveSetting('whatsapp_link', $validated['whatsapp_link'] ?? null);
+        $this->saveSetting('instagram_link', $validated['instagram_link'] ?? null);
+        $this->saveSetting('facebook_link', $validated['facebook_link'] ?? null);
+        $this->saveSetting('twitter_link', $validated['twitter_link'] ?? null);
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
     }

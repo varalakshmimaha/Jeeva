@@ -68,23 +68,23 @@
           </div>
 
           <div class="site-footer-social-icons">
-            @if(!empty($siteSettings['facebook']))
-              <a href="{{ $siteSettings['facebook'] }}" target="_blank" class="site-footer-social-link" title="Facebook" aria-label="Follow us on Facebook">
+            @if(!empty($siteSettings['facebook_link']))
+              <a href="{{ $siteSettings['facebook_link'] }}" target="_blank" class="site-footer-social-link" title="Facebook" aria-label="Follow us on Facebook">
                 <span>f</span>
               </a>
             @endif
-            @if(!empty($siteSettings['whatsapp']))
-              <a href="{{ $siteSettings['whatsapp'] }}" target="_blank" class="site-footer-social-link" title="WhatsApp" aria-label="Contact us on WhatsApp">
+            @if(!empty($siteSettings['whatsapp_link']))
+              <a href="{{ $siteSettings['whatsapp_link'] }}" target="_blank" class="site-footer-social-link" title="WhatsApp" aria-label="Contact us on WhatsApp">
                 <span>💬</span>
               </a>
             @endif
-            @if(!empty($siteSettings['instagram']))
-              <a href="{{ $siteSettings['instagram'] }}" target="_blank" class="site-footer-social-link" title="Instagram" aria-label="Follow us on Instagram">
+            @if(!empty($siteSettings['instagram_link']))
+              <a href="{{ $siteSettings['instagram_link'] }}" target="_blank" class="site-footer-social-link" title="Instagram" aria-label="Follow us on Instagram">
                 <span>📷</span>
               </a>
             @endif
-            @if(!empty($siteSettings['twitter']))
-              <a href="{{ $siteSettings['twitter'] }}" target="_blank" class="site-footer-social-link" title="Twitter" aria-label="Follow us on Twitter">
+            @if(!empty($siteSettings['twitter_link']))
+              <a href="{{ $siteSettings['twitter_link'] }}" target="_blank" class="site-footer-social-link" title="Twitter" aria-label="Follow us on Twitter">
                 <span>𝕏</span>
               </a>
             @endif

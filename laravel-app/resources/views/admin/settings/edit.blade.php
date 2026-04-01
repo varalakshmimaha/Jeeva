@@ -90,6 +90,47 @@
             </div>
         </div>
 
+        {{-- Social Media Links --}}
+        <div style="background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); padding: 40px; margin-bottom: 24px;">
+            <h2 style="color: var(--navy); margin: 0 0 8px 0; font-size: 20px; font-weight: 700;">Social Media Links</h2>
+            <p style="color: var(--muted); margin: 0 0 28px 0; font-size: 14px;">These links will appear as icons in the website footer. Leave blank to hide the icon.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label for="whatsapp_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">WhatsApp Link</label>
+                    <input type="url" id="whatsapp_link" name="whatsapp_link"
+                        value="{{ old('whatsapp_link', $settings['whatsapp_link'] ?? '') }}"
+                        placeholder="https://wa.me/yournumber"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+                <div>
+                    <label for="instagram_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Instagram Link</label>
+                    <input type="url" id="instagram_link" name="instagram_link"
+                        value="{{ old('instagram_link', $settings['instagram_link'] ?? '') }}"
+                        placeholder="https://instagram.com/yourprofile"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+                <div>
+                    <label for="facebook_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Facebook Link</label>
+                    <input type="url" id="facebook_link" name="facebook_link"
+                        value="{{ old('facebook_link', $settings['facebook_link'] ?? '') }}"
+                        placeholder="https://facebook.com/yourpage"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+                <div>
+                    <label for="twitter_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Twitter/X Link</label>
+                    <input type="url" id="twitter_link" name="twitter_link"
+                        value="{{ old('twitter_link', $settings['twitter_link'] ?? '') }}"
+                        placeholder="https://twitter.com/yourprofile"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+            </div>
+        </div>
+
         {{-- Actions --}}
         <div style="display: flex; gap: 12px; align-items: center;">
             <button type="submit"
