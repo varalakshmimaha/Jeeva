@@ -6,7 +6,11 @@
 
 <div class="page-header">
   <div class="page-header-body">
-    <div class="breadcrumb">Home &rsaquo; <span>Privacy Policy</span></div>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ route('home') }}">Home</a>
+        <span class="breadcrumb-sep">&rsaquo;</span>
+        <span class="breadcrumb-current">Privacy Policy</span>
+      </nav>
     <h1>Privacy Policy</h1>
     <p>How we collect, use, and protect your personal information when you interact with our clinic and website.</p>
   </div>

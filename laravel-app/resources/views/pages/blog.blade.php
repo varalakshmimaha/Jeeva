@@ -9,7 +9,11 @@
 <!-- Page Header (Hero Banner) -->
 <div class="page-header" style="background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.7) 100%), url('{{ asset('images/blog_implants.png') }}'); background-size: cover; background-position: center; min-height: 340px; display: flex; align-items: center;">
   <div class="page-header-body">
-    <div class="breadcrumb">Home &rsaquo; <span>Blog</span></div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ route('home') }}">Home</a>
+      <span class="breadcrumb-sep">&rsaquo;</span>
+      <span class="breadcrumb-current">Blog</span>
+    </nav>
     <h1 style="text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Dental Care Insights</h1>
     <p style="color: rgba(255,255,255,0.9); font-size: 18px; max-width: 600px;">Expert insights on oral health, treatment options, and smile care tips from our dental specialists.</p>
   </div>

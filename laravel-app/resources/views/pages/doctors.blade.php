@@ -7,7 +7,11 @@
 <!-- Page Header (Banner) -->
 <div class="page-header">
   <div class="page-header-body">
-    <div class="breadcrumb">Home &rsaquo; <span>Our Doctors</span></div>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ route('home') }}">Home</a>
+        <span class="breadcrumb-sep">&rsaquo;</span>
+        <span class="breadcrumb-current">Our Doctors</span>
+      </nav>
     <h1>Meet Our Expert Team</h1>
     <p>Highly qualified dentists and orthodontists dedicated to your best smile.</p>
   </div>

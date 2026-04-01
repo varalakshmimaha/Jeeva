@@ -7,7 +7,11 @@
   <!-- Page Header (Hero Banner) -->
   <div class="page-header" style="background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.7) 100%), url('{{ asset('images/dentist_checking_patient.png') }}'); background-size: cover; background-position: center; min-height: 340px; display: flex; align-items: center;">
     <div class="page-header-body">
-      <div class="breadcrumb">Home &rsaquo; <span>About Us</span></div>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ route('home') }}">Home</a>
+        <span class="breadcrumb-sep">&rsaquo;</span>
+        <span class="breadcrumb-current">About Us</span>
+      </nav>
       <h1 style="text-shadow: 0 4px 12px rgba(0,0,0,0.3);">About Us &ndash; Western Dental</h1>
       <p style="color: rgba(255,255,255,0.9); font-size: 18px; max-width: 600px;">Your trusted destination for advanced dental care in Tippasandra, Bangalore.</p>
     </div>
@@ -19,8 +23,7 @@
       <span class="sec-label reveal">Our Story</span>
       <h2 class="sec-title reveal d1">Bringing Smiles to Life</h2>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin:32px 0 0"
-        class="reveal d2">
+      <div class="about-main-grid reveal d2">
         <div style="text-align:center">
           <img src="{{ asset('images/dentist_checking_patient.png') }}" alt="Specialist Dentist checking patient"
             style="border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.15);width:100%;height:auto;object-fit:cover;border:1px solid rgba(255,255,255,0.1);">
@@ -48,7 +51,7 @@
         <p class="reveal d2" style="max-width: 650px; margin: 0 auto; color: #475569; font-size: 18px; line-height: 1.7;">Delivering world-class dental care with a personalized touch, ensuring our patients receive the highest standard of treatment in a comfortable, modern environment.</p>
       </div>
       
-      <div class="about-highlights" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px;">
+      <div class="about-highlights-grid" style="margin-top: 40px;">
         <!-- Card 1 -->
         <div class="mission-card reveal d1" style="background: #ffffff; border-radius: 24px; padding: 40px 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); position: relative; overflow: hidden;">
           <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #0ea5e9, #38bdf8);"></div>
@@ -91,8 +94,53 @@
       </div>
     </div>
     <style>
-      .mission-card { transition: all 0.3s ease; top: 0; }
+      /* Main About Grid - Image first on mobile */
+      .about-main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin: 32px 0 0;
+      }
+      
+      /* Mission Section Grid */
+      .about-highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .mission-card { transition: all 0.3s ease; position: relative; top: 0; }
       .mission-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(14,165,233,0.1); }
+
+      /* Mobile Optimizations */
+      @media (max-width: 860px) {
+        .about-main-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        
+        /* Ensure image stays on top on mobile */
+        .about-main-grid > div:first-child {
+          order: 1;
+        }
+        .about-main-grid > div:last-child {
+          order: 2;
+        }
+
+        .about-highlights-grid {
+          grid-template-columns: 1fr; /* Single column for one row */
+          gap: 16px;
+        }
+        
+        .why-sec {
+          padding: 60px 20px !important;
+        }
+        
+        .mission-card {
+          padding: 30px 20px !important;
+        }
+      }
     </style>
   </section>
 

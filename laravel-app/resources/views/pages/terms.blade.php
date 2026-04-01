@@ -6,7 +6,11 @@
 
 <div class="page-header">
   <div class="page-header-body">
-    <div class="breadcrumb">Home &rsaquo; <span>Terms &amp; Conditions</span></div>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ route('home') }}">Home</a>
+        <span class="breadcrumb-sep">&rsaquo;</span>
+        <span class="breadcrumb-current">Terms &amp; Conditions</span>
+      </nav>
     <h1>Terms &amp; Conditions</h1>
     <p>The basic terms that apply when you use our website, submit enquiries, or schedule services with our clinic.</p>
   </div>

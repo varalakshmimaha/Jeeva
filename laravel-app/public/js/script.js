@@ -16,21 +16,57 @@ window.addEventListener('scroll', () => {
 // ══════════════════════════════════
 // MOBILE MENU TOGGLE
 // ══════════════════════════════════
+const mobMenuBackdrop = document.getElementById('mobMenuBackdrop');
+const mobMenuClose   = document.getElementById('mobMenuClose');
+
+function openMobMenu() {
+  hamburger.classList.add('open');
+  mobMenu.classList.add('open');
+  if (mobMenuBackdrop) {
+    mobMenuBackdrop.style.display = 'block';
+    requestAnimationFrame(() => mobMenuBackdrop.classList.add('open'));
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobMenu() {
+  hamburger.classList.remove('open');
+  mobMenu.classList.remove('open');
+  if (mobMenuBackdrop) {
+    mobMenuBackdrop.classList.remove('open');
+    setTimeout(() => { mobMenuBackdrop.style.display = 'none'; }, 350);
+  }
+  document.body.style.overflow = '';
+}
+
 if (hamburger) {
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobMenu.classList.toggle('open');
+    mobMenu.classList.contains('open') ? closeMobMenu() : openMobMenu();
   });
 }
 
-// Close mobile menu when a link is clicked
+// Close via X button
+if (mobMenuClose) {
+  mobMenuClose.addEventListener('click', closeMobMenu);
+}
+
+// Close via backdrop click
+if (mobMenuBackdrop) {
+  mobMenuBackdrop.addEventListener('click', closeMobMenu);
+}
+
+// Close via Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mobMenu && mobMenu.classList.contains('open')) {
+    closeMobMenu();
+  }
+});
+
+// Close mobile menu when a nav link is clicked
 if (mobMenu) {
   const mobLinks = mobMenu.querySelectorAll('a');
   mobLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobMenu.classList.remove('open');
-    });
+    link.addEventListener('click', closeMobMenu);
   });
 }
 
