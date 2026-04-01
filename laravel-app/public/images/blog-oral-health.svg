@@ -1,0 +1,30 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="blogGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0F7FC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B3E5FC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0097A7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00BCD4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="600" height="400" fill="url(#blogGradient1)"/>
+  
+  <!-- Tooth Icon -->
+  <g transform="translate(150, 80)">
+    <circle cx="150" cy="120" r="100" fill="url(#iconGradient1)" opacity="0.2"/>
+    <path d="M 130 80 Q 120 60 150 40 Q 180 60 170 80 L 170 160 Q 170 180 150 190 Q 130 180 130 160 Z" 
+          fill="url(#iconGradient1)" stroke="#00897B" stroke-width="2"/>
+  </g>
+  
+  <!-- Smile line -->
+  <path d="M 80 280 Q 300 320 520 280" stroke="#00BCD4" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+  
+  <!-- Text -->
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#0097A7">
+    Oral Health Tips
+  </text>
+</svg>

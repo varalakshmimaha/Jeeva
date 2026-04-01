@@ -1,0 +1,18 @@
+[     720ms] [LOG] ✨ Western Dental website loaded successfully! @ http://localhost:8000/js/script.js:171
+[     721ms] [LOG] [DentalData] Admin data retrieved: {services: Array(5), banners: Array(2), blogs: Array(2), gallery: Array(4), settings: Object} @ http://localhost:8000/js/dental-data.js:87
+[     722ms] [LOG] [DentalData] Admin data retrieved: {services: Array(5), banners: Array(2), blogs: Array(2), gallery: Array(4), settings: Object} @ http://localhost:8000/js/dental-data.js:87
+[     722ms] [LOG] [DentalData] Current page: home @ http://localhost:8000/js/dental-data.js:670
+[     722ms] [LOG] [DentalData] Admin data retrieved: {services: Array(5), banners: Array(2), blogs: Array(2), gallery: Array(4), settings: Object} @ http://localhost:8000/js/dental-data.js:87
+[     722ms] [LOG] [DentalData] renderBanners called for page: home @ http://localhost:8000/js/dental-data.js:271
+[     722ms] [LOG] [DentalData] Found 1 stored banners, 2 default banners available @ http://localhost:8000/js/dental-data.js:272
+[     722ms] [LOG] [DentalData] Rendering 1 banners @ http://localhost:8000/js/dental-data.js:289
+[     722ms] [LOG] [DentalData] Banner data: [Object] @ http://localhost:8000/js/dental-data.js:290
+[     723ms] [LOG] [DentalData] Creating banner slide 1: {title: Welcome to Western Dental, description: undefined, image: data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%, enabled: true} @ http://localhost:8000/js/dental-data.js:296
+[     723ms] [LOG] [DentalData] Banner 1 image src length: 1232, starts with: data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2 @ http://localhost:8000/js/dental-data.js:331
+[     723ms] [LOG] [DentalData] Slide 1 created with style: yes @ http://localhost:8000/js/dental-data.js:345
+[     723ms] [LOG] [DentalData] Total slides HTML length: 1860 @ http://localhost:8000/js/dental-data.js:349
+[     723ms] [LOG] [DentalData] Banner HTML inserted into container @ http://localhost:8000/js/dental-data.js:381
+[     724ms] [LOG] [DentalData] Track children count: 1 @ http://localhost:8000/js/dental-data.js:382
+[     724ms] [LOG] [DentalData] First slide element: JSHandle@node @ http://localhost:8000/js/dental-data.js:383
+[     724ms] [LOG] [DentalData] Setting up real-time storage listeners... @ http://localhost:8000/js/dental-data.js:584
+[     724ms] [LOG] [DentalData] BroadcastChannel listener registered for admin updates @ http://localhost:8000/js/dental-data.js:626

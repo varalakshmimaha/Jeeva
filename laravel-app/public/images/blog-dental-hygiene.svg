@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0f7fc"/>
+      <stop offset="100%" stop-color="#b3e5fc"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="60" fill="#18b4d4" opacity="0.1"/>
+  <circle cx="700" cy="500" r="80" fill="#00d4f0" opacity="0.1"/>
+  
+  <!-- Toothbrush -->
+  <g transform="translate(150, 200)">
+    <rect x="0" y="0" width="20" height="250" rx="10" fill="#ff6b35" stroke="#cc5429" stroke-width="2"/>
+    <circle cx="10" cy="30" r="8" fill="#fff" opacity="0.8"/>
+    <circle cx="10" cy="50" r="8" fill="#fff" opacity="0.8"/>
+    <circle cx="10" cy="70" r="8" fill="#fff" opacity="0.8"/>
+    <circle cx="10" cy="90" r="8" fill="#fff" opacity="0.8"/>
+  </g>
+  
+  <!-- Floss container -->
+  <g transform="translate(450, 180)">
+    <rect x="0" y="0" width="60" height="80" rx="8" fill="#4da6d0" stroke="#2e6c9e" stroke-width="2"/>
+    <text x="30" y="50" text-anchor="middle" fill="#fff" font-size="32" font-weight="bold">F</text>
+  </g>
+  
+  <!-- Water drop -->
+  <g transform="translate(600, 250)">
+    <path d="M 0 0 Q -20 20 -20 40 Q -20 60 0 70 Q 20 60 20 40 Q 20 20 0 0" fill="#18b4d4" stroke="#0d5a7f" stroke-width="2"/>
+    <circle cx="0" cy="35" r="4" fill="#fff" opacity="0.6"/>
+  </g>
+  
+  <!-- Teeth -->
+  <g transform="translate(200, 380)">
+    <rect x="0" y="0" width="40" height="60" rx="5" fill="#ffffff" stroke="#ddd" stroke-width="2"/>
+    <line x1="10" y1="0" x2="10" y2="60" stroke="#ddd" stroke-width="1"/>
+    <line x1="20" y1="0" x2="20" y2="60" stroke="#ddd" stroke-width="1"/>
+    <line x1="30" y1="0" x2="30" y2="60" stroke="#ddd" stroke-width="1"/>
+    
+    <rect x="50" y="0" width="40" height="60" rx="5" fill="#ffffff" stroke="#ddd" stroke-width="2"/>
+    <line x1="60" y1="0" x2="60" y2="60" stroke="#ddd" stroke-width="1"/>
+    <line x1="70" y1="0" x2="70" y2="60" stroke="#ddd" stroke-width="1"/>
+    <line x1="80" y1="0" x2="80" y2="60" stroke="#ddd" stroke-width="1"/>
+  </g>
+  
+  <!-- Smile indicator -->
+  <circle cx="400" cy="480" r="50" fill="none" stroke="#18b4d4" stroke-width="3" opacity="0.5"/>
+  <path d="M 360 480 Q 400 510 440 480" stroke="#f39c12" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- Text labels -->
+  <text x="170" y="480" text-anchor="middle" fill="#0d5a7f" font-size="18" font-weight="bold">BRUSH</text>
+  <text x="480" y="480" text-anchor="middle" fill="#0d5a7f" font-size="18" font-weight="bold">FLOSS</text>
+  <text x="640" y="480" text-anchor="middle" fill="#0d5a7f" font-size="18" font-weight="bold">RINSE</text>
+</svg>

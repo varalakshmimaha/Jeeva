@@ -1,0 +1,17 @@
+[    1915ms] [LOG] ✨ Western Dental website loaded successfully! @ http://localhost:8000/js/script.js:171
+[    2003ms] [LOG] [DentalData] Admin data retrieved: {services: Array(5), banners: Array(3), blogs: Array(2), gallery: Array(4), settings: Object} @ http://localhost:8000/js/dental-data.js:87
+[    2006ms] [LOG] [DentalData] Admin data retrieved: {services: Array(5), banners: Array(3), blogs: Array(2), gallery: Array(4), settings: Object} @ http://localhost:8000/js/dental-data.js:87
+[    2006ms] [LOG] [DentalData] Current page: home @ http://localhost:8000/js/dental-data.js:662
+[    2008ms] [LOG] [DentalData] Admin data retrieved: {services: Array(5), banners: Array(3), blogs: Array(2), gallery: Array(4), settings: Object} @ http://localhost:8000/js/dental-data.js:87
+[    2009ms] [LOG] [DentalData] renderBanners called for page: home @ http://localhost:8000/js/dental-data.js:271
+[    2009ms] [LOG] [DentalData] Found 1 stored banners, 2 default banners available @ http://localhost:8000/js/dental-data.js:272
+[    2009ms] [LOG] [DentalData] Rendering 1 banners @ http://localhost:8000/js/dental-data.js:289
+[    2009ms] [LOG] [DentalData] Banner data: [Object] @ http://localhost:8000/js/dental-data.js:290
+[    2013ms] [LOG] [DentalData] Creating banner slide 1: {title: , description: undefined, image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKg, enabled: true} @ http://localhost:8000/js/dental-data.js:296
+[    2014ms] [LOG] [DentalData] Slide 1 HTML created, length: 452 @ http://localhost:8000/js/dental-data.js:337
+[    2015ms] [LOG] [DentalData] Total slides HTML length: 452 @ http://localhost:8000/js/dental-data.js:341
+[    2017ms] [LOG] [DentalData] Banner HTML inserted into container @ http://localhost:8000/js/dental-data.js:373
+[    2017ms] [LOG] [DentalData] Track children count: 1 @ http://localhost:8000/js/dental-data.js:374
+[    2017ms] [LOG] [DentalData] First slide element: JSHandle@node @ http://localhost:8000/js/dental-data.js:375
+[    2020ms] [LOG] [DentalData] Setting up real-time storage listeners... @ http://localhost:8000/js/dental-data.js:576
+[    2021ms] [LOG] [DentalData] BroadcastChannel listener registered for admin updates @ http://localhost:8000/js/dental-data.js:618

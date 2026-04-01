@@ -1,0 +1,64 @@
+- generic [ref=e18]:
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - heading "🏥 Western Dental" [level=1] [ref=e21]
+      - paragraph [ref=e22]: Admin Panel
+    - navigation [ref=e23]:
+      - button "📊 Dashboard" [ref=e24] [cursor=pointer]:
+        - generic [ref=e25]: 📊
+        - generic [ref=e26]: Dashboard
+      - button "🦷 Services" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: 🦷
+        - generic [ref=e29]: Services
+      - button "📸 Banners" [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: 📸
+        - generic [ref=e32]: Banners
+      - button "🖼️ Gallery" [ref=e33] [cursor=pointer]:
+        - generic [ref=e34]: 🖼️
+        - generic [ref=e35]: Gallery
+      - button "⚙️ Settings" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: ⚙️
+        - generic [ref=e38]: Settings
+  - generic [ref=e39]:
+    - generic [ref=e40]:
+      - button "☰" [ref=e41] [cursor=pointer]
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - text: Welcome,
+          - strong [ref=e44]: Admin
+        - button "Logout" [ref=e45] [cursor=pointer]
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - heading "Banners" [level=1] [ref=e68]
+        - button "+ Add Banner" [ref=e69] [cursor=pointer]
+      - generic [ref=e70]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - heading "Welcome to Western Dental" [level=3] [ref=e75]
+              - generic [ref=e76]: Active
+            - paragraph [ref=e78]: Expert Dental Care for Your Smile
+            - paragraph [ref=e79]: "Button: Book Consultation"
+          - generic [ref=e80]:
+            - button "Edit" [ref=e81] [cursor=pointer]
+            - button "Delete" [ref=e82] [cursor=pointer]
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - heading "Advanced Orthodontics" [level=3] [ref=e87]
+              - generic [ref=e88]: Active
+            - paragraph [ref=e90]: Straighten Your Teeth with Latest Technology
+            - paragraph [ref=e91]: "Button: Learn More"
+          - generic [ref=e92]:
+            - button "Edit" [ref=e93] [cursor=pointer]
+            - button "Delete" [ref=e94] [cursor=pointer]
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - heading [level=3]
+              - generic [ref=e99]: Active
+            - paragraph
+            - paragraph [ref=e101]: "Button: N/A"
+          - generic [ref=e102]:
+            - button "Edit" [ref=e103] [cursor=pointer]
+            - button "Delete" [ref=e104] [cursor=pointer]

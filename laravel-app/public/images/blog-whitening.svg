@@ -1,0 +1,38 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="whiteningGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F3E5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E1BEE7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="whiteningIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B1FA2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="600" height="400" fill="url(#whiteningGrad)"/>
+  
+  <!-- Bright smile representation -->
+  <g transform="translate(100, 60)">
+    <circle cx="200" cy="150" r="130" fill="url(#whiteningIcon)" opacity="0.15"/>
+    <!-- Teeth -->
+    <ellipse cx="200" cy="150" rx="90" ry="80" fill="white" stroke="url(#whiteningIcon)" stroke-width="2"/>
+    <!-- Smile curve -->
+    <path d="M 140 170 Q 200 200 260 170" stroke="url(#whiteningIcon)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Sparkle/shine effects -->
+    <circle cx="160" cy="120" r="5" fill="url(#whiteningIcon)" opacity="0.9"/>
+    <circle cx="180" cy="110" r="6" fill="url(#whiteningIcon)" opacity="0.7"/>
+    <circle cx="220" cy="115" r="5" fill="url(#whiteningIcon)" opacity="0.8"/>
+    <circle cx="240" cy="125" r="4" fill="url(#whiteningIcon)" opacity="0.6"/>
+  </g>
+  
+  <!-- Brightness rays -->
+  <line x1="480" y1="100" x2="520" y2="100" stroke="url(#whiteningIcon)" stroke-width="3" opacity="0.7" stroke-linecap="round"/>
+  <line x1="490" y1="80" x2="510" y2="60" stroke="url(#whiteningIcon)" stroke-width="3" opacity="0.6" stroke-linecap="round"/>
+  <line x1="510" y1="120" x2="530" y2="140" stroke="url(#whiteningIcon)" stroke-width="3" opacity="0.6" stroke-linecap="round"/>
+  
+  <!-- Text -->
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#7B1FA2">
+    Teeth Whitening
+  </text>
+</svg>

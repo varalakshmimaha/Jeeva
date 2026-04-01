@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Western Dental Admin - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
+        .transition-all { transition: all 0.3s ease; }
+        .sidebar-hidden { margin-left: -250px; }
+        .sidebar-show { margin-left: 0; }
+        .image-preview { max-width: 150px; max-height: 150px; border-radius: 8px; object-fit: cover; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ===== FILE UPLOAD HANDLER =====
+        const handleFileUpload = (file) => {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    resolve(e.target.result); // base64 data URL
+                };
+                reader.readAsDataURL(file);
+            });
+        };
+
+        // ===== INITIAL DATA =====
+        const INITIAL_DATA = {
+            services: [
+                { id: 1, title: 'Dental Braces', description: 'Straighten your teeth with modern braces', icon: '🦷', price: '₹25,000', featured: null },
+                { id: 2, title: 'Dental Implants', description: 'Permanent tooth replacement solution', icon: '✨', price: '₹45,000', featured: null },
+                { id: 3, title: 'Root Canal', description: 'Save your natural tooth with RCT', icon: '🔧', price: '₹15,000', featured: null },
+                { id: 4, title: 'Cosmetic Dentistry', description: 'Enhance your smile with cosmetic treatments', icon: '✨', price: '₹10,000', featured: null }
+            ],
+            banners: [
+                { id: 1, title: 'Welcome to Western Dental', subtitle: 'Expert Dental Care for Your Smile', image: null, buttonText: 'Book Consultation', link: '#', order: 1, enabled: true, page: 'home' },
+                { id: 2, title: 'Advanced Orthodontics', subtitle: 'Straighten Your Teeth with Latest Technology', image: null, buttonText: 'Learn More', link: '#', order: 2, enabled: true, page: 'home' }
+            ],
+            blogs: [
+                { id: 1, title: 'Tips for Dental Hygiene', summary: 'Learn the best practices for maintaining healthy teeth and keeping your smile bright forever', content: 'Daily brushing, flossing, and regular checkups are essential for good dental health. Visit us regularly for professional cleanups and expert advice on maintaining your oral health.', image: '/images/blog-dental-hygiene.svg', date: '2025-03-28', status: 'published', category: 'Hygiene' },
+                { id: 2, title: 'Understanding Braces', summary: 'Everything you need to know about orthodontic treatment and straightening your smile perfectly', content: 'Braces are a popular choice for correcting misaligned teeth and improving your bite. Modern braces are more comfortable and discreet than ever before, with various options to suit your lifestyle.', image: '/images/blog-braces.svg', date: '2025-03-25', status: 'published', category: 'Orthodontics' },
+                { id: 3, title: 'Benefits of Dental Implants', summary: 'Discover why dental implants are the best long-term solution for missing teeth today', content: 'Dental implants offer a permanent solution for missing teeth. They look, feel, and function like natural teeth, providing improved comfort, better eating ability, and enhanced confidence in your smile.', image: '/images/blog-implants.svg', date: '2025-03-20', status: 'published', category: 'Implants' }
+            ],
+            gallery: [
+                { id: 1, caption: 'Beautiful Smile', category: 'Braces', image: null },
+                { id: 2, caption: 'Implant Result', category: 'Implants', image: null },
+                { id: 3, caption: 'Cosmetic Makeover', category: 'Cosmetic', image: null }
+            ],
+            settings: {
+                clinicName: 'Western Dental & Orthodontics',
+                address: 'Tippasandra, Bangalore, Karnataka 560075',
+                address_main: 'Tippasandra, Bangalore',
+                address_sub: 'Next to Central Park, Bangalore 560075',
+                phone: '+91 74832 11870',
+                email: 'contact@westerndental.com',
+                hours: 'Mon-Sat: 9:00 AM - 8:00 PM, Sun: 10:00 AM - 2:00 PM',
+                facebook: 'https://facebook.com/westerndental',
+                instagram: 'https://instagram.com/westerndental',
+                whatsapp: 'https://wa.me/917483211870',
+                twitter: 'https://twitter.com/westerndental',
+                map_embed: '',
+                logo: null
+            }
+        };
+
+        // ===== AUTHENTICATION COMPONENT =====
+        function LoginPage({ onLogin }) {
+            const [email, setEmail] = useState('admin@westerndental.com');
+            const [password, setPassword] = useState('admin123');
+            const [error, setError] = useState('');
+
+            const handleLogin = (e) => {
+                e.preventDefault();
+                if (email === 'admin@westerndental.com' && password === 'admin123') {
+                    onLogin({ name: 'Admin', email: email });
+                } else {
+                    setError('Invalid email or password. Use admin@westerndental.com / admin123');
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
+                        <div className="text-center mb-8">
+                            <div className="text-4xl mb-2">🏥</div>
+                            <h1 className="text-2xl font-bold text-gray-800">Western Dental</h1>
+                            <p className="text-gray-600 text-sm">Admin Dashboard</p>
+                        </div>
+
+                        <form onSubmit={handleLogin}>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 font-medium mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="admin@westerndental.com"
+                                />
+                            </div>
+
+                            <div className="mb-6">
+                                <label className="block text-gray-700 font-medium mb-2">Password</label>
+                                <input 
+                                    type="password" 
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="••••••••"
+                                />
+                            </div>
+
+                            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+
+                            <button 
+                                type="submit"
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition-all"
+                            >
+                                Login to Dashboard
+                            </button>
+                        </form>
+
+                        <p className="text-gray-600 text-xs text-center mt-6">
+                            Demo Credentials:<br/>
+                            Email: admin@westerndental.com<br/>
+                            Password: admin123
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== DASHBOARD COMPONENT =====
+        function Dashboard({ data }) {
+            const chartsRef = useRef(null);
+
+            useEffect(() => {
+                if (chartsRef.current) {
+                    const ctx = chartsRef.current.getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                            datasets: [{
+                                label: 'Website Visits',
+                                data: [120, 150, 100, 200, 180, 220, 190],
+                                borderColor: '#2563eb',
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { display: true } }
+                        }
+                    });
+                }
+            }, []);
+
+            return (
+                <div className="space-y-6">
+                    <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+
+                    {/* Metrics Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <MetricCard title="Total Services" value={data.services.length} icon="🦷" color="blue" />
+                        <MetricCard title="Active Banners" value={data.banners.filter(b => b.enabled).length} icon="📸" color="green" />
+                        <MetricCard title="Published Blogs" value={data.blogs.filter(b => b.published).length} icon="📝" color="purple" />
+                        <MetricCard title="Gallery Images" value={data.gallery.length} icon="🖼️" color="orange" />
+                    </div>
+
+                    {/* Recent Activity & Chart */}
+                    <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
+                        <div className="bg-white rounded-lg shadow p-6">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Weekly Visits</h2>
+                            <canvas ref={chartsRef}></canvas>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function MetricCard({ title, value, icon, color }) {
+            const colorClass = {
+                blue: 'bg-blue-50 text-blue-600',
+                green: 'bg-green-50 text-green-600',
+                purple: 'bg-purple-50 text-purple-600',
+                orange: 'bg-orange-50 text-orange-600'
+            }[color];
+
+            return (
+                <div className={`${colorClass} rounded-lg p-6 shadow`}>
+                    <div className="text-2xl mb-2">{icon}</div>
+                    <p className="text-gray-600 text-sm">{title}</p>
+                    <p className="text-2xl font-bold">{value}</p>
+                </div>
+            );
+        }
+
+        // ===== SERVICES COMPONENT =====
+        function Services({ data, onUpdate }) {
+            const [showForm, setShowForm] = useState(false);
+            const [editingId, setEditingId] = useState(null);
+            const [formData, setFormData] = useState({ title: '', description: '', icon: '', price: '', featured: null });
+
+            const handleImageUpload = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const base64 = await handleFileUpload(file);
+                    setFormData({...formData, featured: base64});
+                }
+            };
+
+            const handleAddOrUpdate = () => {
+                if (!formData.title || !formData.description) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+
+                let updated = [...data.services];
+                if (editingId) {
+                    updated = updated.map(s => s.id === editingId ? { ...s, ...formData } : s);
+                } else {
+                    updated.push({ ...formData, id: Date.now() });
+                }
+
+                onUpdate({ ...data, services: updated });
+                setFormData({ title: '', description: '', icon: '', price: '', featured: null });
+                setShowForm(false);
+                setEditingId(null);
+            };
+
+            const handleDelete = (id) => {
+                if (confirm('Delete this service?')) {
+                    onUpdate({ ...data, services: data.services.filter(s => s.id !== id) });
+                }
+            };
+
+            const handleEdit = (service) => {
+                setFormData(service);
+                setEditingId(service.id);
+                setShowForm(true);
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-3xl font-bold text-gray-800">Services</h1>
+                        <button 
+                            onClick={() => { setShowForm(!showForm); setEditingId(null); setFormData({ title: '', description: '', icon: '', price: '', featured: null }); }}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all"
+                        >
+                            + Add Service
+                        </button>
+                    </div>
+
+                    {showForm && (
+                        <div className="bg-white rounded-lg shadow p-6">
+                            <h2 className="text-xl font-semibold mb-4">{editingId ? 'Edit Service' : 'Add New Service'}</h2>
+                            <div className="space-y-4">
+                                <input 
+                                    placeholder="Service Title" 
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({...formData, title: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <textarea 
+                                    placeholder="Description" 
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({...formData, description: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    rows="3"
+                                />
+                                <input 
+                                    placeholder="Icon (emoji)" 
+                                    value={formData.icon}
+                                    onChange={(e) => setFormData({...formData, icon: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <input 
+                                    placeholder="Price (e.g., ₹25,000)" 
+                                    value={formData.price}
+                                    onChange={(e) => setFormData({...formData, price: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <div>
+                                    <label className="block text-gray-700 font-medium mb-2">📸 Upload Image</label>
+                                    <input 
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    {formData.featured && (
+                                        <img src={formData.featured} alt="Preview" className="mt-3 image-preview" />
+                                    )}
+                                </div>
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={handleAddOrUpdate}
+                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        {editingId ? 'Update' : 'Add'}
+                                    </button>
+                                    <button 
+                                        onClick={() => { setShowForm(false); setEditingId(null); setFormData({ title: '', description: '', icon: '', price: '', featured: null }); }}
+                                        className="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Services Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {data.services.map(service => (
+                            <div key={service.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-all">
+                                {service.featured && <img src={service.featured} alt={service.title} className="w-full h-40 object-cover" />}
+                                <div className="p-4">
+                                    <div className="text-2xl mb-2">{service.icon}</div>
+                                    <h3 className="font-semibold text-gray-800">{service.title}</h3>
+                                    <p className="text-sm text-gray-600 mb-3">{service.description}</p>
+                                    <p className="font-bold text-blue-600 mb-3">{service.price}</p>
+                                    <div className="flex gap-2">
+                                        <button 
+                                            onClick={() => handleEdit(service)}
+                                            className="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 rounded transition-all"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button 
+                                            onClick={() => handleDelete(service.id)}
+                                            className="flex-1 bg-red-500 hover:bg-red-600 text-white text-sm py-1 rounded transition-all"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== BANNERS COMPONENT =====
+        function Banners({ data, onUpdate }) {
+            const [showForm, setShowForm] = useState(false);
+            const [editingId, setEditingId] = useState(null);
+            const [formData, setFormData] = useState({ title: '', subtitle: '', image: null, buttonText: '', link: '', order: 1, enabled: true, page: 'home' });
+
+            const handleImageUpload = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const base64 = await handleFileUpload(file);
+                    setFormData({...formData, image: base64});
+                }
+            };
+
+            const handleAddOrUpdate = () => {
+                if (!formData.image) {
+                    alert('Please upload image');
+                    return;
+                }
+
+                let updated = [...data.banners];
+                if (editingId) {
+                    updated = updated.map(b => b.id === editingId ? { ...b, ...formData } : b);
+                } else {
+                    updated.push({ ...formData, id: Date.now() });
+                }
+
+                onUpdate({ ...data, banners: updated });
+                setFormData({ title: '', subtitle: '', image: null, buttonText: '', link: '', order: 1, enabled: true, page: 'home' });
+                setShowForm(false);
+                setEditingId(null);
+            };
+
+            const handleDelete = (id) => {
+                if (confirm('Delete this banner?')) {
+                    onUpdate({ ...data, banners: data.banners.filter(b => b.id !== id) });
+                }
+            };
+
+            const handleEdit = (banner) => {
+                setFormData(banner);
+                setEditingId(banner.id);
+                setShowForm(true);
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-3xl font-bold text-gray-800">Banners</h1>
+                        <button 
+                            onClick={() => { setShowForm(!showForm); setEditingId(null); setFormData({ title: '', subtitle: '', image: null, buttonText: '', link: '', order: 1, enabled: true, page: 'home' }); }}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all"
+                        >
+                            + Add Banner
+                        </button>
+                    </div>
+
+                    {showForm && (
+                        <div className="bg-white rounded-lg shadow p-6">
+                            <h2 className="text-xl font-semibold mb-4">{editingId ? 'Edit Banner' : 'Add New Banner'}</h2>
+                            <div className="space-y-4">
+                                <input 
+                                    placeholder="Banner Title" 
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({...formData, title: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <input 
+                                    placeholder="Subtitle" 
+                                    value={formData.subtitle}
+                                    onChange={(e) => setFormData({...formData, subtitle: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <div>
+                                    <label className="block text-gray-700 font-medium mb-2">📸 Upload Banner Image</label>
+                                    <input 
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    {formData.image && (
+                                        <img src={formData.image} alt="Preview" className="mt-3 image-preview" />
+                                    )}
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <input 
+                                        placeholder="Button Text" 
+                                        value={formData.buttonText}
+                                        onChange={(e) => setFormData({...formData, buttonText: e.target.value})}
+                                        className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <input 
+                                        placeholder="Link" 
+                                        value={formData.link}
+                                        onChange={(e) => setFormData({...formData, link: e.target.value})}
+                                        className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-gray-700 font-medium mb-2">Display on Page</label>
+                                    <select
+                                        value={formData.page}
+                                        onChange={(e) => setFormData({...formData, page: e.target.value})}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="home">Home</option>
+                                        <option value="services">Services</option>
+                                        <option value="gallery">Gallery</option>
+                                    </select>
+                                </div>
+                                <label className="flex items-center gap-2">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={formData.enabled}
+                                        onChange={(e) => setFormData({...formData, enabled: e.target.checked})}
+                                        className="w-4 h-4"
+                                    />
+                                    <span>Enable Banner</span>
+                                </label>
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={handleAddOrUpdate}
+                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        {editingId ? 'Update' : 'Add'}
+                                    </button>
+                                    <button 
+                                        onClick={() => { setShowForm(false); setEditingId(null); setFormData({ title: '', subtitle: '', image: null, buttonText: '', link: '', order: 1, enabled: true, page: 'home' }); }}
+                                        className="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Banners List */}
+                    <div className="space-y-4">
+                        {data.banners.map(banner => (
+                            <div key={banner.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-all">
+                                <div className="md:flex gap-4 p-4">
+                                    {banner.image && <img src={banner.image} alt={banner.title} className="w-32 h-32 object-cover rounded" />}
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <h3 className="font-semibold text-gray-800">{banner.title}</h3>
+                                            <span className={`px-2 py-1 rounded text-xs font-medium ${banner.enabled ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                                                {banner.enabled ? 'Active' : 'Inactive'}
+                                            </span>
+                                            <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800 capitalize">{banner.page}</span>
+                                        </div>
+                                        <p className="text-gray-600">{banner.subtitle}</p>
+                                        <p className="text-sm text-gray-500 mt-2">Button: {banner.buttonText || 'N/A'}</p>
+                                    </div>
+                                    <div className="flex gap-2 mt-4 md:mt-0">
+                                        <button 
+                                            onClick={() => handleEdit(banner)}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-all"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button 
+                                            onClick={() => handleDelete(banner.id)}
+                                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-all"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== BLOGS COMPONENT =====
+        function Blogs({ data, onUpdate }) {
+            const [showForm, setShowForm] = useState(false);
+            const [editingId, setEditingId] = useState(null);
+            const [formData, setFormData] = useState({ title: '', summary: '', content: '', image: null, date: new Date().toISOString().split('T')[0], status: 'draft' });
+
+            const handleImageUpload = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const base64 = await handleFileUpload(file);
+                    setFormData({...formData, image: base64});
+                }
+            };
+
+            const handleAddOrUpdate = () => {
+                if (!formData.title || !formData.content) {
+                    alert('Please fill in title and content');
+                    return;
+                }
+
+                let updated = [...data.blogs];
+                if (editingId) {
+                    updated = updated.map(b => b.id === editingId ? { ...b, ...formData } : b);
+                } else {
+                    updated.push({ ...formData, id: Date.now() });
+                }
+
+                onUpdate({ ...data, blogs: updated });
+                setFormData({ title: '', summary: '', content: '', image: null, date: new Date().toISOString().split('T')[0], status: 'draft' });
+                setShowForm(false);
+                setEditingId(null);
+            };
+
+            const handleDelete = (id) => {
+                if (confirm('Delete this blog?')) {
+                    onUpdate({ ...data, blogs: data.blogs.filter(b => b.id !== id) });
+                }
+            };
+
+            const handleEdit = (blog) => {
+                setFormData(blog);
+                setEditingId(blog.id);
+                setShowForm(true);
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-3xl font-bold text-gray-800">Blogs</h1>
+                        <button 
+                            onClick={() => { setShowForm(!showForm); setEditingId(null); setFormData({ title: '', summary: '', content: '', image: null, date: new Date().toISOString().split('T')[0], status: 'draft' }); }}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all"
+                        >
+                            + Add Blog
+                        </button>
+                    </div>
+
+                    {showForm && (
+                        <div className="bg-white rounded-lg shadow p-6">
+                            <h2 className="text-xl font-semibold mb-4">{editingId ? 'Edit Blog' : 'Add New Blog'}</h2>
+                            <div className="space-y-4">
+                                <input 
+                                    placeholder="Blog Title" 
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({...formData, title: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <input 
+                                    placeholder="Summary" 
+                                    value={formData.summary}
+                                    onChange={(e) => setFormData({...formData, summary: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <textarea 
+                                    placeholder="Content" 
+                                    value={formData.content}
+                                    onChange={(e) => setFormData({...formData, content: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    rows="5"
+                                />
+                                <div>
+                                    <label className="block text-gray-700 font-medium mb-2">📸 Upload Featured Image</label>
+                                    <input 
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    {formData.image && (
+                                        <img src={formData.image} alt="Preview" className="mt-3 image-preview" />
+                                    )}
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <input 
+                                        type="date"
+                                        value={formData.date}
+                                        onChange={(e) => setFormData({...formData, date: e.target.value})}
+                                        className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <select 
+                                        value={formData.status}
+                                        onChange={(e) => setFormData({...formData, status: e.target.value})}
+                                        className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="draft">Draft</option>
+                                        <option value="published">Published</option>
+                                    </select>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={handleAddOrUpdate}
+                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        {editingId ? 'Update' : 'Add'}
+                                    </button>
+                                    <button 
+                                        onClick={() => { setShowForm(false); setEditingId(null); setFormData({ title: '', summary: '', content: '', image: null, date: new Date().toISOString().split('T')[0], status: 'draft' }); }}
+                                        className="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Blogs Table */}
+                    <div className="bg-white rounded-lg shadow overflow-hidden">
+                        <table className="w-full">
+                            <thead className="bg-gray-100 border-b">
+                                <tr>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Title</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Date</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
+                                    <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.blogs.map(blog => (
+                                    <tr key={blog.id} className="border-b hover:bg-gray-50 transition-all">
+                                        <td className="px-4 py-3 text-sm text-gray-800">{blog.title}</td>
+                                        <td className="px-4 py-3 text-sm text-gray-600">{blog.date}</td>
+                                        <td className="px-4 py-3 text-sm">
+                                            <span className={`px-2 py-1 rounded text-xs font-medium ${blog.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                                                {blog.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3 text-right text-sm space-x-2">
+                                            <button 
+                                                onClick={() => handleEdit(blog)}
+                                                className="text-blue-600 hover:text-blue-800 font-medium"
+                                            >
+                                                Edit
+                                            </button>
+                                            <button 
+                                                onClick={() => handleDelete(blog.id)}
+                                                className="text-red-600 hover:text-red-800 font-medium"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== GALLERY COMPONENT =====
+        function Gallery({ data, onUpdate }) {
+            const [showForm, setShowForm] = useState(false);
+            const [newImage, setNewImage] = useState({ caption: '', category: 'Braces', image: null });
+            const [editingId, setEditingId] = useState(null);
+            const [editImage, setEditImage] = useState({ caption: '', category: 'Braces', image: null });
+
+            const handleImageUpload = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const base64 = await handleFileUpload(file);
+                    if (editingId) {
+                        setEditImage({...editImage, image: base64});
+                    } else {
+                        setNewImage({...newImage, image: base64});
+                    }
+                }
+            };
+
+            const handleAddImage = () => {
+                if (!newImage.image) {
+                    alert('Please upload image');
+                    return;
+                }
+
+                onUpdate({
+                    ...data,
+                    gallery: [...data.gallery, { ...newImage, id: Date.now() }]
+                });
+                setNewImage({ caption: '', category: 'Braces', image: null });
+                setShowForm(false);
+            };
+
+            const handleEdit = (item) => {
+                setEditingId(item.id);
+                setEditImage({ caption: item.caption, category: item.category, image: item.image });
+                setShowForm(true);
+            };
+
+            const handleUpdate = () => {
+                const updated = data.gallery.map(item =>
+                    item.id === editingId ? { 
+                        ...item, 
+                        caption: editImage.caption,
+                        category: editImage.category,
+                        image: editImage.image || item.image
+                    } : item
+                );
+                onUpdate({ ...data, gallery: updated });
+                setEditingId(null);
+                setEditImage({ caption: '', category: 'Braces', image: null });
+                setShowForm(false);
+            };
+
+            const handleCancel = () => {
+                setEditingId(null);
+                setEditImage({ caption: '', category: 'Braces', image: null });
+                setNewImage({ caption: '', category: 'Braces', image: null });
+                setShowForm(false);
+            };
+
+            const handleDelete = (id) => {
+                if (confirm('Delete this image?')) {
+                    onUpdate({ ...data, gallery: data.gallery.filter(g => g.id !== id) });
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-3xl font-bold text-gray-800">Gallery</h1>
+                        <button 
+                            onClick={() => { setShowForm(!showForm); setEditingId(null); setNewImage({ caption: '', category: 'Braces', image: null }); setEditImage({ caption: '', category: 'Braces', image: null }); }}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all"
+                        >
+                            + Add Image
+                        </button>
+                    </div>
+
+                    {/* Add/Edit Form */}
+                    {(showForm || editingId) && (
+                        <div className="bg-white rounded-lg shadow p-6">
+                            <h2 className="text-xl font-semibold mb-4">{editingId ? 'Edit Image' : 'Add New Image'}</h2>
+                            <div className="space-y-4">
+                                <input 
+                                    placeholder="Image Caption (Optional)" 
+                                    value={editingId ? editImage.caption : newImage.caption}
+                                    onChange={(e) => editingId ? setEditImage({...editImage, caption: e.target.value}) : setNewImage({...newImage, caption: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <select 
+                                    value={editingId ? editImage.category : newImage.category}
+                                    onChange={(e) => editingId ? setEditImage({...editImage, category: e.target.value}) : setNewImage({...newImage, category: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    <option value="Braces">Braces</option>
+                                    <option value="Implants">Implants</option>
+                                    <option value="Cosmetic">Cosmetic</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div>
+                                    <label className="block text-gray-700 font-medium mb-2">📸 Upload Image</label>
+                                    <input 
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    {(editingId ? editImage.image : newImage.image) && (
+                                        <img src={editingId ? editImage.image : newImage.image} alt="Preview" className="mt-3 image-preview" />
+                                    )}
+                                </div>
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={editingId ? handleUpdate : handleAddImage}
+                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        {editingId ? 'Update' : 'Add'}
+                                    </button>
+                                    <button 
+                                        onClick={handleCancel}
+                                        className="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-all"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Gallery Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {data.gallery.map(item => (
+                            <div key={item.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-all">
+                                {item.image && <img src={item.image} alt={item.caption} className="w-full h-48 object-cover" />}
+                                <div className="p-4">
+                                    <h3 className="font-semibold text-gray-800">{item.caption || 'Untitled'}</h3>
+                                    <p className="text-sm text-gray-600 mb-3">{item.category}</p>
+                                    <div className="flex gap-2">
+                                        <button 
+                                            onClick={() => handleEdit(item)}
+                                            className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-1 rounded transition-all text-sm"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button 
+                                            onClick={() => handleDelete(item.id)}
+                                            className="flex-1 bg-red-500 hover:bg-red-600 text-white py-1 rounded transition-all text-sm"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== SETTINGS COMPONENT =====
+        function Settings({ data, onUpdate }) {
+            const [formData, setFormData] = useState(data.settings);
+            const [saved, setSaved] = useState(false);
+
+            const handleLogoUpload = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const base64 = await handleFileUpload(file);
+                    setFormData({...formData, logo: base64});
+                }
+            };
+
+            const handleSave = async () => {
+                // Save to localStorage and state
+                onUpdate({ ...data, settings: formData });
+                
+                // Also save to backend API
+                try {
+                    const response = await fetch('/api/admin/settings/save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        console.log('Settings saved to backend successfully');
+                        setSaved(true);
+                        setTimeout(() => setSaved(false), 3000);
+                    } else {
+                        console.error('Backend save failed:', result.message);
+                        // Still show local save success
+                        setSaved(true);
+                        setTimeout(() => setSaved(false), 3000);
+                    }
+                } catch (error) {
+                    console.error('Error saving settings to backend:', error);
+                    // Still show local save success for localStorage
+                    setSaved(true);
+                    setTimeout(() => setSaved(false), 3000);
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <h1 className="text-3xl font-bold text-gray-800">Settings</h1>
+
+                    <div className="bg-white rounded-lg shadow p-6 max-w-2xl">
+                        <h2 className="text-xl font-semibold mb-6">Clinic Information</h2>
+
+                        {saved && <div className="mb-4 p-3 bg-green-100 text-green-800 rounded">Settings saved successfully!</div>}
+
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">📸 Upload Logo</label>
+                                <input 
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleLogoUpload}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                {formData.logo && (
+                                    <img src={formData.logo} alt="Logo" className="mt-3 image-preview" />
+                                )}
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Clinic Name</label>
+                                <input 
+                                    value={formData.clinicName}
+                                    onChange={(e) => setFormData({...formData, clinicName: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Address</label>
+                                <textarea 
+                                    value={formData.address}
+                                    onChange={(e) => setFormData({...formData, address: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    rows="2"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Phone</label>
+                                <input 
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Email</label>
+                                <input 
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Consultation Hours</label>
+                                <input 
+                                    value={formData.hours}
+                                    onChange={(e) => setFormData({...formData, hours: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Facebook URL</label>
+                                <input 
+                                    value={formData.facebook}
+                                    onChange={(e) => setFormData({...formData, facebook: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Instagram URL</label>
+                                <input 
+                                    value={formData.instagram}
+                                    onChange={(e) => setFormData({...formData, instagram: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">WhatsApp URL</label>
+                                <input 
+                                    value={formData.whatsapp}
+                                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="https://wa.me/YOUR_PHONE_NUMBER"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">Twitter URL</label>
+                                <input 
+                                    value={formData.twitter}
+                                    onChange={(e) => setFormData({...formData, twitter: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+
+                            <div className="col-span-2 border-t pt-4">
+                                <label className="block text-gray-700 font-medium mb-2">Google Map Embed Code</label>
+                                <p className="text-sm text-gray-600 mb-2">Paste your Google Maps embed iframe code here. Example: &lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt;</p>
+                                <textarea 
+                                    value={formData.map_embed}
+                                    onChange={(e) => setFormData({...formData, map_embed: e.target.value})}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24 font-mono text-sm"
+                                    placeholder="Paste Google Maps embed code here..."
+                                />
+                            </div>
+
+                            <div className="col-span-2 pt-4 border-t flex gap-2">
+                                <button 
+                                    onClick={handleSave}
+                                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-all"
+                                >
+                                    Save Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== MAIN APP COMPONENT =====
+        function AdminApp() {
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [user, setUser] = useState(null);
+            const [currentPage, setCurrentPage] = useState('dashboard');
+            const [sidebarOpen, setSidebarOpen] = useState(true);
+            const [data, setData] = useState(() => {
+                const saved = localStorage.getItem('dentalAdminData');
+                return saved ? JSON.parse(saved) : INITIAL_DATA;
+            });
+
+            // Save data to localStorage whenever it changes
+            useEffect(() => {
+                localStorage.setItem('dentalAdminData', JSON.stringify(data));
+                
+                // Broadcast update to other tabs/windows
+                try {
+                    if (window.BroadcastChannel) {
+                        const channel = new BroadcastChannel('dental_admin_updates');
+                        channel.postMessage({ type: 'dataUpdated', timestamp: Date.now() });
+                        channel.close();
+                    }
+                } catch (e) {
+                    console.warn('Could not broadcast update:', e);
+                }
+            }, [data]);
+
+            const handleLogin = (userData) => {
+                setUser(userData);
+                setIsLoggedIn(true);
+            };
+
+            const handleLogout = () => {
+                setIsLoggedIn(false);
+                setUser(null);
+                setCurrentPage('dashboard');
+            };
+
+            if (!isLoggedIn) {
+                return <LoginPage onLogin={handleLogin} />;
+            }
+
+            return (
+                <div className="flex h-screen bg-gray-100">
+                    {/* Sidebar */}
+                    <div className={`${sidebarOpen ? 'w-64' : 'w-0'} bg-gradient-to-b from-blue-700 to-blue-800 text-white transition-all duration-300 ease-in-out overflow-hidden`}>
+                        <div className="p-6 border-b border-blue-600">
+                            <h1 className="text-xl font-bold">🏥 Western Dental</h1>
+                            <p className="text-sm text-blue-200">Admin Panel</p>
+                        </div>
+
+                        <nav className="p-4 space-y-2">
+                            {[
+                                { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+                                { id: 'services', label: 'Services', icon: '🦷' },
+                                { id: 'banners', label: 'Banners', icon: '📸' },
+                                { id: 'blogs', label: 'Blogs', icon: '📝' },
+                                { id: 'gallery', label: 'Gallery', icon: '🖼️' },
+                                { id: 'settings', label: 'Settings', icon: '⚙️' }
+                            ].map(item => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => setCurrentPage(item.id)}
+                                    className={`w-full text-left px-4 py-3 rounded-lg transition-all flex items-center gap-3 ${currentPage === item.id ? 'bg-blue-600' : 'hover:bg-blue-600'}`}
+                                >
+                                    <span className="text-lg">{item.icon}</span>
+                                    <span>{item.label}</span>
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="flex-1 flex flex-col overflow-hidden">
+                        {/* Top Navbar */}
+                        <div className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+                            <button 
+                                onClick={() => setSidebarOpen(!sidebarOpen)}
+                                className="text-gray-700 text-2xl hover:bg-gray-100 p-2 rounded transition-all"
+                            >
+                                {sidebarOpen ? '☰' : '☰'}
+                            </button>
+
+                            <div className="flex items-center gap-4">
+                                <span className="text-gray-700">Welcome, <strong>{user.name}</strong></span>
+                                <button 
+                                    onClick={handleLogout}
+                                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-all"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Page Content */}
+                        <div className="flex-1 overflow-auto p-6">
+                            {currentPage === 'dashboard' && <Dashboard data={data} />}
+                            {currentPage === 'services' && <Services data={data} onUpdate={setData} />}
+                            {currentPage === 'banners' && <Banners data={data} onUpdate={setData} />}
+                            {currentPage === 'blogs' && <Blogs data={data} onUpdate={setData} />}
+                            {currentPage === 'gallery' && <Gallery data={data} onUpdate={setData} />}
+                            {currentPage === 'settings' && <Settings data={data} onUpdate={setData} />}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Render App
+        ReactDOM.createRoot(document.getElementById('root')).render(<AdminApp />);
+    </script>
+</body>
+</html>

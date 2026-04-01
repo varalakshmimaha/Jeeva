@@ -1,0 +1,36 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="blogGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FCE4EC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F8BBD0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C2185B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E91E63;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="600" height="400" fill="url(#blogGradient3)"/>
+  
+  <!-- Bright smile icon -->
+  <g transform="translate(120, 60)">
+    <circle cx="180" cy="140" r="110" fill="url(#iconGradient3)" opacity="0.2"/>
+    <!-- Teeth -->
+    <ellipse cx="180" cy="140" rx="80" ry="70" fill="white" stroke="url(#iconGradient3)" stroke-width="2"/>
+    <!-- Smile -->
+    <path d="M 130 160 Q 180 190 230 160" stroke="url(#iconGradient3)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Shine/sparkle -->
+    <circle cx="160" cy="115" r="6" fill="url(#iconGradient3)" opacity="0.8"/>
+    <circle cx="200" cy="110" r="8" fill="url(#iconGradient3)" opacity="0.6"/>
+  </g>
+  
+  <!-- Stars around -->
+  <text x="350" y="130" font-size="40" fill="url(#iconGradient3)" opacity="0.6">✨</text>
+  <text x="450" y="250" font-size="35" fill="url(#iconGradient3)" opacity="0.5">⭐</text>
+  
+  <!-- Text -->
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#C2185B">
+    Cosmetic Dentistry
+  </text>
+</svg>

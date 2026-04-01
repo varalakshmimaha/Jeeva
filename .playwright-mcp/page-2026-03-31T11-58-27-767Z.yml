@@ -1,0 +1,200 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "🏥 Western Dental & Orthodontics Orthodontics" [ref=e4] [cursor=pointer]:
+        - /url: http://localhost:8000
+        - generic [ref=e5]: 🏥
+        - generic [ref=e6]:
+          - generic [ref=e7]: Western Dental & Orthodontics
+          - generic [ref=e8]: Orthodontics
+      - list [ref=e9]:
+        - listitem [ref=e10]:
+          - link "Home" [ref=e11] [cursor=pointer]:
+            - /url: http://localhost:8000
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: http://localhost:8000/services
+        - listitem [ref=e14]:
+          - link "Gallery" [ref=e15] [cursor=pointer]:
+            - /url: http://localhost:8000/gallery
+        - listitem [ref=e16]:
+          - link "📞 Contact" [ref=e17] [cursor=pointer]:
+            - /url: http://localhost:8000/contact
+  - generic [ref=e24]:
+    - paragraph [ref=e25]: Expert Dental Care for Your Smile
+    - heading "Welcome to Western Dental" [level=1] [ref=e26]
+    - link "Book Consultation →" [ref=e27] [cursor=pointer]:
+      - /url: "#"
+      - text: Book Consultation
+      - generic [ref=e28]: →
+  - generic [ref=e31]:
+    - generic [ref=e33]:
+      - img "Modern Dental Clinic" [ref=e35]
+      - generic [ref=e36]:
+        - generic [ref=e37]: 15+ Years
+        - generic [ref=e38]: of Excellence
+    - generic [ref=e39]:
+      - generic [ref=e40]:
+        - generic [ref=e41]: About Western Dental
+        - heading "Leading Dental Care Excellence" [level=2] [ref=e42]
+      - paragraph [ref=e43]: At Western Dental & Orthodontics, we believe every smile tells a story. Our mission is to create beautiful, healthy smiles that last a lifetime.
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: 🏆
+          - generic [ref=e47]:
+            - heading "Award-Winning Clinic" [level=4] [ref=e48]
+            - paragraph [ref=e49]: Recognized for excellence in dental care and patient satisfaction
+        - generic [ref=e50]:
+          - generic [ref=e51]: 👨‍⚕️
+          - generic [ref=e52]:
+            - heading "Expert Specialists" [level=4] [ref=e53]
+            - paragraph [ref=e54]: Highly qualified and certified dental professionals
+        - generic [ref=e55]:
+          - generic [ref=e56]: 🔬
+          - generic [ref=e57]:
+            - heading "Latest Technology" [level=4] [ref=e58]
+            - paragraph [ref=e59]: State-of-the-art equipment for precise diagnosis and treatment
+      - link "Schedule Your Visit" [ref=e60] [cursor=pointer]:
+        - /url: http://localhost:8000/contact
+  - generic [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]: Why Choose Us
+      - heading "Dentistry Built on Trust" [level=2] [ref=e65]
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - img "Tooth icon" [ref=e69]
+        - heading "Painless Treatments" [level=3] [ref=e70]
+        - paragraph [ref=e71]: Modern anaesthetic techniques for a completely comfortable, anxiety-free experience
+      - generic [ref=e72]:
+        - img "Transparent pricing icon" [ref=e74]
+        - heading "Transparent Pricing" [level=3] [ref=e75]
+        - paragraph [ref=e76]: No hidden charges. Clear, upfront costs so you can make informed decisions
+      - generic [ref=e77]:
+        - generic [ref=e78]: 🩺
+        - heading "Expert Doctors" [level=3] [ref=e79]
+        - paragraph [ref=e80]: Led by qualified specialists with 15+ years of combined dental expertise
+      - generic [ref=e81]:
+        - img "Modern equipment icon" [ref=e83]
+        - heading "Modern Equipment" [level=3] [ref=e84]
+        - paragraph [ref=e85]: Digital X-rays, advanced sterilisation, and cutting-edge dental technology
+  - generic [ref=e87]:
+    - generic [ref=e88]:
+      - generic [ref=e89]: What We Offer
+      - heading "Comprehensive Dental Services" [level=2] [ref=e90]
+      - paragraph [ref=e91]: From your first check-up to complete smile transformations — all under one trusted roof.
+    - generic [ref=e92]:
+      - generic [ref=e93]:
+        - generic [ref=e95]: 🦷
+        - heading "Braces & Aligners" [level=3] [ref=e96]
+        - paragraph [ref=e97]: Advanced orthodontic treatment using metal braces and Invisalign clear aligners for all ages.
+      - generic [ref=e98]:
+        - generic [ref=e100]: 🔩
+        - heading "Dental Implants" [level=3] [ref=e101]
+        - paragraph [ref=e102]: Permanent, natural-looking solution for missing teeth with lasting functional results.
+      - generic [ref=e103]:
+        - generic [ref=e105]: 💊
+        - heading "Root Canal Treatment" [level=3] [ref=e106]
+        - paragraph [ref=e107]: Pain-free RCT to save damaged teeth and restore complete function with modern techniques.
+      - generic [ref=e108]:
+        - generic [ref=e110]: ✨
+        - heading "Cosmetic Dentistry" [level=3] [ref=e111]
+        - paragraph [ref=e112]: Smile designing, veneers, and whitening to enhance your natural beauty and confidence.
+    - link "View All Services →" [ref=e114] [cursor=pointer]:
+      - /url: http://localhost:8000/services
+  - generic [ref=e116]:
+    - generic [ref=e117]:
+      - heading "Ready to Transform Your Smile?" [level=2] [ref=e118]
+      - paragraph [ref=e119]: Schedule your consultation with our expert team today and start your journey to a healthier, more beautiful smile.
+    - generic [ref=e120]:
+      - link "☎ Call Us Now" [ref=e121] [cursor=pointer]:
+        - /url: tel:+917483211870
+        - generic [ref=e122]: ☎ Call Us Now
+      - link "Book Appointment" [ref=e123] [cursor=pointer]:
+        - /url: http://localhost:8000/contact
+        - generic [ref=e124]: Book Appointment
+  - contentinfo [ref=e125]:
+    - generic [ref=e127]:
+      - generic [ref=e128]:
+        - heading "About Us" [level=3] [ref=e129]
+        - link "🏥 Western Dental & Orthodontics Orthodontics" [ref=e130] [cursor=pointer]:
+          - /url: http://localhost:8000
+          - generic [ref=e131]: 🏥
+          - generic [ref=e132]:
+            - generic [ref=e133]: Western Dental & Orthodontics
+            - generic [ref=e134]: Orthodontics
+        - paragraph [ref=e135]: Trusted dental care for your whole family with compassionate treatment, modern technology, and a warm clinic experience at Tippasandra, Bangalore, Karnataka.
+      - generic [ref=e136]:
+        - heading "Quick Links" [level=3] [ref=e137]
+        - list [ref=e138]:
+          - listitem [ref=e139]:
+            - link "› Home" [ref=e140] [cursor=pointer]:
+              - /url: http://localhost:8000
+              - generic [ref=e141]: ›
+              - text: Home
+          - listitem [ref=e142]:
+            - link "› Services" [ref=e143] [cursor=pointer]:
+              - /url: http://localhost:8000/services
+              - generic [ref=e144]: ›
+              - text: Services
+          - listitem [ref=e145]:
+            - link "› Blog" [ref=e146] [cursor=pointer]:
+              - /url: http://localhost:8000/blog
+              - generic [ref=e147]: ›
+              - text: Blog
+          - listitem [ref=e148]:
+            - link "› Gallery" [ref=e149] [cursor=pointer]:
+              - /url: http://localhost:8000/gallery
+              - generic [ref=e150]: ›
+              - text: Gallery
+          - listitem [ref=e151]:
+            - link "› Contact Us" [ref=e152] [cursor=pointer]:
+              - /url: http://localhost:8000/contact
+              - generic [ref=e153]: ›
+              - text: Contact Us
+      - generic [ref=e154]:
+        - heading "Legal" [level=3] [ref=e155]
+        - list [ref=e156]:
+          - listitem [ref=e157]:
+            - link "› Privacy Policy" [ref=e158] [cursor=pointer]:
+              - /url: http://localhost:8000/privacy-policy
+              - generic [ref=e159]: ›
+              - text: Privacy Policy
+          - listitem [ref=e160]:
+            - link "› Terms of Service" [ref=e161] [cursor=pointer]:
+              - /url: http://localhost:8000/terms-and-conditions
+              - generic [ref=e162]: ›
+              - text: Terms of Service
+      - generic [ref=e163]:
+        - heading "Contact Us" [level=3] [ref=e164]
+        - generic [ref=e165]:
+          - generic [ref=e166]:
+            - generic [ref=e167]: 📍
+            - paragraph [ref=e169]: Tippasandra, Bangalore, Karnataka
+          - generic [ref=e170]:
+            - generic [ref=e171]: 📞
+            - link "+91 74832 11870" [ref=e173] [cursor=pointer]:
+              - /url: tel:+917483211870
+          - generic [ref=e174]:
+            - generic [ref=e175]: ✉
+            - link "contact@westerndental.com" [ref=e177] [cursor=pointer]:
+              - /url: mailto:contact@westerndental.com
+          - generic [ref=e178]:
+            - link "Follow us on Facebook" [ref=e179] [cursor=pointer]:
+              - /url: https://facebook.com/westerndental
+              - generic [ref=e180]: f
+            - link "Contact us on WhatsApp" [ref=e181] [cursor=pointer]:
+              - /url: https://wa.me/917483211870
+              - generic [ref=e182]: 💬
+            - link "Follow us on Instagram" [ref=e183] [cursor=pointer]:
+              - /url: https://instagram.com/westerndental
+              - generic [ref=e184]: 📷
+            - link "Follow us on Twitter" [ref=e185] [cursor=pointer]:
+              - /url: https://twitter.com/westerndental
+              - generic [ref=e186]: 𝕏
+    - generic [ref=e188]:
+      - paragraph [ref=e189]: © 2026 Western Dental. All rights reserved.
+      - generic [ref=e190]:
+        - link "Privacy Policy" [ref=e191] [cursor=pointer]:
+          - /url: http://localhost:8000/privacy-policy
+        - link "Terms & Conditions" [ref=e192] [cursor=pointer]:
+          - /url: http://localhost:8000/terms-and-conditions

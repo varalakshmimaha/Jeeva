@@ -1,0 +1,45 @@
+- generic [ref=e18]:
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - heading "🏥 Western Dental" [level=1] [ref=e21]
+      - paragraph [ref=e22]: Admin Panel
+    - navigation [ref=e23]:
+      - button "📊 Dashboard" [ref=e24] [cursor=pointer]:
+        - generic [ref=e25]: 📊
+        - generic [ref=e26]: Dashboard
+      - button "🦷 Services" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: 🦷
+        - generic [ref=e29]: Services
+      - button "📸 Banners" [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: 📸
+        - generic [ref=e32]: Banners
+      - button "🖼️ Gallery" [ref=e33] [cursor=pointer]:
+        - generic [ref=e34]: 🖼️
+        - generic [ref=e35]: Gallery
+      - button "⚙️ Settings" [ref=e36] [cursor=pointer]:
+        - generic [ref=e37]: ⚙️
+        - generic [ref=e38]: Settings
+  - generic [ref=e39]:
+    - generic [ref=e40]:
+      - button "☰" [ref=e41] [cursor=pointer]
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - text: Welcome,
+          - strong [ref=e44]: Admin
+        - button "Logout" [ref=e45] [cursor=pointer]
+    - generic [ref=e47]:
+      - heading "Dashboard" [level=1] [ref=e48]
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: 🦷
+          - paragraph [ref=e52]: Total Services
+          - paragraph [ref=e53]: "5"
+        - generic [ref=e54]:
+          - generic [ref=e55]: 📸
+          - paragraph [ref=e56]: Active Banners
+          - paragraph [ref=e57]: "3"
+        - generic [ref=e58]:
+          - generic [ref=e59]: 🖼️
+          - paragraph [ref=e60]: Gallery Images
+          - paragraph [ref=e61]: "4"
+      - heading "Weekly Visits" [level=2] [ref=e64]

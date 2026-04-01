@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\SiteSetting;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class SettingsController extends Controller
+{
+    public function edit()
+    {
+        $settings = SiteSetting::pluck('value', 'key')->toArray();
+        return view('admin.settings.edit', compact('settings'));
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'company_name' => 'nullable|string|max:255',
+            'company_email' => 'nullable|email',
+            'company_phone' => 'nullable|string|max:20',
+            'company_address' => 'nullable|string',
+            'company_hours' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle logo upload
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logo', 'public');
+            $this->saveSetting('logo_path', $logoPath);
+        }
+
+        // Save other settings
+        $this->saveSetting('company_name', $validated['company_name'] ?? null);
+        $this->saveSetting('company_email', $validated['company_email'] ?? null);
+        $this->saveSetting('company_phone', $validated['company_phone'] ?? null);
+        $this->saveSetting('company_address', $validated['company_address'] ?? null);
+        $this->saveSetting('company_hours', $validated['company_hours'] ?? null);
+
+        return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
+    }
+
+    private function saveSetting($key, $value)
+    {
+        SiteSetting::updateOrCreate(
+            ['key' => $key],
+            ['value' => $value]
+        );
+    }
+}

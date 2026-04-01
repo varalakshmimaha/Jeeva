@@ -1,0 +1,29 @@
+<svg width="1920" height="980" viewBox="0 0 1920 980" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dental clinic banner 1">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b2b4d"/>
+      <stop offset="55%" stop-color="#0d4c78"/>
+      <stop offset="100%" stop-color="#1ab3cf"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.8" cy="0.2" r="0.55">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="980" fill="url(#bg1)"/>
+  <rect width="1920" height="980" fill="url(#glow1)"/>
+  <g opacity="0.22" fill="#ffffff">
+    <circle cx="240" cy="210" r="6"/>
+    <circle cx="360" cy="280" r="5"/>
+    <circle cx="480" cy="200" r="5"/>
+    <circle cx="620" cy="320" r="6"/>
+    <circle cx="770" cy="210" r="5"/>
+  </g>
+  <g transform="translate(1300 220)">
+    <rect x="0" y="0" width="360" height="430" rx="42" fill="#ffffff" fill-opacity="0.18"/>
+    <rect x="50" y="58" width="260" height="120" rx="24" fill="#ffffff" fill-opacity="0.78"/>
+    <rect x="98" y="220" width="160" height="160" rx="32" fill="#2dc7de"/>
+    <circle cx="178" cy="302" r="42" fill="#ffffff"/>
+    <path d="M162 286c0-10 8-18 16-18s16 8 16 18-8 18-16 18-16-8-16-18z" fill="#2dc7de"/>
+  </g>
+</svg>

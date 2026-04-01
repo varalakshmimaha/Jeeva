@@ -1,0 +1,37 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF3E0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFE0B2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="rcIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6F00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="600" height="400" fill="url(#rcGrad)"/>
+  
+  <!-- Tooth with treatment -->
+  <g transform="translate(120, 70)">
+    <circle cx="180" cy="140" r="120" fill="url(#rcIcon)" opacity="0.15"/>
+    <!-- Tooth outline -->
+    <path d="M 160 80 Q 150 60 180 50 Q 210 60 200 80 L 200 200 Q 200 220 180 230 Q 160 220 160 200 Z" 
+          fill="white" stroke="url(#rcIcon)" stroke-width="2"/>
+    <!-- Treatment lines -->
+    <line x1="170" y1="100" x2="190" y2="100" stroke="url(#rcIcon)" stroke-width="2" opacity="0.6"/>
+    <line x1="170" y1="130" x2="190" y2="130" stroke="url(#rcIcon)" stroke-width="2" opacity="0.6"/>
+    <line x1="170" y1="160" x2="190" y2="160" stroke="url(#rcIcon)" stroke-width="2" opacity="0.6"/>
+    <!-- Cross mark -->
+    <line x1="160" y1="140" x2="200" y2="140" stroke="url(#rcIcon)" stroke-width="2" opacity="0.4"/>
+  </g>
+  
+  <!-- Support icons -->
+  <text x="420" y="130" font-size="40" fill="url(#rcIcon)" opacity="0.8">⚕️</text>
+  <text x="420" y="220" font-size="40" fill="url(#rcIcon)" opacity="0.6">💊</text>
+  
+  <!-- Text -->
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#E65100">
+    Root Canal Therapy
+  </text>
+</svg>
