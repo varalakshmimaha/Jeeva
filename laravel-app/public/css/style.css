@@ -2008,13 +2008,13 @@ footer{
 .gallery-filter{
   padding:14px 26px;
   border-radius:999px;
-  border:1px solid rgba(10,22,40,.12);
-  background:rgba(255,255,255,.92);
+  border:1px solid rgba(56,189,248,.3);
+  background:var(--teal-pale);
   color:var(--navy);
   font-size:15px;
   font-weight:700;
   transition:all .25s ease;
-  box-shadow:0 10px 24px rgba(10,22,40,.04);
+  box-shadow:0 10px 24px rgba(56,189,248,.08);
 }
 .gallery-filter:hover{
   transform:translateY(-2px);

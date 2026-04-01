@@ -136,38 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
     
-    // Filtering logic
-    const filterBtns = document.querySelectorAll('.gallery-filter');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-gallery-filter');
-            
-            // Update active state
-            filterBtns.forEach(b => b.classList.remove('is-active'));
-            btn.classList.add('is-active');
-            
-            // Filter cards
-            cards.forEach(card => {
-                const category = card.getAttribute('data-gallery-category');
-                
-                if (filter === 'all' || category === filter) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.classList.add('is-visible');
-                        card.style.opacity = '1';
-                        card.style.visibility = 'visible';
-                        card.style.transform = 'translateY(0) scale(1)';
-                    }, 20);
-                } else {
-                    card.style.display = 'none';
-                    card.classList.remove('is-visible');
-                    card.style.opacity = '0';
-                    card.style.visibility = 'hidden';
-                    card.style.transform = 'translateY(20px) scale(0.95)';
-                }
-            });
-        });
-    });
+    // Filtering logic relies entirely on dental-data.js
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && lightbox.classList.contains('is-active')) {
