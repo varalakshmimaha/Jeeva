@@ -77,7 +77,7 @@
           </div>
           <div class="highlight-item">
             <div class="highlight-icon">
-              <img src="{{ asset('images/blog_oral-health.svg') }}" class="highlight-icon-img" alt="Advanced dental technology icon">
+              <img src="{{ asset('images/blog_root_canal.png') }}" class="highlight-icon-img" alt="Advanced dental technology icon">
               <div class="highlight-icon-overlay"></div>
             </div>
             <div class="highlight-text">

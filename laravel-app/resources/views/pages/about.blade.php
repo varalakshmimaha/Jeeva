@@ -74,7 +74,7 @@
 
         <div class="highlight-item reveal d3">
           <div class="highlight-icon">
-            <img src="{{ asset('images/blog_implants.png') }}" class="highlight-icon-img" alt="Advanced dental technology icon">
+            <img src="{{ asset('images/blog_root_canal.png') }}" class="highlight-icon-img" alt="Advanced dental technology icon">
             <div class="highlight-icon-overlay"></div>
           </div>
           <div class="highlight-text">
