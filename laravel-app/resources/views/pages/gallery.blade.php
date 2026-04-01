@@ -136,6 +136,32 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
     
+    // Filtering logic
+    const filterBtns = document.querySelectorAll('.gallery-filter');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-gallery-filter');
+            
+            // Update active state
+            filterBtns.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                const category = card.getAttribute('data-gallery-category');
+                if (filter === 'all' || category === filter) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && lightbox.classList.contains('is-active')) {
             closeLightbox();

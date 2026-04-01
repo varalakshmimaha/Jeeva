@@ -63,9 +63,11 @@ class SiteContentSeeder extends Seeder
         \App\Models\GalleryItem::truncate();
         $galleryItems = [
             ['title' => 'Reception & Waiting Area', 'category' => 'clinic-interior', 'image' => '/images/dentist_checking_patient.png', 'color_class' => 'tone-1'],
-            ['title' => 'Treatment Room 1', 'category' => 'equipment', 'image' => '/images/dentist_checking_patient.png', 'color_class' => 'tone-2'],
-            ['title' => 'Dental Chair & Unit', 'category' => 'equipment', 'image' => '/images/blog_dental_hygiene.png', 'color_class' => 'tone-3'],
-            ['title' => 'Sterilization & Lab Corner', 'category' => 'clinic-interior', 'image' => '/images/blog_implants.png', 'color_class' => 'tone-4'],
+            ['title' => 'Modern Consultation Suite', 'category' => 'clinic-interior', 'image' => '/images/blog_dental_hygiene.png', 'color_class' => 'tone-2'],
+            
+            ['title' => 'Advanced Treatment Room', 'category' => 'equipment', 'image' => '/images/dentist_checking_patient.png', 'color_class' => 'tone-3'],
+            ['title' => 'Clinical Sterilization Unit', 'category' => 'equipment', 'image' => '/images/blog_implants.png', 'color_class' => 'tone-4'],
+            
             ['title' => 'Smile Makeover Result', 'category' => 'before-after', 'image' => '/images/blog_invisalign.png', 'color_class' => 'tone-5'],
             ['title' => 'Braces Transformation', 'category' => 'before-after', 'image' => '/images/blog_braces.png', 'color_class' => 'tone-6'],
         ];
