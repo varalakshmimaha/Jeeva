@@ -24,20 +24,22 @@
   <div class="container">
     <div class="svc-full-grid">
       @foreach($services as $index => $service)
-      <div class="svc-full-card reveal d{{ $index + 1 }}">
-        <div class="svc-full-head">
-          <div class="svc-full-ico" style="width: 50px; height: 50px; border-radius: 10px; overflow: hidden; background: var(--teal-pale);">
-            <img src="{{ asset($service->icon) }}" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div>
-            <h3>{{ $service->title }}</h3>
-            <div class="sub">{{ $service->subtitle }}</div>
-          </div>
+      <article class="svc-full-card reveal d{{ ($index % 6) + 1 }}">
+        <div class="svc-full-thumb">
+          <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}">
         </div>
         <div class="svc-full-body">
+          <div class="svc-full-cat">{{ $service->subtitle }}</div>
+          <h3>{{ $service->title }}</h3>
           <p>{{ $service->description }}</p>
+          <div class="svc-full-footer">
+            <span style="font-size:12px;color:var(--muted);">Dental Care</span>
+            <a href="{{ route('service.show', $service->id) }}" class="svc-learn-btn">
+              Read More <span class="arrow">&rarr;</span>
+            </a>
+          </div>
         </div>
-      </div>
+      </article>
       @endforeach
     </div>
   </div>

@@ -41,6 +41,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'content' => 'nullable|string',
             'icon' => 'nullable|string|max:255',
             'order' => 'nullable|integer',
         ]);
@@ -62,7 +63,8 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
-            'icon' => 'nullable|string|max:10',
+            'content' => 'nullable|string',
+            'icon' => 'nullable|string|max:255',
             'order' => 'nullable|integer',
         ]);
 

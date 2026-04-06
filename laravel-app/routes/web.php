@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminSettingsController;
 // Page Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/services', [PageController::class, 'services'])->name('services');
+Route::get('/services/{id}', [PageController::class, 'serviceShow'])->name('service.show');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [PageController::class, 'blogShow'])->name('blog.show');

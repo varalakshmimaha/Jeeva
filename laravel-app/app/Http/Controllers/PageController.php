@@ -28,6 +28,15 @@ class PageController extends Controller
         ]);
     }
 
+    public function serviceShow($id)
+    {
+        $service = \App\Models\Service::findOrFail($id);
+        return view('pages.service-show', [
+            'pageName' => 'services',
+            'service' => $service,
+        ]);
+    }
+
     public function about()
     {
         return view('pages.about', ['pageName' => 'about']);

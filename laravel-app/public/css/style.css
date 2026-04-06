@@ -1154,40 +1154,81 @@ section{padding:90px 6%}
 .svc-full-card{
   background:white;border-radius:var(--radius-lg);
   overflow:hidden;border:1px solid var(--border);
-  transition:all .35s;
+  transition:all .35s;display:flex;flex-direction:column;
 }
-.svc-full-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent}
-.svc-full-head{
-  padding:30px;
-  background:var(--grad-hero);
-  position:relative;overflow:hidden;
-  display:flex;align-items:flex-start;gap:18px;
+.svc-full-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:transparent}
+.svc-full-card:hover .svc-full-thumb img{transform:scale(1.05)}
+.svc-full-thumb{
+  height:200px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#fef9ef 0%,#fde8c8 100%);
 }
-.svc-full-head::after{
-  content:'';position:absolute;right:-30px;top:-30px;
-  width:130px;height:130px;border-radius:50%;
-  background:rgba(255,255,255,.04);
+.svc-full-thumb img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .45s ease;
 }
-.svc-full-ico{font-size:38px;flex-shrink:0}
-.svc-full-head h3{
+.svc-full-body{padding:26px 26px 28px;flex:1;display:flex;flex-direction:column}
+.svc-full-cat{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--teal-2);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.svc-full-cat::before{content:'';width:16px;height:2px;background:var(--teal);border-radius:2px}
+.svc-full-body h3{
   font-family:'Playfair Display',serif;
-  font-size:22px;font-weight:700;color:white;margin-bottom:4px;
+  font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px;
 }
-.svc-full-head .sub{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase}
-@media(max-width:540px){
-  .svc-full-head{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:12px;
-    padding:24px 20px;
-  }
-  .svc-full-ico{
-    margin-bottom:8px;
-  }
+.svc-full-body p{color:var(--muted);line-height:1.75;font-size:14.5px;flex:1}
+.svc-full-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:20px;padding-top:16px;border-top:1px solid var(--border);
 }
-.svc-full-body{padding:26px}
-.svc-full-body p{color:var(--muted);line-height:1.75;font-size:14.5px}
+.svc-learn-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--teal-2);
+  background:var(--teal-pale);padding:6px 14px;border-radius:8px;
+  transition:all .25s;text-decoration:none;
+}
+.svc-learn-btn:hover{background:var(--teal);color:white;transform:translateX(3px)}
+.svc-learn-btn .arrow{transition:transform .25s}
+.svc-learn-btn:hover .arrow{transform:translateX(4px)}
+
+/* Service Detail Page */
+.svc-detail-page{
+  margin-top:52px;
+  background:white;border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:40px;
+  box-shadow:var(--shadow-sm);
+}
+.svc-detail-image-full{
+  border-radius:16px;overflow:hidden;
+  margin-bottom:32px;background:#fef9ef;
+}
+.svc-detail-image-full img{
+  width:100%;height:auto;max-height:480px;
+  object-fit:cover;display:block;
+}
+.svc-detail-cat{
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--teal-2);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.svc-detail-cat::before{content:'';width:20px;height:2.5px;background:var(--teal);border-radius:2px}
+.svc-detail-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,42px);font-weight:700;
+  color:var(--navy);line-height:1.2;margin-bottom:20px;
+}
+.svc-detail-short{
+  font-size:16px;color:var(--navy);line-height:1.85;
+  font-weight:500;margin-bottom:24px;
+  padding-bottom:24px;border-bottom:1px solid var(--border);
+}
+.svc-detail-full-content{
+  font-size:15px;line-height:1.95;color:var(--text);
+}
+@media(max-width:860px){
+  .svc-detail-page{padding:24px}
+}
 
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BLOG PAGE

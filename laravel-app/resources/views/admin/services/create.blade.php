@@ -33,6 +33,11 @@
         </div>
         
         <div style="margin-bottom: 20px;">
+            <label for="content" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Detailed Content (shown on detail page)</label>
+            <textarea id="content" name="content" rows="10" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box; resize: vertical;" placeholder="Add detailed information about this service. Use separate paragraphs for better readability.">{{ old('content') }}</textarea>
+        </div>
+
+        <div style="margin-bottom: 20px;">
             <label for="icon" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Icon (emoji or char)</label>
             <input type="text" id="icon" name="icon" value="{{ old('icon') }}" maxlength="10" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
         </div>
