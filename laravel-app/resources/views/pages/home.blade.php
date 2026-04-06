@@ -154,16 +154,24 @@
       <p class="section-subtitle">From your first check-up to complete smile transformations — all under one trusted roof.</p>
     </div>
 
-    <div class="services-grid-4">
+    <div class="svc-full-grid">
       @foreach($services as $index => $service)
-      <div class="service-card reveal fade-up d{{ $index + 1 }}">
-        <div class="service-icon-bg">
-          <img src="{{ asset($service->icon) }}" class="service-icon-img" alt="{{ $service->title }} photo thumbnail">
-          <div class="service-icon-overlay"></div>
+      <article class="svc-full-card reveal d{{ ($index % 6) + 1 }}">
+        <div class="svc-full-thumb">
+          <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}">
         </div>
-        <h3 class="service-title">{{ $service->title }}</h3>
-        <p class="service-desc">{{ $service->description }}</p>
-      </div>
+        <div class="svc-full-body">
+          <div class="svc-full-cat">{{ $service->subtitle }}</div>
+          <h3>{{ $service->title }}</h3>
+          <p>{{ $service->description }}</p>
+          <div class="svc-full-footer">
+            <span style="font-size:12px;color:var(--muted);">Dental Care</span>
+            <a href="{{ route('service.show', $service->id) }}" class="svc-learn-btn">
+              Read More <span class="arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </article>
       @endforeach
     </div>
 
