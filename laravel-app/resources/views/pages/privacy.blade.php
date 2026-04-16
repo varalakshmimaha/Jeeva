@@ -23,13 +23,13 @@
         <p><strong>Last updated:</strong> {{ now()->format('F d, Y') }}</p>
 
         <h3>Information We Collect</h3>
-        <p>We may collect your name, phone number, email address, appointment details, and any information you provide through our contact or enquiry forms. We may also collect limited technical data such as browser type, device information, and pages visited for website performance and security.</p>
+        <p>We may collect your name, phone number, email address, consultation details, and any information you provide through our contact or enquiry forms. We may also collect limited technical data such as browser type, device information, and pages visited for website performance and security.</p>
 
         <h3>How We Use Your Information</h3>
-        <p>We use your information to respond to enquiries, schedule appointments, provide dental care support, improve our services, and communicate important updates related to your requests or visits.</p>
+        <p>We use your information to respond to enquiries, schedule consultations, provide birth and wellness support, improve our services, and communicate important updates related to your requests or visits.</p>
 
         <h3>Sharing of Information</h3>
-        <p>We do not sell or rent your personal information. We may share information only when required for clinic operations, legal compliance, safety, or with trusted service providers who help us operate the website or manage communications.</p>
+        <p>We do not sell or rent your personal information. We may share information only when required for business operations, legal compliance, safety, or with trusted service providers who help us operate the website or manage communications.</p>
 
         <h3>Data Security</h3>
         <p>We take reasonable administrative and technical steps to protect your information from unauthorized access, misuse, or disclosure. However, no internet-based system can be guaranteed to be completely secure.</p>

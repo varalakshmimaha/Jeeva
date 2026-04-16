@@ -1,51 +1,72 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<div style="max-width: 600px;">
-    <h1 style="color: #0a1628; margin-bottom: 30px; margin-top: 0; font-family: 'Playfair Display';">Add New Banner</h1>
-    
+<div>
+    <div class="adm-page-header">
+        <h1 class="adm-page-title">Add New Banner</h1>
+        <a href="{{ route('admin.banners.index') }}" class="adm-back">&larr; Back to Banners</a>
+    </div>
+
     @if($errors->any())
-        <div style="background: #ffebee; color: #c62828; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #c62828;">
-            <ul style="margin: 0; padding-left: 20px;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="adm-alert adm-alert-err">
+            @foreach($errors->all() as $error){{ $error }}<br>@endforeach
         </div>
     @endif
-    
-    <form action="{{ route('admin.banners.store') }}" method="POST" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+    <form action="{{ route('admin.banners.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
-        <div style="margin-bottom: 20px;">
-            <label for="page" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Page *</label>
-            <select id="page" name="page" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-                <option value="">Select a page</option>
-                <option value="services" {{ old('page') == 'services' ? 'selected' : '' }}>Services</option>
-                <option value="blog" {{ old('page') == 'blog' ? 'selected' : '' }}>Blog</option>
-                <option value="gallery" {{ old('page') == 'gallery' ? 'selected' : '' }}>Gallery</option>
-                <option value="contact" {{ old('page') == 'contact' ? 'selected' : '' }}>Contact</option>
-            </select>
+
+        <div class="adm-card">
+            <div class="adm-card-head">Banner Details</div>
+            <div class="adm-card-body">
+                <div class="adm-form-grid">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Page *</label>
+                        <select name="page" required class="adm-input">
+                            <option value="">Select a page</option>
+                            <option value="home" {{ old('page') == 'home' ? 'selected' : '' }}>Home</option>
+                            <option value="services" {{ old('page') == 'services' ? 'selected' : '' }}>Services</option>
+                            <option value="blog" {{ old('page') == 'blog' ? 'selected' : '' }}>Blog</option>
+                            <option value="gallery" {{ old('page') == 'gallery' ? 'selected' : '' }}>Gallery</option>
+                            <option value="contact" {{ old('page') == 'contact' ? 'selected' : '' }}>Contact</option>
+                        </select>
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Title *</label>
+                        <input type="text" name="title" value="{{ old('title') }}" required class="adm-input" placeholder="Banner heading text">
+                    </div>
+                </div>
+                <div class="adm-form-group" style="margin-top:16px;">
+                    <label class="adm-label">Description</label>
+                    <textarea name="description" rows="3" class="adm-input" placeholder="Short description for the banner">{{ old('description') }}</textarea>
+                </div>
+                <div class="adm-form-grid" style="margin-top:16px;">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Button Text</label>
+                        <input type="text" name="button_text" value="{{ old('button_text', 'Book Consultation') }}" class="adm-input" placeholder="e.g., Book Consultation">
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Button Link</label>
+                        <input type="text" name="button_link" value="{{ old('button_link', '/contact') }}" class="adm-input" placeholder="e.g., /contact or /services">
+                    </div>
+                </div>
+                <div class="adm-form-grid" style="margin-top:16px;">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Banner Image</label>
+                        <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
+                        <p class="adm-hint">JPG, PNG or WebP. Max 3MB. Recommended: 1920x600px</p>
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Display Order</label>
+                        <input type="number" name="order" value="{{ old('order', 0) }}" class="adm-input" placeholder="0">
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="title" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Title *</label>
-            <input type="text" id="title" name="title" value="{{ old('title') }}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="description" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Description</label>
-            <textarea id="description" name="description" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box; resize: vertical;">{{ old('description') }}</textarea>
-        </div>
-        
-        <div style="margin-bottom: 30px;">
-            <label for="breadcrumb" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Breadcrumb</label>
-            <input type="text" id="breadcrumb" name="breadcrumb" value="{{ old('breadcrumb') }}" placeholder="e.g., Home > Services" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="display: flex; gap: 10px;">
-            <button type="submit" style="background: #18b4d4; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 14px;">Create Banner</button>
-            <a href="{{ route('admin.banners.index') }}" style="background: #ccc; color: #333; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 14px;">Cancel</a>
+
+        <div class="adm-form-actions">
+            <button type="submit" class="adm-btn adm-btn-primary">Create Banner</button>
+            <a href="{{ route('admin.banners.index') }}" class="adm-btn adm-btn-cancel">Cancel</a>
         </div>
     </form>
 </div>

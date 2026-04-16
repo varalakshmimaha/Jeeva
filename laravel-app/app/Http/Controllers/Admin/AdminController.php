@@ -6,6 +6,8 @@ use App\Models\Service;
 use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\GalleryItem;
+use App\Models\Testimonial;
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,8 +21,13 @@ class AdminController extends Controller
             'banners' => Banner::count(),
             'blogs' => Blog::count(),
             'gallery' => GalleryItem::count(),
+            'testimonials' => Testimonial::count(),
+            'messages' => ContactMessage::count(),
+            'unread_messages' => ContactMessage::where('is_read', false)->count(),
         ];
-        return view('admin.dashboard', $stats);
+        $recentMessages = ContactMessage::latest()->take(5)->get();
+        $recentServices = Service::latest()->take(5)->get();
+        return view('admin.dashboard', array_merge($stats, ['recentMessages' => $recentMessages, 'recentServices' => $recentServices]));
     }
 
     // === SERVICES ===
@@ -81,7 +88,7 @@ class AdminController extends Controller
     // === BANNERS ===
     public function bannersIndex()
     {
-        $banners = Banner::all();
+        $banners = Banner::orderBy('order')->get();
         return view('admin.banners.index', compact('banners'));
     }
 
@@ -96,9 +103,20 @@ class AdminController extends Controller
             'page' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|string|max:255',
-            'breadcrumb' => 'nullable|string|max:255',
+            'button_text' => 'nullable|string|max:255',
+            'button_link' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'order' => 'nullable|integer',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/banners'), $filename);
+            $validated['image'] = 'images/banners/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
 
         Banner::create($validated);
         return redirect()->route('admin.banners.index')->with('success', 'Banner created successfully!');
@@ -117,9 +135,20 @@ class AdminController extends Controller
             'page' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|string|max:255',
-            'breadcrumb' => 'nullable|string|max:255',
+            'button_text' => 'nullable|string|max:255',
+            'button_link' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'order' => 'nullable|integer',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/banners'), $filename);
+            $validated['image'] = 'images/banners/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
 
         $banner->update($validated);
         return redirect()->route('admin.banners.index')->with('success', 'Banner updated successfully!');
@@ -149,10 +178,19 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'content' => 'required|string',
-            'icon' => 'nullable|string|max:10',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
             'slug' => 'required|string|unique:blogs',
             'published' => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/blogs'), $filename);
+            $validated['image'] = 'images/blogs/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
 
         Blog::create($validated);
         return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully!');
@@ -171,10 +209,19 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'content' => 'required|string',
-            'icon' => 'nullable|string|max:10',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
             'slug' => 'required|string|unique:blogs,slug,' . $id,
             'published' => 'boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/blogs'), $filename);
+            $validated['image'] = 'images/blogs/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
 
         $blog->update($validated);
         return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully!');
@@ -195,20 +242,24 @@ class AdminController extends Controller
 
     public function galleryCreate()
     {
-        $colors = ['gc1', 'gc2', 'gc3', 'gc4', 'gc5', 'gc6', 'gc7', 'gc8', 'gc9'];
-        return view('admin.gallery.create', compact('colors'));
+        return view('admin.gallery.create');
     }
 
     public function galleryStore(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'nullable|string|max:255',
-            'color_class' => 'required|string',
+            'category' => 'nullable|string|max:255',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:3072',
             'order' => 'nullable|integer',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/gallery'), $filename);
+            $validated['image'] = 'images/gallery/' . $filename;
+        }
 
         GalleryItem::create($validated);
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item created successfully!');
@@ -217,8 +268,7 @@ class AdminController extends Controller
     public function galleryEdit($id)
     {
         $item = GalleryItem::findOrFail($id);
-        $colors = ['gc1', 'gc2', 'gc3', 'gc4', 'gc5', 'gc6', 'gc7', 'gc8', 'gc9'];
-        return view('admin.gallery.edit', compact('item', 'colors'));
+        return view('admin.gallery.edit', compact('item'));
     }
 
     public function galleryUpdate(Request $request, $id)
@@ -226,11 +276,19 @@ class AdminController extends Controller
         $item = GalleryItem::findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'icon' => 'nullable|string|max:10',
-            'color_class' => 'required|string|in:gc1,gc2,gc3,gc4,gc5,gc6,gc7,gc8,gc9',
+            'category' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
             'order' => 'nullable|integer',
         ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/gallery'), $filename);
+            $validated['image'] = 'images/gallery/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
 
         $item->update($validated);
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item updated successfully!');
@@ -240,5 +298,102 @@ class AdminController extends Controller
     {
         GalleryItem::findOrFail($id)->delete();
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item deleted successfully!');
+    }
+
+    // === TESTIMONIALS ===
+    public function testimonialsIndex()
+    {
+        $testimonials = Testimonial::orderBy('order')->get();
+        return view('admin.testimonials.index', compact('testimonials'));
+    }
+
+    public function testimonialsCreate()
+    {
+        return view('admin.testimonials.create');
+    }
+
+    public function testimonialsStore(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'role' => 'nullable|string|max:255',
+            'message' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'rating' => 'required|integer|min:1|max:5',
+            'published' => 'nullable|boolean',
+            'order' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/testimonials'), $filename);
+            $validated['image'] = 'images/testimonials/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
+
+        $validated['published'] = $request->has('published');
+        Testimonial::create($validated);
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial added successfully!');
+    }
+
+    public function testimonialsEdit($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        return view('admin.testimonials.edit', compact('testimonial'));
+    }
+
+    public function testimonialsUpdate(Request $request, $id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'role' => 'nullable|string|max:255',
+            'message' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'rating' => 'required|integer|min:1|max:5',
+            'published' => 'nullable|boolean',
+            'order' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/testimonials'), $filename);
+            $validated['image'] = 'images/testimonials/' . $filename;
+        } else {
+            unset($validated['image']);
+        }
+
+        $validated['published'] = $request->has('published');
+        $testimonial->update($validated);
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated successfully!');
+    }
+
+    public function testimonialsDestroy($id)
+    {
+        Testimonial::findOrFail($id)->delete();
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted successfully!');
+    }
+
+    // === CONTACT MESSAGES ===
+    public function messagesIndex()
+    {
+        $messages = ContactMessage::latest()->get();
+        return view('admin.messages.index', compact('messages'));
+    }
+
+    public function messagesShow($id)
+    {
+        $message = ContactMessage::findOrFail($id);
+        $message->update(['is_read' => true]);
+        return view('admin.messages.show', compact('message'));
+    }
+
+    public function messagesDestroy($id)
+    {
+        ContactMessage::findOrFail($id)->delete();
+        return redirect()->route('admin.messages.index')->with('success', 'Message deleted.');
     }
 }

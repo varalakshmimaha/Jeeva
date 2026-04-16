@@ -1,38 +1,36 @@
 @extends('layouts.app')
 
-@section('title', 'Gallery - Western Dental & Orthodontics')
+@section('title', 'Gallery - Jiva Birth and Beyond')
 
 @section('content')
 
-
-
-<!-- Page Header (Hero Banner) -->
-<div class="page-header" style="background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.7) 100%), url('{{ asset('images/blog_braces.png') }}'); background-size: cover; background-position: center; min-height: 340px; display: flex; align-items: center;">
-  <div class="page-header-body">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="{{ route('home') }}">Home</a>
-      <span class="breadcrumb-sep">&rsaquo;</span>
-      <span class="breadcrumb-current">Gallery</span>
-    </nav>
-    <h1 style="text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Our Transformation Gallery</h1>
-    <p style="color: rgba(255,255,255,0.9); font-size: 18px; max-width: 600px;">A look inside our modern clinic, equipment, and real patient smile transformations.</p>
-  </div>
-</div>
+<x-page-banner
+  title="Our Gallery"
+  subtitle="A glimpse into our prenatal yoga sessions, doula support, nutrition guidance, and childbirth education."
+  image="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1600&q=80"
+  :breadcrumbs="[['label' => 'Gallery']]"
+/>
 
 <!-- Gallery Section -->
 <section class="gallery-showcase-section">
   <div class="container">
+    @php
+      $categories = $galleryItems->pluck('category')->filter()->unique()->values();
+    @endphp
+
+    @if($categories->count() > 0)
     <div class="gallery-filters reveal">
       <button type="button" class="gallery-filter is-active" data-gallery-filter="all">All Photos</button>
-      <button type="button" class="gallery-filter" data-gallery-filter="clinic-interior">Clinic Interior</button>
-      <button type="button" class="gallery-filter" data-gallery-filter="equipment">Equipment</button>
-      <button type="button" class="gallery-filter" data-gallery-filter="before-after">Before &amp; After</button>
+      @foreach($categories as $cat)
+        <button type="button" class="gallery-filter" data-gallery-filter="{{ $cat }}">{{ ucfirst($cat) }}</button>
+      @endforeach
     </div>
+    @endif
 
-    <div class="gallery-grid gallery-grid-showcase" id="dental-gallery">
+    <div class="gallery-grid gallery-grid-showcase" id="gallery-items">
       @forelse($galleryItems as $item)
           <article class="gallery-showcase-card reveal" data-gallery-category="{{ $item->category }}" tabindex="0">
-              <div class="gallery-showcase-surface {{ $item->color_class }}">
+              <div class="gallery-showcase-surface">
                   <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="gallery-image-full">
                   <div class="gallery-info-overlay">
                       <h3 class="gallery-showcase-title">{{ $item->title }}</h3>
@@ -40,7 +38,7 @@
               </div>
           </article>
       @empty
-          <div class="no-gallery-items reveal">No gallery items found. Check back soon for new patient transformations!</div>
+          <div class="no-gallery-items reveal">No gallery items found. Check back soon!</div>
       @endforelse
     </div>
   </div>
@@ -65,16 +63,16 @@
   padding: 40px;
 }
 .lightbox-container.is-active { opacity: 1; pointer-events: all; }
-.lightbox-backdrop { position: absolute; inset: 0; background: rgba(10, 22, 40, 0.95); backdrop-filter: blur(8px); }
+.lightbox-backdrop { position: absolute; inset: 0; background: rgba(61, 43, 43, 0.95); backdrop-filter: blur(8px); }
 .lightbox-close-btn {
-  position: absolute; top: 30px; right: 30px; 
+  position: absolute; top: 30px; right: 30px;
   background: transparent; border: none; font-size: 48px; color: white;
   cursor: pointer; line-height: 1; z-index: 10;
   transition: transform 0.3s;
 }
 .lightbox-close-btn:hover { transform: scale(1.2) rotate(90deg); }
-.lightbox-content { 
-  position: relative; max-width: 900px; width: 100%; 
+.lightbox-content {
+  position: relative; max-width: 900px; width: 100%;
   transform: translateY(30px) scale(0.95); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex; flex-direction: column; align-items: center;
 }
@@ -92,7 +90,7 @@
   transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .gallery-info-overlay {
-  position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 22, 40, 0.95), transparent 70%);
+  position: absolute; inset: 0; background: linear-gradient(to top, rgba(61, 43, 43, 0.95), transparent 70%);
   display: flex; align-items: flex-end; padding: 24px;
   opacity: 0; pointer-events: none; transition: all 0.4s ease;
   transform: translateY(15px);
@@ -122,12 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('click', () => {
             const img = card.querySelector('img');
             const title = card.querySelector('.gallery-showcase-title');
-            
             if (img && title) {
                 lbImg.src = img.src;
                 lbCap.textContent = title.textContent;
                 lightbox.classList.add('is-active');
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
             }
         });
     });
@@ -139,13 +136,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
-    
-    // Filtering logic relies entirely on dental-data.js
-
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('is-active')) {
-            closeLightbox();
-        }
+        if (e.key === 'Escape' && lightbox.classList.contains('is-active')) closeLightbox();
+    });
+
+    // Gallery filter logic
+    const filterBtns = document.querySelectorAll('[data-gallery-filter]');
+    const galleryCards = document.querySelectorAll('[data-gallery-category]');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.galleryFilter;
+            filterBtns.forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+
+            galleryCards.forEach(card => {
+                if (filter === 'all' || card.dataset.galleryCategory === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
     });
 });
 </script>
@@ -153,20 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
 <section class="cta-modern-section reveal">
   <div class="container container-cta-boxed">
     <div class="cta-modern-card">
-      <!-- Subtle Decorative Circles -->
       <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05);"></div>
       <div style="position: absolute; bottom: -30px; left: -20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.03);"></div>
-      
       <div class="cta-content" style="position: relative; z-index: 1;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; color: white;">Ready to Visit Our Clinic?</h2>
-        <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;">Schedule your appointment and experience our world-class facilities firsthand.</p>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; color: white;">Ready to Begin Your Journey?</h2>
+        <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;">Schedule your consultation and take the first step toward an empowered birth experience.</p>
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-          <a href="tel:+917483211870" class="btn-ghost">
-             📞 Call Us
-          </a>
-          <a href="{{ route('contact') }}" class="btn-white-solid">
-            Book Now &rarr;
-          </a>
+          <a href="tel:+917483211870" class="btn-ghost">Call Us</a>
+          <a href="{{ route('contact') }}" class="btn-white-solid">Book Now &rarr;</a>
         </div>
       </div>
     </div>

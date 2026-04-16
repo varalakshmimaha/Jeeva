@@ -16,6 +16,7 @@ Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [PageController::class, 'blogShow'])->name('blog.show');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/testimonials', [PageController::class, 'testimonials'])->name('testimonials');
 Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/terms-and-conditions', [PageController::class, 'terms'])->name('terms');
 
@@ -90,6 +91,19 @@ Route::prefix('admin')->group(function () {
         Route::put('/gallery/{id}', [AdminController::class, 'galleryUpdate'])->name('admin.gallery.update');
         Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('admin.gallery.destroy');
         
+        // Testimonials
+        Route::get('/testimonials', [AdminController::class, 'testimonialsIndex'])->name('admin.testimonials.index');
+        Route::get('/testimonials/create', [AdminController::class, 'testimonialsCreate'])->name('admin.testimonials.create');
+        Route::post('/testimonials', [AdminController::class, 'testimonialsStore'])->name('admin.testimonials.store');
+        Route::get('/testimonials/{id}/edit', [AdminController::class, 'testimonialsEdit'])->name('admin.testimonials.edit');
+        Route::put('/testimonials/{id}', [AdminController::class, 'testimonialsUpdate'])->name('admin.testimonials.update');
+        Route::delete('/testimonials/{id}', [AdminController::class, 'testimonialsDestroy'])->name('admin.testimonials.destroy');
+
+        // Contact Messages
+        Route::get('/messages', [AdminController::class, 'messagesIndex'])->name('admin.messages.index');
+        Route::get('/messages/{id}', [AdminController::class, 'messagesShow'])->name('admin.messages.show');
+        Route::delete('/messages/{id}', [AdminController::class, 'messagesDestroy'])->name('admin.messages.destroy');
+
         // Settings
         Route::get('/settings', [SettingsController::class, 'edit'])->name('admin.settings.edit');
         Route::put('/settings', [SettingsController::class, 'update'])->name('admin.settings.update');

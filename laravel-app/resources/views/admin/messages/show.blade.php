@@ -1,0 +1,58 @@
+@extends('layouts.admin')
+
+@section('admin-content')
+<div>
+    <div class="adm-page-header">
+        <h1 class="adm-page-title">Message from {{ $message->name }}</h1>
+        <a href="{{ route('admin.messages.index') }}" class="adm-back">&larr; Back to Messages</a>
+    </div>
+
+    <div class="adm-card">
+        <div class="adm-card-head" style="display:flex;justify-content:space-between;align-items:center;">
+            <span>Message Details</span>
+            <span style="font-size:12px;color:var(--muted);font-weight:400;">{{ $message->created_at->format('d M Y, h:i A') }}</span>
+        </div>
+        <div class="adm-card-body">
+            <table class="adm-form-table">
+                <tr>
+                    <td class="adm-fl">Name</td>
+                    <td class="adm-fi" style="font-weight:600;">{{ $message->name }}</td>
+                </tr>
+                <tr>
+                    <td class="adm-fl">Email</td>
+                    <td class="adm-fi">{{ $message->email }}</td>
+                </tr>
+                @if($message->phone)
+                <tr>
+                    <td class="adm-fl">Phone</td>
+                    <td class="adm-fi">{{ $message->phone }}</td>
+                </tr>
+                @endif
+                @if($message->subject)
+                <tr>
+                    <td class="adm-fl">Subject</td>
+                    <td class="adm-fi" style="font-weight:600;">{{ $message->subject }}</td>
+                </tr>
+                @endif
+                <tr>
+                    <td class="adm-fl" style="vertical-align:top;padding-top:20px;">Message</td>
+                    <td class="adm-fi">
+                        <div class="adm-detail-box">{{ $message->message }}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="adm-form-actions">
+        <a href="mailto:{{ $message->email }}" class="adm-btn adm-btn-primary">Reply via Email</a>
+        @if($message->phone)
+            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $message->phone) }}" class="adm-btn adm-btn-cancel">Call</a>
+        @endif
+        <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Delete this message?')">
+            @csrf @method('DELETE')
+            <button type="submit" class="adm-btn adm-btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+@endsection

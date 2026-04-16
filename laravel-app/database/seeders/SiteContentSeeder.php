@@ -16,42 +16,42 @@ class SiteContentSeeder extends Seeder
         \App\Models\Banner::truncate();
         \App\Models\Banner::create([
             'page' => 'home',
-            'title' => 'Complete Smile Solutions',
-            'description' => 'Experience the most advanced dental care in Bangalore with our expert team.',
-            'image' => '/images/dentist_checking_patient.png',
+            'title' => 'Empowered Birth & Beyond',
+            'description' => 'Compassionate birth doula support, prenatal yoga, childbirth education, and nutrition guidance for your journey into motherhood.',
+            'image' => 'https://images.unsplash.com/photo-1519782522197-0ad0ea62dfeb?auto=format&fit=crop&w=1200&q=80',
         ]);
         \App\Models\Banner::create([
             'page' => 'home',
-            'title' => 'Your Journey to a Perfect Smile',
-            'description' => 'Modern orthodontics and painless treatments tailored for your comfort.',
-            'image' => '/images/blog_braces.png',
+            'title' => 'Nourish Your Body and Mind',
+            'description' => 'Holistic care through prenatal yoga and tailored nutrition to support you and your baby.',
+            'image' => 'https://images.unsplash.com/photo-1447452001602-7090c7ab2bf3?auto=format&fit=crop&w=1200&q=80',
         ]);
 
-        // 2. Seed Blogs (Migrate Fallback Blogs)
+        // 2. Seed Blogs
         \App\Models\Blog::truncate();
         $fallbackBlogs = [
             [
-                'title' => 'Tips for Dental Hygiene',
-                'category' => 'Hygiene',
-                'content' => "Daily brushing, flossing, and regular checkups are essential for good dental health. Visit us regularly for professional cleanups and expert advice on maintaining your oral health.\n\nHealthy teeth are built through consistency. Brushing twice a day with fluoride toothpaste, cleaning between teeth daily, and replacing your toothbrush regularly are small habits that prevent many common dental problems.\n\nDiet matters too. Frequent sugary snacks and acidic drinks increase the risk of decay and enamel wear. Drinking water after meals and limiting sticky snacks can help reduce that exposure.\n\nRegular checkups complete the picture. Even strong home care cannot remove hardened tartar or catch every early issue. Preventive dental visits help us detect concerns sooner, keep treatment simpler, and protect your smile over time.",
-                'image' => '/images/blog_dental_hygiene.png',
-                'slug' => 'tips-for-dental-hygiene',
+                'title' => 'The Benefits of a Birth Doula',
+                'category' => 'Doula Support',
+                'content' => "Having a birth doula by your side provides continuous physical, emotional, and informational support before, during, and after childbirth. Research shows that doula support can lead to shorter labor, fewer complications, and a more positive birth experience.\n\nA doula helps you navigate your birth plan, advocates for your preferences, and offers comfort techniques like massage, breathing exercises, and positioning. It is about creating a safe, empowering space where you feel heard and supported.\n\nWhether you are planning an unmedicated birth, a hospital birth with an epidural, or a cesarean, your doula is there exclusively for you and your partner, ensuring you transition into motherhood with confidence and peace.",
+                'image' => 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80',
+                'slug' => 'benefits-of-birth-doula',
                 'published' => true,
             ],
             [
-                'title' => 'Understanding Braces',
-                'category' => 'Orthodontics',
-                'content' => "Braces are a popular choice for correcting misaligned teeth and improving your bite. Modern braces are more comfortable and discreet than ever before, with various options to suit your lifestyle.\n\nBraces work by applying gentle, continuous pressure to gradually move teeth into proper alignment. The process typically takes 18 to 24 months, though this varies depending on the complexity of your case.\n\nThere are several types of braces available today: traditional metal braces, ceramic braces that blend with your teeth, and lingual braces that go behind your teeth. Your orthodontist will help determine which option is best for your needs and goals.\n\nWith proper care and regular adjustments, braces can give you a beautiful, healthy smile that lasts a lifetime.",
-                'image' => '/images/blog_braces.png',
-                'slug' => 'understanding-braces',
+                'title' => 'Prenatal Yoga for a Smooth Pregnancy',
+                'category' => 'Prenatal Yoga',
+                'content' => "Prenatal yoga is a multifaceted approach to exercise that encourages stretching, mental centering, and focused breathing. It is one of the best ways to prepare your body and mind for the journey of labor and delivery.\n\nRegular practice helps improve sleep, reduce stress, and minimize common pregnancy discomforts like lower back pain, nausea, and shortness of breath. The gentle stretching increases your strength and flexibility, particularly in the muscles needed for childbirth.\n\nBeyond the physical benefits, prenatal yoga offers a wonderful opportunity to connect with your growing baby and meet other expectant mothers. Building a community of support during this transformative time is invaluable.",
+                'image' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80',
+                'slug' => 'prenatal-yoga-smooth-pregnancy',
                 'published' => true,
             ],
             [
-                'title' => 'Benefits of Dental Implants',
-                'category' => 'Implants',
-                'content' => "Dental implants offer a permanent solution for missing teeth. They look, feel, and function like natural teeth, providing improved comfort, better eating ability, and enhanced confidence in your smile.\n\nDental implants replace missing teeth with a titanium post that functions like an artificial root. Once the implant integrates with the jawbone, it can support a crown, bridge, or denture with excellent stability and a very natural appearance.\n\nOne major benefit of implants is bone preservation. When a tooth is missing for a long time, the jawbone in that area can gradually shrink. Implants help stimulate the bone and reduce that loss, which supports long-term facial structure and oral function.\n\nImplants are more durable than other replacement options and can last 25+ years with proper care. Proper planning, bone evaluation, and aftercare make a big difference in long-term success.",
-                'image' => '/images/blog_implants.png',
-                'slug' => 'benefits-of-dental-implants',
+                'title' => 'Nourishing Nutrition for Two',
+                'category' => 'Nutrition',
+                'content' => "What you eat during pregnancy directly impacts your baby's growth and development, as well as your own health and energy levels. A balanced diet rich in essential nutrients is the foundation of a healthy pregnancy.\n\nFocus on incorporating plenty of colorful fruits and vegetables, whole grains, lean proteins, and healthy fats. Folate, iron, calcium, and DHA are particularly important during this time. Staying hydrated by drinking plenty of water throughout the day is equally crucial.\n\nEvery woman's nutritional needs are unique, especially if experiencing morning sickness or specific aversions. Personalized nutrition guidance can help you navigate these challenges and ensure you and your baby get the nourishment you need to thrive.",
+                'image' => 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80',
+                'slug' => 'nourishing-nutrition-for-two',
                 'published' => true,
             ],
         ];
@@ -62,14 +62,10 @@ class SiteContentSeeder extends Seeder
         // 3. Seed Gallery
         \App\Models\GalleryItem::truncate();
         $galleryItems = [
-            ['title' => 'Reception & Waiting Area', 'category' => 'clinic-interior', 'image' => '/images/dentist_checking_patient.png', 'color_class' => 'tone-1'],
-            ['title' => 'Modern Consultation Suite', 'category' => 'clinic-interior', 'image' => '/images/blog_dental_hygiene.png', 'color_class' => 'tone-2'],
-            
-            ['title' => 'Advanced Treatment Room', 'category' => 'equipment', 'image' => '/images/dentist_checking_patient.png', 'color_class' => 'tone-3'],
-            ['title' => 'Clinical Sterilization Unit', 'category' => 'equipment', 'image' => '/images/blog_implants.png', 'color_class' => 'tone-4'],
-            
-            ['title' => 'Smile Makeover Result', 'category' => 'before-after', 'image' => '/images/blog_invisalign.png', 'color_class' => 'tone-5'],
-            ['title' => 'Braces Transformation', 'category' => 'before-after', 'image' => '/images/blog_braces.png', 'color_class' => 'tone-6'],
+            ['title' => 'Gentle Prenatal Yoga Session', 'category' => 'yoga', 'image' => 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80', 'color_class' => 'tone-1'],
+            ['title' => 'Nutrition & Meal Planning', 'category' => 'nutrition', 'image' => 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80', 'color_class' => 'tone-2'],
+            ['title' => 'Comfort Measures in Labor', 'category' => 'doula', 'image' => 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80', 'color_class' => 'tone-3'],
+            ['title' => 'Childbirth Education Class', 'category' => 'education', 'image' => 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80', 'color_class' => 'tone-4'],
         ];
         foreach ($galleryItems as $idx => $item) {
             \App\Models\GalleryItem::create(array_merge($item, ['order' => $idx]));
@@ -78,21 +74,32 @@ class SiteContentSeeder extends Seeder
         // 4. Seed Services
         \App\Models\Service::truncate();
         $services = [
-            ['title' => 'Dental Braces & Aligners', 'subtitle' => 'Orthodontic Treatment', 'description' => 'Straighten your teeth and correct bite issues using advanced metal braces, ceramic braces, or Invisalign clear aligners. Our orthodontic treatments are customised for children, teens, and adults.', 'icon' => '/images/blog_braces.png'],
-            ['title' => 'Dental Implants', 'subtitle' => 'Tooth Replacement', 'description' => 'Dental implants offer a permanent, natural-looking solution for missing teeth. A titanium post is placed in the jawbone acting as an artificial root, topped with a realistic crown.', 'icon' => '/images/blog_implants.png'],
-            ['title' => 'Root Canal Treatment', 'subtitle' => 'Pain-Free Tooth Saving', 'description' => 'Modern root canal treatment is virtually painless with the latest techniques and anaesthesia. We carefully remove the infected pulp, clean the root canals, and seal the tooth to prevent re-infection.', 'icon' => '/images/blog_root_canal.png'],
-            ['title' => 'Smile Designing', 'subtitle' => 'Cosmetic Dentistry', 'description' => 'Transform your smile with a combination of cosmetic procedures tailored to your facial features. Includes teeth whitening, porcelain veneers, bonding, and gum contouring.', 'icon' => '/images/blog_invisalign.png'],
-            ['title' => 'General Dentistry', 'subtitle' => 'Preventive & Routine Care', 'description' => 'Maintaining good oral health starts with regular check-ups and professional cleaning. Our general dentistry services include scaling, polishing, fillings, and tooth extractions.', 'icon' => '/images/dentist_checking_patient.png'],
+            ['title' => 'Birth Doula Support', 'subtitle' => 'Continuous Labor Support', 'description' => 'Receive unwavering physical, emotional, and informational support throughout your pregnancy, labor, and the immediate postpartum period. Ensure your birth experience is respected, calm, and deeply empowering.', 'icon' => 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=400&q=80'],
+            ['title' => 'Prenatal Yoga', 'subtitle' => 'Mind & Body Preparation', 'description' => 'Prepare your body for birth with customized prenatal yoga practices. Focus on gentle stretching, breathing techniques, and mental centering to relieve discomfort and increase flexibility.', 'icon' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&q=80'],
+            ['title' => 'Childbirth Education', 'subtitle' => 'Knowledge is Power', 'description' => 'Comprehensive classes covering everything from the stages of labor and comfort measures to postpartum recovery. Feel confident and fully informed as you make choices for your birth plan.', 'icon' => 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80'],
+            ['title' => 'Nutrition Guidance', 'subtitle' => 'Nourishment for Two', 'description' => 'Personalized nutritional counseling to support optimal health during pregnancy and postpartum. Learn how to fuel your body and baby with the right balance of wholesome, nutrient-dense foods.', 'icon' => 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=400&q=80'],
         ];
         foreach ($services as $idx => $service) {
             \App\Models\Service::create(array_merge($service, ['order' => $idx]));
         }
 
+        // 5. Seed Testimonials
+        \App\Models\Testimonial::truncate();
+        $testimonials = [
+            ['name' => 'Priya Sharma', 'role' => 'First-time Mother', 'message' => 'Jiva Birth and Beyond made my birthing experience truly beautiful. The doula support was incredible - I felt calm, informed, and empowered throughout. I cannot recommend them enough!', 'rating' => 5, 'published' => true, 'order' => 0],
+            ['name' => 'Ananya Reddy', 'role' => 'Mother of Two', 'message' => 'The prenatal yoga classes were a game-changer for my second pregnancy. I felt so much stronger and more prepared compared to my first. The breathing techniques helped immensely during labor.', 'rating' => 5, 'published' => true, 'order' => 1],
+            ['name' => 'Meera Krishnan', 'role' => 'Expectant Mother', 'message' => 'The nutrition guidance I received was personalized and practical. I finally understood what my body needed during pregnancy. My energy levels improved dramatically within weeks.', 'rating' => 4, 'published' => true, 'order' => 2],
+            ['name' => 'Kavitha Nair', 'role' => 'New Mother', 'message' => 'The childbirth education classes gave me and my husband so much confidence. We knew exactly what to expect and felt like a team. The postpartum support was equally wonderful.', 'rating' => 5, 'published' => true, 'order' => 3],
+        ];
+        foreach ($testimonials as $t) {
+            \App\Models\Testimonial::create($t);
+        }
+
         // 6. Seed Site Settings
         \App\Models\SiteSetting::truncate();
         $settings = [
-            ['key' => 'company_name', 'value' => 'Western Dental & Orthodontics'],
-            ['key' => 'company_email', 'value' => 'info@westerndental.com'],
+            ['key' => 'company_name', 'value' => 'Jiva Birth and Beyond'],
+            ['key' => 'company_email', 'value' => 'info@jivabirthandbeyond.com'],
             ['key' => 'company_phone', 'value' => '+91 74832 11870'],
             ['key' => 'company_address', 'value' => 'Tippasandra, Bangalore, Karnataka 560075'],
             ['key' => 'company_hours', 'value' => 'Mon-Sat: 10:00 AM - 8:00 PM'],
@@ -106,7 +113,7 @@ class SiteContentSeeder extends Seeder
         \App\Models\User::truncate();
         \App\Models\User::create([
             'name' => 'Admin User',
-            'email' => 'admin@dental.com',
+            'email' => 'admin@jivabirthandbeyond.com',
             'password' => bcrypt('admin123'),
         ]);
     }

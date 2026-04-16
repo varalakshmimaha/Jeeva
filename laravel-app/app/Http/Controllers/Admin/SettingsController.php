@@ -22,7 +22,8 @@ class SettingsController extends Controller
             'company_phone' => 'nullable|string|max:20',
             'company_address' => 'nullable|string',
             'company_hours' => 'nullable|string',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'favicon' => 'nullable|image|mimes:ico,png,jpg,jpeg|max:1024',
             'whatsapp_link' => 'nullable|url|max:500',
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
@@ -34,6 +35,14 @@ class SettingsController extends Controller
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('logo', 'public');
             $this->saveSetting('logo_path', $logoPath);
+        }
+
+        // Handle favicon upload
+        if ($request->hasFile('favicon')) {
+            $file = $request->file('favicon');
+            $filename = 'favicon.' . $file->getClientOriginalExtension();
+            $file->move(public_path(), $filename);
+            $this->saveSetting('favicon_path', $filename);
         }
 
         // Save other settings

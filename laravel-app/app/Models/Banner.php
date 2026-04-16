@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
 {
-    protected $fillable = ['page', 'title', 'description', 'breadcrumb'];
+    protected $fillable = ['page', 'title', 'description', 'button_text', 'button_link', 'image', 'order'];
 }

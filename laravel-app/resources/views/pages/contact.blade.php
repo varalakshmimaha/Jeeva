@@ -1,21 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us - Western Dental & Orthodontics')
+@section('title', 'Contact Us - Jiva Birth and Beyond')
 
 @section('content')
 
-  <!-- Page Header (Hero Banner) -->
-  <div class="page-header" style="background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.7) 100%), url('{{ asset('images/dentist_checking_patient.png') }}'); background-size: cover; background-position: center; min-height: 340px; display: flex; align-items: center;">
-    <div class="page-header-body">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ route('home') }}">Home</a>
-        <span class="breadcrumb-sep">&rsaquo;</span>
-        <span class="breadcrumb-current">Contact</span>
-      </nav>
-      <h1 style="text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Get in Touch</h1>
-      <p style="color: rgba(255,255,255,0.9); font-size: 18px; max-width: 600px;">Have questions or ready to book an appointment? We're here to help.</p>
-    </div>
-  </div>
+  <x-page-banner
+    title="Get in Touch"
+    subtitle="Have questions or ready to book a consultation? We're here to help you on your birth journey."
+    image="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80"
+    :breadcrumbs="[['label' => 'Contact Us']]"
+  />
 
   <!-- Contact Section -->
   <section>
@@ -98,7 +92,7 @@
           <div class="c-ico">📧</div>
           <div class="c-content">
             <div class="c-lbl">Email</div>
-            <a href="mailto:info@westerndental.com" class="c-val">bengaluruldentalhome@gmail.com</a>
+            <a href="mailto:info@jivabirthandbeyond.com" class="c-val">bengaluruldentalhome@gmail.com</a>
             <div class="c-sub">We'll respond within 2 hours</div>
           </div>
         </div>

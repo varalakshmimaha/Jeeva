@@ -4,17 +4,12 @@
 
 @section('content')
 
-<div class="page-header">
-  <div class="page-header-body">
-    <div class="breadcrumb">
-      <a href="{{ route('home') }}">Home</a> &rsaquo;
-      <a href="{{ route('blog') }}">Blog</a> &rsaquo;
-      <span>{{ $article['title'] }}</span>
-    </div>
-    <h1>{{ $article['title'] }}</h1>
-    <p>{{ $article['excerpt'] }}</p>
-  </div>
-</div>
+<x-page-banner
+  :title="$article['title']"
+  :subtitle="$article['excerpt'] ?? ''"
+  image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=80"
+  :breadcrumbs="[['label' => 'Blog', 'url' => route('blog')], ['label' => $article['title']]]"
+/>
 
 <section>
   <div class="container">
@@ -53,7 +48,7 @@
       <div style="position: absolute; bottom: -30px; left: -20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.03);"></div>
       
       <div class="cta-content" style="position: relative; z-index: 1;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; color: white;">Need Personal Dental Advice?</h2>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; color: white;">Need Personal Guidance?</h2>
         <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;">Book a consultation and get guidance tailored to your smile, comfort, and treatment goals.</p>
         <a href="{{ route('contact') }}" class="btn-white-solid">
           Talk to Us &rarr;

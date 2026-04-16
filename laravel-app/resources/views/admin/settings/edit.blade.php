@@ -1,156 +1,247 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<div style="max-width: 900px; margin: 0 auto;">
-    <div style="margin-bottom: 40px;">
-        <h1 style="color: var(--navy); margin: 0; font-family: 'Playfair Display', serif; font-size: 32px;">Practice Settings</h1>
-        <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 14px;">Update your clinic's identity, contact details, and brand assets.</p>
+<div>
+
+    <div class="adm-page-header">
+        <h1 class="adm-page-title">Site Settings</h1>
+        <button type="submit" form="settingsForm" class="adm-btn adm-btn-primary">Save Changes</button>
     </div>
 
     @if(session('success'))
-        <div style="background: #f0fdf4; color: #16a34a; padding: 16px 24px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #dcfce7; display: flex; align-items: center; gap: 12px; font-weight: 500;">
-            <span>✅</span> {{ session('success') }}
-        </div>
+        <div class="adm-alert adm-alert-ok">{{ session('success') }}</div>
     @endif
-
     @if($errors->any())
-        <div style="background: #fef2f2; color: #ef4444; padding: 16px 24px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #fee2e2; font-weight: 500;">
-            <ul style="margin: 0; padding-left: 20px;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="adm-alert adm-alert-err">
+            @foreach($errors->all() as $error){{ $error }}<br>@endforeach
         </div>
     @endif
 
-    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
+    <form id="settingsForm" action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-        {{-- Logo Section --}}
-        <div style="background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); padding: 40px; margin-bottom: 24px;">
-            <h2 style="color: var(--navy); margin: 0 0 8px 0; font-size: 20px; font-weight: 700;">Brand Logo</h2>
-            <p style="color: var(--muted); margin: 0 0 28px 0; font-size: 14px;">Upload your clinic logo (JPEG, PNG, max 2MB).</p>
-
-            @if(isset($settings['logo_path']) && $settings['logo_path'])
-                <div style="margin-bottom: 20px; padding: 16px; background: #fafcfe; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); display: inline-block;">
-                    <p style="color: var(--muted); font-size: 12px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Current Logo</p>
-                    <img src="{{ asset('storage/' . $settings['logo_path']) }}" alt="Logo" style="max-width: 160px; height: auto; display: block;">
-                </div>
-            @endif
-
-            <div>
-                <label for="logo" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 14px;">Upload New Logo</label>
-                <input type="file" id="logo" name="logo" accept="image/*"
-                    style="display: block; width: 100%; padding: 14px; border: 2px dashed var(--teal); border-radius: 12px; font-family: 'Outfit', sans-serif; font-size: 14px; background: rgba(125,211,252,0.04); box-sizing: border-box; cursor: pointer;">
-            </div>
+        {{-- Tabs --}}
+        <div class="st-tabs">
+            <button type="button" class="st-tab is-active" data-tab="general">General</button>
+            <button type="button" class="st-tab" data-tab="logo">Logo & Favicon</button>
+            <button type="button" class="st-tab" data-tab="social">Footer & Social</button>
         </div>
 
-        {{-- Clinic Information --}}
-        <div style="background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); padding: 40px; margin-bottom: 24px;">
-            <h2 style="color: var(--navy); margin: 0 0 8px 0; font-size: 20px; font-weight: 700;">Clinic Information</h2>
-            <p style="color: var(--muted); margin: 0 0 28px 0; font-size: 14px;">This information appears across the public site — footer, contact page, and more.</p>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <label for="company_name" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Clinic Name</label>
-                    <input type="text" id="company_name" name="company_name"
-                        value="{{ old('company_name', $settings['company_name'] ?? '') }}"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
-                </div>
-                <div>
-                    <label for="company_email" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</label>
-                    <input type="email" id="company_email" name="company_email"
-                        value="{{ old('company_email', $settings['company_email'] ?? '') }}"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
-                </div>
-                <div>
-                    <label for="company_phone" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Phone Number</label>
-                    <input type="text" id="company_phone" name="company_phone"
-                        value="{{ old('company_phone', $settings['company_phone'] ?? '') }}"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
-                </div>
-                <div>
-                    <label for="company_hours" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Business Hours</label>
-                    <input type="text" id="company_hours" name="company_hours"
-                        value="{{ old('company_hours', $settings['company_hours'] ?? '') }}"
-                        placeholder="e.g., Mon-Sat: 10AM - 8PM"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+        {{-- Panel: General --}}
+        <div class="st-panel is-active" data-panel="general">
+            <div class="adm-card">
+                <div class="adm-card-head">General Settings</div>
+                <div class="adm-card-body">
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Site Name</td>
+                            <td class="adm-fi">
+                                <input type="text" name="company_name" class="adm-input"
+                                    value="{{ old('company_name', $settings['company_name'] ?? '') }}"
+                                    placeholder="Jiva Birth and Beyond">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">Site Tagline</td>
+                            <td class="adm-fi">
+                                <input type="text" name="company_hours" class="adm-input"
+                                    value="{{ old('company_hours', $settings['company_hours'] ?? '') }}"
+                                    placeholder="Birth Doula & Wellness">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">Site Email</td>
+                            <td class="adm-fi">
+                                <input type="email" name="company_email" class="adm-input"
+                                    value="{{ old('company_email', $settings['company_email'] ?? '') }}"
+                                    placeholder="contact@jivabirthandbeyond.com">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">Site Phone</td>
+                            <td class="adm-fi">
+                                <input type="text" name="company_phone" class="adm-input"
+                                    value="{{ old('company_phone', $settings['company_phone'] ?? '') }}"
+                                    placeholder="+91 XXXXX XXXXX">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">Site Address</td>
+                            <td class="adm-fi">
+                                <input type="text" name="company_address" class="adm-input"
+                                    value="{{ old('company_address', $settings['company_address'] ?? '') }}"
+                                    placeholder="Tippasandra, Bangalore 560075">
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div style="margin-top: 20px;">
-                <label for="company_address" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Full Address</label>
-                <textarea id="company_address" name="company_address" rows="2"
-                    style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; resize: vertical; transition: border-color 0.2s;"
-                    onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">{{ old('company_address', $settings['company_address'] ?? '') }}</textarea>
-            </div>
-            <div style="margin-top: 20px;">
-                <label for="map_embed" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Google Maps Embed HTML</label>
-                <textarea id="map_embed" name="map_embed" rows="3"
-                    placeholder='<iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
-                    style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit', monospace; font-size: 14px; color: #555; background: #fafcfe; box-sizing: border-box; resize: vertical; transition: border-color 0.2s;"
-                    onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">{{ old('map_embed', $settings['map_embed'] ?? '') }}</textarea>
-                <p style="margin: 6px 0 0 0; font-size: 13px; color: var(--muted);">Paste the full HTML embed code provided by Google Maps.</p>
-            </div>
-        </div>
 
-        {{-- Social Media Links --}}
-        <div style="background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); padding: 40px; margin-bottom: 24px;">
-            <h2 style="color: var(--navy); margin: 0 0 8px 0; font-size: 20px; font-weight: 700;">Social Media Links</h2>
-            <p style="color: var(--muted); margin: 0 0 28px 0; font-size: 14px;">These links will appear as icons in the website footer. Leave blank to hide the icon.</p>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <label for="whatsapp_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">WhatsApp Link</label>
-                    <input type="url" id="whatsapp_link" name="whatsapp_link"
-                        value="{{ old('whatsapp_link', $settings['whatsapp_link'] ?? '') }}"
-                        placeholder="https://wa.me/yournumber"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
-                </div>
-                <div>
-                    <label for="instagram_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Instagram Link</label>
-                    <input type="url" id="instagram_link" name="instagram_link"
-                        value="{{ old('instagram_link', $settings['instagram_link'] ?? '') }}"
-                        placeholder="https://instagram.com/yourprofile"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
-                </div>
-                <div>
-                    <label for="facebook_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Facebook Link</label>
-                    <input type="url" id="facebook_link" name="facebook_link"
-                        value="{{ old('facebook_link', $settings['facebook_link'] ?? '') }}"
-                        placeholder="https://facebook.com/yourpage"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
-                </div>
-                <div>
-                    <label for="twitter_link" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Twitter/X Link</label>
-                    <input type="url" id="twitter_link" name="twitter_link"
-                        value="{{ old('twitter_link', $settings['twitter_link'] ?? '') }}"
-                        placeholder="https://twitter.com/yourprofile"
-                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
-                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+            <div class="adm-card">
+                <div class="adm-card-head">Google Map Embed Code</div>
+                <div class="adm-card-body">
+                    <textarea name="map_embed" class="adm-input" rows="3"
+                        placeholder="Paste Google Maps embed iframe code here...">{{ old('map_embed', $settings['map_embed'] ?? '') }}</textarea>
+                    <p class="adm-hint">Paste the full iframe embed code from Google Maps</p>
                 </div>
             </div>
         </div>
 
-        {{-- Actions --}}
-        <div style="display: flex; gap: 12px; align-items: center;">
-            <button type="submit"
-                style="background: var(--teal); color: white; padding: 16px 36px; border: none; border-radius: 14px; cursor: pointer; font-weight: 700; font-size: 15px; font-family: 'Outfit'; box-shadow: 0 10px 25px rgba(125,211,252,0.4); transition: transform 0.2s;"
-                onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
-                Save Changes
-            </button>
-            <a href="{{ route('admin.dashboard') }}"
-                style="padding: 16px 28px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px; color: var(--muted); background: rgba(0,0,0,0.04);">
-                Cancel
-            </a>
+        {{-- Panel: Logo --}}
+        <div class="st-panel" data-panel="logo">
+            <div class="adm-card">
+                <div class="adm-card-head">Logo Upload</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['logo_path']) && $settings['logo_path'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset('storage/' . $settings['logo_path']) }}" alt="Current Logo">
+                            <span class="adm-img-tag">Current Logo</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Logo</td>
+                            <td class="adm-fi">
+                                <input type="file" name="logo" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Accepted formats: JPEG, PNG, WebP. Max size: 2MB</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Favicon Upload</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['favicon_path']) && $settings['favicon_path'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset($settings['favicon_path']) }}" alt="Current Favicon" style="max-width:48px;">
+                            <span class="adm-img-tag">Current Favicon</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Favicon</td>
+                            <td class="adm-fi">
+                                <input type="file" name="favicon" accept="image/png,image/x-icon,image/jpeg" class="adm-input">
+                                <p class="adm-hint">PNG or ICO format. Recommended: 32x32px or 64x64px. Max 1MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {{-- Panel: Footer & Social --}}
+        <div class="st-panel" data-panel="social">
+            <div class="adm-card">
+                <div class="adm-card-head">Social Media Links</div>
+                <div class="adm-card-body">
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">
+                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#25D366;margin-right:6px;vertical-align:middle;"></span> WhatsApp
+                            </td>
+                            <td class="adm-fi">
+                                <input type="url" name="whatsapp_link" class="adm-input"
+                                    value="{{ old('whatsapp_link', $settings['whatsapp_link'] ?? '') }}"
+                                    placeholder="https://wa.me/91XXXXXXXXXX">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">
+                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#E4405F;margin-right:6px;vertical-align:middle;"></span> Instagram
+                            </td>
+                            <td class="adm-fi">
+                                <input type="url" name="instagram_link" class="adm-input"
+                                    value="{{ old('instagram_link', $settings['instagram_link'] ?? '') }}"
+                                    placeholder="https://instagram.com/yourprofile">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">
+                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#1877F2;margin-right:6px;vertical-align:middle;"></span> Facebook
+                            </td>
+                            <td class="adm-fi">
+                                <input type="url" name="facebook_link" class="adm-input"
+                                    value="{{ old('facebook_link', $settings['facebook_link'] ?? '') }}"
+                                    placeholder="https://facebook.com/yourpage">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">
+                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#000;margin-right:6px;vertical-align:middle;"></span> Twitter / X
+                            </td>
+                            <td class="adm-fi">
+                                <input type="url" name="twitter_link" class="adm-input"
+                                    value="{{ old('twitter_link', $settings['twitter_link'] ?? '') }}"
+                                    placeholder="https://x.com/yourprofile">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </form>
 </div>
+
+<style>
+/* Tabs */
+.st-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 24px;
+}
+.st-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+}
+.st-tab:hover { color: var(--navy); }
+.st-tab.is-active { color: var(--teal); }
+.st-tab.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--teal);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Panels */
+.st-panel { display: none; }
+.st-panel.is-active { display: block; }
+
+@media (max-width: 700px) {
+    .st-tabs { overflow-x: auto; }
+    .st-tab { padding: 10px 16px; font-size: 13px; white-space: nowrap; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.st-tab');
+    const panels = document.querySelectorAll('.st-panel');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('is-active'));
+            panels.forEach(p => p.classList.remove('is-active'));
+            tab.classList.add('is-active');
+            document.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('is-active');
+        });
+    });
+});
+</script>
 @endsection

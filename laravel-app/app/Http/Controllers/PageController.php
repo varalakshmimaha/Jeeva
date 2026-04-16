@@ -10,12 +10,14 @@ class PageController extends Controller
 {
     public function home()
     {
-        $banners = \App\Models\Banner::where('page', 'home')->orderBy('id', 'asc')->get();
+        $banners = \App\Models\Banner::where('page', 'home')->orderBy('order', 'asc')->get();
         $services = \App\Models\Service::orderBy('order', 'asc')->get();
+        $testimonials = \App\Models\Testimonial::where('published', true)->orderBy('order')->take(6)->get();
         return view('pages.home', [
             'pageName' => 'home',
             'banners'  => $banners,
-            'services' => $services
+            'services' => $services,
+            'testimonials' => $testimonials
         ]);
     }
 
@@ -68,6 +70,15 @@ class PageController extends Controller
         return view('pages.gallery', [
             'pageName' => 'gallery',
             'galleryItems' => $galleryItems
+        ]);
+    }
+
+    public function testimonials()
+    {
+        $testimonials = \App\Models\Testimonial::where('published', true)->orderBy('order')->get();
+        return view('pages.testimonials', [
+            'pageName' => 'testimonials',
+            'testimonials' => $testimonials
         ]);
     }
 

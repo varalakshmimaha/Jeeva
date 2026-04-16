@@ -23,10 +23,10 @@
         <p><strong>Last updated:</strong> {{ now()->format('F d, Y') }}</p>
 
         <h3>Website Use</h3>
-        <p>This website is intended to provide general information about our dental clinic, services, and contact options. The content is for informational purposes and should not be treated as a substitute for professional medical or dental advice.</p>
+        <p>This website is intended to provide general information about Jiva Birth and Beyond, our services, and contact options. The content is for informational purposes and should not be treated as a substitute for professional medical advice.</p>
 
-        <h3>Appointments and Enquiries</h3>
-        <p>Submitting a form or enquiry through this website does not guarantee an appointment until it is confirmed by our clinic. Appointment times, treatment availability, and consultation schedules are subject to confirmation.</p>
+        <h3>Consultations and Enquiries</h3>
+        <p>Submitting a form or enquiry through this website does not guarantee a consultation until it is confirmed by Jiva Birth and Beyond. Consultation times, service availability, and schedules are subject to confirmation.</p>
 
         <h3>Medical Information</h3>
         <p>Information on this website may describe treatments and procedures in general terms. Individual treatment recommendations vary from patient to patient and should be confirmed only after professional consultation and examination.</p>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Our Doctors - Western Dental & Orthodontics')
+@section('title', 'Our Team - Jiva Birth and Beyond')
 
 @section('content')
 
@@ -75,9 +75,9 @@
   <div class="cta-inner">
     <div class="cta-text reveal-left">
       <h2>Want to Consult?</h2>
-      <p>Schedule an appointment with our expert doctors for a personalized treatment plan.</p>
+      <p>Schedule a consultation for personalized guidance on your journey.</p>
     </div>
-    <a href="{{ route('contact') }}" class="btn-white reveal-right">Book Appointment</a>
+    <a href="{{ route('contact') }}" class="btn-white reveal-right">Book Consultation</a>
   </div>
 </div>
 

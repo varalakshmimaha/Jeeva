@@ -205,4 +205,45 @@ if ('IntersectionObserver' in window) {
   });
 }
 
-console.log('✨ Western Dental website loaded successfully!');
+// ══════════════════════════════════
+// HERO BANNER SLIDER
+// ══════════════════════════════════
+(function() {
+  const slider = document.getElementById('bannerSlider');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.banner-slide');
+  const dots   = slider.querySelectorAll('.banner-dot');
+  const prev   = document.getElementById('bannerPrev');
+  const next   = document.getElementById('bannerNext');
+  if (slides.length < 2) return;
+
+  let current = 0;
+  let autoTimer;
+
+  function goTo(index) {
+    slides[current].classList.remove('is-active');
+    if (dots[current]) dots[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    if (dots[current]) dots[current].classList.add('is-active');
+  }
+
+  function startAuto() {
+    autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+  }
+  function resetAuto() {
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  if (prev) prev.addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+  if (next) next.addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); resetAuto(); });
+  });
+
+  startAuto();
+})();
+
+console.log('Jiva Birth and Beyond website loaded successfully!');

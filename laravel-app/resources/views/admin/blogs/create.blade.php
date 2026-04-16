@@ -1,57 +1,62 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<div style="max-width: 600px;">
-    <h1 style="color: #0a1628; margin-bottom: 30px; margin-top: 0; font-family: 'Playfair Display';">Add New Blog</h1>
-    
+<div>
+    <div class="adm-page-header">
+        <h1 class="adm-page-title">Add New Blog</h1>
+        <a href="{{ route('admin.blogs.index') }}" class="adm-back">&larr; Back to Blogs</a>
+    </div>
+
     @if($errors->any())
-        <div style="background: #ffebee; color: #c62828; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #c62828;">
-            <ul style="margin: 0; padding-left: 20px;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="adm-alert adm-alert-err">
+            @foreach($errors->all() as $error){{ $error }}<br>@endforeach
         </div>
     @endif
-    
-    <form action="{{ route('admin.blogs.store') }}" method="POST" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
-        <div style="margin-bottom: 20px;">
-            <label for="title" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Title *</label>
-            <input type="text" id="title" name="title" value="{{ old('title') }}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
+
+        <div class="adm-card">
+            <div class="adm-card-head">Article Details</div>
+            <div class="adm-card-body">
+                <div class="adm-form-grid">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Title *</label>
+                        <input type="text" name="title" value="{{ old('title') }}" required class="adm-input" placeholder="Article title">
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Slug *</label>
+                        <input type="text" name="slug" value="{{ old('slug') }}" required class="adm-input" placeholder="e.g., prenatal-wellness-tips">
+                        <p class="adm-hint">URL-friendly identifier. Lowercase letters and hyphens only.</p>
+                    </div>
+                </div>
+                <div class="adm-form-grid">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Category *</label>
+                        <input type="text" name="category" value="{{ old('category') }}" required class="adm-input" placeholder="e.g., Tips, News, Guide">
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Featured Image</label>
+                        <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
+                        <p class="adm-hint">JPG, PNG or WebP. Max 3MB.</p>
+                    </div>
+                </div>
+                <div class="adm-form-group" style="margin-top:16px;">
+                    <label class="adm-label">Content *</label>
+                    <textarea name="content" required rows="10" class="adm-input" placeholder="Write your article content here...">{{ old('content') }}</textarea>
+                </div>
+                <div class="adm-form-group" style="margin-top:16px;">
+                    <label class="adm-check">
+                        <input type="checkbox" name="published" value="1" {{ old('published') ? 'checked' : '' }}>
+                        <span>Publish immediately (unchecked = Draft)</span>
+                    </label>
+                </div>
+            </div>
         </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="slug" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Slug *</label>
-            <input type="text" id="slug" name="slug" value="{{ old('slug') }}" required placeholder="e.g., dental-care-tips" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="category" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Category *</label>
-            <input type="text" id="category" name="category" value="{{ old('category') }}" required placeholder="e.g., Tips, News, Guide" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="content" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Content *</label>
-            <textarea id="content" name="content" required rows="8" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box; resize: vertical;">{{ old('content') }}</textarea>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="icon" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Icon (emoji or char)</label>
-            <input type="text" id="icon" name="icon" value="{{ old('icon') }}" maxlength="10" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="margin-bottom: 30px;">
-            <label for="published" style="display: flex; align-items: center; color: #0a1628; font-weight: 600; cursor: pointer;">
-                <input type="checkbox" id="published" name="published" value="1" {{ old('published') ? 'checked' : '' }} style="width: 18px; height: 18px; margin-right: 8px; cursor: pointer;">
-                Publish immediately (unchecked = Draft)
-            </label>
-        </div>
-        
-        <div style="display: flex; gap: 10px;">
-            <button type="submit" style="background: #18b4d4; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 14px;">Create Blog</button>
-            <a href="{{ route('admin.blogs.index') }}" style="background: #ccc; color: #333; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 14px;">Cancel</a>
+
+        <div class="adm-form-actions">
+            <button type="submit" class="adm-btn adm-btn-primary">Create Blog</button>
+            <a href="{{ route('admin.blogs.index') }}" class="adm-btn adm-btn-cancel">Cancel</a>
         </div>
     </form>
 </div>

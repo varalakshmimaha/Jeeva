@@ -3,9 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>@yield('title') - Western Dental & Orthodontics</title>
+<title>@yield('title') - Jiva Birth & Beyond</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+@if(!empty($siteSettings['favicon_path']))
+<link rel="icon" href="{{ asset($siteSettings['favicon_path']) }}" type="image/png">
+@endif
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body data-page-name="{{ $pageName ?? 'home' }}">
@@ -17,25 +20,16 @@
   <div class="nav-inner">
     <a href="{{ route('home') }}" class="logo">
       @if(!empty($siteSettings['logo_url']))
-        <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" style="height: 50px; width: auto; object-fit: contain; margin-right: 4px;">
-      @else
-        <div class="logo-mark">
-          &#127973;
-        </div>
+        <img src="{{ $siteSettings['logo_url'] }}" alt="Jiva Birth & Beyond" class="logo-img">
       @endif
-      <div class="logo-words">
-        <span class="logo-name">{{ $siteSettings['company_name'] }}</span>
-        <span class="logo-tag">Orthodontics</span>
-      </div>
     </a>
     <ul class="nav-links">
       <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
       <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
       <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Services</a></li>
-      <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog', 'blog.show') ? 'active' : '' }}">Blog</a></li>
-      <li><a href="{{ route('gallery') }}" class="{{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a></li>
-      <li><a href="{{ route('contact') }}" class="nav-cta-btn">&#128222; Contact</a></li>
+      <li><a href="{{ route('testimonials') }}" class="{{ request()->routeIs('testimonials') ? 'active' : '' }}">Testimonials</a></li>
     </ul>
+    <a href="{{ route('contact') }}" class="nav-cta-btn">&#128222; Contact</a>
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
@@ -50,14 +44,8 @@
   <div class="mob-menu-header">
     <a href="{{ route('home') }}" class="mob-menu-brand">
       @if(!empty($siteSettings['logo_url']))
-        <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" style="height:44px;width:auto;object-fit:contain;">
-      @else
-        <div class="mob-menu-brand-icon">🏥</div>
+        <img src="{{ $siteSettings['logo_url'] }}" alt="Jiva Birth & Beyond" style="height:44px;width:auto;object-fit:contain;">
       @endif
-      <div class="mob-menu-brand-text">
-        <span class="mob-menu-brand-name">{{ $siteSettings['company_name'] }}</span>
-        <span class="mob-menu-brand-tag">ORTHODONTICS & FAMILY DENTAL</span>
-      </div>
     </a>
     <button class="mob-menu-close" id="mobMenuClose" aria-label="Close navigation menu">&#10005;</button>
   </div>
@@ -76,12 +64,8 @@
       <span>Services</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
-    <a href="{{ route('blog') }}" class="mob-menu-link {{ request()->routeIs('blog','blog.show') ? 'mob-menu-link--active' : '' }}">
-      <span>Blog</span>
-      <span class="mob-menu-link-arrow">›</span>
-    </a>
-    <a href="{{ route('gallery') }}" class="mob-menu-link {{ request()->routeIs('gallery') ? 'mob-menu-link--active' : '' }}">
-      <span>Gallery</span>
+    <a href="{{ route('testimonials') }}" class="mob-menu-link {{ request()->routeIs('testimonials') ? 'mob-menu-link--active' : '' }}">
+      <span>Testimonials</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('contact') }}" class="mob-menu-link {{ request()->routeIs('contact') ? 'mob-menu-link--active' : '' }}">
@@ -96,7 +80,7 @@
       📞 Call Now: +91 74832 11870
     </a>
     <a href="{{ route('contact') }}" class="mob-menu-cta-book">
-      📅 Book Appointment
+      📅 Book Consultation
     </a>
   </div>
 
@@ -114,7 +98,7 @@
 <x-footer-contact />
 
 <!-- Floating WhatsApp Button -->
-<a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+book+an+appointment+at+Western+Dental" 
+<a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond" 
    class="whatsapp-float" 
    target="_blank" 
    rel="noopener noreferrer"

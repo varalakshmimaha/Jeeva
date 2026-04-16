@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $settings = [
-                'company_name' => 'Western Dental',
-                'company_email' => 'contact@westerndental.com',
+                'company_name' => 'Jiva Birth and Beyond',
+                'company_email' => 'contact@jivabirthandbeyond.com',
                 'company_phone' => '+91 74832 11870',
                 'company_address' => 'Tippasandra, Bangalore, Karnataka',
                 'company_hours' => 'Mon-Sat: 9 AM - 8 PM',

@@ -1,55 +1,51 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<div style="max-width: 600px;">
-    <h1 style="color: #0a1628; margin-bottom: 30px; margin-top: 0; font-family: 'Playfair Display';">Add Gallery Item</h1>
-    
+<div>
+    <div class="adm-page-header">
+        <h1 class="adm-page-title">Add Gallery Item</h1>
+        <a href="{{ route('admin.gallery.index') }}" class="adm-back">&larr; Back to Gallery</a>
+    </div>
+
     @if($errors->any())
-        <div style="background: #ffebee; color: #c62828; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #c62828;">
-            <ul style="margin: 0; padding-left: 20px;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="adm-alert adm-alert-err">
+            @foreach($errors->all() as $error){{ $error }}<br>@endforeach
         </div>
     @endif
-    
-    <form action="{{ route('admin.gallery.store') }}" method="POST" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+    <form action="{{ route('admin.gallery.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
-        <div style="margin-bottom: 20px;">
-            <label for="title" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Title *</label>
-            <input type="text" id="title" name="title" value="{{ old('title') }}" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
+
+        <div class="adm-card">
+            <div class="adm-card-head">Gallery Item Details</div>
+            <div class="adm-card-body">
+                <div class="adm-form-grid">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Title *</label>
+                        <input type="text" name="title" value="{{ old('title') }}" required class="adm-input" placeholder="Photo or item title">
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Category</label>
+                        <input type="text" name="category" value="{{ old('category') }}" class="adm-input" placeholder="e.g., prenatal, postnatal, wellness">
+                    </div>
+                </div>
+                <div class="adm-form-grid">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Image *</label>
+                        <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input" required>
+                        <p class="adm-hint">JPG, PNG or WebP. Max 3MB.</p>
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">Display Order</label>
+                        <input type="number" name="order" value="{{ old('order', 0) }}" class="adm-input" placeholder="0">
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="description" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Description</label>
-            <textarea id="description" name="description" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box; resize: vertical;">{{ old('description') }}</textarea>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="icon" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Icon (emoji)</label>
-            <input type="text" id="icon" name="icon" value="{{ old('icon') }}" maxlength="10" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label for="color_class" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Color Class *</label>
-            <select id="color_class" name="color_class" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-                <option value="">Select a color</option>
-                @foreach($colors as $color)
-                    <option value="{{ $color }}" {{ old('color_class') == $color ? 'selected' : '' }}>{{ ucfirst($color) }}</option>
-                @endforeach
-            </select>
-        </div>
-        
-        <div style="margin-bottom: 30px;">
-            <label for="order" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Display Order</label>
-            <input type="number" id="order" name="order" value="{{ old('order') }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-        </div>
-        
-        <div style="display: flex; gap: 10px;">
-            <button type="submit" style="background: #18b4d4; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 14px;">Create Item</button>
-            <a href="{{ route('admin.gallery.index') }}" style="background: #ccc; color: #333; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 14px;">Cancel</a>
+
+        <div class="adm-form-actions">
+            <button type="submit" class="adm-btn adm-btn-primary">Create Item</button>
+            <a href="{{ route('admin.gallery.index') }}" class="adm-btn adm-btn-cancel">Cancel</a>
         </div>
     </form>
 </div>
