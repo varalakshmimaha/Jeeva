@@ -73,214 +73,180 @@
 </section>
 
 <!-- Why Choose Us / Our Process Section -->
-<section class="proc-section">
-  <div class="proc-container">
-    <h2 class="proc-heading">Our Journey Together</h2>
+<!-- Modern Journey Together Section -->
+<section class="home-journey-section">
+  <div class="container">
+    <div class="home-journey-header reveal">
+      <span class="journey-eyebrow">Our Process</span>
+      <h2 class="journey-main-title">Our Journey Together</h2>
+      <p class="journey-subtitle">A guided, compassionate approach to your pregnancy, birth, and early parenthood.</p>
+    </div>
 
-    <div class="proc-row">
+    <div class="home-journey-grid">
       <!-- Step 1 -->
-      <div class="proc-item reveal fade-up">
-        <div class="proc-img-wrap">
-          <div class="proc-img-outer">
-            <div class="proc-img-inner">
-              <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Consultation & Assessment">
-            </div>
-          </div>
-          <span class="proc-badge">01</span>
+      <div class="home-journey-card reveal d1">
+        <div class="journey-card-img">
+          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Consultation">
+          <div class="journey-card-num">01</div>
         </div>
-        <h3 class="proc-name">Consultation &amp; Assessment</h3>
-        <p class="proc-text">Initial understanding of your needs, birth preferences, and a comprehensive discussion about your journey.</p>
-      </div>
-
-      <!-- Arrow 1 -->
-      <div class="proc-arrow">
-        <svg viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 12h65" stroke="#4DB6AC" stroke-width="2" stroke-dasharray="6 4"/>
-          <path d="M60 4l14 8-14 8" stroke="#4DB6AC" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <div class="journey-card-content">
+          <h3 class="journey-card-title">Consultation & Assessment</h3>
+          <p class="journey-card-text">Initial understanding of your needs, birth preferences, and a comprehensive discussion about your pregnancy journey.</p>
+        </div>
       </div>
 
       <!-- Step 2 -->
-      <div class="proc-item reveal fade-up" style="animation-delay:0.15s;">
-        <div class="proc-img-wrap">
-          <div class="proc-img-outer">
-            <div class="proc-img-inner">
-              <img src="{{ asset('images/founder-sitting.jpeg') }}" alt="Personalized Birth Plan">
-            </div>
-          </div>
-          <span class="proc-badge">02</span>
+      <div class="home-journey-card reveal d2">
+        <div class="journey-card-img">
+          <img src="{{ asset('images/founder-sitting.jpeg') }}" alt="Personalized Plan">
+          <div class="journey-card-num">02</div>
         </div>
-        <h3 class="proc-name">Personalized Birth Plan</h3>
-        <p class="proc-text">Creating a tailored plan focusing on your comfort, choices, and desired birth experience.</p>
-      </div>
-
-      <!-- Arrow 2 -->
-      <div class="proc-arrow">
-        <svg viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 12h65" stroke="#4DB6AC" stroke-width="2" stroke-dasharray="6 4"/>
-          <path d="M60 4l14 8-14 8" stroke="#4DB6AC" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <div class="journey-card-content">
+          <h3 class="journey-card-title">Personalized Birth Plan</h3>
+          <p class="journey-card-text">Creating a thoughtfully tailored plan focusing on your absolute comfort, personal choices, and desired birth experience.</p>
+        </div>
       </div>
 
       <!-- Step 3 -->
-      <div class="proc-item reveal fade-up" style="animation-delay:0.3s;">
-        <div class="proc-img-wrap">
-          <div class="proc-img-outer">
-            <div class="proc-img-inner">
-              <img src="{{ asset('images/founder-casual.jpeg') }}" alt="Birth & Postpartum Support">
-            </div>
-          </div>
-          <span class="proc-badge">03</span>
+      <div class="home-journey-card reveal d3">
+        <div class="journey-card-img">
+          <img src="{{ asset('images/founder-casual.jpeg') }}" alt="Birth Support">
+          <div class="journey-card-num">03</div>
         </div>
-        <h3 class="proc-name">Birth &amp; Postpartum Support</h3>
-        <p class="proc-text">Continuous physical and emotional support during labor, delivery, recovery, and early parenthood.</p>
+        <div class="journey-card-content">
+          <h3 class="journey-card-title">Birth & Postpartum</h3>
+          <p class="journey-card-text">Continuous and unwavering physical and emotional support throughout labor, delivery, and early parenthood.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-/* ===== WHY CHOOSE US — Exact Reference Design ===== */
-.proc-section {
-  padding: 90px 5%;
-  background: #ffffff;
+/* Modern Journey Section */
+.home-journey-section {
+  padding: 110px 6%;
+  background: #fdfdfc;
+  position: relative;
+  overflow: hidden;
 }
-.proc-container {
-  max-width: 1140px;
-  margin: 0 auto;
-}
-.proc-heading {
+.home-journey-header {
   text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(30px, 4vw, 46px);
-  font-weight: 700;
-  color: #1a1a2e;
   margin-bottom: 70px;
 }
-
-/* Row: items + arrows in a single flex line */
-.proc-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0;
+.journey-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #4DB6AC;
+  margin-bottom: 12px;
+}
+.journey-main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 4.5vw, 48px);
+  color: #2b2b2b;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+.journey-subtitle {
+  color: #6b7280;
+  font-size: 17px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* Each step column */
-.proc-item {
-  flex: 0 0 280px;
-  text-align: center;
-  padding: 0 10px;
+.home-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
 }
-
-/* Dashed arrow between steps */
-.proc-arrow {
-  flex: 0 0 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 110px; /* vertically center with circles */
-}
-.proc-arrow svg {
-  width: 80px;
-  height: 24px;
-}
-
-/* Circle image container */
-.proc-img-wrap {
-  position: relative;
-  width: 230px;
-  height: 230px;
-  margin: 0 auto 28px;
-}
-
-/* Outer ring */
-.proc-img-outer {
-  width: 230px;
-  height: 230px;
-  border-radius: 50%;
-  border: 3px solid #4DB6AC;
-  padding: 8px;
-  background: transparent;
-  position: relative;
-}
-
-/* Inner image circle */
-.proc-img-inner {
-  width: 100%;
+.home-journey-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+  transition: all 0.4s ease;
   height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
+}
+.home-journey-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+}
+@media (min-width: 900px) {
+  .home-journey-card:nth-child(2) {
+    transform: translateY(40px);
+  }
+  .home-journey-card:nth-child(2):hover {
+    transform: translateY(32px);
+  }
+}
+
+.journey-card-img {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-radius: 20px 20px 0 0;
   background: #f0f0f0;
 }
-.proc-img-inner img {
+.journey-card-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  border-radius: 20px 20px 0 0;
 }
-.proc-item:hover .proc-img-inner img {
-  transform: scale(1.08);
-}
-
-/* Number badge */
-.proc-badge {
+.journey-card-num {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f5a623, #e8913a);
-  color: #fff;
+  right: 24px;
+  bottom: -28px;
+  width: 56px;
+  height: 56px;
+  background: #C5B499; /* elegant gold/tan */
+  color: #ffffff;
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #ffffff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 3;
+  border: 4px solid #ffffff;
+  box-shadow: 0 6px 15px rgba(197, 180, 153, 0.4);
+  z-index: 2;
 }
 
-/* Title */
-.proc-name {
+.journey-card-content {
+  padding: 40px 30px 35px;
+}
+.journey-card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 19px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 12px;
+  font-size: 22px;
+  color: #2b2b2b;
+  margin-bottom: 14px;
   line-height: 1.3;
 }
-
-/* Description */
-.proc-text {
-  color: #6b7280;
-  font-size: 14px;
-  line-height: 1.75;
-  max-width: 260px;
-  margin: 0 auto;
+.journey-card-text {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 960px) {
-  .proc-arrow { display: none; }
-  .proc-row {
-    flex-wrap: wrap;
+@media (max-width: 900px) {
+  .home-journey-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
     gap: 50px;
-    justify-content: center;
   }
-  .proc-item { flex: 0 0 260px; }
-}
-@media (max-width: 600px) {
-  .proc-section { padding: 60px 4%; }
-  .proc-heading { margin-bottom: 40px; }
-  .proc-row { flex-direction: column; align-items: center; gap: 45px; }
-  .proc-item { flex: 0 0 100%; }
-  .proc-img-wrap, .proc-img-outer { width: 200px; height: 200px; }
 }
 </style>
+
+
+
 
 <!-- Book an Appointment Section -->
 <section class="book-appointment-section" id="book-appointment">

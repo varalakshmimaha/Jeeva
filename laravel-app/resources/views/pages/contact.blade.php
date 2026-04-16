@@ -7,7 +7,7 @@
   <x-page-banner
     title="Get in Touch"
     subtitle="Have questions or ready to book a consultation? We're here to help you on your birth journey."
-    image="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80"
+    :image="asset('images/banner-services.png')"
     :breadcrumbs="[['label' => 'Contact Us']]"
   />
 

@@ -9,7 +9,7 @@
 <x-page-banner
   title="Our Services"
   subtitle="Compassionate birth support, prenatal yoga, childbirth education, and nutrition guidance for your journey."
-  image="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1600&q=80"
+  :image="asset('images/banner-services.png')"
   :breadcrumbs="[['label' => 'Services']]"
 />
 

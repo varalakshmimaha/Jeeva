@@ -7,7 +7,7 @@
 <x-page-banner
   title="Our Gallery"
   subtitle="A glimpse into our prenatal yoga sessions, doula support, nutrition guidance, and childbirth education."
-  image="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1600&q=80"
+  :image="asset('images/banner-gallery.png')"
   :breadcrumbs="[['label' => 'Gallery']]"
 />
 

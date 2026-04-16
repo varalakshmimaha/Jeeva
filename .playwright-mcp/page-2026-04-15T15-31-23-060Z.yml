@@ -1,0 +1,270 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "🏥 Jiva Birth and Beyond Birth and Beyond" [ref=e4] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000
+        - generic [ref=e5]: 🏥
+        - generic [ref=e6]:
+          - generic [ref=e7]: Jiva Birth and Beyond
+          - generic [ref=e8]: Birth and Beyond
+      - list [ref=e9]:
+        - listitem [ref=e10]:
+          - link "Home" [ref=e11] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000
+        - listitem [ref=e12]:
+          - link "About Us" [ref=e13] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/about
+        - listitem [ref=e14]:
+          - link "Services" [ref=e15] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services
+        - listitem [ref=e16]:
+          - link "Testimonials" [ref=e17] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/testimonials
+        - listitem [ref=e18]:
+          - link "📞 Contact" [ref=e19] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/contact
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - heading "Empowering Your Birth Journey" [level=2]
+          - paragraph: Experience world-class treatment in the heart of Bangalore.
+          - link "Our Services":
+            - /url: http://127.0.0.1:8000/services
+  - generic [ref=e22]:
+    - generic [ref=e24]:
+      - img "Specialist Dentist checking patient" [ref=e26]
+      - generic [ref=e27]:
+        - generic [ref=e28]: 15+ Years
+        - generic [ref=e29]: of Excellence
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: About Jiva Birth and Beyond
+        - heading "Compassionate Birth Support" [level=2] [ref=e33]
+      - paragraph [ref=e34]: At Jiva Birth and Beyond, we believe every woman deserves to feel seen, heard, and supported throughout her pregnancy, birth, and postpartum journey.
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - img "Award trophy clinical icon" [ref=e38]
+          - generic [ref=e39]:
+            - heading "Award-Winning Clinic" [level=4] [ref=e40]
+            - paragraph [ref=e41]: Compassionate birth doula support with years of experience
+        - generic [ref=e42]:
+          - img "Expert Specialist portrait" [ref=e44]
+          - generic [ref=e45]:
+            - heading "Expert Specialists" [level=4] [ref=e46]
+            - paragraph [ref=e47]: Certified prenatal yoga and childbirth educator
+        - generic [ref=e48]:
+          - img "Advanced dental technology icon" [ref=e50]
+          - generic [ref=e51]:
+            - heading "Latest Technology" [level=4] [ref=e52]
+            - paragraph [ref=e53]: State-of-the-art equipment for precise diagnosis and treatment
+      - link "Schedule Your Visit" [ref=e54] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/contact
+  - generic [ref=e56]:
+    - generic [ref=e57]:
+      - generic [ref=e58]: Why Choose Us
+      - heading "Our Journey Together" [level=2] [ref=e59]
+      - paragraph [ref=e60]: A step-by-step process designed to support you through every stage of your birth journey.
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - img "Consultation & Assessment" [ref=e65]
+          - generic [ref=e66]: "01"
+        - heading "Consultation & Assessment" [level=3] [ref=e68]
+        - paragraph [ref=e69]: Initial understanding of your needs, birth preferences, and a comprehensive discussion about your journey.
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - img "Personalized Birth Plan" [ref=e73]
+          - generic [ref=e74]: "02"
+        - heading "Personalized Birth Plan" [level=3] [ref=e76]
+        - paragraph [ref=e77]: Creating a tailored plan focusing on your comfort, choices, and desired birth experience.
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - img "Birth & Postpartum Support" [ref=e81]
+          - generic [ref=e82]: "03"
+        - heading "Birth & Postpartum Support" [level=3] [ref=e83]
+        - paragraph [ref=e84]: Continuous physical and emotional support during labor, delivery, recovery, and early parenthood.
+  - generic [ref=e87]:
+    - generic [ref=e88]:
+      - heading "Book consultation today!" [level=2] [ref=e89]
+      - paragraph [ref=e90]: Scheduling your session is quick and easy—connect with Anu today and take the first step toward your empowered birth journey.
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - textbox "First Name" [ref=e94]
+          - textbox "Last Name" [ref=e96]
+        - generic [ref=e97]:
+          - textbox "Email Address" [ref=e99]
+          - textbox "Phone Number" [ref=e101]
+        - combobox [ref=e103]:
+          - option "Choose Services" [disabled] [selected]
+        - textbox [ref=e105]
+        - button "Book A Consultation" [ref=e106] [cursor=pointer]
+    - img "Happy family with newborn" [ref=e109]
+  - generic [ref=e111]:
+    - generic [ref=e112]:
+      - generic [ref=e113]: What We Offer
+      - heading "Our Services" [level=2] [ref=e114]
+      - paragraph [ref=e115]: From your first check-up to complete smile transformations — all under one trusted roof.
+    - link "View All Services →" [ref=e117] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/services
+  - generic [ref=e121]:
+    - generic [ref=e122]:
+      - generic [ref=e123]:
+        - generic [ref=e124]: ●
+        - text: Testimonial
+      - heading "The Best Customers Says About Our Action" [level=2] [ref=e125]:
+        - text: The Best Customers
+        - text: Says About Our Action
+      - link "Read All Testimonials ↗" [ref=e126] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/testimonials
+        - text: Read All Testimonials
+        - generic [ref=e127]: ↗
+    - generic [ref=e128]:
+      - generic [ref=e129]: "4.8"
+      - generic [ref=e130]:
+        - img [ref=e131]
+        - img [ref=e133]
+        - img [ref=e135]
+        - img [ref=e137]
+        - img [ref=e139]
+      - paragraph [ref=e142]: From 3k Members,
+      - paragraph [ref=e143]: Reviewed by Google
+      - generic [ref=e144]:
+        - img [ref=e146]
+        - img [ref=e149]
+        - img [ref=e152]
+        - img [ref=e155]
+        - generic [ref=e157]: +
+    - generic [ref=e158]:
+      - img [ref=e160]
+      - generic [ref=e162]:
+        - img [ref=e163]
+        - img [ref=e165]
+        - img [ref=e167]
+        - img [ref=e169]
+        - img [ref=e171]
+      - generic [ref=e174]:
+        - paragraph [ref=e175]: "\"Anu provided such compassionate guidance during my pregnancy. The prenatal yoga sessions kept me grounded, and her doula support during childbirth was incredibly empowering and peaceful.\""
+        - generic [ref=e179]:
+          - strong [ref=e180]: Sarah Jenkins
+          - generic [ref=e181]: New Mother
+  - generic [ref=e186]:
+    - generic [ref=e187]:
+      - generic [ref=e188]: FAQ's
+      - heading "Frequently Asked Questions" [level=2] [ref=e189]:
+        - text: Frequently Asked
+        - text: Questions
+      - img "Consultation" [ref=e191]
+      - generic [ref=e192]:
+        - link "Get In Touch →" [ref=e193] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/contact
+          - text: Get In Touch
+          - generic [ref=e194]: →
+        - generic [ref=e195]:
+          - text: Have Any Question
+          - text: on Your Minds?
+    - generic [ref=e196]:
+      - generic [ref=e197]:
+        - button "What is a birth doula and how can one help me? +" [ref=e198] [cursor=pointer]:
+          - generic [ref=e199]: What is a birth doula and how can one help me?
+          - generic [ref=e200]: +
+        - paragraph [ref=e201]: A birth doula provides continuous physical, emotional, and informational support during pregnancy, labor, and the postpartum period. Anu helps you feel calm, informed, and empowered throughout your birthing journey.
+      - generic [ref=e202]:
+        - button "When should I hire a birth doula? +" [ref=e203] [cursor=pointer]:
+          - generic [ref=e204]: When should I hire a birth doula?
+          - generic [ref=e205]: +
+        - paragraph [ref=e206]: Ideally, connect with your doula during the second trimester so there's enough time for prenatal sessions, birth planning, and building a trusting relationship before your due date.
+      - generic [ref=e207]:
+        - button "Do you offer prenatal yoga and nutrition guidance? +" [ref=e208] [cursor=pointer]:
+          - generic [ref=e209]: Do you offer prenatal yoga and nutrition guidance?
+          - generic [ref=e210]: +
+        - paragraph [ref=e211]: Yes! Jiva Birth and Beyond offers prenatal yoga sessions and personalized nutrition consultations to support your physical and mental well-being throughout pregnancy.
+      - generic [ref=e212]:
+        - button "Can I book a consultation before deciding? +" [ref=e213] [cursor=pointer]:
+          - generic [ref=e214]: Can I book a consultation before deciding?
+          - generic [ref=e215]: +
+        - paragraph [ref=e216]: Absolutely. We offer a free initial consultation where you can discuss your needs, ask questions, and understand how Anu can support your unique birth plan.
+  - generic [ref=e222]:
+    - heading "Ready to Begin Your Journey?" [level=2] [ref=e223]
+    - paragraph [ref=e224]: Connect with Anu today and take the first step toward a calm, confident, and empowered birth experience.
+    - generic [ref=e225]:
+      - link "☎ Call Now" [ref=e226] [cursor=pointer]:
+        - /url: tel:+917483211870
+      - link "Book Consultation →" [ref=e227] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/contact
+  - contentinfo [ref=e228]:
+    - generic [ref=e230]:
+      - generic [ref=e231]:
+        - heading "About Us" [level=3] [ref=e232]
+        - link "🏥 Jiva Birth and Beyond Birth and Beyond" [ref=e233] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000
+          - generic [ref=e234]: 🏥
+          - generic [ref=e235]:
+            - generic [ref=e236]: Jiva Birth and Beyond
+            - generic [ref=e237]: Birth and Beyond
+        - paragraph [ref=e238]: Compassionate birth doula support, prenatal yoga, childbirth education, and nutrition guidance for your journey into motherhood.
+      - generic [ref=e239]:
+        - heading "Quick Links" [level=3] [ref=e240]
+        - list [ref=e241]:
+          - listitem [ref=e242]:
+            - link "› Home" [ref=e243] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000
+              - generic [ref=e244]: ›
+              - text: Home
+          - listitem [ref=e245]:
+            - link "› Services" [ref=e246] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/services
+              - generic [ref=e247]: ›
+              - text: Services
+          - listitem [ref=e248]:
+            - link "› Blog" [ref=e249] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/blog
+              - generic [ref=e250]: ›
+              - text: Blog
+          - listitem [ref=e251]:
+            - link "› Gallery" [ref=e252] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/gallery
+              - generic [ref=e253]: ›
+              - text: Gallery
+          - listitem [ref=e254]:
+            - link "› Contact Us" [ref=e255] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/contact
+              - generic [ref=e256]: ›
+              - text: Contact Us
+      - generic [ref=e257]:
+        - heading "Legal" [level=3] [ref=e258]
+        - list [ref=e259]:
+          - listitem [ref=e260]:
+            - link "› Privacy Policy" [ref=e261] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/privacy-policy
+              - generic [ref=e262]: ›
+              - text: Privacy Policy
+          - listitem [ref=e263]:
+            - link "› Terms of Service" [ref=e264] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/terms-and-conditions
+              - generic [ref=e265]: ›
+              - text: Terms of Service
+      - generic [ref=e266]:
+        - heading "Contact Us" [level=3] [ref=e267]
+        - generic [ref=e268]:
+          - generic [ref=e269]:
+            - generic [ref=e270]: 📍
+            - paragraph [ref=e272]: Tippasandra, Bangalore, Karnataka
+          - generic [ref=e273]:
+            - generic [ref=e274]: 📞
+            - link "+91 74832 11870" [ref=e276] [cursor=pointer]:
+              - /url: tel:+917483211870
+          - generic [ref=e277]:
+            - generic [ref=e278]: ✉
+            - link "contact@jivabirthandbeyond.com" [ref=e280] [cursor=pointer]:
+              - /url: mailto:contact@jivabirthandbeyond.com
+    - generic [ref=e283]:
+      - paragraph [ref=e284]: © 2026 Jiva Birth and Beyond. All rights reserved.
+      - generic [ref=e285]:
+        - link "Privacy Policy" [ref=e286] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/privacy-policy
+        - link "Terms & Conditions" [ref=e287] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/terms-and-conditions
+  - link "Contact us on WhatsApp" [ref=e288] [cursor=pointer]:
+    - /url: https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond
+    - img [ref=e290]

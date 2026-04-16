@@ -1,0 +1,527 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: 
+      - text: +91 9845728507, +91 9113620609
+    - generic [ref=e6]: Welcome to SR Greenscapes Pvt Ltd
+    - generic [ref=e7]:
+      - generic [ref=e8]: 
+      - text: srgreenscapes@gmail.com, mdsrgreenscapes@gmail.com
+  - navigation [ref=e9]:
+    - generic [ref=e10]:
+      - link "Ecoscapes Landscaping Pvt Ltd" [ref=e11] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000
+        - img "Ecoscapes Landscaping Pvt Ltd" [ref=e12]
+      - text: 
+      - list [ref=e13]:
+        - listitem [ref=e14]:
+          - link "HOME" [ref=e15] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e16]:
+          - link "ABOUT US" [ref=e17] [cursor=pointer]:
+            - /url: /about
+        - listitem [ref=e18]:
+          - link "SERVICES" [ref=e19] [cursor=pointer]:
+            - /url: /services
+        - listitem [ref=e20]:
+          - link "PROJECTS" [ref=e21] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=e22]:
+          - link "OUR PROCESS" [ref=e23] [cursor=pointer]:
+            - /url: /process
+        - listitem [ref=e24]:
+          - link "FAQ'S" [ref=e25] [cursor=pointer]:
+            - /url: /faqs
+        - listitem [ref=e26]:
+          - link "CONTACTS" [ref=e27] [cursor=pointer]:
+            - /url: /contact
+      - link "Download Brochure" [ref=e29] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/storage/settings/wCbNU9mZ6O0xAZ2by1d4wRjaArcbIAkpNBXx40Pk.pdf
+  - generic [ref=e30]:
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - button [ref=e33] [cursor=pointer]
+        - button [ref=e34] [cursor=pointer]
+        - button [ref=e35] [cursor=pointer]
+        - button [ref=e36] [cursor=pointer]
+      - button [ref=e40] [cursor=pointer]
+      - button [ref=e42] [cursor=pointer]
+    - generic [ref=e45]:
+      - generic: 
+      - generic [ref=e46]:
+        - heading "Book A Free Consultation" [level=4] [ref=e47]
+        - generic [ref=e49]:
+          - textbox "Name*" [ref=e51]
+          - textbox "Phone*" [ref=e53]
+          - textbox "Email" [ref=e55]
+          - combobox [ref=e57]:
+            - option "Select Service *" [selected]
+            - option "Landscape Design & Execution"
+            - option "Hardscape & Softscape Development"
+            - option "Commercial Campus Landscaping"
+            - option "Specialized Garden Services"
+            - option "Nursery & Plant Supply"
+            - option "Horticulture Consultancy"
+            - option "Landscape Maintenance (AMC)"
+            - option "Event Styling & Green Decor"
+            - option "Others"
+          - textbox "City" [ref=e59]
+          - textbox "Address" [ref=e61]
+          - textbox "Message" [ref=e63]
+          - button "SUBMIT REQUEST" [ref=e65] [cursor=pointer]
+  - generic [ref=e68]:
+    - generic [ref=e69]:
+      - paragraph [ref=e70]: About Our Company
+      - heading "Creating High-Performance, Science-Driven Sustainable Landscapes." [level=2] [ref=e71]
+      - paragraph [ref=e72]: We combine plant science, climate-responsive design, and expert execution to deliver spaces that are beautiful and functional. From design to maintenance, we offer end-to-end green solutions for homes, commercial spaces, and institutions.
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e76]: 
+          - paragraph [ref=e77]: Scientific solutions & expert execution for long-lasting functional green spaces.
+        - generic [ref=e78]:
+          - generic [ref=e80]: 
+          - paragraph [ref=e81]: End-to-end robust green solutions from planning to regular maintenance.
+        - generic [ref=e82]:
+          - generic [ref=e84]: 
+          - paragraph [ref=e85]: Climate-responsive designs tailored for homes, commercials, & institutions.
+        - generic [ref=e86]:
+          - generic [ref=e88]: 
+          - paragraph [ref=e89]: Dedicated team committed to creating aesthetics and sustainability.
+      - link "Know More " [ref=e90] [cursor=pointer]:
+        - /url: /about
+        - text: Know More
+        - generic [ref=e92]: 
+    - img "SR Greenscapes Landscaping" [ref=e96]
+  - generic [ref=e98]:
+    - generic [ref=e99]:
+      - paragraph [ref=e100]: What Makes Us Different
+      - heading "Why Homeowners Trust Our Landscaping Expertise" [level=2] [ref=e101]
+      - paragraph [ref=e102]: Every project is guided by scientific assessment, expert execution and a commitment to sustainable, long-lasting results.
+    - generic [ref=e103]:
+      - generic [ref=e105]:
+        - img "Science-Driven Approach" [ref=e107]
+        - generic [ref=e108]:
+          - heading "Science-Driven Approach" [level=6] [ref=e109]
+          - paragraph [ref=e110]: Our projects are grounded in scientific research, soil analysis, and evidence-based plant selection for sustainable results.
+      - generic [ref=e112]:
+        - img "Sustainability at the Core" [ref=e114]
+        - generic [ref=e115]:
+          - heading "Sustainability at the Core" [level=6] [ref=e116]
+          - paragraph [ref=e117]: Every decision we make prioritizes environmental responsibility — from water-efficient irrigation to native plant species.
+      - generic [ref=e119]:
+        - img "Research-Integrated Planning" [ref=e121]
+        - generic [ref=e122]:
+          - heading "Research-Integrated Planning" [level=6] [ref=e123]
+          - paragraph [ref=e124]: We incorporate the latest horticultural research into every design, ensuring long-term viability and ecological balance.
+      - generic [ref=e126]:
+        - img "Climate-Resilient Design" [ref=e128]
+        - generic [ref=e129]:
+          - heading "Climate-Resilient Design" [level=6] [ref=e130]
+          - paragraph [ref=e131]: Our landscapes are engineered to withstand heat stress, irregular rainfall, and changing urban environmental conditions.
+      - generic [ref=e133]:
+        - img "End-to-End Execution" [ref=e135]
+        - generic [ref=e136]:
+          - heading "End-to-End Execution" [level=6] [ref=e137]
+          - paragraph [ref=e138]: From concept design and nursery production to irrigation, hardscape installation, and ongoing maintenance support.
+      - generic [ref=e140]:
+        - img "Experienced Leadership & Advisory Strength" [ref=e142]
+        - generic [ref=e143]:
+          - heading "Experienced Leadership & Advisory Strength" [level=6] [ref=e144]
+          - paragraph [ref=e145]: Led by PhD horticulture professionals with a scientific advisory network providing institutional credibility.
+      - generic [ref=e147]:
+        - img "Long-Term Value Creation" [ref=e149]
+        - generic [ref=e150]:
+          - heading "Long-Term Value Creation" [level=6] [ref=e151]
+          - paragraph [ref=e152]: Our landscapes are built to mature beautifully, increasing property value and reducing maintenance costs over time.
+      - generic [ref=e154]:
+        - img "Cost-Effective & Affordable" [ref=e156]
+        - generic [ref=e157]:
+          - heading "Cost-Effective & Affordable" [level=6] [ref=e158]
+          - paragraph [ref=e159]: Premium quality landscapes delivered at competitive pricing through our own nursery and efficient project management.
+  - generic [ref=e161]:
+    - generic [ref=e162]:
+      - paragraph [ref=e163]: What We Offer
+      - heading "Our Professional Services" [level=2] [ref=e164]
+      - paragraph [ref=e165]: Comprehensive landscaping solutions powered by science, sustainability, and a passion for green spaces.
+    - generic [ref=e166]:
+      - generic [ref=e168]:
+        - img "Landscape Design & Execution" [ref=e170]
+        - generic [ref=e171]:
+          - heading "Landscape Design & Execution" [level=5] [ref=e172]
+          - paragraph [ref=e173]: Our comprehensive landscape design and execution service transforms outdoor spaces into stunning, fu...
+          - link "Explore Services " [ref=e174] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/landscape-design-execution
+            - text: Explore Services
+            - generic [ref=e175]: 
+      - generic [ref=e177]:
+        - img "Specialized Garden Services" [ref=e179]
+        - generic [ref=e180]:
+          - heading "Specialized Garden Services" [level=5] [ref=e181]
+          - paragraph [ref=e182]: From Miyawaki forests and vertical gardens to terrace gardens and rooftop green spaces, we create sp...
+          - link "Explore Services " [ref=e183] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/specialized-garden-services
+            - text: Explore Services
+            - generic [ref=e184]: 
+      - generic [ref=e186]:
+        - img "Hardscape & Softscape Development" [ref=e188]
+        - generic [ref=e189]:
+          - heading "Hardscape & Softscape Development" [level=5] [ref=e190]
+          - paragraph [ref=e191]: We create the perfect balance between hardscape elements (pathways, patios, retaining walls, water f...
+          - link "Explore Services " [ref=e192] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/hardscape-softscape-development
+            - text: Explore Services
+            - generic [ref=e193]: 
+      - generic [ref=e195]:
+        - img "Landscape Maintenance" [ref=e197]
+        - generic [ref=e198]:
+          - heading "Landscape Maintenance" [level=5] [ref=e199]
+          - paragraph [ref=e200]: Keep your landscapes pristine year-round with our comprehensive maintenance service. Our trained gar...
+          - link "Explore Services " [ref=e201] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/landscape-maintenance
+            - text: Explore Services
+            - generic [ref=e202]: 
+      - generic [ref=e204]:
+        - img "Nursery & Plant Supply" [ref=e206]
+        - generic [ref=e207]:
+          - heading "Nursery & Plant Supply" [level=5] [ref=e208]
+          - paragraph [ref=e209]: Our well-stocked nursery provides a wide range of indoor and outdoor plants, ornamental trees, flowe...
+          - link "Explore Services " [ref=e210] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/nursery-plant-supply
+            - text: Explore Services
+            - generic [ref=e211]: 
+      - generic [ref=e213]:
+        - img "Horticulture Consultancy" [ref=e215]
+        - generic [ref=e216]:
+          - heading "Horticulture Consultancy" [level=5] [ref=e217]
+          - paragraph [ref=e218]: Our certified horticulture consultants provide expert advice on plant health, soil management, pest...
+          - link "Explore Services " [ref=e219] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/horticulture-consultancy
+            - text: Explore Services
+            - generic [ref=e220]: 
+      - generic [ref=e222]:
+        - img "Garden Supplies" [ref=e224]
+        - generic [ref=e225]:
+          - heading "Garden Supplies" [level=5] [ref=e226]
+          - paragraph [ref=e227]: Browse our extensive range of garden supplies including premium soil mixes, organic fertilizers, gar...
+          - link "Explore Services " [ref=e228] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/garden-supplies
+            - text: Explore Services
+            - generic [ref=e229]: 
+      - generic [ref=e231]:
+        - img "Green Gifts" [ref=e233]
+        - generic [ref=e234]:
+          - heading "Green Gifts" [level=5] [ref=e235]
+          - paragraph [ref=e236]: Explore our curated collection of green gifts perfect for any occasion — birthdays, housewarmings, c...
+          - link "Explore Services " [ref=e237] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/green-gifts
+            - text: Explore Services
+            - generic [ref=e238]: 
+      - generic [ref=e240]:
+        - img "Event Styling" [ref=e242]
+        - generic [ref=e243]:
+          - heading "Event Styling" [level=5] [ref=e244]
+          - paragraph [ref=e245]: Add a touch of natural elegance to your events with our green styling and floral decoration services...
+          - link "Explore Services " [ref=e246] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/services/event-styling
+            - text: Explore Services
+            - generic [ref=e247]: 
+    - link "View All Services " [ref=e249] [cursor=pointer]:
+      - /url: /services
+      - text: View All Services
+      - generic [ref=e251]: 
+  - generic [ref=e253]:
+    - generic [ref=e254]:
+      - paragraph [ref=e255]: Structured, Measurable, Repeatable
+      - heading "Our Process" [level=2] [ref=e256]
+      - paragraph [ref=e257]: A systematic approach rooted in science and precision, ensuring every project is delivered with consistency, quality, and lasting impact.
+    - generic [ref=e258]:
+      - generic [ref=e260]:
+        - generic [ref=e261]:
+          - img "Consultation & Assessment" [ref=e263]
+          - generic [ref=e264]: "01"
+        - generic [ref=e265]:
+          - heading "Consultation & Assessment" [level=4] [ref=e266]
+          - paragraph [ref=e267]: Initial understanding of project needs and comprehensive on-site evaluation.
+        - img
+      - generic [ref=e269]:
+        - generic [ref=e270]:
+          - img "Research-Based Design" [ref=e272]
+          - generic [ref=e273]: "02"
+        - generic [ref=e274]:
+          - heading "Research-Based Design" [level=4] [ref=e275]
+          - paragraph [ref=e276]: Creating layouts focusing on biodiversity, climate, and site characteristics.
+        - img
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - img "Technical Planning" [ref=e281]
+          - generic [ref=e282]: "03"
+        - generic [ref=e283]:
+          - heading "Technical Planning" [level=4] [ref=e284]
+          - paragraph [ref=e285]: Detailed technical structuring, responsible material choices, and timelines.
+      - generic [ref=e287]:
+        - generic [ref=e288]:
+          - img "Professional Execution" [ref=e290]
+          - generic [ref=e291]: "04"
+        - generic [ref=e292]:
+          - heading "Professional Execution" [level=4] [ref=e293]
+          - paragraph [ref=e294]: Expert on-ground implementation with strict quality and safety controls.
+        - img
+      - generic [ref=e296]:
+        - generic [ref=e297]:
+          - img "Structured Handover" [ref=e299]
+          - generic [ref=e300]: "05"
+        - generic [ref=e301]:
+          - heading "Structured Handover" [level=4] [ref=e302]
+          - paragraph [ref=e303]: Final thorough reviews and detailed documentation provided upon project handover.
+        - img
+      - generic [ref=e305]:
+        - generic [ref=e306]:
+          - img "Lifecycle Support" [ref=e308]
+          - generic [ref=e309]: "06"
+        - generic [ref=e310]:
+          - heading "Lifecycle Support" [level=4] [ref=e311]
+          - paragraph [ref=e312]: Continuous maintenance and care tailored for long-term health and growth.
+  - generic [ref=e318]:
+    - generic [ref=e320]:
+      - generic [ref=e322]: 
+      - generic [ref=e323]: 5+
+      - generic [ref=e328]: Successful Years
+    - generic [ref=e330]:
+      - generic [ref=e332]: 
+      - generic [ref=e333]: 4+
+      - generic [ref=e338]: Projects Completed
+    - generic [ref=e340]:
+      - generic [ref=e342]: 
+      - generic [ref=e343]: 10+
+      - generic [ref=e348]: Professionals
+    - generic [ref=e350]:
+      - generic [ref=e352]: 
+      - generic [ref=e353]: 30+
+      - generic [ref=e358]: Gardeners
+    - generic [ref=e360]:
+      - generic [ref=e362]: 
+      - generic [ref=e363]: 5+
+      - generic [ref=e368]: Locations Executed
+    - generic [ref=e370]:
+      - generic [ref=e372]: 
+      - generic [ref=e373]: 2+
+      - generic [ref=e378]: Awards Won
+    - generic [ref=e380]:
+      - generic [ref=e382]: 
+      - generic [ref=e383]: 3.3+
+      - generic [ref=e388]: Google Rating
+  - generic [ref=e390]:
+    - generic [ref=e391]:
+      - paragraph [ref=e392]: Featured Portfolio
+      - heading "Crafting Landscapes That Perform, Evolve and Inspire" [level=2] [ref=e393]
+      - paragraph [ref=e394]: Every project is a reflection of our commitment to scientific planning, thoughtful design and sustainable execution. Our portfolio showcases a diverse range of landscapes- each uniquely designed to respond to its environment, purpose and client vision.
+    - generic [ref=e395]:
+      - generic [ref=e398] [cursor=pointer]:
+        - img "Villa Garden Design" [ref=e399]
+        - generic [ref=e400]: Residential
+        - generic [ref=e402]:
+          - heading "Villa Garden Design" [level=5] [ref=e403]
+          - paragraph [ref=e404]:
+            - generic [ref=e405]: 
+            - text: Bengaluru, Karnataka
+      - generic [ref=e408] [cursor=pointer]:
+        - img "Corporate Campus Landscape" [ref=e409]
+        - generic [ref=e410]: Commercial
+        - generic [ref=e412]:
+          - heading "Corporate Campus Landscape" [level=5] [ref=e413]
+          - paragraph [ref=e414]:
+            - generic [ref=e415]: 
+            - text: Whitefield, Bengaluru
+      - generic [ref=e418] [cursor=pointer]:
+        - img "School & Institutional Garden" [ref=e419]
+        - generic [ref=e420]: Institutional
+        - generic [ref=e422]:
+          - heading "School & Institutional Garden" [level=5] [ref=e423]
+          - paragraph [ref=e424]:
+            - generic [ref=e425]: 
+            - text: Hoskote, Karnataka
+      - generic [ref=e428] [cursor=pointer]:
+        - img "Terrace & Rooftop Garden" [ref=e429]
+        - generic [ref=e430]: Residential
+        - generic [ref=e432]:
+          - heading "Terrace & Rooftop Garden" [level=5] [ref=e433]
+          - paragraph [ref=e434]:
+            - generic [ref=e435]: 
+            - text: Indiranagar, Bengaluru
+      - generic [ref=e438] [cursor=pointer]:
+        - img "Resort & Hotel Landscape" [ref=e439]
+        - generic [ref=e440]: Hospitality
+        - generic [ref=e442]:
+          - heading "Resort & Hotel Landscape" [level=5] [ref=e443]
+          - paragraph [ref=e444]:
+            - generic [ref=e445]: 
+            - text: Coorg, Karnataka
+    - link "View All Projects " [ref=e447] [cursor=pointer]:
+      - /url: /projects
+      - text: View All Projects
+      - generic [ref=e448]: 
+  - generic [ref=e451]:
+    - generic [ref=e453]:
+      - generic [ref=e454]: FAQS
+      - heading "Frequently Asked Questions" [level=2] [ref=e456]:
+        - text: Frequently Asked
+        - text: Questions
+      - generic [ref=e457]:
+        - img "Expert" [ref=e459]
+        - img "Garden" [ref=e461]
+      - generic [ref=e462]:
+        - paragraph [ref=e463]:
+          - text: Have Any Question
+          - text: on Your Minds?
+        - link "Get In Touch " [ref=e464] [cursor=pointer]:
+          - /url: /contact
+          - text: Get In Touch
+          - generic [ref=e466]: 
+    - generic [ref=e468]:
+      - button "What is SR Greenscapes Pvt Ltd? +" [ref=e470] [cursor=pointer]:
+        - generic [ref=e471]: What is SR Greenscapes Pvt Ltd?
+        - generic [ref=e473]: +
+      - button "Do you handle small gardens or terraces? +" [ref=e475] [cursor=pointer]:
+        - generic [ref=e476]: Do you handle small gardens or terraces?
+        - generic [ref=e478]: +
+      - button "Who is behind SR Greenscapes Pvt Ltd? +" [ref=e480] [cursor=pointer]:
+        - generic [ref=e481]: Who is behind SR Greenscapes Pvt Ltd?
+        - generic [ref=e483]: +
+  - generic [ref=e488]:
+    - generic [ref=e489]:
+      - generic [ref=e490]: YOUR INQUIRY
+      - heading "Start A Conversation With Us" [level=2] [ref=e491]:
+        - text: Start A Conversation
+        - text: With Us
+      - paragraph [ref=e492]:
+        - text: Reach out to discuss your ideas and outdoor needs.
+        - text: We're here to help your garden thrive beautifully
+        - text: with science-driven sustainable landscapes.
+    - generic [ref=e493]:
+      - heading "Book Consultation" [level=4] [ref=e494]
+      - paragraph [ref=e495]: Share your details and we'll respond with the right garden solution for you.
+      - generic [ref=e496]:
+        - generic [ref=e497]:
+          - textbox "Your Name *" [ref=e498]
+          - textbox "Phone Number *" [ref=e499]
+        - generic [ref=e500]:
+          - combobox [ref=e501]:
+            - option "Select Service *" [selected]
+            - option "Landscape Design & Execution"
+            - option "Hardscape & Softscape Development"
+            - option "Commercial Campus Landscaping"
+            - option "Specialized Garden Services"
+            - option "Nursery & Plant Supply"
+            - option "Horticulture Consultancy"
+            - option "Landscape Maintenance (AMC)"
+            - option "Event Styling & Green Decor"
+            - option "Others"
+          - textbox "City" [ref=e502]
+        - textbox "Your message" [ref=e503]
+        - button "SEND MESSAGE" [ref=e504] [cursor=pointer]
+  - contentinfo [ref=e505]:
+    - generic [ref=e506]:
+      - generic [ref=e507]:
+        - generic [ref=e508]:
+          - img "Ecoscapes Landscaping Pvt Ltd" [ref=e510]
+          - paragraph [ref=e511]: Creating High-Performance, Science-Driven Sustainable Landscapes. Based in Bengaluru with Pan-India Project Execution.
+          - paragraph [ref=e512]:
+            - generic [ref=e513]: 
+            - text: 3rd floor, Thanks Court, 3rd B Main Road, Kalyan Nagar, Bengaluru, Karnataka - 560043
+        - generic [ref=e515]:
+          - generic [ref=e516]:
+            - heading "Quick Links" [level=5] [ref=e517]
+            - list [ref=e518]:
+              - listitem [ref=e519]:
+                - link " Home" [ref=e520] [cursor=pointer]:
+                  - /url: /
+                  - generic [ref=e521]: 
+                  - text: Home
+              - listitem [ref=e522]:
+                - link " About Us" [ref=e523] [cursor=pointer]:
+                  - /url: /about
+                  - generic [ref=e524]: 
+                  - text: About Us
+              - listitem [ref=e525]:
+                - link " Services" [ref=e526] [cursor=pointer]:
+                  - /url: /services
+                  - generic [ref=e527]: 
+                  - text: Services
+              - listitem [ref=e528]:
+                - link " Projects" [ref=e529] [cursor=pointer]:
+                  - /url: /projects
+                  - generic [ref=e530]: 
+                  - text: Projects
+              - listitem [ref=e531]:
+                - link " Gallery" [ref=e532] [cursor=pointer]:
+                  - /url: /gallery
+                  - generic [ref=e533]: 
+                  - text: Gallery
+          - generic [ref=e534]:
+            - heading "Explore" [level=5] [ref=e535]
+            - list [ref=e536]:
+              - listitem [ref=e537]:
+                - link " Blogs" [ref=e538] [cursor=pointer]:
+                  - /url: /blogs
+                  - generic [ref=e539]: 
+                  - text: Blogs
+              - listitem [ref=e540]:
+                - link " Videos" [ref=e541] [cursor=pointer]:
+                  - /url: /videos
+                  - generic [ref=e542]: 
+                  - text: Videos
+              - listitem [ref=e543]:
+                - link " Testimonials" [ref=e544] [cursor=pointer]:
+                  - /url: /testimonials
+                  - generic [ref=e545]: 
+                  - text: Testimonials
+              - listitem [ref=e546]:
+                - link " FAQ's" [ref=e547] [cursor=pointer]:
+                  - /url: /faqs
+                  - generic [ref=e548]: 
+                  - text: FAQ's
+              - listitem [ref=e549]:
+                - link " Contact Us" [ref=e550] [cursor=pointer]:
+                  - /url: /contact
+                  - generic [ref=e551]: 
+                  - text: Contact Us
+        - generic [ref=e552]:
+          - heading "Contact Us" [level=5] [ref=e553]
+          - list [ref=e554]:
+            - listitem [ref=e555]:
+              - generic [ref=e557]: 
+              - generic [ref=e558]:
+                - text: "Phone / WhatsApp:"
+                - link "+91 9845728507" [ref=e559] [cursor=pointer]:
+                  - /url: tel:+919845728507
+                - link "+91 9113620609" [ref=e560] [cursor=pointer]:
+                  - /url: tel:+919113620609
+            - listitem [ref=e561]:
+              - generic [ref=e563]: 
+              - generic [ref=e564]:
+                - text: "Email:"
+                - link "srgreenscapes@gmail.com" [ref=e565] [cursor=pointer]:
+                  - /url: mailto:srgreenscapes@gmail.com
+                - link "mdsrgreenscapes@gmail.com" [ref=e566] [cursor=pointer]:
+                  - /url: mailto:mdsrgreenscapes@gmail.com
+          - heading "Follow Us" [level=6] [ref=e567]
+          - generic [ref=e568]:
+            - link "" [ref=e569] [cursor=pointer]:
+              - /url: https://www.facebook.com/profile.php?id=61579521119580
+              - generic [ref=e570]: 
+            - link "" [ref=e571] [cursor=pointer]:
+              - /url: https://www.instagram.com/sr_greenscapes/?hl=en
+              - generic [ref=e572]: 
+            - link "" [ref=e573] [cursor=pointer]:
+              - /url: https://x.com/GreenscapesSr
+              - generic [ref=e574]: 
+            - link "" [ref=e575] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/sr-greenscapes-pvt-ltd/
+              - generic [ref=e576]: 
+            - link "" [ref=e577] [cursor=pointer]:
+              - /url: https://www.youtube.com/@srgreenscapes
+              - generic [ref=e578]: 
+      - paragraph [ref=e580]: Copyright 2025 Ecoscapes All rights reserved.
+  - link "" [ref=e581] [cursor=pointer]:
+    - /url: https://wa.me/919845728507
+    - generic [ref=e582]: 

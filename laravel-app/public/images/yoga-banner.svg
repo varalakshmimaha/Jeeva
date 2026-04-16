@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d2b2b"/>
+      <stop offset="100%" stop-color="#5a3e3e"/>
+    </linearGradient>
+    <linearGradient id="tealGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4DB6AC" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4DB6AC" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="pinkGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5d5d5" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#f0c4c4" stop-opacity="0.05"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4DB6AC" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#4DB6AC" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#4DB6AC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lotusGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5d5d5"/>
+      <stop offset="100%" stop-color="#e8b4b4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="600" fill="url(#bg)"/>
+
+  <!-- Soft decorative circles -->
+  <circle cx="200" cy="100" r="250" fill="url(#pinkGlow)"/>
+  <circle cx="1200" cy="500" r="300" fill="url(#pinkGlow)"/>
+  <circle cx="700" cy="300" r="200" fill="url(#tealGlow)"/>
+
+  <!-- Mandala-style decorative ring behind figure -->
+  <circle cx="700" cy="280" r="180" stroke="#4DB6AC" stroke-opacity="0.12" stroke-width="1" fill="none"/>
+  <circle cx="700" cy="280" r="150" stroke="#4DB6AC" stroke-opacity="0.08" stroke-width="1" fill="none"/>
+  <circle cx="700" cy="280" r="210" stroke="#f5d5d5" stroke-opacity="0.08" stroke-width="1" fill="none"/>
+
+  <!-- Sun glow behind yoga figure -->
+  <circle cx="700" cy="250" r="160" fill="url(#sunGlow)"/>
+
+  <!-- Yoga figure - Tree Pose (Vrksasana) -->
+  <g transform="translate(700, 280)" stroke="#f5d5d5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Head -->
+    <circle cx="0" cy="-120" r="18" fill="#f5d5d5" fill-opacity="0.9" stroke="none"/>
+
+    <!-- Body/Torso -->
+    <line x1="0" y1="-100" x2="0" y2="-20"/>
+
+    <!-- Standing leg -->
+    <line x1="0" y1="-20" x2="0" y2="80"/>
+
+    <!-- Bent leg (tree pose) -->
+    <path d="M0,-20 Q25,-10 18,20 Q12,35 0,10"/>
+
+    <!-- Arms raised in namaste above head -->
+    <path d="M0,-90 Q-30,-110 -20,-140"/>
+    <path d="M0,-90 Q30,-110 20,-140"/>
+    <!-- Hands meeting -->
+    <path d="M-20,-140 Q-5,-155 0,-155"/>
+    <path d="M20,-140 Q5,-155 0,-155"/>
+
+    <!-- Foot -->
+    <line x1="-8" y1="80" x2="8" y2="80"/>
+  </g>
+
+  <!-- Small floating lotus left -->
+  <g transform="translate(320, 380)" opacity="0.5">
+    <path d="M0,-15 Q-15,-25 -20,-10 Q-22,0 -10,8 Q-5,12 0,10" fill="url(#lotusGrad)" fill-opacity="0.6"/>
+    <path d="M0,-15 Q15,-25 20,-10 Q22,0 10,8 Q5,12 0,10" fill="url(#lotusGrad)" fill-opacity="0.6"/>
+    <path d="M0,-18 Q-8,-30 0,-12 Q8,-30 0,-18" fill="#4DB6AC" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Small floating lotus right -->
+  <g transform="translate(1080, 200)" opacity="0.4">
+    <path d="M0,-15 Q-15,-25 -20,-10 Q-22,0 -10,8 Q-5,12 0,10" fill="url(#lotusGrad)" fill-opacity="0.6"/>
+    <path d="M0,-15 Q15,-25 20,-10 Q22,0 10,8 Q5,12 0,10" fill="url(#lotusGrad)" fill-opacity="0.6"/>
+    <path d="M0,-18 Q-8,-30 0,-12 Q8,-30 0,-18" fill="#4DB6AC" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Decorative dots pattern -->
+  <g fill="#4DB6AC" fill-opacity="0.15">
+    <circle cx="100" cy="200" r="3"/>
+    <circle cx="130" cy="180" r="2"/>
+    <circle cx="150" cy="220" r="4"/>
+    <circle cx="180" cy="160" r="2"/>
+    <circle cx="1250" cy="150" r="3"/>
+    <circle cx="1280" cy="180" r="2"/>
+    <circle cx="1220" cy="200" r="4"/>
+    <circle cx="1300" cy="130" r="2"/>
+  </g>
+
+  <!-- Flowing curves representing breath/energy -->
+  <path d="M0,450 Q200,380 400,420 Q600,460 800,400 Q1000,340 1200,380 Q1350,400 1400,390" stroke="#4DB6AC" stroke-opacity="0.1" stroke-width="2" fill="none"/>
+  <path d="M0,480 Q200,410 400,450 Q600,490 800,430 Q1000,370 1200,410 Q1350,430 1400,420" stroke="#f5d5d5" stroke-opacity="0.08" stroke-width="1.5" fill="none"/>
+
+  <!-- Subtle stars/sparkles -->
+  <g fill="#4DB6AC" fill-opacity="0.25">
+    <path d="M450,120 l2,-6 2,6 6,2 -6,2 -2,6 -2,-6 -6,-2z"/>
+    <path d="M950,150 l2,-6 2,6 6,2 -6,2 -2,6 -2,-6 -6,-2z"/>
+    <path d="M300,300 l1.5,-4.5 1.5,4.5 4.5,1.5 -4.5,1.5 -1.5,4.5 -1.5,-4.5 -4.5,-1.5z"/>
+    <path d="M1100,350 l1.5,-4.5 1.5,4.5 4.5,1.5 -4.5,1.5 -1.5,4.5 -1.5,-4.5 -4.5,-1.5z"/>
+  </g>
+
+  <!-- Om symbol suggestion (simplified) -->
+  <g transform="translate(700, 120)" opacity="0.12">
+    <text font-family="serif" font-size="40" fill="#f5d5d5" text-anchor="middle" dominant-baseline="central">&#x0950;</text>
+  </g>
+</svg>

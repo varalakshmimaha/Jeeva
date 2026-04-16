@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" fill="none">
+  <rect width="200" height="160" rx="16" fill="#f5faf9"/>
+  <circle cx="100" cy="58" r="40" fill="#4DB6AC" fill-opacity="0.08"/>
+  <g transform="translate(100,50)">
+    <!-- Mother holding baby silhouette -->
+    <!-- Mother head -->
+    <circle cx="-5" cy="-30" r="9" fill="#4DB6AC" fill-opacity="0.15" stroke="#4DB6AC" stroke-width="1.5"/>
+    <!-- Mother body -->
+    <path d="M-5,-21 Q-5,-10 -8,0 Q-10,8 -8,15" stroke="#4DB6AC" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Arms cradling -->
+    <path d="M-5,-15 Q5,-18 12,-12 Q16,-8 12,0 Q8,5 0,5 Q-8,5 -10,0" stroke="#4DB6AC" stroke-width="1.8" fill="#4DB6AC" fill-opacity="0.06" stroke-linecap="round"/>
+    <!-- Baby -->
+    <circle cx="5" cy="-6" r="5" fill="#f5d5d5" stroke="#e8b4b4" stroke-width="1.2"/>
+    <circle cx="5" cy="2" r="8" fill="#f5d5d5" fill-opacity="0.4" stroke="none"/>
+    <!-- Heart -->
+    <path d="M15,-22 C14,-25 10,-25 10,-21 C10,-18 13,-16 15,-14 C17,-16 20,-18 20,-21 C20,-25 16,-25 15,-22Z" fill="#f0c4c4" stroke="none" opacity="0.6"/>
+  </g>
+  <text x="100" y="115" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3d2b2b" font-weight="600">Breastfeeding</text>
+  <text x="100" y="130" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7a6060">Guidance &amp; Support</text>
+</svg>

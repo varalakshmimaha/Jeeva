@@ -9,7 +9,7 @@
 <x-page-banner
   title="Birth & Wellness Insights"
   subtitle="Expert articles on pregnancy, birth preparation, prenatal wellness, nutrition, and postpartum care to guide your journey."
-  image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=80"
+  :image="asset('images/banner-gallery.png')"
   :breadcrumbs="[['label' => 'Blog']]"
 />
 

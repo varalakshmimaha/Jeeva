@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" fill="none">
+  <rect width="200" height="160" rx="16" fill="#f0faf9"/>
+  <circle cx="100" cy="58" r="40" fill="#4DB6AC" fill-opacity="0.08"/>
+  <!-- Pregnant woman in yoga pose (warrior) -->
+  <g transform="translate(100,55)" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" fill="none">
+    <!-- Head -->
+    <circle cx="0" cy="-38" r="8" fill="#4DB6AC" fill-opacity="0.15"/>
+    <!-- Body with belly -->
+    <path d="M0,-30 L0,-8"/>
+    <path d="M2,-18 Q8,-14 6,-10" stroke="#4DB6AC" stroke-width="1.5"/>
+    <!-- Arms stretched wide -->
+    <path d="M0,-25 L-25,-25"/>
+    <path d="M0,-25 L25,-25"/>
+    <!-- Warrior pose legs -->
+    <path d="M0,-8 L-18,18"/>
+    <path d="M0,-8 L18,10 L18,18"/>
+    <!-- Ground line -->
+    <line x1="-25" y1="18" x2="25" y2="18" stroke="#4DB6AC" stroke-opacity="0.3" stroke-width="1"/>
+  </g>
+  <!-- Lotus petals -->
+  <g transform="translate(100,100)" opacity="0.4">
+    <path d="M0,-5 Q-10,-12 -14,-3 Q-14,2 -7,5 Q-3,6 0,5" fill="#4DB6AC" fill-opacity="0.2" stroke="none"/>
+    <path d="M0,-5 Q10,-12 14,-3 Q14,2 7,5 Q3,6 0,5" fill="#4DB6AC" fill-opacity="0.2" stroke="none"/>
+  </g>
+  <text x="100" y="120" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3d2b2b" font-weight="600">Prenatal Yoga</text>
+  <text x="100" y="135" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7a6060">Strength &amp; Calm</text>
+</svg>

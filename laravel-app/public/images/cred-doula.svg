@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" fill="none">
+  <rect width="200" height="160" rx="16" fill="#f0faf9"/>
+  <circle cx="100" cy="60" r="40" fill="#4DB6AC" fill-opacity="0.1"/>
+  <!-- Mother and doula hands -->
+  <g transform="translate(100,55)" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" fill="none">
+    <!-- Shield -->
+    <path d="M0,-30 L20,-20 L20,5 C20,20 0,30 0,30 C0,30 -20,20 -20,5 L-20,-20 Z" fill="#4DB6AC" fill-opacity="0.12"/>
+    <!-- Heart inside shield -->
+    <path d="M0,8 C-2,4 -10,-2 -7,-8 C-4,-14 0,-10 0,-6 C0,-10 4,-14 7,-8 C10,-2 2,4 0,8Z" fill="#4DB6AC" fill-opacity="0.3" stroke="none"/>
+    <!-- Check mark -->
+    <path d="M-5,0 L-1,4 L7,-5" stroke="#4DB6AC" stroke-width="2.5"/>
+  </g>
+  <text x="100" y="115" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3d2b2b" font-weight="600">DONA Certified</text>
+  <text x="100" y="130" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7a6060">International Standard</text>
+</svg>

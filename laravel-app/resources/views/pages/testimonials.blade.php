@@ -7,19 +7,26 @@
 <x-page-banner
   title="What Mamas Say"
   subtitle="Heartfelt words from the families I have had the honour of supporting through their birth journeys."
-  image="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=80"
+  :image="asset('images/banner-about.png')"
   :breadcrumbs="[['label' => 'Testimonials']]"
 />
 
-<!-- Testimonials Grid -->
-<section style="padding: 90px 6%; background: var(--cream);">
+<!-- Modern Testimonials Grid -->
+<section class="testi-modern-sec">
   <div class="container">
+    <div class="testi-header">
+      <h2 class="testi-main-title">Stories of Strength & Joy</h2>
+      <p class="testi-sub-title">Real experiences from mothers who trusted us on their sacred journey into motherhood.</p>
+    </div>
+
     @if($testimonials->isNotEmpty())
-      <div class="testimonials-grid">
+      <div class="testi-masonry">
         @foreach($testimonials as $index => $testimonial)
-          <div class="testimonial-card reveal d{{ ($index % 4) + 1 }}">
-            <div class="testimonial-quote-icon">&ldquo;</div>
-            <div class="testimonial-stars">
+          <div class="testi-modern-card reveal d{{ ($index % 3) + 1 }}">
+            <!-- Background Quote Mark -->
+            <div class="testi-bg-quote">&ldquo;</div>
+            
+            <div class="testi-stars">
               @for($i = 0; $i < $testimonial->rating; $i++)
                 <span class="star-filled">&#9733;</span>
               @endfor
@@ -27,19 +34,21 @@
                 <span class="star-empty">&#9733;</span>
               @endfor
             </div>
-            <p class="testimonial-message">{{ $testimonial->message }}</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">
+            
+            <p class="testi-modern-text">"{{ $testimonial->message }}"</p>
+            
+            <div class="testi-modern-author">
+              <div class="testi-modern-avatar">
                 @if($testimonial->image)
                   <img src="{{ asset($testimonial->image) }}" alt="{{ $testimonial->name }}">
                 @else
                   <span>{{ strtoupper(substr($testimonial->name, 0, 1)) }}</span>
                 @endif
               </div>
-              <div>
-                <div class="testimonial-name">{{ $testimonial->name }}</div>
+              <div class="testi-modern-meta">
+                <div class="testi-modern-name">{{ $testimonial->name }}</div>
                 @if($testimonial->role)
-                  <div class="testimonial-role">{{ $testimonial->role }}</div>
+                  <div class="testi-modern-role">{{ $testimonial->role }}</div>
                 @endif
               </div>
             </div>
@@ -74,90 +83,148 @@
 </section>
 
 <style>
-  .testimonials-grid {
+  /* Modern Testimonials CSS */
+  .testi-modern-sec {
+    padding: 100px 6% 120px;
+    background: linear-gradient(180deg, #FAFAFA 0%, #F3F0E9 100%);
+    position: relative;
+  }
+  .testi-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .testi-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 5vw, 48px);
+    font-weight: 700;
+    color: #2b2b2b;
+    margin-bottom: 16px;
+  }
+  .testi-sub-title {
+    color: #6b7280;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .testi-masonry {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 28px;
+    gap: 40px;
+    max-width: 1240px;
+    margin: 0 auto;
   }
-  .testimonial-card {
+  @media (min-width: 1024px) {
+    .testi-modern-card:nth-child(3n+2) {
+      transform: translateY(40px);
+    }
+  }
+  .testi-modern-card {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 36px 32px;
-    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 50px 40px;
     position: relative;
-    transition: all 0.35s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  }
-  .testimonial-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(77, 182, 172, 0.12);
-    border-color: rgba(77, 182, 172, 0.3);
-  }
-  .testimonial-quote-icon {
-    font-family: 'Playfair Display', serif;
-    font-size: 60px;
-    line-height: 1;
-    color: var(--teal);
-    opacity: 0.25;
-    position: absolute;
-    top: 20px;
-    right: 28px;
-  }
-  .testimonial-stars {
-    margin-bottom: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(0,0,0,0.02);
     display: flex;
-    gap: 2px;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
   }
-  .star-filled { color: #f59e0b; font-size: 18px; }
-  .star-empty { color: #e5e7eb; font-size: 18px; }
-  .testimonial-message {
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.75;
+  .testi-modern-card:hover {
+    box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+  }
+  @media (min-width: 1024px) {
+    .testi-modern-card:hover {
+      transform: translateY(-8px);
+    }
+    .testi-modern-card:nth-child(3n+2):hover {
+      transform: translateY(32px);
+    }
+  }
+  .testi-bg-quote {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    line-height: 1;
+    color: #DCD0BC;
+    opacity: 0.15;
+    pointer-events: none;
+    user-select: none;
+  }
+  .testi-stars {
     margin-bottom: 24px;
+    display: flex;
+    gap: 4px;
+    z-index: 2;
     position: relative;
-    z-index: 1;
   }
-  .testimonial-author {
+  .star-filled { color: #EAB308; font-size: 20px; text-shadow: 0 2px 4px rgba(234, 179, 8, 0.2); }
+  .star-empty { color: #E5E7EB; font-size: 20px; }
+  
+  .testi-modern-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    line-height: 1.8;
+    color: #4a4a4a;
+    font-style: italic;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+  }
+  
+  .testi-modern-author {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
+    gap: 16px;
+    position: relative;
+    z-index: 2;
   }
-  .testimonial-avatar {
-    width: 48px;
-    height: 48px;
+  .testi-modern-avatar {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: var(--grad-teal);
+    background: linear-gradient(135deg, #4DB6AC, #628575);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #ffffff;
     font-weight: 700;
-    font-size: 18px;
-    overflow: hidden;
+    font-size: 22px;
+    box-shadow: 0 8px 20px rgba(77, 182, 172, 0.3);
     flex-shrink: 0;
   }
-  .testimonial-avatar img {
+  .testi-modern-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
   }
-  .testimonial-name {
+  .testi-modern-name {
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    font-size: 15px;
-    color: var(--navy);
+    font-size: 17px;
+    color: #2b2b2b;
   }
-  .testimonial-role {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
+  .testi-modern-role {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
   }
-
   @media (max-width: 860px) {
-    .testimonials-grid {
+    .testi-masonry {
       grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .testi-modern-card {
+      padding: 40px 30px;
     }
   }
 </style>

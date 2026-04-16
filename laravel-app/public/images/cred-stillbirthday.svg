@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" fill="none">
+  <rect width="200" height="160" rx="16" fill="#fef5f5"/>
+  <circle cx="100" cy="60" r="40" fill="#f5d5d5" fill-opacity="0.5"/>
+  <g transform="translate(100,55)">
+    <!-- Holding hands with heart -->
+    <path d="M-22,5 Q-22,-10 -12,-10 Q-5,-10 -5,0" stroke="#e8a0a0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M22,5 Q22,-10 12,-10 Q5,-10 5,0" stroke="#e8a0a0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Heart -->
+    <path d="M0,-15 C-3,-22 -14,-22 -14,-12 C-14,-5 -5,2 0,8 C5,2 14,-5 14,-12 C14,-22 3,-22 0,-15Z" fill="#f0c4c4" stroke="#e8a0a0" stroke-width="1.5"/>
+    <!-- Small butterfly/angel wings -->
+    <path d="M-8,-25 Q-18,-35 -15,-22 Q-13,-18 -8,-20" fill="#4DB6AC" fill-opacity="0.2" stroke="none"/>
+    <path d="M8,-25 Q18,-35 15,-22 Q13,-18 8,-20" fill="#4DB6AC" fill-opacity="0.2" stroke="none"/>
+    <!-- Small star -->
+    <circle cx="0" cy="-28" r="2" fill="#4DB6AC" fill-opacity="0.4"/>
+  </g>
+  <text x="100" y="115" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3d2b2b" font-weight="600">Bereavement Support</text>
+  <text x="100" y="130" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7a6060">Compassionate Care</text>
+</svg>
