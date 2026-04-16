@@ -15,33 +15,43 @@
   <section class="founder-bio-section">
     <div class="container">
       <div class="founder-bio-grid">
-        <!-- Left: Image with Floral SVG -->
+        <!-- Left: Image with decorative frame -->
         <div class="founder-bio-img-col reveal">
-          <div class="floral-bg">
-            <svg width="400" height="400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g transform="translate(100, 100)">
-                <!-- 8 soft, wide lotus petals -->
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(0)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(45)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(90)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(135)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(180)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(225)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(270)" />
-                <path d="M0,0 C-35,-80 35,-80 0,0" fill="#EAE2D3" transform="rotate(315)" />
-                <!-- Center circle -->
-                <circle cx="0" cy="0" r="12" fill="#D8CDB8" />
-              </g>
-            </svg>
+          <div class="founder-img-frame">
+            <div class="founder-img-accent"></div>
+            <div class="founder-img-dot founder-img-dot--1"></div>
+            <div class="founder-img-dot founder-img-dot--2"></div>
+            <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="founder-img">
           </div>
-          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="founder-img">
+          <!-- Experience badge -->
+          <div class="founder-exp-badge reveal d2">
+            <span class="founder-exp-num">10+</span>
+            <span class="founder-exp-label">Years of<br>Experience</span>
+          </div>
         </div>
-        
+
         <!-- Right: Content -->
         <div class="founder-bio-text-col reveal d1">
+          <span class="founder-bio-label">About the Founder</span>
           <h2 class="founder-bio-title">Meet Anu, Your Birth Doula & Wellness Guide</h2>
+
+          <!-- Quote -->
+          <blockquote class="founder-quote">
+            <svg class="founder-quote-icon" width="32" height="32" viewBox="0 0 24 24" fill="#4DB6AC" opacity="0.3"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
+            Every woman deserves to feel seen, heard, and supported throughout her birth journey.
+          </blockquote>
+
           <div class="founder-bio-content">
             <p><strong>I am Anu</strong>, a Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, and Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
+            <p>I believe childbirth is not only a physical experience but also an emotional and spiritual transformation. Every journey is unique, and every woman deserves care that honours her choices, her body, and her voice.</p>
+          </div>
+
+          <!-- Highlight tags -->
+          <div class="founder-tags">
+            <span class="founder-tag">Birth Doula</span>
+            <span class="founder-tag">Prenatal Yoga</span>
+            <span class="founder-tag">Childbirth Educator</span>
+            <span class="founder-tag">Nutritionist</span>
           </div>
         </div>
       </div>
@@ -51,67 +61,189 @@
   <style>
   .founder-bio-section {
     padding: 100px 6%;
-    background: #ffffff;
+    background: #fdfbfa;
     overflow: hidden;
+    position: relative;
+  }
+  .founder-bio-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: rgba(77,182,172,0.04);
+    pointer-events: none;
   }
   .founder-bio-grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    gap: 60px;
+    gap: 70px;
     align-items: center;
     max-width: 1240px;
     margin: 0 auto;
   }
+
+  /* Image column */
   .founder-bio-img-col {
     position: relative;
     z-index: 1;
   }
-  .floral-bg {
-    position: absolute;
-    top: -60px;
-    left: -80px;
-    z-index: -1;
-    animation: slowSpin 40s linear infinite;
-    pointer-events: none;
+  .founder-img-frame {
+    position: relative;
   }
-  @keyframes slowSpin {
-    100% { transform: rotate(360deg); }
+  .founder-img-accent {
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 100%; height: 100%;
+    border-radius: 32px;
+    border: 2px solid #4DB6AC;
+    opacity: 0.2;
+    z-index: -1;
+  }
+  .founder-img-dot {
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  .founder-img-dot--1 {
+    width: 80px; height: 80px;
+    background: rgba(245,213,213,0.5);
+    top: -30px; right: -20px;
+  }
+  .founder-img-dot--2 {
+    width: 50px; height: 50px;
+    background: rgba(77,182,172,0.12);
+    bottom: 40px; left: -25px;
   }
   .founder-img {
     width: 100%;
-    max-height: 540px;
-    border-radius: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    max-height: 580px;
+    border-radius: 32px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.1);
     display: block;
     object-fit: cover;
     object-position: top;
   }
+
+  /* Experience badge */
+  .founder-exp-badge {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(77,182,172,0.1);
+    z-index: 5;
+  }
+  .founder-exp-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #4DB6AC;
+    line-height: 1;
+  }
+  .founder-exp-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #7a6060;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Text column */
+  .founder-bio-label {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #4DB6AC;
+    margin-bottom: 14px;
+  }
   .founder-bio-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(34px, 4vw, 46px);
+    font-size: clamp(32px, 4vw, 44px);
     color: #2b2b2b;
     margin-bottom: 24px;
-    line-height: 1.25;
+    line-height: 1.2;
   }
+
+  /* Quote */
+  .founder-quote {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: #3d2b2b;
+    line-height: 1.7;
+    padding: 20px 24px 20px 28px;
+    margin: 0 0 28px 0;
+    background: linear-gradient(135deg, rgba(245,213,213,0.25), rgba(77,182,172,0.06));
+    border-left: 4px solid #4DB6AC;
+    border-radius: 0 16px 16px 0;
+  }
+  .founder-quote-icon {
+    position: absolute;
+    top: 12px; right: 16px;
+  }
+
   .founder-bio-content p {
-    font-size: 17px;
-    color: #555555;
+    font-size: 16px;
+    color: #666;
     line-height: 1.85;
     margin-bottom: 16px;
   }
+  .founder-bio-content p strong {
+    color: #3d2b2b;
+  }
+
+  /* Tags */
+  .founder-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .founder-tag {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4DB6AC;
+    background: rgba(77,182,172,0.08);
+    border: 1px solid rgba(77,182,172,0.15);
+    transition: all 0.3s;
+  }
+  .founder-tag:hover {
+    background: #4DB6AC;
+    color: #fff;
+    border-color: #4DB6AC;
+  }
+
   @media (max-width: 991px) {
     .founder-bio-grid {
       grid-template-columns: 1fr;
       gap: 50px;
     }
-    .floral-bg {
-      top: -40px;
-      left: -30px;
+    .founder-bio-img-col {
+      max-width: 500px;
+      margin: 0 auto;
     }
-    .floral-bg svg {
-      width: 300px;
-      height: 300px;
+    .founder-exp-badge {
+      bottom: -15px; right: 10px;
     }
+  }
+  @media (max-width: 480px) {
+    .founder-bio-section { padding: 70px 5%; }
+    .founder-exp-badge { padding: 14px 18px; }
+    .founder-exp-num { font-size: 28px; }
+    .founder-quote { font-size: 17px; padding: 16px 20px 16px 22px; }
   }
   </style>
 
@@ -688,5 +820,247 @@
       }
     </style>
   </section>
+
+  <!-- Book Consultation CTA -->
+  <section class="about-cta-section">
+    <div class="about-cta-bg" style="background-image: url('{{ asset('images/mission_bg.png') }}');"></div>
+    <div class="about-cta-overlay"></div>
+    <div class="container">
+      <div class="about-cta-grid">
+        <!-- Left: Text -->
+        <div class="about-cta-text reveal">
+          <span class="about-cta-label">Let's Connect</span>
+          <h2 class="about-cta-title">Begin Your Empowered Birth Journey</h2>
+          <p class="about-cta-desc">Whether you're expecting, planning, or simply curious — I'd love to hear from you. Let's create a birth experience that feels safe, supported, and truly yours.</p>
+          <div class="about-cta-trust">
+            <div class="about-cta-trust-item">
+              <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Personalised birth plans</span>
+            </div>
+            <div class="about-cta-trust-item">
+              <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Prenatal & postnatal support</span>
+            </div>
+            <div class="about-cta-trust-item">
+              <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Free initial consultation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="about-cta-form-wrap reveal d1">
+          <h3 class="about-cta-form-title">Book Consultation</h3>
+          <p class="about-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
+          <form action="{{ route('contact.store') }}" method="POST">
+            @csrf
+            <div class="about-cta-row">
+              <div class="about-cta-field">
+                <input type="text" name="name" placeholder="Your Name *" required>
+              </div>
+              <div class="about-cta-field">
+                <input type="tel" name="phone" placeholder="Phone Number">
+              </div>
+            </div>
+            <div class="about-cta-field">
+              <input type="email" name="email" placeholder="Email Address *" required>
+            </div>
+            <div class="about-cta-field">
+              <select name="subject">
+                <option value="" disabled selected>What are you looking for? *</option>
+                <option value="Birth Doula Support">Birth Doula Support</option>
+                <option value="Prenatal Yoga">Prenatal Yoga</option>
+                <option value="Childbirth Education">Childbirth Education</option>
+                <option value="Postnatal Support">Postnatal Support</option>
+                <option value="Lactation Support">Lactation Support</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="about-cta-field">
+              <textarea name="message" rows="3" placeholder="Tell us about your journey..." required></textarea>
+            </div>
+            <button type="submit" class="about-cta-submit">Book My Consultation</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .about-cta-section {
+      position: relative;
+      padding: 80px 6%;
+      overflow: hidden;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      border-radius: 40px;
+      margin: 0 4% 60px;
+    }
+    .about-cta-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      border-radius: 40px;
+      z-index: 0;
+    }
+    .about-cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(30, 40, 35, 0.85) 0%, rgba(40, 55, 45, 0.7) 100%);
+      border-radius: 40px;
+      z-index: 1;
+    }
+    .about-cta-section .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .about-cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-cta-label {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: #4DB6AC;
+      margin-bottom: 16px;
+    }
+    .about-cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .about-cta-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+    .about-cta-trust {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .about-cta-trust-item svg { flex-shrink: 0; }
+
+    .about-cta-form-wrap {
+      background: rgba(255,255,255,0.97);
+      border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .about-cta-form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #3d2b2b;
+      margin-bottom: 8px;
+    }
+    .about-cta-form-sub {
+      font-size: 14px;
+      color: #7a6060;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .about-cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .about-cta-field {
+      margin-bottom: 14px;
+    }
+    .about-cta-field input,
+    .about-cta-field select,
+    .about-cta-field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #e8e0e0;
+      border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      color: #3d2b2b;
+      background: #faf8f8;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .about-cta-field input::placeholder,
+    .about-cta-field textarea::placeholder {
+      color: #b0a0a0;
+    }
+    .about-cta-field input:focus,
+    .about-cta-field select:focus,
+    .about-cta-field textarea:focus {
+      border-color: #4DB6AC;
+      box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
+    }
+    .about-cta-field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a6060' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .about-cta-field textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .about-cta-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--grad-teal);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 4px;
+    }
+    .about-cta-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(77,182,172,0.4);
+      opacity: 0.9;
+    }
+    @media (max-width: 991px) {
+      .about-cta-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about-cta-text { text-align: center; }
+      .about-cta-desc { margin-left: auto; margin-right: auto; }
+      .about-cta-trust { align-items: center; }
+    }
+    @media (max-width: 480px) {
+      .about-cta-row { grid-template-columns: 1fr; }
+      .about-cta-form-wrap { padding: 28px 22px; }
+      .about-cta-section { padding: 60px 5%; border-radius: 24px; margin: 0 3% 40px; }
+    }
+  </style>
 
 @endsection

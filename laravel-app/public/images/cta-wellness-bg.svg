@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" fill="none">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2d3b35"/>
+      <stop offset="50%" stop-color="#3a4f44"/>
+      <stop offset="100%" stop-color="#2a3830"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="20%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#4DB6AC" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#4DB6AC" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#f5d5d5" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#f5d5d5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1400" height="700" fill="url(#bg1)"/>
+  <rect width="1400" height="700" fill="url(#glow1)"/>
+  <rect width="1400" height="700" fill="url(#glow2)"/>
+
+  <!-- Large decorative mandala circles -->
+  <circle cx="250" cy="350" r="280" stroke="#4DB6AC" stroke-opacity="0.06" stroke-width="1" fill="none"/>
+  <circle cx="250" cy="350" r="220" stroke="#4DB6AC" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+  <circle cx="250" cy="350" r="160" stroke="#f5d5d5" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+
+  <!-- Right side mandala -->
+  <circle cx="1200" cy="200" r="200" stroke="#f5d5d5" stroke-opacity="0.05" stroke-width="1" fill="none"/>
+  <circle cx="1200" cy="200" r="150" stroke="#4DB6AC" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+
+  <!-- Bottom right decorative -->
+  <circle cx="1100" cy="600" r="180" stroke="#4DB6AC" stroke-opacity="0.05" stroke-width="1" fill="none"/>
+
+  <!-- Lotus pattern top-left -->
+  <g transform="translate(150, 120)" opacity="0.08">
+    <path d="M0,-40 C-20,-60 -40,-40 -30,-15 C-25,-5 -10,5 0,0" fill="#4DB6AC"/>
+    <path d="M0,-40 C20,-60 40,-40 30,-15 C25,-5 10,5 0,0" fill="#4DB6AC"/>
+    <path d="M0,-50 C-10,-65 10,-65 0,-50" fill="#80cbc4"/>
+  </g>
+
+  <!-- Lotus pattern bottom-right -->
+  <g transform="translate(1300, 550)" opacity="0.06">
+    <path d="M0,-35 C-18,-52 -35,-35 -26,-13 C-22,-5 -9,4 0,0" fill="#f5d5d5"/>
+    <path d="M0,-35 C18,-52 35,-35 26,-13 C22,-5 9,4 0,0" fill="#f5d5d5"/>
+  </g>
+
+  <!-- Flowing wave lines -->
+  <path d="M0,500 Q200,440 400,470 Q600,500 800,450 Q1000,400 1200,440 Q1350,460 1400,450" stroke="#4DB6AC" stroke-opacity="0.06" stroke-width="1.5" fill="none"/>
+  <path d="M0,540 Q200,480 400,510 Q600,540 800,490 Q1000,440 1200,480 Q1350,500 1400,490" stroke="#f5d5d5" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+  <path d="M0,580 Q200,520 400,550 Q600,580 800,530 Q1000,480 1200,520 Q1350,540 1400,530" stroke="#4DB6AC" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+
+  <!-- Top wave -->
+  <path d="M0,150 Q200,100 400,130 Q600,160 800,120 Q1000,80 1200,110 Q1350,130 1400,120" stroke="#f5d5d5" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+
+  <!-- Sparkle dots scattered -->
+  <g fill="#4DB6AC" fill-opacity="0.1">
+    <circle cx="500" cy="100" r="3"/>
+    <circle cx="900" cy="150" r="2.5"/>
+    <circle cx="700" cy="600" r="3"/>
+    <circle cx="350" cy="550" r="2"/>
+    <circle cx="1050" cy="500" r="2.5"/>
+    <circle cx="600" cy="250" r="2"/>
+    <circle cx="1000" cy="350" r="3"/>
+    <circle cx="200" cy="200" r="2"/>
+  </g>
+
+  <!-- Star sparkles -->
+  <g fill="#4DB6AC" fill-opacity="0.08">
+    <path d="M800,80 l2,-6 2,6 6,2 -6,2 -2,6 -2,-6 -6,-2z"/>
+    <path d="M400,300 l1.5,-4.5 1.5,4.5 4.5,1.5 -4.5,1.5 -1.5,4.5 -1.5,-4.5 -4.5,-1.5z"/>
+    <path d="M1100,280 l2,-6 2,6 6,2 -6,2 -2,6 -2,-6 -6,-2z"/>
+    <path d="M300,480 l1.5,-4.5 1.5,4.5 4.5,1.5 -4.5,1.5 -1.5,4.5 -1.5,-4.5 -4.5,-1.5z"/>
+  </g>
+
+  <!-- Subtle leaf/branch -->
+  <g transform="translate(80, 500)" opacity="0.06" stroke="#4DB6AC" stroke-width="1.5" fill="none">
+    <path d="M0,0 Q20,-30 50,-20"/>
+    <path d="M10,-5 Q15,-20 30,-18"/>
+    <path d="M25,-12 Q28,-25 40,-22"/>
+  </g>
+</svg>

@@ -39,28 +39,230 @@
   </div>
 </section>
 
-<!-- Modern CTA Section -->
-<section class="cta-modern-section reveal">
+<!-- Book Consultation CTA Section -->
+<section class="svc-cta-section">
+  <div class="svc-cta-bg" style="background-image: url('{{ asset('images/banners/1776263096_Gemini_Generated_Image_ozfdjmozfdjmozfd.png') }}');"></div>
+  <div class="svc-cta-overlay"></div>
   <div class="container">
-    <div class="cta-modern-card">
-      <!-- Subtle Decorative Circles -->
-      <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05);"></div>
-      <div style="position: absolute; bottom: -30px; left: -20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.03);"></div>
-      
-      <div class="cta-content" style="position: relative; z-index: 1;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; color: white;">Ready for Compassionate Support?</h2>
-        <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;">Let's plan your empowered birth journey. Book a one-on-one consultation today to discover how we can guide you into motherhood.</p>
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-          <a href="tel:+917483211870" class="btn-ghost">
-             📞 Call Us
-          </a>
-          <a href="{{ route('contact') }}" class="btn-white-solid">
-            Book Consultation &rarr;
-          </a>
-        </div>
+    <div class="svc-cta-grid">
+      <!-- Left: Text Content -->
+      <div class="svc-cta-text reveal">
+        <span class="svc-cta-label">Your Inquiry</span>
+        <h2 class="svc-cta-title">Ready for Compassionate Support?</h2>
+        <p class="svc-cta-desc">Let's plan your empowered birth journey. Book a one-on-one consultation today to discover how we can guide you into motherhood.</p>
+      </div>
+
+      <!-- Right: Consultation Form -->
+      <div class="svc-cta-form-wrap reveal d1">
+        <h3 class="svc-cta-form-title">Book Consultation</h3>
+        <p class="svc-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
+        <form action="{{ route('contact.store') }}" method="POST" class="svc-cta-form">
+          @csrf
+          <div class="svc-cta-form-row">
+            <div class="svc-cta-field">
+              <input type="text" name="name" placeholder="Your Name *" required>
+            </div>
+            <div class="svc-cta-field">
+              <input type="tel" name="phone" placeholder="Phone Number">
+            </div>
+          </div>
+          <div class="svc-cta-field">
+            <select name="subject">
+              <option value="" disabled selected>Select Service *</option>
+              @foreach($services as $service)
+                <option value="{{ $service->title }}">{{ $service->title }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="svc-cta-field">
+            <textarea name="message" rows="4" placeholder="Your message..." required></textarea>
+          </div>
+          <input type="hidden" name="email" value="consultation@jivabirthandbeyond.com">
+          <button type="submit" class="svc-cta-submit">Send Message</button>
+        </form>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Service CTA - Split Layout */
+  .svc-cta-section {
+    position: relative;
+    padding: 80px 6%;
+    overflow: hidden;
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+    border-radius: 40px;
+    margin: 20px 4% 60px;
+  }
+  .svc-cta-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 40px;
+    z-index: 0;
+  }
+  .svc-cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 40, 35, 0.65) 0%, rgba(40, 55, 45, 0.5) 100%);
+    border-radius: 40px;
+    z-index: 1;
+  }
+  .svc-cta-section .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .svc-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .svc-cta-label {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #4DB6AC;
+    margin-bottom: 16px;
+  }
+  .svc-cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .svc-cta-desc {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.75;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+  /* Form Card */
+  .svc-cta-form-wrap {
+    background: rgba(255,255,255,0.97);
+    border-radius: 24px;
+    padding: 40px 36px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .svc-cta-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #3d2b2b;
+    margin-bottom: 8px;
+  }
+  .svc-cta-form-sub {
+    font-size: 14px;
+    color: #7a6060;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .svc-cta-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .svc-cta-field {
+    margin-bottom: 14px;
+  }
+  .svc-cta-field input,
+  .svc-cta-field select,
+  .svc-cta-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e8e0e0;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    color: #3d2b2b;
+    background: #faf8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .svc-cta-field input::placeholder,
+  .svc-cta-field textarea::placeholder {
+    color: #b0a0a0;
+  }
+  .svc-cta-field input:focus,
+  .svc-cta-field select:focus,
+  .svc-cta-field textarea:focus {
+    border-color: #4DB6AC;
+    box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
+  }
+  .svc-cta-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a6060' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .svc-cta-field textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .svc-cta-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--grad-teal);
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+  }
+  .svc-cta-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(77,182,172,0.4);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 991px) {
+    .svc-cta-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .svc-cta-text {
+      text-align: center;
+    }
+    .svc-cta-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .svc-cta-contact-info {
+      align-items: center;
+    }
+  }
+  @media (max-width: 480px) {
+    .svc-cta-form-row {
+      grid-template-columns: 1fr;
+    }
+    .svc-cta-form-wrap {
+      padding: 28px 22px;
+    }
+    .svc-cta-section {
+      padding: 60px 5%;
+      border-radius: 24px;
+      margin: 20px 3% 40px;
+    }
+  }
+</style>
 
 @endsection

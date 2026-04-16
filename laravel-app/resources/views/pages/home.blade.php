@@ -52,70 +52,24 @@
 <!-- About Us Section -->
 <section class="about-us-section">
   <div class="container">
-    <div class="about-wrapper about-wrapper--reversed">
+    <div class="about-wrapper">
+      <!-- Left: Content -->
       <div class="about-content-col reveal">
-        <div class="section-header">
-          <span class="section-label">About Us</span>
-          <h2 class="section-title">Walking Alongside You</h2>
+        <div class="about-eyebrow-row">
+          <span class="about-eyebrow-line"></span>
+          <span class="about-eyebrow-label">About Us</span>
         </div>
+        <h2 class="about-section-title">Walking Alongside You</h2>
         <div class="about-text-body">
-          <p>I am Anu — a Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two. I believe every woman deserves to feel seen, heard, and supported throughout her pregnancy, birth, and postpartum journey. My intention is to create a calm, safe, and nurturing space where you feel empowered without judgment and guided without pressure.</p>
+          <p>I am Anu &mdash; a Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two. I believe every woman deserves to feel seen, heard, and supported throughout her pregnancy, birth, and postpartum journey. My intention is to create a calm, safe, and nurturing space where you feel empowered without judgment and guided without pressure.</p>
         </div>
-        <a href="{{ route('about') }}" class="btn btn-primary">Read More About Me</a>
+        <a href="{{ route('about') }}" class="btn-about-teal">Read More About Me</a>
       </div>
-      <div class="about-image-col reveal">
-        <div class="about-circle-wrap">
-          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="about-circle-img">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Why Choose Us / Our Process Section -->
-<!-- Modern Journey Together Section -->
-<section class="home-journey-section">
-  <div class="container">
-    <div class="home-journey-header reveal">
-      <span class="journey-eyebrow">Our Process</span>
-      <h2 class="journey-main-title">Our Journey Together</h2>
-      <p class="journey-subtitle">A guided, compassionate approach to your pregnancy, birth, and early parenthood.</p>
-    </div>
-
-    <div class="home-journey-grid">
-      <!-- Step 1 -->
-      <div class="home-journey-card reveal d1">
-        <div class="journey-card-img">
-          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Consultation">
-          <div class="journey-card-num">01</div>
-        </div>
-        <div class="journey-card-content">
-          <h3 class="journey-card-title">Consultation & Assessment</h3>
-          <p class="journey-card-text">Initial understanding of your needs, birth preferences, and a comprehensive discussion about your pregnancy journey.</p>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="home-journey-card reveal d2">
-        <div class="journey-card-img">
-          <img src="{{ asset('images/founder-sitting.jpeg') }}" alt="Personalized Plan">
-          <div class="journey-card-num">02</div>
-        </div>
-        <div class="journey-card-content">
-          <h3 class="journey-card-title">Personalized Birth Plan</h3>
-          <p class="journey-card-text">Creating a thoughtfully tailored plan focusing on your absolute comfort, personal choices, and desired birth experience.</p>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="home-journey-card reveal d3">
-        <div class="journey-card-img">
-          <img src="{{ asset('images/founder-casual.jpeg') }}" alt="Birth Support">
-          <div class="journey-card-num">03</div>
-        </div>
-        <div class="journey-card-content">
-          <h3 class="journey-card-title">Birth & Postpartum</h3>
-          <p class="journey-card-text">Continuous and unwavering physical and emotional support throughout labor, delivery, and early parenthood.</p>
+      <!-- Right: Circle Image -->
+      <div class="about-image-col reveal d1">
+        <div class="about-blob-wrap">
+          <div class="about-blob-bg"></div>
+          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="about-blob-img">
         </div>
       </div>
     </div>
@@ -123,18 +77,207 @@
 </section>
 
 <style>
-/* Modern Journey Section */
-.home-journey-section {
-  padding: 110px 6%;
-  background: #fdfdfc;
+/* About Us Section */
+.about-us-section {
+  padding: 100px 6%;
+  background: #ffffff;
+}
+.about-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-content-col { flex: 1; }
+.about-image-col {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+/* Eyebrow */
+.about-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.about-eyebrow-line {
+  display: inline-block;
+  width: 36px;
+  height: 2px;
+  background: #4DB6AC;
+  border-radius: 2px;
+}
+.about-eyebrow-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #4DB6AC;
+}
+/* Title */
+.about-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 54px);
+  color: #1a1a1a;
+  line-height: 1.15;
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+/* Body */
+.about-text-body p {
+  font-size: 17px;
+  color: #555;
+  line-height: 1.85;
+  margin-bottom: 36px;
+}
+/* Button */
+.btn-about-teal {
+  display: inline-block;
+  background: #4DB6AC;
+  color: #ffffff;
+  padding: 16px 36px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(77, 182, 172, 0.25);
+}
+.btn-about-teal:hover {
+  background: #3d918a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(77, 182, 172, 0.35);
+  color: #fff;
+}
+/* Blob Circle Image */
+.about-blob-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+.about-blob-bg {
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(77, 182, 172, 0.08);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.about-blob-img {
+  width: 100%;
+  max-width: 460px;
+  height: 480px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+}
+@media (max-width: 991px) {
+  .about-wrapper { flex-direction: column-reverse; gap: 40px; }
+  .about-blob-img { max-width: 320px; height: 320px; }
+  .about-blob-bg { width: 300px; height: 300px; }
+}
+</style>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-us-sec">
+  <div class="container">
+    <div class="why-header reveal">
+      <span class="why-eyebrow">Why Jiva Birth & Beyond</span>
+      <h2 class="why-title">Why Choose Us?</h2>
+      <p class="why-subtitle">Providing a sanctuary of support, knowledge, and empowerment for your unique birthing journey.</p>
+    </div>
+
+    <div class="why-journey-grid">
+      <!-- Feature 1 -->
+      <div class="why-journey-step reveal d1">
+        <div class="why-img-wrap">
+          <img src="{{ asset('images/why_support.png') }}" alt="Compassionate Care">
+          <div class="why-badge">01</div>
+        </div>
+        <div class="why-arrow d-none-mobile">
+          <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
+            <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#4DB6AC" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+          </svg>
+          <svg class="why-arrow-head" viewBox="0 0 10 10">
+            <polygon points="0,0 10,5 0,10" fill="#4DB6AC" />
+          </svg>
+        </div>
+        <h3 class="why-card-title">Compassionate Care</h3>
+        <p class="why-card-text">We provide deeply personal and empathetic support, ensuring you feel seen and heard at every step.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="why-journey-step reveal d2">
+        <div class="why-img-wrap">
+          <img src="{{ asset('images/why_advocacy.png') }}" alt="Expert Guidance">
+          <div class="why-badge">02</div>
+        </div>
+        <div class="why-arrow d-none-mobile">
+          <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
+            <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#4DB6AC" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+          </svg>
+          <svg class="why-arrow-head" viewBox="0 0 10 10">
+            <polygon points="0,0 10,5 0,10" fill="#4DB6AC" />
+          </svg>
+        </div>
+        <h3 class="why-card-title">Expert Guidance</h3>
+        <p class="why-card-text">With professional training in doula care and nutrition, we offer knowledgeable guidance for a healthy journey.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="why-journey-step reveal d3">
+        <div class="why-img-wrap">
+          <img src="{{ asset('images/why_mindbody.png') }}" alt="Holistic Wellness">
+          <div class="why-badge">03</div>
+        </div>
+        <div class="why-arrow d-none-mobile">
+          <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
+            <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#4DB6AC" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+          </svg>
+          <svg class="why-arrow-head" viewBox="0 0 10 10">
+            <polygon points="0,0 10,5 0,10" fill="#4DB6AC" />
+          </svg>
+        </div>
+        <h3 class="why-card-title">Holistic Wellness</h3>
+        <p class="why-card-text">From prenatal yoga to dietary advice, we nurture your physical, emotional, and spiritual well-being.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="why-journey-step reveal d4">
+        <div class="why-img-wrap">
+          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Evidence-Based Support">
+          <div class="why-badge">04</div>
+        </div>
+        <h3 class="why-card-title">Evidence-Based Support</h3>
+        <p class="why-card-text">Our practices are grounded in research and experience, helping you make informed decisions for your birth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* why Choose Us - Circular Design Settings */
+.why-choose-us-sec {
+  padding: 100px 6%;
+  background: linear-gradient(to bottom, #ffffff, #f9f7f4);
   position: relative;
   overflow: hidden;
 }
-.home-journey-header {
+.why-header {
   text-align: center;
-  margin-bottom: 70px;
+  margin-bottom: 80px;
 }
-.journey-eyebrow {
+.why-eyebrow {
   display: inline-block;
   font-size: 13px;
   font-weight: 700;
@@ -143,107 +286,309 @@
   color: #4DB6AC;
   margin-bottom: 12px;
 }
-.journey-main-title {
+.why-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(34px, 4.5vw, 48px);
-  color: #2b2b2b;
+  color: #2c3e50;
   margin-bottom: 20px;
-  line-height: 1.2;
 }
-.journey-subtitle {
+.why-subtitle {
   color: #6b7280;
-  font-size: 17px;
-  max-width: 600px;
+  font-size: 18px;
+  max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
-.home-journey-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1200px;
+.why-journey-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1300px;
   margin: 0 auto;
-  align-items: start;
 }
-.home-journey-card {
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
-  transition: all 0.4s ease;
-  height: 100%;
-}
-.home-journey-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-}
-@media (min-width: 900px) {
-  .home-journey-card:nth-child(2) {
-    transform: translateY(40px);
-  }
-  .home-journey-card:nth-child(2):hover {
-    transform: translateY(32px);
+@media (max-width: 1200px) {
+  .why-journey-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 30px;
   }
 }
 
-.journey-card-img {
+.why-journey-step {
+  flex: 1;
+  text-align: center;
   position: relative;
-  width: 100%;
-  height: 250px;
-  border-radius: 20px 20px 0 0;
-  background: #f0f0f0;
 }
-.journey-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px 20px 0 0;
-}
-.journey-card-num {
-  position: absolute;
-  right: 24px;
-  bottom: -28px;
-  width: 56px;
-  height: 56px;
-  background: #C5B499; /* elegant gold/tan */
-  color: #ffffff;
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 700;
-  border-radius: 50%;
+.why-img-wrap {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 30px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 4px solid #ffffff;
-  box-shadow: 0 6px 15px rgba(197, 180, 153, 0.4);
+  border: 1px dashed #4DB6AC;
+  border-radius: 50%;
+  padding: 10px;
+  background: #fff;
+}
+.why-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+}
+.why-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  background: #4DB6AC;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 6px 15px rgba(77, 182, 172, 0.4);
   z-index: 2;
+  border: 2px solid #fff;
 }
-
-.journey-card-content {
-  padding: 40px 30px 35px;
+.why-arrow {
+  position: absolute;
+  top: 90px;
+  left: calc(50% + 120px);
+  width: calc(100% - 240px);
+  height: 40px;
+  z-index: 10;
+  pointer-events: none;
 }
-.journey-card-title {
+.why-arrow-head {
+  position: absolute;
+  right: -3px;
+  bottom: -1px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(38deg);
+  transform-origin: center;
+}
+.why-card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: #2b2b2b;
+  font-size: 21px;
+  color: #2c3e50;
   margin-bottom: 14px;
-  line-height: 1.3;
 }
-.journey-card-text {
-  color: #666;
-  font-size: 15px;
+.why-card-text {
+  color: #6b7280;
+  font-size: 14.5px;
   line-height: 1.7;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 280px;
 }
 
-@media (max-width: 900px) {
-  .home-journey-grid {
+@media (max-width: 1200px) {
+  .why-arrow { display: none; }
+}
+@media (max-width: 600px) {
+  .why-journey-grid {
     grid-template-columns: 1fr;
-    max-width: 480px;
     gap: 50px;
   }
 }
 </style>
+
+<!-- Stats Counter Section -->
+<section class="home-stats-sec">
+  <div class="stats-overlay"></div>
+  <div class="stats-inner">
+    <!-- Stat 1 -->
+    <div class="stat-card reveal d1">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-num" data-target="12">0</div>
+      <div class="stat-dot">•</div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <!-- Stat 2 -->
+    <div class="stat-card reveal d2">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-num" data-target="450">0</div>
+      <div class="stat-dot">•</div>
+      <div class="stat-label">Families Supported</div>
+    </div>
+    <!-- Stat 3 -->
+    <div class="stat-card reveal d3">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-num" data-target="25">0</div>
+      <div class="stat-dot">•</div>
+      <div class="stat-label">Professional Certs</div>
+    </div>
+    <!-- Stat 4 -->
+    <div class="stat-card reveal d4">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.52 4.82 3.889 6.178L6 21l4.5-2.25c.49.085.993.135 1.5.135 4.97 0 9-3.186 9-7.12S16.97 3 12 3Z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-num" data-target="1500" data-suffix="+">0</div>
+      <div class="stat-dot">•</div>
+      <div class="stat-label">Yoga Hours Taught</div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Stats Counter — Greenscapes Card Design */
+.home-stats-sec {
+  position: relative;
+  background-image: url('{{ asset("images/banner-about.png") }}');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 100px 5%;
+}
+.stats-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+.stats-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.stat-card {
+  flex: 1;
+  min-width: 200px;
+  max-width: 260px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 40px 24px;
+  text-align: center;
+  color: #ffffff;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.14);
+}
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+.stat-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #4DB6AC;
+  stroke: #4DB6AC;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 5vw, 62px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.stat-dot {
+  color: #4DB6AC;
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.stat-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .stats-inner { gap: 14px; }
+  .stat-card { min-width: 160px; padding: 30px 16px; }
+}
+@media (max-width: 600px) {
+  .home-stats-sec { padding: 70px 4%; background-attachment: scroll; }
+  .stats-inner { gap: 12px; }
+  .stat-card { min-width: 140px; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const stats = document.querySelectorAll('.stat-num');
+  const observerOptions = {
+    threshold: 0.5
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const countTo = parseInt(target.getAttribute('data-target'));
+        const suffix = target.getAttribute('data-suffix') || '';
+        let count = 0;
+        const duration = 2000; // 2 seconds
+        const increment = countTo / (duration / 16); // 60fps
+
+        const updateCount = () => {
+          count += increment;
+          if (count < countTo) {
+            target.innerText = Math.floor(count) + suffix;
+            requestAnimationFrame(updateCount);
+          } else {
+            target.innerText = countTo + suffix;
+          }
+        };
+        updateCount();
+        observer.unobserve(target);
+      }
+    });
+  }, observerOptions);
+
+  stats.forEach(stat => observer.observe(stat));
+});
+</script>
+
+
+
+
 
 
 
@@ -457,162 +802,408 @@
   </div>
 </section>
 
-<!-- Testimonials Section -->
-<section class="home-testimonials-section">
-  <div class="home-testimonials-overlay"></div>
-  <div class="container" style="position: relative; z-index: 2;">
-    <div class="home-testi-grid">
-      <!-- Left Column -->
-      <div class="home-testi-left reveal">
-        <span class="home-testi-label"><i>&#9679;</i> Testimonial</span>
-        <h2 class="home-testi-heading">The Best Customers<br>Says About Our Action</h2>
-        <a href="{{ route('testimonials') }}" class="home-testi-readall">
-          Read All Testimonials 
-          <span class="home-testi-readall-icon">&nearr;</span>
+<!-- Testimonials Section - Theme Layout -->
+<section class="htsd-section theme-bg">
+  <div class="container htsd-container">
+    <div class="htsd-3col-grid">
+      <!-- Left: Info -->
+      <div class="htsd-info-col reveal">
+        <span class="htsd-label">Testimonial</span>
+        <h2 class="htsd-heading">The Best Customers Says About Our Action</h2>
+        <a href="{{ route('testimonials') }}" class="htsd-read-btn">
+          <span>Read All Testimonials</span>
+          <span class="htsd-read-icon-circle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
         </a>
       </div>
 
-      <!-- Center: Rating Card -->
-      <div class="home-testi-rating-card reveal d1">
-        <div class="home-testi-stars-top" style="display:none;"></div>
-        <div class="home-testi-score">4.8</div>
-        <div class="home-testi-score-stars" style="display: flex; justify-content: center; gap: 4px; margin-bottom: 24px; color: #123C51;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><path d="M12 2v15.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
-        </div>
-        <p class="home-testi-members">From 3k Members,</p>
-        <p class="home-testi-reviewed">Reviewed by Google</p>
-        <div class="home-testi-avatars">
-          @foreach($testimonials->take(4) as $t)
-            @if($t->image)
-              <img src="{{ asset($t->image) }}" alt="{{ $t->name }}" class="home-testi-avatar">
-            @else
-              <span class="home-testi-avatar-placeholder">{{ strtoupper(substr($t->name, 0, 1)) }}</span>
-            @endif
-          @endforeach
-          @if($testimonials->count() < 4)
-            @for($i = 0; $i < 4 - $testimonials->count(); $i++)
-              <span class="home-testi-avatar-placeholder" style="background:#fff;"><svg viewBox="0 0 24 24" width="24" height="24" fill="#a0a0a0"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
-            @endfor
-          @endif
-          <span class="home-testi-avatar-placeholder home-testi-avatar-add" style="width: 36px; height: 36px; border: none; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-left:-8px; z-index: 10;">+</span>
+      <!-- Middle: Rating Card -->
+      <div class="htsd-rating-col reveal d1">
+        <div class="htsd-rating-card">
+          <div class="htsd-rating-num">4.8</div>
+          <div class="htsd-rating-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span class="half-star">&#9733;</span>
+          </div>
+          <p class="htsd-rating-text">From 3k Members,<br>Reviewed by Google</p>
+          <div class="htsd-avatars-group">
+            <div class="htsd-avatar"><img src="{{ asset('images/gallery/1.jpg') }}" alt="V" onerror="this.src='https://ui-avatars.com/api/?name=V&background=random'"></div>
+            <div class="htsd-avatar"><img src="{{ asset('images/gallery/2.jpg') }}" alt="A" onerror="this.src='https://ui-avatars.com/api/?name=A&background=random'"></div>
+            <div class="htsd-avatar"><img src="{{ asset('images/gallery/3.jpg') }}" alt="R" onerror="this.src='https://ui-avatars.com/api/?name=R&background=random'"></div>
+            <div class="htsd-avatar"><img src="{{ asset('images/gallery/4.jpg') }}" alt="S" onerror="this.src='https://ui-avatars.com/api/?name=S&background=random'"></div>
+            <div class="htsd-avatar htsd-avatar-more">+</div>
+          </div>
         </div>
       </div>
 
-      <!-- Right: Featured Review -->
-      <div class="home-testi-review-card reveal d2">
-        <span class="home-testi-quote-icon">
-          <svg viewBox="0 0 24 24" width="48" height="48" fill="#C1E8FF"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
-        </span>
-        <div class="home-testi-review-stars" style="display: flex; gap: 4px; margin-bottom: 24px; color: #C1E8FF;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        @if($testimonials->count() > 0)
-          <div class="home-testi-slider-container" style="position: relative; min-height: 220px;">
-            <div class="home-testi-slider-track" id="testimonialSliderTrack">
-              @foreach($testimonials as $index => $t)
-                <div class="home-testi-slide" style="display: {{ $index === 0 ? 'block' : 'none' }}; opacity: {{ $index === 0 ? '1' : '0' }}; transition: opacity 0.5s ease-in-out; width: 100%;">
-                  <p class="home-testi-review-text">"{{ Str::limit($t->message, 220) }}"</p>
-                  <div class="home-testi-reviewer">
-                    <div class="home-testi-reviewer-img-wrap">
-                      @if($t->image)
-                        <img src="{{ asset($t->image) }}" alt="{{ $t->name }}" class="home-testi-reviewer-img">
-                      @else
-                        <span class="home-testi-reviewer-placeholder">{{ strtoupper(substr($t->name, 0, 1)) }}</span>
-                      @endif
-                    </div>
-                    <div>
-                      <strong class="home-testi-reviewer-name">{{ $t->name }}</strong>
-                      <span class="home-testi-reviewer-role">{{ $t->role }}</span>
-                    </div>
-                  </div>
+      <!-- Right: Card Slider -->
+      <div class="htsd-slider-col reveal d2">
+        <div class="htsd-track" id="htsdTrack">
+          @if($testimonials->isNotEmpty())
+            @foreach($testimonials as $index => $t)
+            <div class="htsd-card {{ $index === 0 ? 'htsd-card--active' : '' }}">
+              <div class="htsd-card-quote">9999</div>
+              <div class="htsd-card-stars">
+                @for($i = 0; $i < ($t->rating ?? 5); $i++)<span class="htsd-star filled">&#9733;</span>@endfor
+                @for($i = ($t->rating ?? 5); $i < 5; $i++)<span class="htsd-star">&#9733;</span>@endfor
+              </div>
+              <p class="htsd-card-msg">&ldquo;{{ Str::limit($t->message, 280) }}&rdquo;</p>
+              <div class="htsd-card-author">
+                <div class="htsd-card-avatar-s">
+                  @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}">
+                  @else<span>{{ strtoupper(substr($t->name, 0, 1)) }}</span>@endif
                 </div>
-              @endforeach
-            </div>
-            
-            <div class="home-testi-dots" id="testimonialDots" style="position: absolute; bottom: 0px; right: 0px;">
-              @if($testimonials->count() > 1)
-                @foreach($testimonials as $index => $t)
-                  <span class="home-testi-dot {{ $index === 0 ? 'active' : '' }}" onclick="goToTestiSlide({{ $index }})" style="cursor:pointer;"></span>
-                @endforeach
-              @endif
-            </div>
-          </div>
-        @else
-          <div class="home-testi-slider-container" style="position: relative;">
-            <div class="home-testi-slide" style="display: block; opacity: 1;">
-              <p class="home-testi-review-text">"Anu provided such compassionate guidance during my pregnancy. The prenatal yoga sessions kept me grounded, and her doula support during childbirth was incredibly empowering and peaceful."</p>
-              <div class="home-testi-reviewer">
-                <div class="home-testi-reviewer-img-wrap">
-                  <span class="home-testi-reviewer-placeholder" style="background: url('https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=150&q=80') center/cover;"></span>
-                </div>
-                <div>
-                  <strong class="home-testi-reviewer-name">Sarah Jenkins</strong>
-                  <span class="home-testi-reviewer-role">New Mother</span>
+                <div class="htsd-card-meta">
+                  <div class="htsd-card-name">{{ $t->name }}</div>
+                  <div class="htsd-card-role">{{ $t->role ?? 'Happy Client' }}</div>
                 </div>
               </div>
             </div>
-            <div class="home-testi-dots" style="position: absolute; bottom: 0px; right: 0px;">
-              <span class="home-testi-dot active"></span>
+            @endforeach
+          @else
+            <div class="htsd-card htsd-card--active">
+              <div class="htsd-card-quote">9999</div>
+              <div class="htsd-card-stars"><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span></div>
+              <p class="htsd-card-msg">&ldquo;The prenatal yoga classes were a game-changer for my second pregnancy. I felt so much stronger and more prepared compared to my first. The breathing techniques helped immensely during labor.&rdquo;</p>
+              <div class="htsd-card-author">
+                <div class="htsd-card-avatar-s"><span>A</span></div>
+                <div class="htsd-card-meta"><div class="htsd-card-name">Ananya Reddy</div><div class="htsd-card-role">Mother of Two</div></div>
+              </div>
             </div>
-          </div>
-        @endif
+          @endif
+        </div>
+
+        <!-- Dots -->
+        <div class="htsd-dots" id="htsdDots">
+          @if($testimonials->isNotEmpty())
+            @foreach($testimonials as $i => $t)
+              <button class="htsd-dot {{ $i === 0 ? 'htsd-dot--active' : '' }}" data-index="{{ $i }}"></button>
+            @endforeach
+          @endif
+        </div>
       </div>
-      
-      <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const slides = document.querySelectorAll('.home-testi-slide');
-          const dots = document.querySelectorAll('#testimonialDots .home-testi-dot');
-          if(slides.length <= 1) return;
-          
-          let currentSlide = 0;
-          let slideInterval;
-          
-          window.goToTestiSlide = function(index) {
-              if (index === currentSlide) return;
-              clearInterval(slideInterval);
-              
-              slides[currentSlide].style.opacity = 0;
-              setTimeout(() => {
-                  slides[currentSlide].style.display = 'none';
-                  if(dots[currentSlide]) dots[currentSlide].classList.remove('active');
-                  
-                  currentSlide = index;
-                  
-                  slides[currentSlide].style.display = 'block';
-                  if(dots[currentSlide]) dots[currentSlide].classList.add('active');
-                  
-                  // Force reflow for transition
-                  void slides[currentSlide].offsetWidth; 
-                  slides[currentSlide].style.opacity = 1;
-                  
-                  startSlideTimer();
-              }, 300); // Wait for fade out
-          }
-          
-          function startSlideTimer() {
-              slideInterval = setInterval(() => {
-                  let next = (currentSlide + 1) % slides.length;
-                  window.goToTestiSlide(next);
-              }, 5000);
-          }
-          
-          startSlideTimer();
-      });
-      </script>
     </div>
   </div>
 </section>
 
+<style>
+/* ===== Home Testimonials - Split Dark Layout ===== */
+.htsd-section {
+  position: relative;
+  padding: 80px 6%;
+  overflow: hidden;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+}
+.htsd-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.htsd-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(60, 40, 30, 0.55);
+}
+.htsd-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+.htsd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Side */
+.htsd-left { }
+.htsd-left-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: start;
+}
+.htsd-text-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.htsd-label {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #4DB6AC;
+  margin-bottom: 18px;
+  background: rgba(77,182,172,0.15);
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+.htsd-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3vw, 38px);
+  color: #ffffff;
+  line-height: 1.3;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+/* Rating Box - Solid Teal Card */
+.htsd-rating-box {
+  background: linear-gradient(160deg, #4DB6AC 0%, #3d9e94 100%);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  text-align: center;
+  min-width: 170px;
+  box-shadow: 0 12px 35px rgba(77,182,172,0.35);
+}
+.htsd-rating-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.htsd-rating-stars {
+  color: #FFD700;
+  font-size: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+.htsd-rating-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.htsd-social-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.htsd-social {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.htsd-social:hover {
+  background: rgba(0,0,0,0.35);
+  transform: translateY(-2px);
+}
+
+/* Read All Button */
+.htsd-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 24px 6px 6px;
+  background: #ffffff;
+  border: none;
+  border-radius: 50px;
+  color: #3d2b2b;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.htsd-read-icon-circle {
+  width: 38px;
+  height: 38px;
+  background: #4DB6AC;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+.htsd-read-icon-circle svg { stroke: #fff; }
+.htsd-read-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Right Card */
+.htsd-card-area {
+  position: relative;
+}
+.htsd-track {
+  position: relative;
+}
+.htsd-card {
+  display: none;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 36px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  animation: htsdFade 0.5s ease;
+}
+.htsd-card--active { display: block; }
+@keyframes htsdFade {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.htsd-card-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  line-height: 0.8;
+  color: #4DB6AC;
+  opacity: 0.3;
+  margin-bottom: 14px;
+  pointer-events: none;
+}
+.htsd-card-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 18px;
+}
+.htsd-star { font-size: 17px; color: #E5E7EB; }
+.htsd-star.filled { color: #EAB308; }
+.htsd-card-msg {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 26px;
+  font-style: italic;
+  font-family: 'Outfit', sans-serif;
+}
+.htsd-card-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 18px;
+}
+.htsd-card-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #4DB6AC, #3d9e94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(77,182,172,0.3);
+}
+.htsd-card-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.htsd-card-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2b2b2b;
+}
+.htsd-card-role {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Dots */
+.htsd-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  justify-content: center;
+}
+.htsd-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+.htsd-dot--active {
+  background: #4DB6AC;
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .htsd-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .htsd-left-inner {
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+  }
+  .htsd-text-col { align-items: flex-start; }
+}
+@media (max-width: 768px) {
+  .htsd-left-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  .htsd-text-col { align-items: center; }
+  .htsd-rating-box { margin: 0 auto; }
+}
+@media (max-width: 480px) {
+  .htsd-section { padding: 60px 5%; }
+  .htsd-card { padding: 30px 24px; }
+  .htsd-rating-box { padding: 22px 22px 18px; min-width: 150px; }
+  .htsd-rating-num { font-size: 40px; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.htsd-card');
+  const dots  = document.querySelectorAll('.htsd-dot');
+  if (!cards.length || cards.length <= 1) return;
+
+  let current = 0;
+  let timer;
+
+  function goTo(idx) {
+    cards[current].classList.remove('htsd-card--active');
+    dots[current] && dots[current].classList.remove('htsd-dot--active');
+    current = (idx + cards.length) % cards.length;
+    cards[current].classList.add('htsd-card--active');
+    dots[current] && dots[current].classList.add('htsd-dot--active');
+  }
+
+  function startTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 5500); }
+
+  dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); startTimer(); }));
+  startTimer();
+});
+</script>
+
 <!-- FAQ Section -->
 <section class="home-faq-section">
+  <div class="faq-bg-overlay"></div>
   <div class="container">
     <div class="home-faq-grid">
       <!-- Left Column -->
@@ -675,235 +1266,24 @@
 </section>
 
 <style>
-/* ===== HOME TESTIMONIALS ===== */
-.home-testimonials-section {
-  padding: 100px 6%;
-  background: #f9ebeb url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  position: relative;
-  overflow: hidden;
-}
-.home-testimonials-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(90, 62, 74, 0.85); /* Dark plum/rose overlay to let light pink accents pop */
-}
-.home-testi-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.3fr;
-  gap: 40px;
-  align-items: center;
-  max-width: 1240px;
-  margin: 0 auto;
-}
-.home-testi-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border: none;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 20px;
-  border-radius: 30px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.home-testi-label i {
-  color: #C1E8FF;
-  font-style: normal;
-  font-size: 14px;
-}
-.home-testi-heading {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(32px, 4vw, 48px);
-  color: #fff;
-  line-height: 1.2;
-  font-weight: 800;
-  margin-bottom: 36px;
-}
-.home-testi-readall {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 10px 10px 10px 24px;
-  border: none;
-  border-radius: 40px;
-  background: #fff;
-  color: #123C51;
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  transition: transform 0.3s;
-}
-.home-testi-readall:hover {
-  transform: translateY(-2px);
-  background: #fff;
-}
-.home-testi-readall-icon {
-  width: 38px;
-  height: 38px;
-  background: #C1E8FF;
-  color: #123C51;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-/* Rating Card */
-.home-testi-rating-card {
-  background: #C1E8FF;
-  border-radius: 20px 80px 20px 80px;
-  padding: 50px 30px;
-  text-align: center;
-  color: #123C51;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-}
-.home-testi-score {
-  font-family: 'Outfit', sans-serif;
-  font-size: 72px;
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 8px;
-  color: #123C51;
-}
-.home-testi-score-stars {
-  font-size: 20px;
-  letter-spacing: 2px;
-  color: #123C51;
-  margin-bottom: 24px;
-}
-.home-testi-members {
-  font-size: 15px;
-  font-weight: 800;
-  margin-bottom: 6px;
-  color: #123C51;
-}
-.home-testi-reviewed {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 24px;
-  color: #123C51;
-}
-.home-testi-avatars {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.home-testi-avatar, .home-testi-avatar-placeholder {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  border: 3px solid #C1E8FF;
-  margin-left: -12px;
-  object-fit: cover;
-  background: #fff;
-  color: #123C51;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-.home-testi-avatar:first-child, .home-testi-avatar-placeholder:first-child { margin-left: 0; }
-.home-testi-avatar-add {
-  font-size: 20px;
-  color: #123C51;
-}
-
-/* Review Card */
-.home-testi-review-card {
-  border: none;
-  background: transparent;
-  padding: 20px 0;
-  position: relative;
-}
-.home-testi-quote-icon {
-  margin-bottom: 16px;
-  display: block;
-  fill: #C1E8FF;
-}
-.home-testi-review-stars {
-  font-size: 18px;
-  letter-spacing: 3px;
-  color: #fff;
-  margin-bottom: 24px;
-}
-.home-testi-review-stars svg path {
-  fill: #C1E8FF !important;
-}
-.home-testi-review-text {
-  color: rgba(255,255,255,0.9);
-  font-size: 15px;
-  line-height: 1.8;
-  margin-bottom: 30px;
-}
-.home-testi-reviewer {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-top: 10px;
-}
-.home-testi-reviewer-img-wrap {
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  padding: 0;
-}
-.home-testi-reviewer-img {
-  width: 100%; height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.home-testi-reviewer-placeholder {
-  width: 100%; height: 100%;
-  border-radius: 50%;
-  background: #C1E8FF;
-  color: #123C51;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 20px;
-}
-.home-testi-reviewer-name {
-  display: block;
-  color: #fff;
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.home-testi-reviewer-role {
-  display: block;
-  color: rgba(255,255,255,0.7);
-  font-size: 13px;
-}
-.home-testi-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-}
-.home-testi-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  transition: all 0.3s ease;
-}
-.home-testi-dot.active {
-  width: 24px;
-  background: #C1E8FF;
-  border-radius: 8px;
-}
-
 /* ===== HOME FAQ ===== */
 .home-faq-section {
   padding: 90px 6%;
-  background: linear-gradient(135deg, #f5d5d5 0%, #f0c4c4 100%);
+  position: relative;
+  background-image: url('{{ asset("images/banner-services.png") }}');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.faq-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.60);
+  z-index: 0;
+}
+.home-faq-grid {
+  position: relative;
+  z-index: 1;
 }
 .home-faq-grid {
   display: grid;
@@ -928,7 +1308,7 @@
 .home-faq-heading {
   font-family: 'Playfair Display', serif;
   font-size: clamp(28px, 3.5vw, 42px);
-  color: #3d2b2b;
+  color: #ffffff;
   line-height: 1.2;
   margin-bottom: 40px;
 }

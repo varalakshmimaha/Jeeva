@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" fill="none">
+  <defs>
+    <linearGradient id="skyBg" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1a2e28"/>
+      <stop offset="40%" stop-color="#263d34"/>
+      <stop offset="100%" stop-color="#1f3029"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="70%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#f5d5d5" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#f5d5d5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tealAura" cx="25%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#4DB6AC" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#4DB6AC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leafGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4DB6AC" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#2d7a6f" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Deep green background -->
+  <rect width="1400" height="700" fill="url(#skyBg)"/>
+  <rect width="1400" height="700" fill="url(#warmGlow)"/>
+  <rect width="1400" height="700" fill="url(#tealAura)"/>
+
+  <!-- Large tropical leaf - left side -->
+  <g transform="translate(50, 100)" opacity="0.12">
+    <path d="M80,600 Q60,400 100,250 Q130,150 180,80 Q200,50 210,20" stroke="#4DB6AC" stroke-width="3" fill="none"/>
+    <!-- Leaf blades -->
+    <path d="M100,250 Q50,220 20,180" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M100,250 Q130,200 170,170" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M110,320 Q60,300 30,260" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M110,320 Q140,280 180,260" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M100,400 Q50,380 25,340" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M100,400 Q140,370 175,350" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M90,480 Q45,465 20,430" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M90,480 Q130,455 160,440" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <!-- Filled leaf shapes -->
+    <path d="M100,250 Q50,220 20,180 Q60,200 100,250" fill="url(#leafGrad)"/>
+    <path d="M100,250 Q130,200 170,170 Q140,210 100,250" fill="url(#leafGrad)"/>
+    <path d="M110,320 Q60,300 30,260 Q70,290 110,320" fill="url(#leafGrad)"/>
+    <path d="M110,320 Q140,280 180,260 Q150,300 110,320" fill="url(#leafGrad)"/>
+  </g>
+
+  <!-- Large tropical leaf - right side -->
+  <g transform="translate(1150, 50)" opacity="0.1">
+    <path d="M100,600 Q120,400 80,250 Q50,150 0,80 Q-20,50 -30,20" stroke="#4DB6AC" stroke-width="3" fill="none"/>
+    <path d="M80,250 Q130,220 160,180" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M80,250 Q50,200 10,170" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M70,330 Q120,310 150,270" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M70,330 Q40,290 0,270" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M80,410 Q130,390 155,350" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M80,410 Q40,380 5,350" stroke="#4DB6AC" stroke-width="1.5" fill="none"/>
+    <path d="M80,250 Q130,220 160,180 Q120,210 80,250" fill="url(#leafGrad)"/>
+    <path d="M80,250 Q50,200 10,170 Q40,210 80,250" fill="url(#leafGrad)"/>
+    <path d="M70,330 Q120,310 150,270 Q110,300 70,330" fill="url(#leafGrad)"/>
+    <path d="M70,330 Q40,290 0,270 Q30,300 70,330" fill="url(#leafGrad)"/>
+  </g>
+
+  <!-- Soft monstera leaf outlines - scattered -->
+  <g transform="translate(1300, 500)" opacity="0.06">
+    <path d="M0,0 Q-30,-50 -10,-90 Q5,-120 30,-100 Q50,-85 40,-50 Q35,-20 0,0Z" stroke="#f5d5d5" stroke-width="1.5" fill="none"/>
+    <path d="M10,-60 Q25,-70 30,-55" stroke="#f5d5d5" stroke-width="1" fill="none"/>
+  </g>
+
+  <g transform="translate(100, 50)" opacity="0.06">
+    <path d="M0,0 Q30,-50 10,-90 Q-5,-120 -30,-100 Q-50,-85 -40,-50 Q-35,-20 0,0Z" stroke="#f5d5d5" stroke-width="1.5" fill="none"/>
+  </g>
+
+  <!-- Central sun/moon glow -->
+  <circle cx="700" cy="350" r="250" fill="#4DB6AC" fill-opacity="0.02"/>
+  <circle cx="700" cy="350" r="180" fill="#f5d5d5" fill-opacity="0.02"/>
+
+  <!-- Concentric mandala rings - subtle center -->
+  <circle cx="700" cy="350" r="300" stroke="#4DB6AC" stroke-opacity="0.04" stroke-width="0.8" fill="none" stroke-dasharray="8,12"/>
+  <circle cx="700" cy="350" r="250" stroke="#f5d5d5" stroke-opacity="0.03" stroke-width="0.8" fill="none" stroke-dasharray="6,10"/>
+
+  <!-- Floating flower petals -->
+  <g opacity="0.07">
+    <!-- Petal 1 -->
+    <ellipse cx="500" cy="150" rx="15" ry="8" fill="#f5d5d5" transform="rotate(-30, 500, 150)"/>
+    <!-- Petal 2 -->
+    <ellipse cx="950" cy="200" rx="12" ry="6" fill="#f5d5d5" transform="rotate(20, 950, 200)"/>
+    <!-- Petal 3 -->
+    <ellipse cx="600" cy="550" rx="14" ry="7" fill="#4DB6AC" transform="rotate(-15, 600, 550)"/>
+    <!-- Petal 4 -->
+    <ellipse cx="850" cy="500" rx="10" ry="5" fill="#f5d5d5" transform="rotate(40, 850, 500)"/>
+    <!-- Petal 5 -->
+    <ellipse cx="400" cy="450" rx="12" ry="6" fill="#4DB6AC" transform="rotate(-50, 400, 450)"/>
+  </g>
+
+  <!-- Small lotus bottom center -->
+  <g transform="translate(700, 620)" opacity="0.08">
+    <path d="M0,-20 Q-18,-35 -25,-15 Q-26,-5 -14,5 Q-6,8 0,6" fill="#f5d5d5"/>
+    <path d="M0,-20 Q18,-35 25,-15 Q26,-5 14,5 Q6,8 0,6" fill="#f5d5d5"/>
+    <path d="M0,-25 Q-10,-38 0,-20 Q10,-38 0,-25" fill="#4DB6AC" fill-opacity="0.4"/>
+  </g>
+
+  <!-- Sparkle dots -->
+  <g fill="#4DB6AC" fill-opacity="0.12">
+    <circle cx="450" cy="120" r="2"/>
+    <circle cx="980" cy="100" r="2.5"/>
+    <circle cx="350" cy="500" r="2"/>
+    <circle cx="1050" cy="450" r="2"/>
+    <circle cx="650" cy="80" r="1.5"/>
+    <circle cx="800" cy="620" r="2"/>
+  </g>
+  <g fill="#f5d5d5" fill-opacity="0.06">
+    <circle cx="550" cy="300" r="2.5"/>
+    <circle cx="900" cy="350" r="2"/>
+    <circle cx="300" cy="250" r="2"/>
+    <circle cx="1100" cy="300" r="2.5"/>
+  </g>
+
+  <!-- Star sparkles -->
+  <g fill="#4DB6AC" fill-opacity="0.08">
+    <path d="M480,80 l2,-6 2,6 6,2 -6,2 -2,6 -2,-6 -6,-2z"/>
+    <path d="M1000,130 l2,-6 2,6 6,2 -6,2 -2,6 -2,-6 -6,-2z"/>
+    <path d="M350,400 l1.5,-4 1.5,4 4,1.5 -4,1.5 -1.5,4 -1.5,-4 -4,-1.5z"/>
+    <path d="M1080,550 l1.5,-4 1.5,4 4,1.5 -4,1.5 -1.5,4 -1.5,-4 -4,-1.5z"/>
+  </g>
+</svg>

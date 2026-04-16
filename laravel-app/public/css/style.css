@@ -1538,8 +1538,8 @@ section{padding:90px 6%}
 }
 .sub-btn{
   width:100%;
-  background:#f0c4c0;
-  color:#3d2b2b;
+  background:var(--grad-teal);
+  color:#ffffff;
   padding:16px;
   border-radius:12px;
   border:none;
@@ -1552,14 +1552,14 @@ section{padding:90px 6%}
   align-items:center;
   justify-content:center;
   gap:9px;
-  box-shadow:0 6px 24px rgba(192,228,255,.4);
+  box-shadow:0 6px 24px rgba(77,182,172,.3);
   text-transform:uppercase;
   letter-spacing:.08em;
 }
 .sub-btn:hover{
   transform:translateY(-3px);
-  box-shadow:0 12px 36px rgba(192,228,255,.6);
-  background:#a8d5ff;
+  box-shadow:0 12px 36px rgba(77,182,172,.45);
+  opacity:0.9;
 }
 .form-ok{
   display:none;background:var(--teal-pale);
