@@ -802,78 +802,82 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-<!-- Testimonials Section - Theme Layout -->
-<section class="htsd-section theme-bg">
-  <div class="container htsd-container">
-    <div class="htsd-3col-grid">
-      <!-- Left: Info -->
-      <div class="htsd-info-col reveal">
-        <span class="htsd-label">Testimonial</span>
-        <h2 class="htsd-heading">The Best Customers Says About Our Action</h2>
-        <a href="{{ route('testimonials') }}" class="htsd-read-btn">
-          <span>Read All Testimonials</span>
-          <span class="htsd-read-icon-circle">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<!-- Testimonials Section -->
+<section class="htsd-sec">
+  <!-- Background Grass/Leaf Decorations -->
+  <div class="htsd-grass htsd-grass-left">
+    <svg viewBox="0 0 200 500" fill="none"><path d="M120,500 Q100,400 110,300 Q115,200 105,100 Q100,50 110,0" stroke="#4DB6AC" stroke-width="2" opacity="0.15"/><path d="M110,300 Q70,270 40,210" stroke="#4DB6AC" stroke-width="1.5" opacity="0.12"/><path d="M110,300 Q70,270 40,210 Q80,260 110,300" fill="#4DB6AC" opacity="0.06"/><path d="M108,200 Q65,175 35,120" stroke="#4DB6AC" stroke-width="1.5" opacity="0.12"/><path d="M108,200 Q65,175 35,120 Q78,172 108,200" fill="#4DB6AC" opacity="0.06"/><path d="M112,400 Q75,375 45,320" stroke="#4DB6AC" stroke-width="1.5" opacity="0.10"/><path d="M112,400 Q75,375 45,320 Q82,370 112,400" fill="#4DB6AC" opacity="0.04"/></svg>
+  </div>
+  <div class="htsd-grass htsd-grass-right">
+    <svg viewBox="0 0 200 500" fill="none"><path d="M80,500 Q100,400 90,300 Q85,200 95,100 Q100,50 90,0" stroke="#4DB6AC" stroke-width="2" opacity="0.12"/><path d="M90,300 Q130,270 160,210" stroke="#4DB6AC" stroke-width="1.5" opacity="0.10"/><path d="M90,300 Q130,270 160,210 Q120,260 90,300" fill="#4DB6AC" opacity="0.05"/><path d="M92,200 Q135,175 165,120" stroke="#4DB6AC" stroke-width="1.5" opacity="0.10"/><path d="M92,200 Q135,175 165,120 Q122,172 92,200" fill="#4DB6AC" opacity="0.05"/></svg>
+  </div>
+
+  <div class="container htsd-wrap">
+    <div class="htsd-grid">
+      <!-- Col 1: Text -->
+      <div class="htsd-info reveal">
+        <span class="htsd-tag">Testimonial</span>
+        <h2 class="htsd-title">The Best Customers Says About Our Action</h2>
+        <a href="{{ route('testimonials') }}" class="htsd-cta-btn">
+          Read All Testimonials
+          <span class="htsd-cta-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </a>
       </div>
 
-      <!-- Middle: Rating Card -->
-      <div class="htsd-rating-col reveal d1">
-        <div class="htsd-rating-card">
-          <div class="htsd-rating-num">4.8</div>
-          <div class="htsd-rating-stars">
-            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span class="half-star">&#9733;</span>
-          </div>
-          <p class="htsd-rating-text">From 3k Members,<br>Reviewed by Google</p>
-          <div class="htsd-avatars-group">
-            <div class="htsd-avatar"><img src="{{ asset('images/gallery/1.jpg') }}" alt="V" onerror="this.src='https://ui-avatars.com/api/?name=V&background=random'"></div>
-            <div class="htsd-avatar"><img src="{{ asset('images/gallery/2.jpg') }}" alt="A" onerror="this.src='https://ui-avatars.com/api/?name=A&background=random'"></div>
-            <div class="htsd-avatar"><img src="{{ asset('images/gallery/3.jpg') }}" alt="R" onerror="this.src='https://ui-avatars.com/api/?name=R&background=random'"></div>
-            <div class="htsd-avatar"><img src="{{ asset('images/gallery/4.jpg') }}" alt="S" onerror="this.src='https://ui-avatars.com/api/?name=S&background=random'"></div>
-            <div class="htsd-avatar htsd-avatar-more">+</div>
+      <!-- Col 2: Rating Card -->
+      <div class="htsd-mid reveal d1">
+        <div class="htsd-rate-card">
+          <div class="htsd-rate-num">4.8</div>
+          <div class="htsd-rate-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="htsd-rate-text">From 3k Members,<br>Reviewed by Google</p>
+          <div class="htsd-avatars">
+            <div class="htsd-av" style="background:#e8b4b8;">V</div>
+            <div class="htsd-av" style="background:#a8d5ba;">A</div>
+            <div class="htsd-av" style="background:#b4c8e8;">R</div>
+            <div class="htsd-av" style="background:#e8d4a8;">S</div>
+            <div class="htsd-av htsd-av-more">+</div>
           </div>
         </div>
       </div>
 
-      <!-- Right: Card Slider -->
-      <div class="htsd-slider-col reveal d2">
-        <div class="htsd-track" id="htsdTrack">
+      <!-- Col 3: Review Card -->
+      <div class="htsd-review reveal d2">
+        <div class="htsd-slider" id="htsdTrack">
           @if($testimonials->isNotEmpty())
             @foreach($testimonials as $index => $t)
             <div class="htsd-card {{ $index === 0 ? 'htsd-card--active' : '' }}">
-              <div class="htsd-card-quote">9999</div>
-              <div class="htsd-card-stars">
-                @for($i = 0; $i < ($t->rating ?? 5); $i++)<span class="htsd-star filled">&#9733;</span>@endfor
-                @for($i = ($t->rating ?? 5); $i < 5; $i++)<span class="htsd-star">&#9733;</span>@endfor
+              <div class="htsd-q">&ldquo;&rdquo;</div>
+              <div class="htsd-stars">
+                @for($i = 0; $i < ($t->rating ?? 5); $i++)<span class="htsd-s filled">&#9733;</span>@endfor
+                @for($i = ($t->rating ?? 5); $i < 5; $i++)<span class="htsd-s">&#9733;</span>@endfor
               </div>
-              <p class="htsd-card-msg">&ldquo;{{ Str::limit($t->message, 280) }}&rdquo;</p>
-              <div class="htsd-card-author">
-                <div class="htsd-card-avatar-s">
+              <p class="htsd-msg">{{ Str::limit($t->message, 300) }}</p>
+              <div class="htsd-author">
+                <div class="htsd-auth-img">
                   @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}">
                   @else<span>{{ strtoupper(substr($t->name, 0, 1)) }}</span>@endif
                 </div>
-                <div class="htsd-card-meta">
-                  <div class="htsd-card-name">{{ $t->name }}</div>
-                  <div class="htsd-card-role">{{ $t->role ?? 'Happy Client' }}</div>
+                <div>
+                  <div class="htsd-auth-name">{{ $t->name }}</div>
+                  <div class="htsd-auth-role">{{ $t->role ?? 'Mother of Two' }}</div>
                 </div>
               </div>
             </div>
             @endforeach
           @else
             <div class="htsd-card htsd-card--active">
-              <div class="htsd-card-quote">9999</div>
-              <div class="htsd-card-stars"><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span><span class="htsd-star filled">&#9733;</span></div>
-              <p class="htsd-card-msg">&ldquo;The prenatal yoga classes were a game-changer for my second pregnancy. I felt so much stronger and more prepared compared to my first. The breathing techniques helped immensely during labor.&rdquo;</p>
-              <div class="htsd-card-author">
-                <div class="htsd-card-avatar-s"><span>A</span></div>
-                <div class="htsd-card-meta"><div class="htsd-card-name">Ananya Reddy</div><div class="htsd-card-role">Mother of Two</div></div>
+              <div class="htsd-q">&ldquo;&rdquo;</div>
+              <div class="htsd-stars"><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span></div>
+              <p class="htsd-msg">The prenatal yoga classes were a game-changer for my second pregnancy. I felt so much stronger and more prepared compared to my first. The breathing techniques helped immensely during labor.</p>
+              <div class="htsd-author">
+                <div class="htsd-auth-img"><span>A</span></div>
+                <div><div class="htsd-auth-name">Ananya Reddy</div><div class="htsd-auth-role">Mother of Two</div></div>
               </div>
             </div>
           @endif
         </div>
-
-        <!-- Dots -->
         <div class="htsd-dots" id="htsdDots">
           @if($testimonials->isNotEmpty())
             @foreach($testimonials as $i => $t)
@@ -887,148 +891,86 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <style>
-/* ===== Home Testimonials - Split Dark Layout ===== */
-.htsd-section {
+/* ===== Testimonial Section - Dark ===== */
+.htsd-sec {
   position: relative;
   padding: 80px 6%;
+  background: linear-gradient(135deg, #e8f5f3 0%, #fdf0ee 35%, #f0faf8 65%, #fce8e6 100%);
   overflow: hidden;
-  min-height: 560px;
+  min-height: 520px;
   display: flex;
   align-items: center;
 }
-.htsd-bg {
+/* Background grass */
+.htsd-grass {
   position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
+  top: 0;
+  width: 180px;
+  height: 100%;
   z-index: 0;
+  pointer-events: none;
 }
-.htsd-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(60, 40, 30, 0.55);
-}
-.htsd-container {
+.htsd-grass-left { left: 0; }
+.htsd-grass-right { right: 0; }
+.htsd-wrap {
   position: relative;
   z-index: 2;
   width: 100%;
 }
+
+/* Grid */
 .htsd-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: 1fr auto 1.4fr;
+  gap: 40px;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Left Side */
-.htsd-left { }
-.htsd-left-inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 30px;
-  align-items: start;
-}
-.htsd-text-col {
+/* Col 1: Info */
+.htsd-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.htsd-label {
+.htsd-tag {
   display: inline-block;
-  text-transform: uppercase;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
+  text-transform: uppercase;
   color: #4DB6AC;
-  margin-bottom: 18px;
   background: rgba(77,182,172,0.15);
-  padding: 5px 14px;
+  padding: 6px 16px;
   border-radius: 20px;
+  margin-bottom: 18px;
 }
-.htsd-heading {
+.htsd-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(26px, 3vw, 38px);
-  color: #ffffff;
+  font-size: clamp(24px, 2.8vw, 38px);
+  color: #3d2b2b;
   line-height: 1.3;
   margin-bottom: 30px;
   font-weight: 700;
 }
-
-/* Rating Box - Solid Teal Card */
-.htsd-rating-box {
-  background: linear-gradient(160deg, #4DB6AC 0%, #3d9e94 100%);
-  border-radius: 20px;
-  padding: 28px 28px 24px;
-  text-align: center;
-  min-width: 170px;
-  box-shadow: 0 12px 35px rgba(77,182,172,0.35);
-}
-.htsd-rating-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 900;
-  color: #ffffff;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.htsd-rating-stars {
-  color: #FFD700;
-  font-size: 16px;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-}
-.htsd-rating-text {
-  font-size: 12px;
-  color: rgba(255,255,255,0.75);
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-.htsd-social-icons {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-.htsd-social {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  transition: all 0.3s;
-  text-decoration: none;
-}
-.htsd-social:hover {
-  background: rgba(0,0,0,0.35);
-  transform: translateY(-2px);
-}
-
-/* Read All Button */
-.htsd-read-btn {
+.htsd-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 6px 24px 6px 6px;
+  gap: 10px;
+  padding: 10px 12px 10px 24px;
   background: #ffffff;
-  border: none;
-  border-radius: 50px;
-  color: #3d2b2b;
+  border-radius: 40px;
+  color: #1a2e1a;
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s;
 }
-.htsd-read-icon-circle {
-  width: 38px;
-  height: 38px;
+.htsd-cta-arrow {
+  width: 34px;
+  height: 34px;
   background: #4DB6AC;
   border-radius: 50%;
   display: flex;
@@ -1037,67 +979,111 @@ document.addEventListener('DOMContentLoaded', function() {
   color: #fff;
   flex-shrink: 0;
 }
-.htsd-read-icon-circle svg { stroke: #fff; }
-.htsd-read-btn:hover {
+.htsd-cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(255,255,255,0.15);
 }
 
-/* Right Card */
-.htsd-card-area {
-  position: relative;
+/* Col 2: Rating Card */
+.htsd-mid {
+  display: flex;
+  justify-content: center;
 }
-.htsd-track {
-  position: relative;
+.htsd-rate-card {
+  background: linear-gradient(160deg, #5ec4a0 0%, #4DB6AC 40%, #3d9e94 100%);
+  border-radius: 16px 50px 16px 16px;
+  padding: 36px 32px 28px;
+  text-align: center;
+  min-width: 190px;
+  box-shadow: 0 20px 50px rgba(77,182,172,0.3);
 }
+.htsd-rate-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 54px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.htsd-rate-stars {
+  color: #FFD700;
+  font-size: 18px;
+  margin-bottom: 16px;
+  letter-spacing: 3px;
+}
+.htsd-rate-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.htsd-avatars {
+  display: flex;
+  justify-content: center;
+}
+.htsd-av {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255,255,255,0.6);
+  margin-left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+.htsd-av:first-child { margin-left: 0; }
+.htsd-av-more {
+  background: rgba(0,0,0,0.25);
+  font-size: 16px;
+}
+
+/* Col 3: Review Card */
+.htsd-review { position: relative; }
+.htsd-slider { position: relative; }
 .htsd-card {
   display: none;
   background: #ffffff;
   border-radius: 20px;
-  padding: 40px 36px;
-  position: relative;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-  animation: htsdFade 0.5s ease;
+  padding: 36px 32px;
+  box-shadow: 0 16px 45px rgba(0,0,0,0.25);
+  animation: htsdIn 0.45s ease;
 }
 .htsd-card--active { display: block; }
-@keyframes htsdFade {
-  from { opacity: 0; transform: translateX(16px); }
+@keyframes htsdIn {
+  from { opacity: 0; transform: translateX(14px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-.htsd-card-quote {
+.htsd-q {
   font-family: 'Playfair Display', serif;
-  font-size: 64px;
+  font-size: 50px;
   line-height: 0.8;
   color: #4DB6AC;
   opacity: 0.3;
-  margin-bottom: 14px;
-  pointer-events: none;
+  margin-bottom: 10px;
 }
-.htsd-card-stars {
-  display: flex;
-  gap: 3px;
-  margin-bottom: 18px;
-}
-.htsd-star { font-size: 17px; color: #E5E7EB; }
-.htsd-star.filled { color: #EAB308; }
-.htsd-card-msg {
-  font-size: 15px;
+.htsd-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+.htsd-s { font-size: 16px; color: #e0e0e0; }
+.htsd-s.filled { color: #EAB308; }
+.htsd-msg {
+  font-size: 14.5px;
   line-height: 1.8;
   color: #555;
-  margin-bottom: 26px;
-  font-style: italic;
+  margin-bottom: 24px;
   font-family: 'Outfit', sans-serif;
 }
-.htsd-card-author {
+.htsd-author {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   border-top: 1px solid #f0f0f0;
-  padding-top: 18px;
+  padding-top: 16px;
 }
-.htsd-card-avatar {
-  width: 48px;
-  height: 48px;
+.htsd-auth-img {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -1106,30 +1092,18 @@ document.addEventListener('DOMContentLoaded', function() {
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(77,182,172,0.3);
 }
-.htsd-card-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.htsd-card-name {
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #2b2b2b;
-}
-.htsd-card-role {
-  font-size: 12px;
-  color: #888;
-  font-weight: 500;
-  margin-top: 2px;
-}
+.htsd-auth-img img { width: 100%; height: 100%; object-fit: cover; }
+.htsd-auth-name { font-size: 15px; font-weight: 700; color: #2b2b2b; }
+.htsd-auth-role { font-size: 12px; color: #888; margin-top: 2px; }
 
 /* Dots */
 .htsd-dots {
   display: flex;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 18px;
   justify-content: center;
 }
 .htsd-dot {
@@ -1137,43 +1111,29 @@ document.addEventListener('DOMContentLoaded', function() {
   height: 10px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.3);
+  background: #d4d4d4;
   cursor: pointer;
   transition: all 0.3s;
   padding: 0;
 }
 .htsd-dot--active {
   background: #4DB6AC;
-  width: 28px;
+  width: 26px;
   border-radius: 5px;
 }
 
 /* Responsive */
 @media (max-width: 991px) {
-  .htsd-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .htsd-left-inner {
-    grid-template-columns: 1fr auto;
-    gap: 24px;
-  }
-  .htsd-text-col { align-items: flex-start; }
+  .htsd-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .htsd-review { grid-column: 1 / -1; }
+  .htsd-grass { display: none; }
 }
-@media (max-width: 768px) {
-  .htsd-left-inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    text-align: center;
-  }
-  .htsd-text-col { align-items: center; }
-  .htsd-rating-box { margin: 0 auto; }
-}
-@media (max-width: 480px) {
-  .htsd-section { padding: 60px 5%; }
-  .htsd-card { padding: 30px 24px; }
-  .htsd-rating-box { padding: 22px 22px 18px; min-width: 150px; }
-  .htsd-rating-num { font-size: 40px; }
+@media (max-width: 600px) {
+  .htsd-grid { grid-template-columns: 1fr; gap: 28px; }
+  .htsd-info { align-items: center; text-align: center; }
+  .htsd-sec { padding: 60px 5%; }
+  .htsd-card { padding: 28px 22px; }
+  .htsd-rate-card { min-width: 160px; }
 }
 </style>
 
@@ -1182,10 +1142,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const cards = document.querySelectorAll('.htsd-card');
   const dots  = document.querySelectorAll('.htsd-dot');
   if (!cards.length || cards.length <= 1) return;
-
-  let current = 0;
-  let timer;
-
+  let current = 0, timer;
   function goTo(idx) {
     cards[current].classList.remove('htsd-card--active');
     dots[current] && dots[current].classList.remove('htsd-dot--active');
@@ -1193,9 +1150,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cards[current].classList.add('htsd-card--active');
     dots[current] && dots[current].classList.add('htsd-dot--active');
   }
-
   function startTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 5500); }
-
   dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); startTimer(); }));
   startTimer();
 });
