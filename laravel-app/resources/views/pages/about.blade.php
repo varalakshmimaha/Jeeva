@@ -38,13 +38,6 @@
         </div>
       </div>
 
-      <!-- Book Consultation CTA -->
-      <div class="about-book-cta reveal">
-        <h3 class="about-book-cta-title">At the heart of every birth is a story&mdash;and I&rsquo;m here to support yours through Pregnancy, Birth &amp; Beyond</h3>
-        <p class="about-book-cta-desc">Compassionate Birth Doula Support, Prenatal Yoga, Childbirth Education, and Nutrition guidance for your journey into motherhood.</p>
-        <a href="{{ route('contact') }}" class="cta-book-btn about-book-cta-btn">Book Consultation &rarr;</a>
-      </div>
-
       <!-- Beyond the Profession: Ultra Marathoner Section -->
       <div class="founder-beyond-grid">
         <!-- Left: Content -->
