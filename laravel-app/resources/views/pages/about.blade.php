@@ -10,6 +10,7 @@
       <div class="founder-bio-grid">
         <!-- Left: Image with decorative frame -->
         <div class="founder-bio-img-col reveal">
+          <h2 class="founder-bio-name">I am Anu</h2>
           <div class="founder-img-frame">
             <div class="founder-img-accent"></div>
             <div class="founder-img-dot founder-img-dot--1"></div>
@@ -23,7 +24,7 @@
           <span class="founder-bio-label">Founder Note</span>
 
           <div class="founder-bio-content">
-            <p><strong>I am Anu</strong>, a Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
+            <p>A Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
           </div>
 
           <!-- Middle Quote -->
@@ -303,6 +304,15 @@
   .founder-bio-img-col {
     position: relative;
     z-index: 1;
+  }
+  .founder-bio-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    color: #1f3b38;
+    margin: 0 0 22px;
+    line-height: 1.15;
+    text-align: left;
   }
   .founder-img-frame {
     position: relative;
