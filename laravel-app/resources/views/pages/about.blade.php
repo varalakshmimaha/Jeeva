@@ -38,78 +38,11 @@
         </div>
       </div>
 
-      <!-- Book Consultation Form (below Founder Note) -->
-      <div class="about-book-section reveal">
-        <div class="about-book-grid">
-          <div class="about-book-img-col">
-            <img src="{{ asset('images/about/book-consultation.jpg') }}" alt="Family with newborn" class="about-book-img">
-          </div>
-          <div class="about-book-form-col">
-            <span class="founder-bio-label">Book Consultation</span>
-            <h3 class="about-book-title">Begin your journey with us</h3>
-            <p class="about-book-sub">Schedule a free consultation and let's talk about how I can support your pregnancy, birth, and postpartum journey.</p>
-
-            <form action="{{ route('contact.store') }}" method="POST" class="about-book-form">
-              @csrf
-              <input type="hidden" name="subject" value="Consultation Request (About Page)">
-              <div class="abf-row">
-                <div class="abf-field">
-                  <label>Full Name *</label>
-                  <input type="text" name="name" placeholder="Your full name" required>
-                </div>
-                <div class="abf-field">
-                  <label>Phone Number *</label>
-                  <div class="abf-phone">
-                    <select name="country_code" class="abf-cc" required>
-                      <option value="+91" selected>+91</option>
-                      <option value="+1">+1</option>
-                      <option value="+44">+44</option>
-                      <option value="+61">+61</option>
-                      <option value="+971">+971</option>
-                      <option value="+65">+65</option>
-                      <option value="+966">+966</option>
-                      <option value="+974">+974</option>
-                      <option value="+60">+60</option>
-                      <option value="+49">+49</option>
-                      <option value="+33">+33</option>
-                      <option value="+81">+81</option>
-                      <option value="+86">+86</option>
-                      <option value="+64">+64</option>
-                      <option value="+92">+92</option>
-                      <option value="+880">+880</option>
-                      <option value="+94">+94</option>
-                    </select>
-                    <input type="tel" name="phone" placeholder="XXXXX XXXXX" required>
-                  </div>
-                </div>
-              </div>
-              <div class="abf-row">
-                <div class="abf-field">
-                  <label>Email Address *</label>
-                  <input type="email" name="email" placeholder="you@email.com" required>
-                </div>
-                <div class="abf-field">
-                  <label>Preferred Date *</label>
-                  <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required>
-                </div>
-              </div>
-              <div class="abf-field">
-                <label>Message</label>
-                <textarea name="message" rows="4" placeholder="Tell us how we can help..." required></textarea>
-              </div>
-              <button type="submit" class="cta-book-btn">Book Consultation &rarr;</button>
-
-              @if($errors->any())
-                <div class="abf-alert abf-alert--err">
-                  @foreach($errors->all() as $error){{ $error }}<br>@endforeach
-                </div>
-              @endif
-              @if(session('success'))
-                <div class="abf-alert abf-alert--ok">✓ Thanks! We'll be in touch within 2 hours.</div>
-              @endif
-            </form>
-          </div>
-        </div>
+      <!-- Book Consultation CTA -->
+      <div class="about-book-cta reveal">
+        <h3 class="about-book-cta-title">At the heart of every birth is a story&mdash;and I&rsquo;m here to support yours through Pregnancy, Birth &amp; Beyond</h3>
+        <p class="about-book-cta-desc">Compassionate Birth Doula Support, Prenatal Yoga, Childbirth Education, and Nutrition guidance for your journey into motherhood.</p>
+        <a href="{{ route('contact') }}" class="cta-book-btn about-book-cta-btn">Book Consultation &rarr;</a>
       </div>
 
       <!-- Beyond the Profession: Ultra Marathoner Section -->
@@ -182,6 +115,39 @@
     margin: 0 auto 32px;
     line-height: 1.6;
   }
+  /* About-page Book Consultation CTA (heading + desc + button) */
+  .about-book-cta {
+    max-width: 980px;
+    margin: 110px auto 0;
+    padding: 56px 48px;
+    text-align: center;
+    background: linear-gradient(135deg, #e6f6f5 0%, #d8efec 55%, #e9f4f3 100%);
+    border-radius: 32px;
+    box-shadow: 0 20px 50px -18px rgba(47,169,163,0.22);
+  }
+  .about-book-cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    color: #1f3b38;
+    line-height: 1.35;
+    margin: 0 0 18px;
+    font-weight: 700;
+  }
+  .about-book-cta-desc {
+    font-size: 17px;
+    line-height: 1.75;
+    color: #3d3d3d;
+    max-width: 720px;
+    margin: 0 auto 28px;
+  }
+  .about-book-cta-btn {
+    display: inline-flex;
+  }
+  @media (max-width: 767px) {
+    .about-book-cta { padding: 38px 24px; margin-top: 70px; border-radius: 24px; }
+    .about-book-cta-desc { font-size: 15px; }
+  }
+
   /* About-page Book Consultation form */
   .about-book-section {
     max-width: 1240px;
