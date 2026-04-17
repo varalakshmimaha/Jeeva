@@ -94,15 +94,6 @@ class PageController extends Controller
         ]);
     }
 
-    public function testimonialShow($id)
-    {
-        $testimonial = \App\Models\Testimonial::where('published', true)->findOrFail($id);
-        return view('pages.testimonial-show', [
-            'pageName' => 'testimonials',
-            'testimonial' => $testimonial,
-        ]);
-    }
-
     public function contact()
     {
         $banner = \App\Models\Banner::where('page', 'contact')->orderBy('order', 'asc')->first();

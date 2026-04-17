@@ -53,13 +53,12 @@
                 <div class="tp-stars">
                   @for($i=0; $i<($t->rating ?? 5); $i++)<span class="tp-star">&#9733;</span>@endfor
                 </div>
-                <p class="tp-msg">"{{ \Illuminate\Support\Str::limit($t->message, 180) }}"</p>
+                <p class="tp-msg">"{{ $t->message }}"</p>
                 <div class="tp-author">
                   <div class="tp-auth-meta">
                     <div class="tp-auth-name">{{ $t->name }}</div>
                     <div class="tp-auth-role">{{ $t->role ?? 'New Mother' }}</div>
                   </div>
-                  <a href="{{ route('testimonial.show', $t->id) }}" class="tp-read-more">Read More <span class="arrow">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -407,35 +406,9 @@ document.addEventListener('DOMContentLoaded', function() {
   font-family: 'Outfit', sans-serif;
   letter-spacing: 0.1px;
 }
-.tp-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid #f5f5f5; padding-top: 18px; justify-content: space-between; }
-.tp-auth-meta { flex: 1; }
+.tp-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid #f5f5f5; padding-top: 18px; }
 .tp-auth-name { font-weight: 800; font-size: 18px; color: #222; margin-bottom: 2px; }
 .tp-auth-role { font-size: 14px; color: #888; text-transform: capitalize; font-weight: 500; }
-.tp-read-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  background: transparent;
-  color: #2c7d75;
-  border: 1.5px solid #4DB6AC;
-  border-radius: 999px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-.tp-read-more:hover {
-  background: #4DB6AC;
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(77,182,172,0.25);
-}
-.tp-read-more .arrow { transition: transform 0.25s ease; }
-.tp-read-more:hover .arrow { transform: translateX(3px); }
 .testi-empty { text-align: center; padding: 100px 20px; grid-column: 1 / -1; }
 
 /* Category filter chips */
@@ -486,55 +459,11 @@ document.addEventListener('DOMContentLoaded', function() {
   border-radius: 999px;
 }
 
-/* Before / After — gallery grid below the content */
-.tp-ba-wrap {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid #f5f0ed;
-}
-.tp-ba-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
-}
-.tp-ba-item {
-  position: relative;
-  display: block;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #f5f1ee;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.tp-ba-item:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
-.tp-ba-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.tp-ba-label {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(255,255,255,0.95);
-  font-size: 10px;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 999px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.tp-ba-before .tp-ba-label { color: #b8636b; }
-.tp-ba-after  .tp-ba-label { color: #2c7d75; }
-
 @media (max-width: 860px) {
   .tp-card { padding: 30px 22px; }
   .tp-top { grid-template-columns: 1fr; gap: 22px; text-align: center; }
   .tp-left-photo { max-width: 200px; margin: 0 auto; }
   .tp-author { justify-content: center; }
-  .tp-ba-gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .tp-filter-bar { margin-bottom: 30px; }
   .tp-cat-badge { position: static; display: inline-block; margin-bottom: 12px; }
 }

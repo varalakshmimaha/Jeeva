@@ -59,48 +59,6 @@
                     <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
                     <p class="adm-hint">Leave empty to keep current photo. JPG, PNG or WebP.</p>
                 </div>
-                @php
-                    $beforeImages = is_array($testimonial->before_image) ? $testimonial->before_image : (empty($testimonial->before_image) ? [] : [$testimonial->before_image]);
-                    $afterImages  = is_array($testimonial->after_image)  ? $testimonial->after_image  : (empty($testimonial->after_image)  ? [] : [$testimonial->after_image]);
-                @endphp
-                <div class="adm-form-grid" style="margin-top:16px;">
-                    <div class="adm-form-group">
-                        <label class="adm-label">Before Images</label>
-                        @if(count($beforeImages))
-                            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-                                @foreach($beforeImages as $img)
-                                    <label style="position:relative;display:block;">
-                                        <img src="{{ asset($img) }}" alt="Before" style="width:110px;height:110px;object-fit:cover;border-radius:10px;border:1.5px solid #e8b4b8;display:block;">
-                                        <span style="display:flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;color:#b8636b;cursor:pointer;">
-                                            <input type="checkbox" name="remove_before_image[]" value="{{ $img }}" style="margin:0;">
-                                            Remove
-                                        </span>
-                                    </label>
-                                @endforeach
-                            </div>
-                        @endif
-                        <input type="file" name="before_images[]" accept="image/jpeg,image/png,image/webp" class="adm-input" multiple>
-                        <p class="adm-hint">Select one or more to append. Existing images stay unless removed.</p>
-                    </div>
-                    <div class="adm-form-group">
-                        <label class="adm-label">After Images</label>
-                        @if(count($afterImages))
-                            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
-                                @foreach($afterImages as $img)
-                                    <label style="position:relative;display:block;">
-                                        <img src="{{ asset($img) }}" alt="After" style="width:110px;height:110px;object-fit:cover;border-radius:10px;border:1.5px solid #4DB6AC;display:block;">
-                                        <span style="display:flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;color:#2c7d75;cursor:pointer;">
-                                            <input type="checkbox" name="remove_after_image[]" value="{{ $img }}" style="margin:0;">
-                                            Remove
-                                        </span>
-                                    </label>
-                                @endforeach
-                            </div>
-                        @endif
-                        <input type="file" name="after_images[]" accept="image/jpeg,image/png,image/webp" class="adm-input" multiple>
-                        <p class="adm-hint">Select one or more to append. Existing images stay unless removed.</p>
-                    </div>
-                </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">
                         <label class="adm-label">Sort Order</label>

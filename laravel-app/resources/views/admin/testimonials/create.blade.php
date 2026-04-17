@@ -57,18 +57,6 @@
                 </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">
-                        <label class="adm-label">Before Images</label>
-                        <input type="file" name="before_images[]" accept="image/jpeg,image/png,image/webp" class="adm-input" multiple>
-                        <p class="adm-hint">Optional. You can select multiple files. e.g., pregnancy photos.</p>
-                    </div>
-                    <div class="adm-form-group">
-                        <label class="adm-label">After Images</label>
-                        <input type="file" name="after_images[]" accept="image/jpeg,image/png,image/webp" class="adm-input" multiple>
-                        <p class="adm-hint">Optional. You can select multiple files. e.g., postpartum / with baby photos.</p>
-                    </div>
-                </div>
-                <div class="adm-form-grid" style="margin-top:16px;">
-                    <div class="adm-form-group">
                         <label class="adm-label">Sort Order</label>
                         <input type="number" name="order" value="{{ old('order', 0) }}" class="adm-input">
                     </div>

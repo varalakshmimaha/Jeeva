@@ -320,8 +320,6 @@ class AdminController extends Controller
             'category' => 'nullable|string|max:255',
             'message' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'before_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
-            'after_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'rating' => 'required|integer|min:1|max:5',
             'published' => 'nullable|boolean',
             'order' => 'nullable|integer',
@@ -339,11 +337,6 @@ class AdminController extends Controller
         } else {
             unset($validated['image']);
         }
-
-        $validated['before_image'] = $this->uploadTestimonialGallery($request, 'before_images', []);
-        $validated['after_image']  = $this->uploadTestimonialGallery($request, 'after_images', []);
-
-        unset($validated['before_images'], $validated['after_images']);
 
         $validated['published'] = $request->has('published');
         Testimonial::create($validated);
@@ -365,8 +358,6 @@ class AdminController extends Controller
             'category' => 'nullable|string|max:255',
             'message' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'before_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
-            'after_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'rating' => 'required|integer|min:1|max:5',
             'published' => 'nullable|boolean',
             'order' => 'nullable|integer',
@@ -385,42 +376,9 @@ class AdminController extends Controller
             unset($validated['image']);
         }
 
-        $keepBefore = $this->filterKeptImages($testimonial->before_image ?? [], $request->input('remove_before_image', []));
-        $keepAfter  = $this->filterKeptImages($testimonial->after_image ?? [], $request->input('remove_after_image', []));
-
-        $validated['before_image'] = $this->uploadTestimonialGallery($request, 'before_images', $keepBefore);
-        $validated['after_image']  = $this->uploadTestimonialGallery($request, 'after_images', $keepAfter);
-
-        unset($validated['before_images'], $validated['after_images']);
-
         $validated['published'] = $request->has('published');
         $testimonial->update($validated);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated successfully!');
-    }
-
-    private function uploadTestimonialGallery(Request $request, string $field, array $existing): array
-    {
-        $paths = $existing;
-        if ($request->hasFile($field)) {
-            foreach ((array) $request->file($field) as $i => $file) {
-                if (!$file) continue;
-                $ext = $file->getClientOriginalExtension();
-                $base = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safe = \Illuminate\Support\Str::slug($base);
-                if (!$safe) { $safe = 'img'; }
-                $filename = time() . '_' . $field . '_' . $i . '_' . $safe . '.' . $ext;
-                $file->move(public_path('images/testimonials'), $filename);
-                $paths[] = 'images/testimonials/' . $filename;
-            }
-        }
-        return $paths;
-    }
-
-    private function filterKeptImages($current, array $toRemove): array
-    {
-        $current = is_array($current) ? $current : (empty($current) ? [] : [$current]);
-        if (empty($toRemove)) return $current;
-        return array_values(array_filter($current, fn($p) => !in_array($p, $toRemove, true)));
     }
 
     public function testimonialsDestroy($id)

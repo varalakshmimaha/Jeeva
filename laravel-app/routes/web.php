@@ -17,7 +17,6 @@ Route::get('/blog/{slug}', [PageController::class, 'blogShow'])->name('blog.show
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/testimonials', [PageController::class, 'testimonials'])->name('testimonials');
-Route::get('/testimonials/{id}', [PageController::class, 'testimonialShow'])->name('testimonial.show');
 Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/terms-and-conditions', [PageController::class, 'terms'])->name('terms');
 
