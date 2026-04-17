@@ -31,12 +31,7 @@
       @if($testimonials->isNotEmpty())
         @foreach($testimonials as $t)
           @php $catSlug = $t->category ? \Illuminate\Support\Str::slug($t->category) : 'uncategorized'; @endphp
-          @php
-            $bImgs = is_array($t->before_image) ? $t->before_image : (empty($t->before_image) ? [] : [$t->before_image]);
-            $aImgs = is_array($t->after_image)  ? $t->after_image  : (empty($t->after_image)  ? [] : [$t->after_image]);
-            $hasBA = count($bImgs) || count($aImgs);
-          @endphp
-          <div class="tp-card {{ $hasBA ? 'has-ba' : '' }}" data-category="{{ $catSlug }}">
+          <div class="tp-card" data-category="{{ $catSlug }}">
             @if($t->category)
               <span class="tp-cat-badge">{{ $t->category }}</span>
             @endif
@@ -58,34 +53,16 @@
                 <div class="tp-stars">
                   @for($i=0; $i<($t->rating ?? 5); $i++)<span class="tp-star">&#9733;</span>@endfor
                 </div>
-                <p class="tp-msg">"{{ $t->message }}"</p>
+                <p class="tp-msg">"{{ \Illuminate\Support\Str::limit($t->message, 180) }}"</p>
                 <div class="tp-author">
                   <div class="tp-auth-meta">
                     <div class="tp-auth-name">{{ $t->name }}</div>
                     <div class="tp-auth-role">{{ $t->role ?? 'New Mother' }}</div>
                   </div>
+                  <a href="{{ route('testimonial.show', $t->id) }}" class="tp-read-more">Read More <span class="arrow">&rarr;</span></a>
                 </div>
               </div>
             </div>
-
-            @if($hasBA)
-              <div class="tp-ba-wrap">
-                <div class="tp-ba-gallery">
-                  @foreach($bImgs as $img)
-                    <a href="{{ asset($img) }}" class="tp-ba-item tp-ba-before" target="_blank" rel="noopener">
-                      <img src="{{ asset($img) }}" alt="Before — {{ $t->name }}" loading="lazy">
-                      <span class="tp-ba-label">Before</span>
-                    </a>
-                  @endforeach
-                  @foreach($aImgs as $img)
-                    <a href="{{ asset($img) }}" class="tp-ba-item tp-ba-after" target="_blank" rel="noopener">
-                      <img src="{{ asset($img) }}" alt="After — {{ $t->name }}" loading="lazy">
-                      <span class="tp-ba-label">After</span>
-                    </a>
-                  @endforeach
-                </div>
-              </div>
-            @endif
           </div>
         @endforeach
       @else
@@ -430,9 +407,35 @@ document.addEventListener('DOMContentLoaded', function() {
   font-family: 'Outfit', sans-serif;
   letter-spacing: 0.1px;
 }
-.tp-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid #f5f5f5; padding-top: 18px; }
+.tp-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid #f5f5f5; padding-top: 18px; justify-content: space-between; }
+.tp-auth-meta { flex: 1; }
 .tp-auth-name { font-weight: 800; font-size: 18px; color: #222; margin-bottom: 2px; }
 .tp-auth-role { font-size: 14px; color: #888; text-transform: capitalize; font-weight: 500; }
+.tp-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: transparent;
+  color: #2c7d75;
+  border: 1.5px solid #4DB6AC;
+  border-radius: 999px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.tp-read-more:hover {
+  background: #4DB6AC;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(77,182,172,0.25);
+}
+.tp-read-more .arrow { transition: transform 0.25s ease; }
+.tp-read-more:hover .arrow { transform: translateX(3px); }
 .testi-empty { text-align: center; padding: 100px 20px; grid-column: 1 / -1; }
 
 /* Category filter chips */
