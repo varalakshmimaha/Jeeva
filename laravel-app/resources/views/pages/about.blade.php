@@ -42,7 +42,7 @@
       <div class="about-book-section reveal">
         <div class="about-book-grid">
           <div class="about-book-img-col">
-            <img src="{{ asset('storage/a8a1039da04fa86cc812b907c3cb1d4e.jpg') }}" alt="Family with newborn" class="about-book-img">
+            <img src="{{ asset('images/about/book-consultation.jpg') }}" alt="Family with newborn" class="about-book-img">
           </div>
           <div class="about-book-form-col">
             <span class="founder-bio-label">Book Consultation</span>
@@ -123,7 +123,7 @@
         <!-- Right: Founder image -->
         <div class="founder-beyond-img-col beyond-anim-right">
           <div class="beyond-single">
-            <img src="{{ asset('storage/founder.png') }}" alt="Anu - Founder" onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';">
+            <img src="{{ asset('images/about/founder.png') }}" alt="Anu - Founder" onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';">
           </div>
         </div>
       </div>
