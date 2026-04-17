@@ -70,6 +70,24 @@ nav.scrolled{
   background:#ffffff;
   box-shadow:0 1px 0 rgba(0,0,0,.05),0 4px 18px rgba(0,0,0,.08);
 }
+/* Home page: transparent header sitting over the banner */
+body[data-page-name="home"] nav{
+  background:transparent;
+  box-shadow:none;
+}
+body[data-page-name="home"] nav.scrolled{
+  background:#ffffff;
+  box-shadow:0 1px 0 rgba(0,0,0,.05),0 4px 18px rgba(0,0,0,.08);
+}
+body[data-page-name="home"] nav:not(.scrolled) .nav-links a{
+  color:#ffffff;
+  text-shadow:0 1px 4px rgba(0,0,0,.25);
+}
+body[data-page-name="home"] nav:not(.scrolled) .nav-links a:hover{
+  color:#2FA9A3;
+  background:rgba(255,255,255,.85);
+  text-shadow:none;
+}
 .nav-inner{
   max-width:1320px;margin:0 auto;
   display:flex;align-items:center;justify-content:space-between;
@@ -2036,7 +2054,7 @@ footer{
 .page-header + section{padding-top:42px}
 
 .home-banners-section{
-  padding:108px 0 0;
+  padding:0;
   margin:0;
   width:100%;
 }
@@ -2045,7 +2063,7 @@ footer{
 }
 .banner-slider{
   position:relative;
-  min-height: calc(100vh - 140px);
+  min-height: 100vh;
   overflow:hidden;
   background:#000;
   margin:0;
@@ -2058,7 +2076,7 @@ footer{
 }
 .banner-slider-track{
   position:relative;
-  min-height: calc(100vh - 140px);
+  min-height: 100vh;
 }
 .banner-slide{
   position:absolute!important;
@@ -2213,10 +2231,10 @@ footer{
   transform:scale(1.18);
 }
 @media(max-width:860px){
-  .home-banners-section{padding-top:84px}
+  .home-banners-section{padding-top:0}
   .banner-slider,
   .banner-slider-track,
-  .banner-slide-image{min-height:calc(100vh - 108px)}
+  .banner-slide-image{min-height:100vh}
   .banner-slide-shell{
     align-items:center;
     padding:28px 5%;
