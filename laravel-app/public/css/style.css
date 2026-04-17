@@ -91,12 +91,12 @@ body[data-page-name="home"] nav:not(.scrolled) .nav-links a:hover{
 .nav-inner{
   max-width:1320px;margin:0 auto;
   display:flex;align-items:center;justify-content:space-between;
-  height:140px;
+  height:120px;
   position:relative;
 }
 .logo{display:flex;align-items:center;cursor:pointer;flex-shrink:0;z-index:2;text-decoration:none}
 .logo-img{
-  height:140px;width:auto;object-fit:contain;
+  height:118px;width:auto;object-fit:contain;
   display:block;
   filter:none;
   transition:height .3s ease;
@@ -107,10 +107,10 @@ body[data-page-name="home"] nav:not(.scrolled) .nav-links a:hover{
   transform:translateZ(0);
 }
 nav.scrolled .nav-inner{
-  height:120px;
+  height:100px;
 }
 nav.scrolled .logo-img{
-  height:120px;
+  height:96px;
   filter:none;
 }
 
@@ -311,10 +311,10 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .nav-links{display:none!important}
   .nav-cta-btn{display:none!important}
   .hamburger{display:flex}
-  .nav-inner{height:108px}
-  .logo-img{height:100px}
-  nav.scrolled .nav-inner{height:96px}
-  nav.scrolled .logo-img{height:88px}
+  .nav-inner{height:96px}
+  .logo-img{height:90px}
+  nav.scrolled .nav-inner{height:84px}
+  nav.scrolled .logo-img{height:78px}
 }
 
 
@@ -1762,7 +1762,7 @@ footer{
 }
 /* Main footer area - logo pink */
 .site-footer-main{
-  background:linear-gradient(180deg,#fde0e0 0%,#fbd4d4 100%);
+  background:linear-gradient(180deg,#ffffff 0%,#fdf4f4 100%);
   padding:52px 6% 42px;
   border-top:none;
 }
@@ -1796,7 +1796,7 @@ footer{
   text-decoration:none;
 }
 .footer-logo-img{
-  height:96px;width:auto;object-fit:contain;
+  height:120px;width:auto;object-fit:contain;
   display:block;
 }
 .site-footer-brand-copy{
@@ -1906,8 +1906,8 @@ footer{
 }
 /* Copyright bottom bar */
 .site-footer-bottom{
-  background:#f5c4c4;
-  border-top:1px solid #ecb5b5;
+  background:#fdf4f4;
+  border-top:1px solid #f5e2e2;
 }
 .site-footer-bottom-row{
   min-height:auto;
@@ -3665,5 +3665,184 @@ footer{
     bottom: 20px;
     right: 20px;
   }
+}
+
+/* =====================================================
+   CONSOLIDATED MOBILE FIXES (≤640px and ≤480px)
+   ===================================================== */
+@media (max-width: 640px) {
+  /* Global section padding */
+  section { padding: 60px 5%; }
+
+  /* Nav / logo — already sized; ensure CTA button tucks */
+  .nav-cta-btn { display: none; }
+  .nav-links { display: none; }
+
+  /* Home banner */
+  .banner-slide-shell { padding: 32px 5% 28px; }
+  .banner-slide-title { font-size: clamp(24px, 7vw, 32px) !important; line-height: 1.15; }
+  .banner-slide-description { font-size: 14px; line-height: 1.6; }
+  .banner-slide-button { padding: 12px 22px; font-size: 14px; margin-top: 18px; }
+  .banner-dots { bottom: 16px; }
+
+  /* Services cards grid */
+  .svc-full-grid { grid-template-columns: 1fr !important; gap: 18px; }
+  .svc-full-thumb { height: 180px; }
+  .svc-full-card { padding: 20px; }
+  .svc-full-title { font-size: 20px; }
+
+  /* Testimonials (home precision section) */
+  .tp-top { grid-template-columns: 1fr !important; gap: 20px; }
+  .tp-left-photo { max-width: 180px; margin: 0 auto; }
+  .tp-msg { font-size: 15px; line-height: 1.7; }
+  .tp-name { font-size: 18px; }
+
+  /* Testimonials page cards */
+  .tp-card { padding: 24px 20px !important; }
+  .tp-card-body { font-size: 15px; }
+
+  /* Why choose */
+  .why-choose-section { padding: 60px 5%; }
+  .why-card-content { padding: 22px 18px; }
+
+  /* Founder bio (about) — heading + image + quote */
+  .founder-bio-section { padding: 110px 5% 60px; }
+  .founder-bio-name { font-size: 28px !important; text-align: center; margin-bottom: 18px; }
+  .founder-img { max-height: 420px; }
+  .founder-quote { font-size: 16px; padding: 16px 18px 16px 20px; }
+  .founder-beyond-grid { margin-top: 60px; gap: 36px; }
+  .founder-beyond-title { font-size: 24px; }
+
+  /* About CTA card */
+  .cta-modern-card { padding: 40px 22px !important; border-radius: 24px; }
+  .cta-quote-light { font-size: 16px !important; line-height: 1.7; }
+  .cta-book-btn { padding: 14px 28px; font-size: 14px; }
+
+  /* About-CTA contact form section */
+  .about-cta-section { padding: 50px 5%; border-radius: 24px; margin: 0 3% 40px; min-height: auto; }
+  .about-cta-form-wrap { padding: 28px 20px; }
+  .about-cta-form-title { font-size: 22px; }
+  .about-cta-title { font-size: 28px; }
+  .about-cta-desc { font-size: 15px; }
+
+  /* Vision / Mission */
+  .vm-section { padding: 60px 5%; min-height: auto; }
+  .vm-card { padding: 36px 22px; }
+  .vm-title { font-size: 22px; }
+  .vm-text { font-size: 15px; line-height: 1.75; }
+
+  /* Credentials */
+  .cred-section { padding: 60px 5%; }
+  .cred-center-img { max-width: 260px; }
+  .cred-item-title { font-size: 16px; }
+  .cred-item-icon { width: 54px; height: 54px; }
+  .cred-item-icon svg { width: 26px; height: 26px; }
+
+  /* Contact form */
+  .contact-info, .contact-form-box { padding: 26px 20px !important; }
+  .contact-info h3, .contact-form-box h3 { font-size: 22px !important; }
+
+  /* Appointment form */
+  .appointment-form-box { padding: 24px 18px; }
+  .appointment-field input,
+  .appointment-field select,
+  .appointment-field textarea { padding: 12px 14px; font-size: 14px; }
+
+  /* Footer stacking + centering on mobile */
+  .site-footer-main { padding: 40px 5% 28px; }
+  .site-footer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+    gap: 28px;
+  }
+  .site-footer-brand,
+  .site-footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    width: 100%;
+    max-width: 360px;
+  }
+  .site-footer-brand-link {
+    display: inline-flex;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .footer-logo-img {
+    height: 90px;
+    margin: 0 auto;
+  }
+  .site-footer-brand-copy {
+    margin: 0 auto 16px;
+    text-align: center;
+    max-width: 100%;
+    font-size: 14px;
+  }
+  .site-footer-address {
+    justify-content: center;
+    text-align: center;
+  }
+  .site-footer-title {
+    width: max-content;
+    margin: 0 auto 18px;
+    font-size: 18px;
+  }
+  .site-footer-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .site-footer-links,
+  .site-footer-contact-list {
+    align-items: center;
+    width: 100%;
+  }
+  .site-footer-links a,
+  .site-footer-contact-item a {
+    font-size: 14px;
+    justify-content: center;
+  }
+  .site-footer-contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-follow {
+    align-items: center;
+    text-align: center;
+  }
+  .site-footer-social-icons {
+    justify-content: center;
+  }
+
+  /* Buttons universally touchable */
+  .adm-btn, .cta-book-btn, .vm-cta-btn, .founder-closing-btn,
+  .about-cta-submit, .banner-slide-button, .nav-cta-btn {
+    min-height: 44px;
+  }
+
+  /* Page banner (title sections) */
+  .page-banner { min-height: 240px; }
+  .page-banner-content { padding: 80px 5% 30px; }
+  .page-banner-title { font-size: clamp(28px, 7vw, 36px) !important; }
+  .page-banner-subtitle { font-size: 14px; }
+
+  /* Hero / founder-closing */
+  .founder-closing { margin-top: 60px; }
+  .founder-closing-quote { padding: 22px 18px; font-size: 17px; }
+
+  /* Prevent horizontal overflow */
+  img, video { max-width: 100%; height: auto; }
+}
+
+@media (max-width: 480px) {
+  .banner-slide-title { font-size: 22px !important; }
+  .banner-slide-description { font-size: 13px; }
+  .founder-bio-name { font-size: 26px !important; }
+  .vm-section { padding: 50px 4%; }
+  .cred-section { padding: 50px 4%; }
+  .about-cta-row { grid-template-columns: 1fr !important; }
+  .site-footer-grid { gap: 24px; }
+  .page-banner-title { font-size: 26px !important; }
 }
 

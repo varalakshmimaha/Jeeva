@@ -55,9 +55,13 @@
                             <img src="{{ asset($testimonial->image) }}" alt="{{ $testimonial->name }}">
                             <span class="adm-img-tag">Current Photo</span>
                         </div>
+                        <label class="adm-check" style="margin-bottom:10px;display:inline-flex;align-items:center;gap:8px;color:#b8636b;font-size:13px;font-weight:600;cursor:pointer;">
+                            <input type="checkbox" name="remove_image" value="1" style="margin:0;">
+                            Remove current photo
+                        </label>
                     @endif
                     <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
-                    <p class="adm-hint">Leave empty to keep current photo. JPG, PNG or WebP.</p>
+                    <p class="adm-hint">Leave empty to keep current photo. JPG, PNG or WebP. Tick "Remove current photo" to clear it without uploading a replacement.</p>
                 </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">

@@ -25,32 +25,13 @@
 
           <div class="founder-bio-content">
             <p>A Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
-          </div>
-
-          <!-- Middle Quote -->
-          <blockquote class="founder-quote">
-            <svg class="founder-quote-icon" width="32" height="32" viewBox="0 0 24 24" fill="#4DB6AC" opacity="0.3"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
-            Every woman deserves to feel seen, heard, and supported throughout her birth journey.
-          </blockquote>
-
-          <div class="founder-bio-content">
             <p>I believe childbirth is not only a physical experience but also an emotional and spiritual transformation. Every journey is unique, and every woman deserves care that honours her choices, her body, and her voice.</p>
           </div>
-        </div>
-      </div>
 
-      <!-- Beyond the Profession: Ultra Marathoner Section -->
-      <div class="founder-beyond-grid">
-        <!-- Left: Content -->
-        <div class="founder-beyond-text-col beyond-anim-left">
-          <span class="founder-bio-label">Beyond the Profession</span>
-          <h3 class="founder-beyond-title">A Life of Strength &amp; Stillness</h3>
-          <p>Outside of my professional role, I am an ultra marathoner and enjoy running and mountain climbing and love exploring places. These personal practices have shaped my strength, resilience, and mindset, and they naturally reflect in the calm and steady support I offer during birth journeys.</p>
-        </div>
-        <!-- Right: Founder image -->
-        <div class="founder-beyond-img-col beyond-anim-right">
-          <div class="beyond-single">
-            <img src="{{ asset('images/about/founder.png') }}" alt="Anu - Founder" onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';">
+          <div class="founder-bio-content founder-bio-beyond">
+            <h3 class="founder-beyond-inline-title"><strong>Beyond the Profession</strong></h3>
+            <p class="founder-beyond-inline-sub">A Life of Strength &amp; Stillness</p>
+            <p>Outside of my professional role, I am an ultra marathoner and enjoy running and mountain climbing and love exploring places. These personal practices have shaped my strength, resilience, and mindset, and they naturally reflect in the calm and steady support I offer during birth journeys.</p>
           </div>
         </div>
       </div>
@@ -277,7 +258,7 @@
   }
 
   .founder-bio-section {
-    padding: 180px 6% 100px;
+    padding: 160px 6% 100px;
     background: #fdfbfa;
     overflow: hidden;
     position: relative;
@@ -295,7 +276,7 @@
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
     gap: 70px;
-    align-items: center;
+    align-items: start;
     max-width: 1240px;
     margin: 0 auto;
   }
@@ -310,9 +291,9 @@
     font-size: clamp(32px, 4vw, 44px);
     font-weight: 700;
     color: #1f3b38;
-    margin: 0 0 22px;
+    margin: 0 0 28px;
     line-height: 1.15;
-    text-align: left;
+    text-align: center;
   }
   .founder-img-frame {
     position: relative;
@@ -399,6 +380,29 @@
   }
   .founder-bio-content p strong {
     color: #3d2b2b;
+  }
+  .founder-bio-beyond { margin-top: 28px; }
+  .founder-beyond-inline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.2vw, 24px);
+    color: #2b2b2b;
+    line-height: 1.3;
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .founder-beyond-inline-title strong {
+    font-weight: 700;
+    color: #1f3b38;
+  }
+  .founder-beyond-inline-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-style: normal;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin: 0 0 22px !important;
+    line-height: 1.15;
+    letter-spacing: 0;
   }
 
   /* Beyond the profession */
@@ -556,7 +560,7 @@
     .founder-closing { margin-top: 80px; }
   }
   @media (max-width: 480px) {
-    .founder-bio-section { padding: 130px 5% 70px; }
+    .founder-bio-section { padding: 100px 5% 70px; }
     .founder-quote { font-size: 17px; padding: 16px 20px 16px 22px; }
     .founder-closing-quote { padding: 24px 22px; }
   }

@@ -364,6 +364,10 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
+            if ($testimonial->image) {
+                $oldPath = public_path($testimonial->image);
+                if (is_file($oldPath)) { @unlink($oldPath); }
+            }
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $base = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -372,6 +376,12 @@ class AdminController extends Controller
             $filename = time() . '_' . $safe . '.' . $ext;
             $file->move(public_path('images/testimonials'), $filename);
             $validated['image'] = 'images/testimonials/' . $filename;
+        } elseif ($request->input('remove_image')) {
+            if ($testimonial->image) {
+                $oldPath = public_path($testimonial->image);
+                if (is_file($oldPath)) { @unlink($oldPath); }
+            }
+            $validated['image'] = null;
         } else {
             unset($validated['image']);
         }
