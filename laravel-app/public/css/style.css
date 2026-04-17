@@ -1744,7 +1744,7 @@ footer{
 }
 /* Main footer area - logo pink */
 .site-footer-main{
-  background:linear-gradient(180deg,#fdf2f2 0%,#fbe6e6 100%);
+  background:linear-gradient(180deg,#fde0e0 0%,#fbd4d4 100%);
   padding:52px 6% 42px;
   border-top:none;
 }
@@ -1888,8 +1888,8 @@ footer{
 }
 /* Copyright bottom bar */
 .site-footer-bottom{
-  background:#f7dcdc;
-  border-top:1px solid #f0caca;
+  background:#f5c4c4;
+  border-top:1px solid #ecb5b5;
 }
 .site-footer-bottom-row{
   min-height:auto;

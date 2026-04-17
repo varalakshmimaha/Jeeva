@@ -9,7 +9,7 @@
 @if(!empty($siteSettings['favicon_path']))
 <link rel="icon" href="{{ asset($siteSettings['favicon_path']) }}" type="image/png">
 @endif
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ @filemtime(public_path('css/style.css')) ?: time() }}">
 </head>
 <body data-page-name="{{ $pageName ?? 'home' }}">
 
