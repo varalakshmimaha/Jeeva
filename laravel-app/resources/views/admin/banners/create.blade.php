@@ -25,10 +25,12 @@
                         <select name="page" required class="adm-input">
                             <option value="">Select a page</option>
                             <option value="home" {{ old('page') == 'home' ? 'selected' : '' }}>Home</option>
+                            <option value="about" {{ old('page') == 'about' ? 'selected' : '' }}>About Us</option>
                             <option value="services" {{ old('page') == 'services' ? 'selected' : '' }}>Services</option>
-                            <option value="blog" {{ old('page') == 'blog' ? 'selected' : '' }}>Blog</option>
+                            <option value="testimonials" {{ old('page') == 'testimonials' ? 'selected' : '' }}>Testimonials</option>
+                            <option value="contact" {{ old('page') == 'contact' ? 'selected' : '' }}>Contact Us</option>
                             <option value="gallery" {{ old('page') == 'gallery' ? 'selected' : '' }}>Gallery</option>
-                            <option value="contact" {{ old('page') == 'contact' ? 'selected' : '' }}>Contact</option>
+                            <option value="blog" {{ old('page') == 'blog' ? 'selected' : '' }}>Blog</option>
                         </select>
                     </div>
                     <div class="adm-form-group">

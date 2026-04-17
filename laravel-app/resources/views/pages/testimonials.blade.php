@@ -5,35 +5,87 @@
 @section('content')
 
 <x-page-banner
-  title="What Mamas Say"
-  subtitle="Heartfelt words from the families I have had the honour of supporting through their birth journeys."
-  :image="asset('images/banner-about.png')"
+  :title="(isset($banner) && $banner) ? $banner->title : 'What Mamas Say'"
+  :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'Heartfelt words from the families I have had the honour of supporting through their birth journeys.'"
+  :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('images/banner-about.png')"
   :breadcrumbs="[['label' => 'Testimonials']]"
 />
 
-<!-- Testimonials Precision Grid (Matches Screenshot) -->
+<!-- Testimonials Precision Grid -->
 <section class="testi-precision-sec">
   <div class="container">
+    @php
+      $categories = $testimonials->pluck('category')->filter()->unique()->values();
+    @endphp
+
+    @if($categories->isNotEmpty())
+      <div class="tp-filter-bar">
+        <button type="button" class="tp-filter-chip is-active" data-filter="all">All</button>
+        @foreach($categories as $cat)
+          <button type="button" class="tp-filter-chip" data-filter="{{ \Illuminate\Support\Str::slug($cat) }}">{{ $cat }}</button>
+        @endforeach
+      </div>
+    @endif
+
     <div class="tp-grid">
       @if($testimonials->isNotEmpty())
         @foreach($testimonials as $t)
-          <div class="tp-card">
-            <div class="tp-quote-container">
-              <span class="tp-quote-icon">“</span>
-            </div>
-            <div class="tp-stars">
-               @for($i=0; $i<($t->rating ?? 5); $i++)<span class="tp-star">&#9733;</span>@endfor
-            </div>
-            <p class="tp-msg">"{{ $t->message }}"</p>
-            <div class="tp-author">
-              <div class="tp-auth-img">
-                @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}">@else<span>{{ substr($t->name,0,1) }}</span>@endif
+          @php $catSlug = $t->category ? \Illuminate\Support\Str::slug($t->category) : 'uncategorized'; @endphp
+          @php
+            $bImgs = is_array($t->before_image) ? $t->before_image : (empty($t->before_image) ? [] : [$t->before_image]);
+            $aImgs = is_array($t->after_image)  ? $t->after_image  : (empty($t->after_image)  ? [] : [$t->after_image]);
+            $hasBA = count($bImgs) || count($aImgs);
+          @endphp
+          <div class="tp-card {{ $hasBA ? 'has-ba' : '' }}" data-category="{{ $catSlug }}">
+            @if($t->category)
+              <span class="tp-cat-badge">{{ $t->category }}</span>
+            @endif
+
+            <div class="tp-top">
+              <div class="tp-left">
+                @php $imgExists = $t->image && file_exists(public_path($t->image)); @endphp
+                @if($imgExists)
+                  <div class="tp-left-photo"><img src="{{ asset($t->image) }}?v={{ @filemtime(public_path($t->image)) }}" alt="{{ $t->name }}" onerror="this.parentElement.classList.add('tp-left-photo-initial');this.parentElement.innerHTML='<span>{{ substr($t->name,0,1) }}</span>';"></div>
+                @else
+                  <div class="tp-left-photo tp-left-photo-initial"><span>{{ substr($t->name,0,1) }}</span></div>
+                @endif
               </div>
-              <div class="tp-auth-meta">
-                <div class="tp-auth-name">{{ $t->name }}</div>
-                <div class="tp-auth-role">{{ $t->role ?? ($t->location ?? 'New Mother') }}</div>
+
+              <div class="tp-right">
+                <div class="tp-quote-container">
+                  <span class="tp-quote-icon">“</span>
+                </div>
+                <div class="tp-stars">
+                  @for($i=0; $i<($t->rating ?? 5); $i++)<span class="tp-star">&#9733;</span>@endfor
+                </div>
+                <p class="tp-msg">"{{ $t->message }}"</p>
+                <div class="tp-author">
+                  <div class="tp-auth-meta">
+                    <div class="tp-auth-name">{{ $t->name }}</div>
+                    <div class="tp-auth-role">{{ $t->role ?? 'New Mother' }}</div>
+                  </div>
+                </div>
               </div>
             </div>
+
+            @if($hasBA)
+              <div class="tp-ba-wrap">
+                <div class="tp-ba-gallery">
+                  @foreach($bImgs as $img)
+                    <a href="{{ asset($img) }}" class="tp-ba-item tp-ba-before" target="_blank" rel="noopener">
+                      <img src="{{ asset($img) }}" alt="Before — {{ $t->name }}" loading="lazy">
+                      <span class="tp-ba-label">Before</span>
+                    </a>
+                  @endforeach
+                  @foreach($aImgs as $img)
+                    <a href="{{ asset($img) }}" class="tp-ba-item tp-ba-after" target="_blank" rel="noopener">
+                      <img src="{{ asset($img) }}" alt="After — {{ $t->name }}" loading="lazy">
+                      <span class="tp-ba-label">After</span>
+                    </a>
+                  @endforeach
+                </div>
+              </div>
+            @endif
           </div>
         @endforeach
       @else
@@ -46,6 +98,26 @@
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const chips = document.querySelectorAll('.tp-filter-chip');
+  const cards = document.querySelectorAll('.tp-card');
+  if (chips.length) {
+    chips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        chips.forEach(c => c.classList.remove('is-active'));
+        this.classList.add('is-active');
+        const filter = this.dataset.filter;
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+        });
+      });
+    });
+  }
+
+});
+</script>
 
 <!-- Book Consultation CTA -->
 <section class="testi-cta-section">
@@ -297,56 +369,171 @@
   background: #fdfaf8; 
 }
 .tp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 40px 30px;
-  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .tp-card {
   background: #ffffff;
-  padding: 50px 45px;
+  padding: 40px 44px;
   border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.04);
   position: relative;
   transition: transform 0.3s ease;
   border: 1px solid rgba(0,0,0,0.01);
-  display: flex;
-  flex-direction: column;
 }
-.tp-card:hover { transform: translateY(-5px); }
-.tp-quote-container { margin-bottom: 25px; }
+.tp-card:hover { transform: translateY(-4px); }
+
+/* Top row: left image + right content */
+.tp-top {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+.tp-left-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f5f1ee;
+  border: 2px solid #CDEB8E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tp-left-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tp-left-photo-initial span {
+  color: #4DB6AC;
+  font-weight: 700;
+  font-size: 72px;
+  font-family: 'Playfair Display', serif;
+}
+
+.tp-right { display: flex; flex-direction: column; }
+.tp-quote-container { margin-bottom: 14px; }
 .tp-quote-icon {
   font-family: 'Playfair Display', serif;
-  font-size: 72px;
+  font-size: 64px;
   color: #CDEB8E;
   line-height: 1;
   font-weight: 900;
 }
-.tp-stars { color: #FFB400; font-size: 18px; margin-bottom: 25px; display: flex; gap: 4px; }
+.tp-stars { color: #FFB400; font-size: 18px; margin-bottom: 18px; display: flex; gap: 4px; }
 .tp-msg {
   font-size: 17px;
   line-height: 1.8;
   color: #444;
-  margin-bottom: 35px;
+  margin-bottom: 22px;
   font-family: 'Outfit', sans-serif;
   letter-spacing: 0.1px;
-  flex-grow: 1;
 }
-.tp-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid #f5f5f5; padding-top: 25px; }
-.tp-auth-img { 
-  width: 56px; height: 56px; border-radius: 50%; overflow: hidden; 
-  background: #f0f0f0; border: 1.5px solid #CDEB8E; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-}
-.tp-auth-img img { width: 100%; height: 100%; object-fit: cover; }
-.tp-auth-img span { color: #4DB6AC; font-weight: 700; font-size: 20px; }
+.tp-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid #f5f5f5; padding-top: 18px; }
 .tp-auth-name { font-weight: 800; font-size: 18px; color: #222; margin-bottom: 2px; }
 .tp-auth-role { font-size: 14px; color: #888; text-transform: capitalize; font-weight: 500; }
 .testi-empty { text-align: center; padding: 100px 20px; grid-column: 1 / -1; }
-@media (max-width: 768px) {
-  .tp-grid { grid-template-columns: 1fr; }
-  .tp-card { padding: 40px 30px; }
+
+/* Category filter chips */
+.tp-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 1100px;
+  margin: 0 auto 45px;
+}
+.tp-filter-chip {
+  border: 1.5px solid #e8d8d8;
+  background: #ffffff;
+  color: #5a4444;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.2px;
+}
+.tp-filter-chip:hover {
+  border-color: #4DB6AC;
+  color: #2c7d75;
+}
+.tp-filter-chip.is-active {
+  background: #4DB6AC;
+  border-color: #4DB6AC;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(77,182,172,0.25);
+}
+
+/* Category badge on card */
+.tp-cat-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(77,182,172,0.12);
+  color: #2c7d75;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+
+/* Before / After — gallery grid below the content */
+.tp-ba-wrap {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #f5f0ed;
+}
+.tp-ba-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.tp-ba-item {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f5f1ee;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tp-ba-item:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+.tp-ba-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.tp-ba-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255,255,255,0.95);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.tp-ba-before .tp-ba-label { color: #b8636b; }
+.tp-ba-after  .tp-ba-label { color: #2c7d75; }
+
+@media (max-width: 860px) {
+  .tp-card { padding: 30px 22px; }
+  .tp-top { grid-template-columns: 1fr; gap: 22px; text-align: center; }
+  .tp-left-photo { max-width: 200px; margin: 0 auto; }
+  .tp-author { justify-content: center; }
+  .tp-ba-gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .tp-filter-bar { margin-bottom: 30px; }
+  .tp-cat-badge { position: static; display: inline-block; margin-bottom: 12px; }
 }
 </style>
 

@@ -30,6 +30,8 @@
                     <tr>
                         <th>Photo</th>
                         <th>Client</th>
+                        <th>Category</th>
+                        <th>B/A</th>
                         <th>Message</th>
                         <th>Rating</th>
                         <th class="col-center">Status</th>
@@ -52,7 +54,41 @@
                             <div style="font-weight:700;">{{ $testimonial->name }}</div>
                             <div style="font-size:12px;color:var(--muted);">{{ $testimonial->role ?? 'Client' }}</div>
                         </td>
-                        <td style="color:var(--muted);font-size:13px;max-width:260px;">{{ Str::limit($testimonial->message, 70) }}</td>
+                        <td>
+                            @if($testimonial->category)
+                                <span class="adm-badge" style="background:rgba(77,182,172,0.12);color:#2c7d75;font-size:11px;">{{ $testimonial->category }}</span>
+                            @else
+                                <span style="color:var(--muted);font-size:12px;">—</span>
+                            @endif
+                        </td>
+                        <td>
+                            @php
+                                $bImgs = is_array($testimonial->before_image) ? $testimonial->before_image : (empty($testimonial->before_image) ? [] : [$testimonial->before_image]);
+                                $aImgs = is_array($testimonial->after_image)  ? $testimonial->after_image  : (empty($testimonial->after_image)  ? [] : [$testimonial->after_image]);
+                            @endphp
+                            <div style="display:flex;gap:6px;align-items:center;">
+                                @if(count($bImgs))
+                                    <div style="position:relative;">
+                                        <img src="{{ asset($bImgs[0]) }}" alt="Before" title="Before ({{ count($bImgs) }})" style="width:32px;height:32px;border-radius:6px;object-fit:cover;border:1.5px solid #e8b4b8;">
+                                        @if(count($bImgs) > 1)
+                                            <span style="position:absolute;top:-6px;right:-6px;background:#b8636b;color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:999px;">{{ count($bImgs) }}</span>
+                                        @endif
+                                    </div>
+                                @endif
+                                @if(count($aImgs))
+                                    <div style="position:relative;">
+                                        <img src="{{ asset($aImgs[0]) }}" alt="After" title="After ({{ count($aImgs) }})" style="width:32px;height:32px;border-radius:6px;object-fit:cover;border:1.5px solid #4DB6AC;">
+                                        @if(count($aImgs) > 1)
+                                            <span style="position:absolute;top:-6px;right:-6px;background:#2c7d75;color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:999px;">{{ count($aImgs) }}</span>
+                                        @endif
+                                    </div>
+                                @endif
+                                @if(!count($bImgs) && !count($aImgs))
+                                    <span style="color:var(--muted);font-size:12px;">—</span>
+                                @endif
+                            </div>
+                        </td>
+                        <td style="color:var(--muted);font-size:13px;max-width:240px;">{{ Str::limit($testimonial->message, 70) }}</td>
                         <td style="color:#f59e0b;font-size:15px;white-space:nowrap;">
                             @for($i = 0; $i < $testimonial->rating; $i++) &#9733; @endfor
                         </td>

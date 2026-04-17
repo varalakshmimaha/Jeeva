@@ -5,9 +5,9 @@
 @section('content')
 
   <x-page-banner
-    title="Get in Touch"
-    subtitle="Have questions or ready to book a consultation? We're here to help you on your birth journey."
-    :image="asset('images/banner-services.png')"
+    :title="(isset($banner) && $banner) ? $banner->title : 'Get in Touch'"
+    :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'Have questions or ready to book a consultation? We are here to help you on your birth journey.'"
+    :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('images/banner-services.png')"
     :breadcrumbs="[['label' => 'Contact Us']]"
   />
 

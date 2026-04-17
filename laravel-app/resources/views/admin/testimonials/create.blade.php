@@ -31,9 +31,9 @@
                 </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">
-                        <label class="adm-label">Client Photo</label>
-                        <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
-                        <p class="adm-hint">JPG, PNG or WebP. Max 2MB. Optional.</p>
+                        <label class="adm-label">Category</label>
+                        <input type="text" name="category" value="{{ old('category') }}" class="adm-input" placeholder="e.g., Birth Doula Support">
+                        <p class="adm-hint">Used to group testimonials on the website.</p>
                     </div>
                     <div class="adm-form-group">
                         <label class="adm-label">Rating *</label>
@@ -49,6 +49,23 @@
                 <div class="adm-form-group" style="margin-top:16px;">
                     <label class="adm-label">Message *</label>
                     <textarea name="message" rows="5" required class="adm-input" placeholder="Write the client's testimonial here...">{{ old('message') }}</textarea>
+                </div>
+                <div class="adm-form-group" style="margin-top:16px;">
+                    <label class="adm-label">Client Photo</label>
+                    <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
+                    <p class="adm-hint">JPG, PNG or WebP. Optional client headshot.</p>
+                </div>
+                <div class="adm-form-grid" style="margin-top:16px;">
+                    <div class="adm-form-group">
+                        <label class="adm-label">Before Images</label>
+                        <input type="file" name="before_images[]" accept="image/jpeg,image/png,image/webp" class="adm-input" multiple>
+                        <p class="adm-hint">Optional. You can select multiple files. e.g., pregnancy photos.</p>
+                    </div>
+                    <div class="adm-form-group">
+                        <label class="adm-label">After Images</label>
+                        <input type="file" name="after_images[]" accept="image/jpeg,image/png,image/webp" class="adm-input" multiple>
+                        <p class="adm-hint">Optional. You can select multiple files. e.g., postpartum / with baby photos.</p>
+                    </div>
                 </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">

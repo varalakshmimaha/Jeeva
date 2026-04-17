@@ -4,13 +4,6 @@
 
 @section('content')
 
-  <x-page-banner
-    title="My Story"
-    subtitle="Walking Alongside You · Anu — Birth Doula"
-    :image="asset('images/banner-about.png')"
-    :breadcrumbs="[['label' => 'About Us']]"
-  />
-
   <!-- Founder Bio Section -->
   <section class="founder-bio-section">
     <div class="container">
@@ -23,35 +16,133 @@
             <div class="founder-img-dot founder-img-dot--2"></div>
             <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="founder-img">
           </div>
-          <!-- Experience badge -->
-          <div class="founder-exp-badge reveal d2">
-            <span class="founder-exp-num">10+</span>
-            <span class="founder-exp-label">Years of<br>Experience</span>
-          </div>
         </div>
 
         <!-- Right: Content -->
         <div class="founder-bio-text-col reveal d1">
-          <span class="founder-bio-label">About the Founder</span>
-          <h2 class="founder-bio-title">Meet Anu, Your Birth Doula & Wellness Guide</h2>
+          <span class="founder-bio-label">Founder Note</span>
 
-          <!-- Quote -->
+          <div class="founder-bio-content">
+            <p><strong>I am Anu</strong>, a Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
+          </div>
+
+          <!-- Middle Quote -->
           <blockquote class="founder-quote">
             <svg class="founder-quote-icon" width="32" height="32" viewBox="0 0 24 24" fill="#4DB6AC" opacity="0.3"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
             Every woman deserves to feel seen, heard, and supported throughout her birth journey.
           </blockquote>
 
           <div class="founder-bio-content">
-            <p><strong>I am Anu</strong>, a Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, and Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
             <p>I believe childbirth is not only a physical experience but also an emotional and spiritual transformation. Every journey is unique, and every woman deserves care that honours her choices, her body, and her voice.</p>
           </div>
+        </div>
+      </div>
 
-          <!-- Highlight tags -->
-          <div class="founder-tags">
-            <span class="founder-tag">Birth Doula</span>
-            <span class="founder-tag">Prenatal Yoga</span>
-            <span class="founder-tag">Childbirth Educator</span>
-            <span class="founder-tag">Nutritionist</span>
+      <!-- Book Consultation Form (below Founder Note) -->
+      <div class="about-book-section reveal">
+        <div class="about-book-grid">
+          <div class="about-book-img-col">
+            <img src="{{ asset('storage/a8a1039da04fa86cc812b907c3cb1d4e.jpg') }}" alt="Family with newborn" class="about-book-img">
+          </div>
+          <div class="about-book-form-col">
+            <span class="founder-bio-label">Book Consultation</span>
+            <h3 class="about-book-title">Begin your journey with us</h3>
+            <p class="about-book-sub">Schedule a free consultation and let's talk about how I can support your pregnancy, birth, and postpartum journey.</p>
+
+            <form action="{{ route('contact.store') }}" method="POST" class="about-book-form">
+              @csrf
+              <input type="hidden" name="subject" value="Consultation Request (About Page)">
+              <div class="abf-row">
+                <div class="abf-field">
+                  <label>Full Name *</label>
+                  <input type="text" name="name" placeholder="Your full name" required>
+                </div>
+                <div class="abf-field">
+                  <label>Phone Number *</label>
+                  <div class="abf-phone">
+                    <select name="country_code" class="abf-cc" required>
+                      <option value="+91" selected>+91</option>
+                      <option value="+1">+1</option>
+                      <option value="+44">+44</option>
+                      <option value="+61">+61</option>
+                      <option value="+971">+971</option>
+                      <option value="+65">+65</option>
+                      <option value="+966">+966</option>
+                      <option value="+974">+974</option>
+                      <option value="+60">+60</option>
+                      <option value="+49">+49</option>
+                      <option value="+33">+33</option>
+                      <option value="+81">+81</option>
+                      <option value="+86">+86</option>
+                      <option value="+64">+64</option>
+                      <option value="+92">+92</option>
+                      <option value="+880">+880</option>
+                      <option value="+94">+94</option>
+                    </select>
+                    <input type="tel" name="phone" placeholder="XXXXX XXXXX" required>
+                  </div>
+                </div>
+              </div>
+              <div class="abf-row">
+                <div class="abf-field">
+                  <label>Email Address *</label>
+                  <input type="email" name="email" placeholder="you@email.com" required>
+                </div>
+                <div class="abf-field">
+                  <label>Preferred Date *</label>
+                  <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required>
+                </div>
+              </div>
+              <div class="abf-field">
+                <label>Message</label>
+                <textarea name="message" rows="4" placeholder="Tell us how we can help..." required></textarea>
+              </div>
+              <button type="submit" class="cta-book-btn">Book Consultation &rarr;</button>
+
+              @if($errors->any())
+                <div class="abf-alert abf-alert--err">
+                  @foreach($errors->all() as $error){{ $error }}<br>@endforeach
+                </div>
+              @endif
+              @if(session('success'))
+                <div class="abf-alert abf-alert--ok">✓ Thanks! We'll be in touch within 2 hours.</div>
+              @endif
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beyond the Profession: Ultra Marathoner Section -->
+      <div class="founder-beyond-grid">
+        <!-- Left: Content -->
+        <div class="founder-beyond-text-col beyond-anim-left">
+          <span class="founder-bio-label">Beyond the Profession</span>
+          <h3 class="founder-beyond-title">A Life of Strength &amp; Stillness</h3>
+          <p>Outside of my professional role, I am an ultra marathoner and enjoy running and mountain climbing and love exploring places. These personal practices have shaped my strength, resilience, and mindset, and they naturally reflect in the calm and steady support I offer during birth journeys.</p>
+        </div>
+        <!-- Right: Founder image -->
+        <div class="founder-beyond-img-col beyond-anim-right">
+          <div class="beyond-single">
+            <img src="{{ asset('storage/founder.png') }}" alt="Anu - Founder" onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modern CTA Section -->
+  <section class="cta-modern-section reveal about-cta-wrap">
+    <div class="container">
+      <div class="cta-modern-card cta-modern-card--light">
+        <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(47,169,163,0.10);"></div>
+        <div style="position: absolute; bottom: -30px; left: -20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(47,169,163,0.08);"></div>
+        <div class="cta-content" style="position: relative; z-index: 1;">
+          <p class="cta-quote-light">
+            "Dear mama, I look forward to being part of your journey—reminding you that you are powerful, capable, and made for this sacred work of bringing life into the world."
+          </p>
+          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 32px;">
+            <a href="{{ route('contact') }}" class="cta-book-btn">Book Consultation &rarr;</a>
           </div>
         </div>
       </div>
@@ -59,8 +150,174 @@
   </section>
 
   <style>
+  /* Wrap CTA in white background to hide page pink */
+  .about-cta-wrap {
+    background: #ffffff;
+    padding: 60px 0 100px;
+  }
+  /* Light CTA override (about page) — light teal/logo-blue tint */
+  .cta-modern-card.cta-modern-card--light {
+    background: linear-gradient(135deg, #e6f6f5 0%, #d8efec 55%, #e9f4f3 100%);
+    box-shadow: 0 20px 50px -18px rgba(47, 169, 163, 0.25);
+  }
+  .cta-modern-card.cta-modern-card--light p.cta-quote-light {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 24px);
+    color: #000 !important;
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.75;
+  }
+  .cta-title-light {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 44px);
+    margin-bottom: 14px;
+    color: #2b2b2b;
+  }
+  .cta-sub-light {
+    font-size: 17px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  /* About-page Book Consultation form */
+  .about-book-section {
+    max-width: 1240px;
+    margin: 110px auto 0;
+    padding: 50px;
+    background: linear-gradient(135deg, #e6f6f5 0%, #d8efec 55%, #e9f4f3 100%);
+    border-radius: 32px;
+    box-shadow: 0 20px 50px -18px rgba(47,169,163,0.22);
+  }
+  .about-book-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .about-book-img {
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 1 / 1.05;
+  }
+  .about-book-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3vw, 34px);
+    color: #2b2b2b;
+    margin: 0 0 12px;
+    line-height: 1.25;
+  }
+  .about-book-sub {
+    font-size: 15.5px;
+    color: #555;
+    line-height: 1.7;
+    margin: 0 0 24px;
+  }
+  .about-book-form .abf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .about-book-form .abf-field {
+    margin-bottom: 14px;
+  }
+  .about-book-form .abf-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+    letter-spacing: .2px;
+  }
+  .about-book-form input,
+  .about-book-form textarea,
+  .about-book-form select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d4e6e4;
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 15px;
+    color: #2b2b2b;
+    font-family: inherit;
+    transition: border-color .25s, box-shadow .25s;
+    outline: none;
+  }
+  .about-book-form input:focus,
+  .about-book-form textarea:focus,
+  .about-book-form select:focus {
+    border-color: #2FA9A3;
+    box-shadow: 0 0 0 4px rgba(47,169,163,0.12);
+  }
+  .abf-phone {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 6px;
+  }
+  .abf-phone .abf-cc {
+    padding: 12px 6px 12px 10px;
+    font-size: 13px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #2FA9A3 50%), linear-gradient(135deg, #2FA9A3 50%, transparent 50%);
+    background-position: calc(100% - 10px) center, calc(100% - 6px) center;
+    background-size: 4px 4px, 4px 4px;
+    background-repeat: no-repeat;
+    padding-right: 20px;
+    cursor: pointer;
+  }
+  .about-book-form input[type="date"] {
+    font-family: inherit;
+    color: #2b2b2b;
+  }
+  .about-book-form textarea { resize: vertical; }
+  .about-book-form .cta-book-btn {
+    border: none;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  .abf-alert {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .abf-alert--ok { background: #e8f8ef; color: #2d7a4b; }
+  .abf-alert--err { background: #fde8e8; color: #c0392b; }
+  @media (max-width: 860px) {
+    .about-book-section { padding: 28px; margin-top: 60px; }
+    .about-book-grid { grid-template-columns: 1fr; gap: 28px; }
+    .about-book-form .abf-row { grid-template-columns: 1fr; }
+  }
+
+  .cta-book-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 44px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: .3px;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s, background .3s;
+    box-shadow: 0 12px 28px -6px rgba(47,169,163,0.45);
+  }
+  .cta-book-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #33b8b1 0%, #25a09a 100%);
+    box-shadow: 0 18px 40px -6px rgba(47,169,163,0.55);
+    color: #fff;
+  }
+
   .founder-bio-section {
-    padding: 100px 6%;
+    padding: 180px 6% 100px;
     background: #fdfbfa;
     overflow: hidden;
     position: relative;
@@ -100,6 +357,9 @@
     opacity: 0.2;
     z-index: -1;
   }
+  .founder-img-accent--right {
+    left: auto; right: -16px;
+  }
   .founder-img-dot {
     position: absolute;
     border-radius: 50%;
@@ -123,36 +383,6 @@
     display: block;
     object-fit: cover;
     object-position: top;
-  }
-
-  /* Experience badge */
-  .founder-exp-badge {
-    position: absolute;
-    bottom: -20px; right: -20px;
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    border: 1px solid rgba(77,182,172,0.1);
-    z-index: 5;
-  }
-  .founder-exp-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: #4DB6AC;
-    line-height: 1;
-  }
-  .founder-exp-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #7a6060;
-    line-height: 1.35;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 
   /* Text column */
@@ -202,49 +432,362 @@
     color: #3d2b2b;
   }
 
-  /* Tags */
-  .founder-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 28px;
+  /* Beyond the profession */
+  .founder-beyond-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 70px;
+    align-items: center;
+    max-width: 1240px;
+    margin: 110px auto 0;
   }
-  .founder-tag {
-    display: inline-block;
-    padding: 8px 18px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #4DB6AC;
-    background: rgba(77,182,172,0.08);
+  .founder-beyond-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.4vw, 38px);
+    color: #2b2b2b;
+    margin: 0 0 20px;
+    line-height: 1.25;
+  }
+  .founder-beyond-text-col p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  /* Beyond the Profession — single image */
+  .beyond-single {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(47,169,163,0.18);
+  }
+  .beyond-single img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Slide-in animations (heading from left, image from right) */
+  .beyond-anim-left,
+  .beyond-anim-right {
+    opacity: 0;
+    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .beyond-anim-left  { transform: translateX(-60px); }
+  .beyond-anim-right { transform: translateX(60px); transition-delay: .15s; }
+  .beyond-anim-left.is-visible,
+  .beyond-anim-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Blob collage for Beyond the Profession */
+  .beyond-blob-stack {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1.15;
+  }
+  .beyond-blob {
+    position: absolute;
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(47,169,163,0.18);
+  }
+  .beyond-blob img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .beyond-blob--person {
+    top: 0;
+    left: 0;
+    width: 62%;
+    height: 72%;
+    border-radius: 58% 42% 55% 45% / 52% 60% 40% 48%;
+    z-index: 2;
+  }
+  .beyond-blob--scene {
+    right: 0;
+    bottom: 0;
+    width: 62%;
+    height: 62%;
+    border-radius: 48% 52% 42% 58% / 60% 45% 55% 40%;
+    z-index: 1;
+  }
+
+  @media (max-width: 640px) {
+    .beyond-blob-stack { max-width: 380px; aspect-ratio: 1 / 1.2; }
+  }
+
+  /* Closing quote + CTA */
+  .founder-closing {
+    max-width: 900px;
+    margin: 110px auto 0;
+    text-align: center;
+  }
+  .founder-closing-quote {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-style: italic;
+    color: #3d2b2b;
+    line-height: 1.7;
+    padding: 32px 36px;
+    margin: 0 0 32px;
+    background: linear-gradient(135deg, rgba(245,213,213,0.3), rgba(77,182,172,0.08));
+    border-radius: 20px;
     border: 1px solid rgba(77,182,172,0.15);
-    transition: all 0.3s;
   }
-  .founder-tag:hover {
-    background: #4DB6AC;
-    color: #fff;
-    border-color: #4DB6AC;
+  .founder-closing-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: var(--grad-teal);
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(77,182,172,0.25);
+  }
+  .founder-closing-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(77,182,172,0.4);
+    opacity: 0.95;
   }
 
   @media (max-width: 991px) {
-    .founder-bio-grid {
+    .founder-bio-grid,
+    .founder-beyond-grid {
       grid-template-columns: 1fr;
       gap: 50px;
+    }
+    .founder-beyond-grid {
+      margin-top: 80px;
+    }
+    .founder-beyond-img-col {
+      order: -1;
+      max-width: 500px;
+      margin: 0 auto;
     }
     .founder-bio-img-col {
       max-width: 500px;
       margin: 0 auto;
     }
-    .founder-exp-badge {
-      bottom: -15px; right: 10px;
-    }
+    .founder-closing { margin-top: 80px; }
   }
   @media (max-width: 480px) {
-    .founder-bio-section { padding: 70px 5%; }
-    .founder-exp-badge { padding: 14px 18px; }
-    .founder-exp-num { font-size: 28px; }
+    .founder-bio-section { padding: 130px 5% 70px; }
     .founder-quote { font-size: 17px; padding: 16px 20px 16px 22px; }
+    .founder-closing-quote { padding: 24px 22px; }
   }
+  </style>
+
+  <!-- Credentials & Training Section -->
+  <section class="cred-section">
+    <div class="container">
+      <div class="cred-header">
+        <span class="section-label reveal">Expertise & Qualifications</span>
+        <h2 class="section-title reveal d1">Professional Training & Certifications</h2>
+      </div>
+
+      <div class="cred-layout">
+        <!-- LEFT column -->
+        <div class="cred-col cred-col-left">
+          <div class="cred-item reveal-left">
+            <div class="cred-item-icon">
+              <!-- Maternity/Doula icon matching the attached image -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="6" r="3"></circle>
+                <path d="M8.5 11.5a4.5 4.5 0 0 0 7 0"></path>
+                <path d="M6 21c0-3.5 1.5-6.5 4-8.5"></path>
+                <path d="M18 21c0-3.5-1.5-6.5-4-8.5"></path>
+                <path d="M9 21c0-2.5 1.5-4 3-4s3 1.5 3 4"></path>
+              </svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">DONA-Trained and Certified Birth Doula</h4>
+            </div>
+          </div>
+          <div class="cred-item reveal-left d1">
+            <div class="cred-item-icon">
+              <!-- Flower icon for StillBirthday -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15"/></svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">StillBirthday Certified Doula</h4>
+            </div>
+          </div>
+          <div class="cred-item reveal-left d2">
+            <div class="cred-item-icon">
+              <!-- Lotus/Zen icon for Prenatal Yoga -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-2.3-2.3-6-5-6-9 0-3.3 2.7-6 6-6s6 2.7 6 6c0 4-3.7 6.7-6 9z"></path></svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">Certified Prenatal &amp; Postnatal Yoga Instructor</h4>
+            </div>
+          </div>
+          <div class="cred-item reveal-left d3">
+            <div class="cred-item-icon">
+              <!-- Graduation Cap/Award for Educator -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">Childbirth Educator</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER image -->
+        <div class="cred-center reveal">
+          <div class="cred-center-img">
+            <img src="{{ asset('images/about-couple.jpeg') }}" alt="Anu supporting expectant parents" onerror="this.onerror=null;this.src='{{ asset('images/founder-portrait.jpeg') }}';">
+          </div>
+        </div>
+
+        <!-- RIGHT column -->
+        <div class="cred-col cred-col-right">
+          <div class="cred-item reveal-right">
+            <div class="cred-item-icon">
+              <!-- Milk droplet icon for Lactation -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">Lactation Education</h4>
+            </div>
+          </div>
+          <div class="cred-item reveal-right d1">
+            <div class="cred-item-icon">
+              <!-- Healing Heart/Therapeutic symbol -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 9.2a2 2 0 0 0-.27 1.35V13h3.29a2 2 0 0 0 1.2-.4l3-2.6"/></svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">Therapeutic Yoga (PCOD/PCOS, Infertility, Postpartum &amp; Menopause)</h4>
+            </div>
+          </div>
+          <div class="cred-item reveal-right d2">
+            <div class="cred-item-icon">
+              <!-- Medal/Award for Advanced Training -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div class="cred-item-body">
+              <h4 class="cred-item-title">Advanced Yoga Teacher Training</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .cred-section {
+      padding: 100px 6%;
+      background: #ffffff;
+    }
+    .cred-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .cred-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px 1fr;
+      gap: 40px;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .cred-col { display: flex; flex-direction: column; gap: 28px; }
+    .cred-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 4px;
+    }
+    .cred-col-left .cred-item { text-align: right; flex-direction: row-reverse; }
+    .cred-item-icon {
+      flex-shrink: 0;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      transition: all 0.3s ease;
+    }
+    .cred-item:hover .cred-item-icon {
+      background: rgba(77, 182, 172, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(77, 182, 172, 0.15);
+    }
+    .cred-item-icon svg { width: 32px; height: 32px; stroke: #4DB6AC; transition: all 0.3s ease; }
+    .cred-item:hover .cred-item-icon svg {
+      transform: scale(1.1);
+    }
+    .cred-item-body { flex: 1; }
+    .cred-item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e3a;
+      margin: 4px 0 8px;
+      line-height: 1.3;
+    }
+    .cred-item-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14.5px;
+      color: #6b5a5a;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .cred-center { display: flex; justify-content: center; }
+    .cred-center-img {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fdf2f2 0%, #faece4 100%);
+      box-shadow: 0 24px 60px rgba(77,182,172,0.18);
+      position: relative;
+    }
+    .cred-center-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 1100px) {
+      .cred-layout { grid-template-columns: 1fr 340px 1fr; gap: 24px; }
+      .cred-item-title { font-size: 18px; }
+    }
+    @media (max-width: 900px) {
+      .cred-layout { grid-template-columns: 1fr; gap: 36px; }
+      .cred-col-left .cred-item { text-align: left; flex-direction: row; }
+      .cred-center { order: -1; }
+      .cred-center-img { max-width: 380px; aspect-ratio: 1 / 1; border-radius: 50%; }
+    }
+    @media (max-width: 480px) {
+      .cred-section { padding: 70px 5%; }
+      .cred-header { margin-bottom: 40px; }
+      .cred-item-icon { width: 60px; height: 60px; padding: 3px; }
+      .cred-item-title { font-size: 17px; }
+      .cred-item-text { font-size: 13.5px; }
+    }
   </style>
 
   <!-- Vision & Mission Section -->
@@ -266,6 +809,9 @@
           <p class="vm-text">To create a world where every woman feels empowered, supported, and celebrated throughout her pregnancy, birth, and postpartum journey — embracing motherhood with confidence, strength, and joy.</p>
         </div>
       </div>
+      <div class="vm-cta-wrap reveal d3">
+        <a href="{{ route('services') }}" class="vm-cta-btn">Explore Our Services</a>
+      </div>
     </div>
   </section>
 
@@ -286,7 +832,7 @@
     .vm-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.25); /* Adjusted to match screenshot styling gracefully */
+      background: rgba(0, 0, 0, 0.25);
       z-index: 1;
     }
     .vm-section .container {
@@ -306,7 +852,7 @@
       margin: 0 auto;
     }
     .vm-card {
-      background: rgba(255, 255, 255, 0.15); /* Frosted glass */
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: 20px;
@@ -336,6 +882,31 @@
       line-height: 1.85;
       margin: 0;
     }
+    .vm-cta-wrap {
+      text-align: center;
+      margin-top: 60px;
+    }
+    .vm-cta-btn {
+      display: inline-block;
+      padding: 16px 42px;
+      background: #ffffff;
+      color: #4DB6AC;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .vm-cta-btn:hover {
+      transform: translateY(-2px);
+      background: #4DB6AC;
+      color: #ffffff;
+      box-shadow: 0 14px 36px rgba(77,182,172,0.45);
+    }
     @media (max-width: 900px) {
       .vm-grid {
         grid-template-columns: 1fr;
@@ -345,481 +916,9 @@
         padding: 40px 30px;
       }
       .vm-section { padding: 80px 5%; min-height: auto; }
+      .vm-cta-wrap { margin-top: 40px; }
     }
   </style>
-
-  <!-- Credentials & Training Section -->
-  <section class="cred-section">
-    <div class="container">
-      <div class="cred-header">
-        <span class="section-label reveal">Expertise & Qualifications</span>
-        <h2 class="section-title reveal d1">Credentials & Training</h2>
-      </div>
-      <div class="cred-grid">
-        <div class="cred-card reveal d1">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-doula.png') }}" alt="DONA Birth Doula">
-          </div>
-          <h4 class="cred-card-title">DONA-Trained Birth Doula</h4>
-          <p class="cred-card-text">Certified through DONA International, the gold standard in birth doula training and support.</p>
-        </div>
-        <div class="cred-card reveal d2">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-stillbirthday.png') }}" alt="StillBirthday Doula">
-          </div>
-          <h4 class="cred-card-title">StillBirthday Certified Doula</h4>
-          <p class="cred-card-text">Specialized training in bereavement support for families experiencing pregnancy or infant loss.</p>
-        </div>
-        <div class="cred-card reveal d3">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-prenatal-yoga.png') }}" alt="Prenatal Yoga">
-          </div>
-          <h4 class="cred-card-title">Prenatal & Postnatal Yoga Instructor</h4>
-          <p class="cred-card-text">Guiding mothers through safe, nurturing yoga practices for strength and calm before and after birth.</p>
-        </div>
-        <div class="cred-card reveal d4">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-childbirth-edu.png') }}" alt="Childbirth Education">
-          </div>
-          <h4 class="cred-card-title">Childbirth Educator</h4>
-          <p class="cred-card-text">Empowering families with evidence-based knowledge for confident, informed birth decisions.</p>
-        </div>
-        <div class="cred-card reveal d1">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-lactation.png') }}" alt="Lactation Education">
-          </div>
-          <h4 class="cred-card-title">Lactation Education</h4>
-          <p class="cred-card-text">Supporting mothers with breastfeeding guidance and lactation knowledge for a smooth postpartum journey.</p>
-        </div>
-        <div class="cred-card reveal d2">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-therapeutic-yoga.png') }}" alt="Therapeutic Yoga">
-          </div>
-          <h4 class="cred-card-title">Therapeutic Yoga</h4>
-          <p class="cred-card-text">Specialized yoga therapy for infertility and menopause, supporting women through every stage of life.</p>
-        </div>
-        <div class="cred-card reveal d3">
-          <div class="cred-card-img">
-            <img src="{{ asset('images/cred-advanced-yoga.png') }}" alt="Advanced Yoga Training">
-          </div>
-          <h4 class="cred-card-title">Advanced Yoga Teacher Training</h4>
-          <p class="cred-card-text">Deepened practice and teaching skills through advanced-level yoga teacher certification and training.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    /* About Banner Large */
-    .about-banner-lg.page-banner {
-      min-height: 520px;
-    }
-    .about-banner-lg .page-banner-content {
-      padding: 140px 6% 80px;
-    }
-    .about-banner-lg .page-banner-title {
-      font-size: clamp(44px, 7vw, 76px);
-    }
-    .about-banner-lg .page-banner-subtitle {
-      font-size: 20px;
-      max-width: 680px;
-    }
-    @media (max-width: 768px) {
-      .about-banner-lg.page-banner { min-height: 420px; }
-      .about-banner-lg .page-banner-content { padding: 110px 5% 50px; }
-      .about-banner-lg .page-banner-subtitle { font-size: 17px; }
-    }
-
-    /* About Main Grid */
-    .about-main-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      margin: 32px 0 0;
-    }
-    @media (max-width: 860px) {
-      .about-main-grid { grid-template-columns: 1fr; gap: 24px; }
-    }
-
-    /* Credentials & Training */
-    .cred-section {
-      padding: 100px 6%;
-      background: #ffffff;
-    }
-    .cred-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .cred-img-wrap {
-      max-width: 480px;
-      margin: 0 auto 50px;
-    }
-    .cred-img-wrap img {
-      width: 100%;
-      height: auto;
-      border-radius: 20px;
-    }
-    .cred-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-    .cred-card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 0 28px 32px;
-      text-align: center;
-      border: 1px solid #f0f0f0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .cred-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%; height: 4px;
-      background: linear-gradient(90deg, #4DB6AC, #80cbc4);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .cred-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 40px rgba(77,182,172,0.1);
-      border-color: rgba(77,182,172,0.2);
-    }
-    .cred-card:hover::before { opacity: 1; }
-    .cred-card-img {
-      margin: 0 -28px 20px;
-      width: calc(100% + 56px);
-      overflow: hidden;
-    }
-    .cred-card-img img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      display: block;
-    }
-    .cred-card-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: #3d2b2b;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .cred-card-text {
-      color: #7a6060;
-      font-size: 14px;
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    @media (max-width: 1024px) {
-      .cred-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .cred-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .cred-card { padding: 0 20px 24px; }
-      .cred-card-img { margin: 0 -20px 16px; width: calc(100% + 40px); }
-      .cred-section { padding: 70px 5%; }
-    }
-    @media (max-width: 480px) {
-      .cred-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <!-- Our Journey Section -->
-  <section class="journey-section">
-    <div class="container">
-      <div class="journey-header">
-        <span class="sec-label reveal">Our Process</span>
-        <h2 class="sec-title reveal d1" style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 44px); color: #3d2b2b;">Our Journey Together</h2>
-      </div>
-      
-      <div class="journey-grid">
-        <!-- Step 1 -->
-        <div class="journey-step reveal d1">
-          <div class="journey-img-wrap">
-            <img src="{{ asset('images/step1_journey.png') }}" alt="Consultation">
-            <div class="journey-badge">01</div>
-          </div>
-          
-          <div class="journey-arrow d-none-mobile">
-            <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
-              <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#628575" stroke-width="1.5" vector-effect="non-scaling-stroke" />
-            </svg>
-            <svg class="arrow-head-svg" viewBox="0 0 10 10">
-              <polygon points="0,0 10,5 0,10" fill="#628575" />
-            </svg>
-          </div>
-
-          <h4 class="journey-title">Initial Consultation</h4>
-          <p class="journey-text">We begin with a heartfelt conversation to understand your vision, needs, and desires for your birth experience, building a foundation of trust.</p>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="journey-step reveal d2">
-          <div class="journey-img-wrap">
-            <img src="{{ asset('images/step2_journey.png') }}" alt="Preparation">
-            <div class="journey-badge">02</div>
-          </div>
-
-          <div class="journey-arrow d-none-mobile">
-            <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
-              <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#628575" stroke-width="1.5" vector-effect="non-scaling-stroke" />
-            </svg>
-            <svg class="arrow-head-svg" viewBox="0 0 10 10">
-              <polygon points="0,0 10,5 0,10" fill="#628575" />
-            </svg>
-          </div>
-
-          <h4 class="journey-title">Prenatal Preparation</h4>
-          <p class="journey-text">Through childbirth education, prenatal yoga, and ongoing emotional support, you and your partner will feel prepared and empowered.</p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="journey-step reveal d3">
-          <div class="journey-img-wrap">
-            <img src="{{ asset('images/step3_journey.png') }}" alt="Birth and Postpartum">
-            <div class="journey-badge">03</div>
-          </div>
-
-          <h4 class="journey-title">Birth & Postpartum</h4>
-          <p class="journey-text">Continuous, unwavering support during labor and birth, seamlessly transitioning into compassionate postpartum care as your family grows.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .journey-section {
-      padding: 100px 6%;
-      background: #fdfefe; /* Very slight subtle background */
-      position: relative;
-      border-top: 1px solid #f0f0f0;
-    }
-    .journey-header {
-      text-align: center;
-      margin-bottom: 70px;
-    }
-    .journey-grid {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-    .journey-step {
-      flex: 1;
-      text-align: center;
-      position: relative;
-    }
-    .journey-img-wrap {
-      width: 250px;
-      height: 250px;
-      margin: 0 auto 35px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed #89bbed;
-      border-radius: 50%;
-      padding: 12px;
-    }
-    .journey-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-    }
-    .journey-badge {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      width: 56px;
-      height: 56px;
-      background: #89bbed;
-      color: #ffffff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      box-shadow: 0 6px 15px rgba(137, 187, 237, 0.4);
-      z-index: 2;
-    }
-    .journey-arrow {
-      position: absolute;
-      top: 100px;
-      left: calc(50% + 140px);
-      width: calc(100% - 280px);
-      height: 40px;
-      z-index: 10;
-      pointer-events: none;
-    }
-    .arrow-head-svg {
-      position: absolute;
-      right: -3px;
-      bottom: -1px;
-      width: 12px;
-      height: 12px;
-      transform: rotate(38deg);
-      transform-origin: center;
-    }
-    .journey-title {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 21px;
-      color: #3d2b2b;
-      margin-bottom: 16px;
-      line-height: 1.3;
-    }
-    .journey-text {
-      font-size: 15px;
-      color: #7a6060;
-      line-height: 1.7;
-      margin: 0 auto;
-      max-width: 320px;
-    }
-    @media (max-width: 991px) {
-      .journey-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 60px;
-      }
-      .journey-step {
-        width: 100%;
-        max-width: 450px;
-      }
-      .d-none-mobile {
-        display: none;
-      }
-    }
-  </style>
-
-  <!-- Why Choose Us Section -->
-  <section class="why-choose-section">
-    <div class="container">
-      <div class="why-choose-header">
-        <span class="sec-label reveal">Why Choose Us</span>
-        <h2 class="sec-title reveal d1" style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 44px); color: #3d2b2b;">Holistic Care for Mother and Baby</h2>
-      </div>
-
-      <div class="why-choose-us-grid">
-        <div class="why-card reveal d1">
-          <div class="why-card-img-wrapper">
-             <img src="{{ asset('images/why_support.png') }}" class="why-card-img" alt="Personalized Support">
-          </div>
-          <div class="why-card-content">
-            <h4 class="why-title">Personalized Support</h4>
-            <p class="why-text">Every pregnancy and birth is unique. We provide tailored care that respects your individual preferences, cultural background, and medical needs.</p>
-          </div>
-        </div>
-        <div class="why-card reveal d2">
-          <div class="why-card-img-wrapper">
-             <img src="{{ asset('images/why_advocacy.png') }}" class="why-card-img" alt="Unwavering Advocacy">
-          </div>
-          <div class="why-card-content">
-            <h4 class="why-title">Unwavering Advocacy</h4>
-            <p class="why-text">Your voice matters. We ensure you feel informed and empowered to make decisions confidently, advocating for your birth plan in any setting.</p>
-          </div>
-        </div>
-        <div class="why-card reveal d3">
-          <div class="why-card-img-wrapper">
-             <img src="{{ asset('images/why_mindbody.png') }}" class="why-card-img" alt="Mind & Body Connection">
-          </div>
-          <div class="why-card-content">
-            <h4 class="why-title">Mind & Body Connection</h4>
-            <p class="why-text">Through prenatal yoga and focused childbirth education, we bridge physical preparation with mental resilience for a calmer labor experience.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <style>
-      .why-choose-section {
-        padding: 100px 6%;
-        background: #fafafb;
-        position: relative;
-      }
-      .why-choose-header {
-        text-align: center;
-        margin-bottom: 70px;
-      }
-      .why-choose-us-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 36px;
-        max-width: 1160px;
-        margin: 0 auto;
-      }
-      .why-card {
-        background: #ffffff;
-        border-radius: 20px;
-        text-align: center;
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-        overflow: hidden;
-        border: 1px solid rgba(0,0,0,0.03);
-      }
-      .why-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 20px 50px rgba(77, 182, 172, 0.15);
-      }
-      .why-card-img-wrapper {
-        width: 100%;
-        height: 240px;
-        overflow: hidden;
-        position: relative;
-      }
-      .why-card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-      .why-card:hover .why-card-img {
-        transform: scale(1.05);
-      }
-      .why-card-content {
-        padding: 40px 30px;
-      }
-      .why-title {
-        font-family: 'Outfit', sans-serif;
-        font-weight: 700;
-        font-size: 22px;
-        color: #3d2b2b;
-        margin-bottom: 16px;
-      }
-      .why-text {
-        font-size: 15.5px;
-        color: #7a6060;
-        line-height: 1.7;
-        margin: 0;
-      }
-      @media (max-width: 991px) {
-        .why-choose-us-grid {
-          gap: 24px;
-        }
-      }
-      @media (max-width: 860px) {
-        .why-choose-us-grid {
-          grid-template-columns: 1fr;
-          max-width: 500px;
-        }
-        .why-choose-section {
-          padding: 80px 5%;
-        }
-      }
-    </style>
-  </section>
 
   <!-- Book Consultation CTA -->
   <section class="about-cta-section">
@@ -1062,5 +1161,24 @@
       .about-cta-section { padding: 60px 5%; border-radius: 24px; margin: 0 3% 40px; }
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.beyond-anim-left, .beyond-anim-right');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      items.forEach(el => io.observe(el));
+    });
+  </script>
 
 @endsection

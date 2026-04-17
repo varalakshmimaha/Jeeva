@@ -5,9 +5,9 @@
 @section('content')
 
 <x-page-banner
-  title="Our Gallery"
-  subtitle="A glimpse into our prenatal yoga sessions, doula support, nutrition guidance, and childbirth education."
-  :image="asset('images/banner-gallery.png')"
+  :title="(isset($banner) && $banner) ? $banner->title : 'Our Gallery'"
+  :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'A glimpse into our prenatal yoga sessions, doula support, nutrition guidance, and childbirth education.'"
+  :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('images/banner-gallery.png')"
   :breadcrumbs="[['label' => 'Gallery']]"
 />
 

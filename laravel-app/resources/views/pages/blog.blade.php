@@ -7,9 +7,9 @@
 
 
 <x-page-banner
-  title="Birth & Wellness Insights"
-  subtitle="Expert articles on pregnancy, birth preparation, prenatal wellness, nutrition, and postpartum care to guide your journey."
-  :image="asset('images/banner-gallery.png')"
+  :title="(isset($banner) && $banner) ? $banner->title : 'Birth & Wellness Insights'"
+  :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'Expert articles on pregnancy, birth preparation, prenatal wellness, nutrition, and postpartum care to guide your journey.'"
+  :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('images/banner-gallery.png')"
   :breadcrumbs="[['label' => 'Blog']]"
 />
 

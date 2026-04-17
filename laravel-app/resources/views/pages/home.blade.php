@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home - Jiva Birth and Beyond')
+@section('title', 'Home')
 
 @section('content')
 
@@ -13,7 +13,6 @@
           <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}" style="background-image: url('{{ asset($banner->image) }}');">
             <div class="banner-slide-shell">
               <div class="banner-slide-content">
-                <div class="banner-slide-eyebrow">Jiva Birth and Beyond</div>
                 <h1 class="banner-slide-title">{{ $banner->title }}</h1>
                 <p class="banner-slide-description">{{ $banner->description }}</p>
                 @if($banner->button_text)
@@ -27,7 +26,6 @@
         <div class="banner-slide is-active" style="background-image: url('{{ asset('images/founder-sitting.jpeg') }}');">
           <div class="banner-slide-shell">
             <div class="banner-slide-content">
-              <div class="banner-slide-eyebrow">Jiva Birth and Beyond</div>
               <h1 class="banner-slide-title">Empowering Your Birth Journey</h1>
               <p class="banner-slide-description">Compassionate birth doula support, prenatal yoga, and childbirth education for your journey into motherhood.</p>
               <a href="{{ route('contact') }}" class="banner-slide-button">Book Consultation <span>&rarr;</span></a>
@@ -80,7 +78,7 @@
 /* About Us Section */
 .about-us-section {
   padding: 100px 6%;
-  background: #ffffff;
+  background: linear-gradient(180deg, #fdf8f5 0%, #faf1ec 100%);
 }
 .about-wrapper {
   display: flex;
@@ -192,7 +190,7 @@
 <section class="why-choose-us-sec">
   <div class="container">
     <div class="why-header reveal">
-      <span class="why-eyebrow">Why Jiva Birth & Beyond</span>
+      <span class="why-eyebrow">Why Choose Us</span>
       <h2 class="why-title">Why Choose Us?</h2>
       <p class="why-subtitle">Providing a sanctuary of support, knowledge, and empowerment for your unique birthing journey.</p>
     </div>
@@ -269,7 +267,7 @@
 /* why Choose Us - Circular Design Settings */
 .why-choose-us-sec {
   padding: 100px 6%;
-  background: linear-gradient(to bottom, #ffffff, #f9f7f4);
+  background: linear-gradient(180deg, #fbf3ef 0%, #f5e6df 100%);
   position: relative;
   overflow: hidden;
 }
@@ -646,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <style>
     .book-appointment-section {
       padding: 90px 6%;
-      background: #ffffff;
+      background: linear-gradient(180deg, #faf1ec 0%, #fdf8f5 100%);
     }
     .appointment-wrapper {
       display: grid;

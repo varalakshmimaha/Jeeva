@@ -7,9 +7,9 @@
 
 
 <x-page-banner
-  title="Our Services"
-  subtitle="Compassionate birth support, prenatal yoga, childbirth education, and nutrition guidance for your journey."
-  :image="asset('images/banner-services.png')"
+  :title="(isset($banner) && $banner) ? $banner->title : 'Our Services'"
+  :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'Compassionate birth support, prenatal yoga, childbirth education, and nutrition guidance for your journey.'"
+  :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('images/banner-services.png')"
   :breadcrumbs="[['label' => 'Services']]"
 />
 
@@ -38,6 +38,132 @@
     </div>
   </div>
 </section>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-section">
+  <div class="container">
+    <div class="why-choose-header">
+      <span class="sec-label reveal">Why Choose Us</span>
+      <h2 class="sec-title reveal d1" style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 44px); color: #3d2b2b;">Holistic Care for Mother and Baby</h2>
+    </div>
+
+    <div class="why-choose-us-grid">
+      <div class="why-card reveal d1">
+        <div class="why-card-img-wrapper">
+          <img src="{{ asset('images/why_support.png') }}" class="why-card-img" alt="Personalized Support">
+        </div>
+        <div class="why-card-content">
+          <h4 class="why-title">Personalized Support</h4>
+          <p class="why-text">Every pregnancy and birth is unique. We provide tailored care that respects your individual preferences, cultural background, and medical needs.</p>
+        </div>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="why-card-img-wrapper">
+          <img src="{{ asset('images/why_advocacy.png') }}" class="why-card-img" alt="Unwavering Advocacy">
+        </div>
+        <div class="why-card-content">
+          <h4 class="why-title">Unwavering Advocacy</h4>
+          <p class="why-text">Your voice matters. We ensure you feel informed and empowered to make decisions confidently, advocating for your birth plan in any setting.</p>
+        </div>
+      </div>
+      <div class="why-card reveal d3">
+        <div class="why-card-img-wrapper">
+          <img src="{{ asset('images/why_mindbody.png') }}" class="why-card-img" alt="Mind & Body Connection">
+        </div>
+        <div class="why-card-content">
+          <h4 class="why-title">Mind & Body Connection</h4>
+          <p class="why-text">Through prenatal yoga and focused childbirth education, we bridge physical preparation with mental resilience for a calmer labor experience.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-choose-section {
+    padding: 100px 6%;
+    background: #fafafb;
+    position: relative;
+  }
+  .why-choose-section .sec-label {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #4DB6AC;
+    margin-bottom: 14px;
+  }
+  .why-choose-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  .why-choose-us-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  .why-card {
+    background: #ffffff;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.03);
+  }
+  .why-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 50px rgba(77, 182, 172, 0.15);
+  }
+  .why-card-img-wrapper {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+  }
+  .why-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .why-card:hover .why-card-img {
+    transform: scale(1.05);
+  }
+  .why-card-content {
+    padding: 40px 30px;
+  }
+  .why-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #3d2b2b;
+    margin-bottom: 16px;
+  }
+  .why-text {
+    font-size: 15.5px;
+    color: #7a6060;
+    line-height: 1.7;
+    margin: 0;
+  }
+  @media (max-width: 991px) {
+    .why-choose-us-grid {
+      gap: 24px;
+    }
+  }
+  @media (max-width: 860px) {
+    .why-choose-us-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+    }
+    .why-choose-section {
+      padding: 80px 5%;
+    }
+  }
+</style>
 
 <!-- Book Consultation CTA Section -->
 <section class="svc-cta-section">

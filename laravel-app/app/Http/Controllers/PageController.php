@@ -24,9 +24,11 @@ class PageController extends Controller
     public function services()
     {
         $services = \App\Models\Service::orderBy('order', 'asc')->get();
+        $banner = \App\Models\Banner::where('page', 'services')->orderBy('order', 'asc')->first();
         return view('pages.services', [
             'pageName' => 'services',
-            'services' => $services
+            'services' => $services,
+            'banner' => $banner,
         ]);
     }
 
@@ -41,14 +43,20 @@ class PageController extends Controller
 
     public function about()
     {
-        return view('pages.about', ['pageName' => 'about']);
+        $banner = \App\Models\Banner::where('page', 'about')->orderBy('order', 'asc')->first();
+        return view('pages.about', [
+            'pageName' => 'about',
+            'banner' => $banner,
+        ]);
     }
 
     public function blog()
     {
+        $banner = \App\Models\Banner::where('page', 'blog')->orderBy('order', 'asc')->first();
         return view('pages.blog', [
             'pageName' => 'blog',
             'blogs' => $this->publishedBlogs(),
+            'banner' => $banner,
         ]);
     }
 
@@ -67,24 +75,32 @@ class PageController extends Controller
     public function gallery()
     {
         $galleryItems = \App\Models\GalleryItem::orderBy('order', 'asc')->get();
+        $banner = \App\Models\Banner::where('page', 'gallery')->orderBy('order', 'asc')->first();
         return view('pages.gallery', [
             'pageName' => 'gallery',
-            'galleryItems' => $galleryItems
+            'galleryItems' => $galleryItems,
+            'banner' => $banner,
         ]);
     }
 
     public function testimonials()
     {
         $testimonials = \App\Models\Testimonial::where('published', true)->orderBy('order')->get();
+        $banner = \App\Models\Banner::where('page', 'testimonials')->orderBy('order', 'asc')->first();
         return view('pages.testimonials', [
             'pageName' => 'testimonials',
-            'testimonials' => $testimonials
+            'testimonials' => $testimonials,
+            'banner' => $banner,
         ]);
     }
 
     public function contact()
     {
-        return view('pages.contact', ['pageName' => 'contact']);
+        $banner = \App\Models\Banner::where('page', 'contact')->orderBy('order', 'asc')->first();
+        return view('pages.contact', [
+            'pageName' => 'contact',
+            'banner' => $banner,
+        ]);
     }
 
     public function privacy()

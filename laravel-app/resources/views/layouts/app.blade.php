@@ -29,7 +29,7 @@
       <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Services</a></li>
       <li><a href="{{ route('testimonials') }}" class="{{ request()->routeIs('testimonials') ? 'active' : '' }}">Testimonials</a></li>
     </ul>
-    <a href="{{ route('contact') }}" class="nav-cta-btn">&#128222; Contact</a>
+    <a href="{{ route('contact') }}" class="nav-cta-btn">Contact Us</a>
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
