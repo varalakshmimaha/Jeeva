@@ -23,45 +23,72 @@
 
 <section class="ts-show-section">
   <div class="container">
-    <div class="ts-show-grid">
-      <div class="ts-show-img-col">
-        @if($imgExists)
-          <div class="ts-show-photo">
-            <img src="{{ asset($testimonial->image) }}" alt="{{ $testimonial->name }}">
-          </div>
-        @else
-          <div class="ts-show-photo ts-show-photo-initial">
-            <span>{{ substr($testimonial->name, 0, 1) }}</span>
-          </div>
-        @endif
-      </div>
-      <div class="ts-show-content-col">
-        @if($testimonial->category)
-          <span class="ts-show-cat">{{ $testimonial->category }}</span>
-        @endif
-        <h1 class="ts-show-name">{{ $testimonial->name }}</h1>
-        <div class="ts-show-role">{{ $testimonial->role ?? 'New Mother' }}</div>
-        <div class="ts-show-stars">
-          @for($i=0; $i<($testimonial->rating ?? 5); $i++)<span>&#9733;</span>@endfor
+    <div class="ts-show-card">
+      <div class="ts-show-grid">
+        <div class="ts-show-img-col">
+          @if($imgExists)
+            <div class="ts-show-photo">
+              <img src="{{ asset($testimonial->image) }}" alt="{{ $testimonial->name }}">
+            </div>
+          @else
+            <div class="ts-show-photo ts-show-photo-initial">
+              <span>{{ substr($testimonial->name, 0, 1) }}</span>
+            </div>
+          @endif
         </div>
-        <div class="ts-show-quote-icon">&ldquo;</div>
-        <p class="ts-show-message">{{ $testimonial->message }}</p>
+        <div class="ts-show-content-col">
+          @if($testimonial->category)
+            <span class="ts-show-cat">{{ $testimonial->category }}</span>
+          @endif
+          <h1 class="ts-show-name">{{ $testimonial->name }}</h1>
+          <div class="ts-show-role">{{ $testimonial->role ?? 'New Mother' }}</div>
+          <div class="ts-show-stars">
+            @for($i=0; $i<($testimonial->rating ?? 5); $i++)<span>&#9733;</span>@endfor
+          </div>
+          <div class="ts-show-quote-icon">&ldquo;</div>
+          <p class="ts-show-message">{{ $testimonial->message }}</p>
+        </div>
       </div>
-    </div>
 
-    @if(count($gallery))
-      <div class="ts-show-gallery-wrap">
-        <h2 class="ts-show-gallery-title">Journey Gallery</h2>
-        <div class="ts-show-gallery">
-          @foreach($gallery as $g)
-            <a href="{{ asset($g['src']) }}" class="ts-show-gallery-item {{ strtolower($g['label']) }}" target="_blank" rel="noopener">
-              <img src="{{ asset($g['src']) }}" alt="{{ $g['label'] }} — {{ $testimonial->name }}" loading="lazy">
-              <span class="ts-show-gallery-label">{{ $g['label'] }}</span>
-            </a>
-          @endforeach
+      @if(count($bImgs) || count($aImgs))
+        <div class="ts-show-ba">
+          <h2 class="ts-show-gallery-title">Journey Gallery</h2>
+          <div class="ts-show-ba-tabs">
+            @if(count($bImgs))
+              <button type="button" class="ts-ba-tab {{ count($bImgs) ? 'is-active' : '' }}" data-tab="before">Before</button>
+            @endif
+            @if(count($aImgs))
+              <button type="button" class="ts-ba-tab {{ !count($bImgs) ? 'is-active' : '' }}" data-tab="after">After</button>
+            @endif
+          </div>
+
+          @if(count($bImgs))
+            <div class="ts-ba-panel {{ 'is-active' }}" data-panel="before">
+              <div class="ts-show-gallery">
+                @foreach($bImgs as $img)
+                  <a href="{{ asset($img) }}" class="ts-show-gallery-item before" target="_blank" rel="noopener">
+                    <img src="{{ asset($img) }}" alt="Before — {{ $testimonial->name }}" loading="lazy">
+                    <span class="ts-show-gallery-label">Before</span>
+                  </a>
+                @endforeach
+              </div>
+            </div>
+          @endif
+          @if(count($aImgs))
+            <div class="ts-ba-panel {{ !count($bImgs) ? 'is-active' : '' }}" data-panel="after">
+              <div class="ts-show-gallery">
+                @foreach($aImgs as $img)
+                  <a href="{{ asset($img) }}" class="ts-show-gallery-item after" target="_blank" rel="noopener">
+                    <img src="{{ asset($img) }}" alt="After — {{ $testimonial->name }}" loading="lazy">
+                    <span class="ts-show-gallery-label">After</span>
+                  </a>
+                @endforeach
+              </div>
+            </div>
+          @endif
         </div>
-      </div>
-    @endif
+      @endif
+    </div>
 
     <div class="ts-show-back-wrap">
       <a href="{{ route('testimonials') }}" class="ts-show-back">&larr; Back to All Testimonials</a>
@@ -74,11 +101,7 @@
   padding: 80px 6%;
   background: #fdfaf8;
 }
-.ts-show-grid {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 50px;
-  align-items: start;
+.ts-show-card {
   max-width: 1100px;
   margin: 0 auto 60px;
   background: #ffffff;
@@ -86,6 +109,46 @@
   border-radius: 28px;
   box-shadow: 0 12px 50px rgba(0,0,0,0.05);
 }
+.ts-show-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 50px;
+  align-items: start;
+}
+.ts-show-ba {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid #f0eae6;
+}
+.ts-show-ba-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.ts-ba-tab {
+  background: #ffffff;
+  color: #5a4444;
+  border: 1.5px solid #e8d8d8;
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.ts-ba-tab:hover { border-color: #4DB6AC; color: #2c7d75; }
+.ts-ba-tab.is-active {
+  background: #4DB6AC;
+  border-color: #4DB6AC;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(77,182,172,0.25);
+}
+.ts-ba-panel { display: none; }
+.ts-ba-panel.is-active { display: block; }
 .ts-show-photo {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -152,19 +215,11 @@
   white-space: pre-line;
 }
 
-.ts-show-gallery-wrap {
-  max-width: 1100px;
-  margin: 0 auto 60px;
-  padding: 44px;
-  background: #ffffff;
-  border-radius: 28px;
-  box-shadow: 0 12px 50px rgba(0,0,0,0.05);
-}
 .ts-show-gallery-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(24px, 3vw, 32px);
   color: #222;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
   text-align: center;
 }
 .ts-show-gallery {
@@ -234,16 +289,32 @@
 }
 
 @media (max-width: 860px) {
+  .ts-show-card { padding: 28px 20px; }
   .ts-show-grid {
     grid-template-columns: 1fr;
     gap: 30px;
-    padding: 32px 22px;
     text-align: center;
   }
   .ts-show-photo { max-width: 280px; margin: 0 auto; }
-  .ts-show-gallery-wrap { padding: 28px 20px; }
   .ts-show-gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.ts-ba-tab');
+  const panels = document.querySelectorAll('.ts-ba-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const target = this.dataset.tab;
+      tabs.forEach(t => t.classList.remove('is-active'));
+      panels.forEach(p => p.classList.remove('is-active'));
+      this.classList.add('is-active');
+      const panel = document.querySelector('.ts-ba-panel[data-panel="' + target + '"]');
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+});
+</script>
 
 @endsection
