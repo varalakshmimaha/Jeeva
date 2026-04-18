@@ -1143,6 +1143,13 @@
       .about-cta-row { grid-template-columns: 1fr; }
       .about-cta-form-wrap { padding: 28px 22px; }
       .about-cta-section { padding: 60px 5%; border-radius: 24px; margin: 0 3% 40px; }
+      .about-cta-submit {
+        padding: 14px 18px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        white-space: normal;
+        line-height: 1.3;
+      }
     }
   </style>
 

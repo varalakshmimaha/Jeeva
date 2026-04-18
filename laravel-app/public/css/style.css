@@ -67,8 +67,11 @@ nav{
   box-shadow:0 1px 0 rgba(0,0,0,.04),0 2px 14px rgba(0,0,0,.06);
 }
 nav.scrolled{
-  background:#ffffff;
-  box-shadow:0 1px 0 rgba(0,0,0,.05),0 4px 18px rgba(0,0,0,.08);
+  background:rgba(255,255,255,.85);
+  -webkit-backdrop-filter:saturate(160%) blur(12px);
+  backdrop-filter:saturate(160%) blur(12px);
+  border-bottom:1px solid rgba(47,169,163,.08);
+  box-shadow:0 6px 24px rgba(15,35,45,.08);
 }
 /* Home page: transparent header sitting over the banner */
 body[data-page-name="home"] nav{
@@ -76,8 +79,11 @@ body[data-page-name="home"] nav{
   box-shadow:none;
 }
 body[data-page-name="home"] nav.scrolled{
-  background:#ffffff;
-  box-shadow:0 1px 0 rgba(0,0,0,.05),0 4px 18px rgba(0,0,0,.08);
+  background:rgba(255,255,255,.88);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid rgba(47,169,163,.08);
+  box-shadow:0 6px 24px rgba(15,35,45,.08);
 }
 body[data-page-name="home"] nav:not(.scrolled) .nav-links a{
   color:#ffffff;
@@ -2236,8 +2242,8 @@ footer{
   .banner-slider-track,
   .banner-slide-image{min-height:100vh}
   .banner-slide-shell{
-    align-items:center;
-    padding:28px 5%;
+    align-items:flex-end;
+    padding:28px 5% 40px;
   }
   .banner-slide-content{
     margin-left:0;

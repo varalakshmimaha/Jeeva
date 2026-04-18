@@ -280,6 +280,21 @@
       border-radius: 24px;
       margin: 20px 3% 40px;
     }
+    .svc-cta-submit {
+      padding: 14px 18px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      white-space: normal;
+      line-height: 1.3;
+    }
+    .svc-full-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .svc-learn-btn {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
   }
 </style>
 

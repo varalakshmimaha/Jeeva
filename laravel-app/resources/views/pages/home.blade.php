@@ -224,8 +224,8 @@
 <section class="why-choose-us-sec">
   <div class="container">
     <div class="why-header reveal">
-      <span class="why-eyebrow">Why Choose Us</span>
-      <h2 class="why-title">Why Choose Us?</h2>
+      <span class="why-eyebrow">Why Families Choose Us</span>
+      <h2 class="why-title">What Makes Us Different</h2>
       <p class="why-subtitle">Providing a sanctuary of support, knowledge, and empowerment for your unique birthing journey.</p>
     </div>
 
@@ -716,6 +716,24 @@
       .appointment-form-row { grid-template-columns: 1fr; }
       .appointment-btn { width: 100%; min-width: 0; }
     }
+    @media (max-width: 480px) {
+      .appointment-form { padding: 18px 16px; }
+      .appointment-title { font-size: clamp(22px, 6vw, 28px); }
+      .appointment-subtitle { font-size: 14px; }
+      .appointment-btn {
+        padding: 14px 18px;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        white-space: normal;
+        line-height: 1.3;
+      }
+      .appointment-field input,
+      .appointment-field select,
+      .appointment-field textarea {
+        font-size: 15px;
+        padding: 12px 14px;
+      }
+    }
   </style>
 
   <script>
@@ -1075,10 +1093,24 @@
   .htsd-grass { display: none; }
   .htsd-single { max-width: 560px; }
 }
+@media (max-width: 720px) {
+  .htsd-pair { grid-template-columns: 1fr; gap: 18px; }
+  .htsd-single { max-width: 520px; }
+  .htsd-title { font-size: clamp(22px, 6vw, 30px); }
+  .htsd-tag { font-size: 10px; letter-spacing: 2px; }
+}
 @media (max-width: 600px) {
-  .htsd-sec { padding: 60px 5%; }
-  .htsd-card { padding: 28px 22px; }
-  .htsd-header { margin-bottom: 32px; }
+  .htsd-sec { padding: 48px 5%; min-height: 0; }
+  .htsd-card { padding: 22px 18px; }
+  .htsd-header { margin-bottom: 26px; }
+  .htsd-q { font-size: 36px; }
+  .htsd-msg { font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+  .htsd-auth-img { width: 38px; height: 38px; font-size: 15px; }
+  .htsd-auth-name { font-size: 14px; }
+  .htsd-auth-role { font-size: 11px; }
+  .htsd-dots { margin-top: 14px; gap: 6px; }
+  .htsd-dot { width: 8px; height: 8px; }
+  .htsd-dot--active { width: 22px; }
 }
 </style>
 
@@ -1347,6 +1379,22 @@ document.addEventListener('DOMContentLoaded', function() {
   .home-faq-left { text-align: center; }
   .home-faq-image-wrap { margin: 0 auto 28px; }
   .home-faq-touch { justify-content: center; }
+}
+@media (max-width: 600px) {
+  .home-faq-heading { font-size: clamp(26px, 7vw, 34px); line-height: 1.2; }
+  .home-faq-touch { flex-direction: column; gap: 12px; }
+  .home-faq-touch-btn { padding: 10px 20px; font-size: 13px; }
+  .home-faq-touch-btn .home-faq-touch-btn-icon { width: 20px; height: 20px; margin-left: 6px; }
+  .home-faq-question { padding: 14px 18px; font-size: 14px; gap: 12px; }
+  .home-faq-icon { width: 28px; height: 28px; font-size: 15px; }
+  .home-faq-answer p { padding: 0 18px 18px; font-size: 13.5px; line-height: 1.6; }
+  .home-faq-item { border-radius: 22px; margin-bottom: 14px; }
+}
+@media (max-width: 380px) {
+  .appointment-btn { font-size: 12px; padding: 12px 14px; letter-spacing: 0.3px; }
+  .home-faq-touch-btn { font-size: 12px; padding: 10px 16px; }
+  .home-faq-question { font-size: 13px; padding: 12px 14px; }
+  .svc-cta-submit, .about-cta-submit, .testi-cta-submit { font-size: 12px; padding: 12px 14px; letter-spacing: 0.5px; }
 }
 </style>
 

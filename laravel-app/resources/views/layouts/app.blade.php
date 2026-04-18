@@ -76,18 +76,12 @@
 
   <!-- CTA Buttons -->
   <div class="mob-menu-cta">
-    <a href="tel:+917483211870" class="mob-menu-cta-call">
-      📞 Call Now: +91 74832 11870
+    <a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond" target="_blank" rel="noopener noreferrer" class="mob-menu-cta-call">
+      💬 WhatsApp: +91 74832 11870
     </a>
     <a href="{{ route('contact') }}" class="mob-menu-cta-book">
       📅 Book Consultation
     </a>
-  </div>
-
-  <!-- Footer Info -->
-  <div class="mob-menu-info">
-    <p>🕐 Mon–Sat: 9:00 AM – 8:00 PM</p>
-    <p>📍 Tippasandra, Bangalore 560075</p>
   </div>
 </div>
 <div class="mob-menu-backdrop" id="mobMenuBackdrop"></div>
