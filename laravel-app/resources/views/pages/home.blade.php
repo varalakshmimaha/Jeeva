@@ -292,13 +292,22 @@
   margin-bottom: 80px;
 }
 .why-eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #4DB6AC;
   margin-bottom: 12px;
+}
+.why-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: #4DB6AC;
+  border-radius: 2px;
 }
 .why-title {
   font-family: 'Playfair Display', serif;
@@ -590,13 +599,22 @@
       .appointment-image { aspect-ratio: 4 / 3; height: auto; }
     }
     .appointment-eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       text-transform: uppercase;
       font-size: 12px;
       letter-spacing: 3px;
       color: var(--teal);
       font-weight: 700;
       margin-bottom: 10px;
+    }
+    .appointment-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--teal);
+      border-radius: 2px;
     }
     .appointment-title {
       font-family: 'Playfair Display', serif;
@@ -903,7 +921,9 @@
 }
 
 .htsd-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -912,6 +932,13 @@
   background: transparent;
   padding: 0;
   margin-bottom: 12px;
+}
+.htsd-tag::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: #4DB6AC;
+  border-radius: 2px;
 }
 .htsd-title {
   font-family: 'Playfair Display', serif;
@@ -1226,16 +1253,22 @@ document.addEventListener('DOMContentLoaded', function() {
   margin: 0 auto;
 }
 .home-faq-label {
-  display: inline-block;
-  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--teal);
   font-size: 13px;
   font-weight: 800;
-  padding: 6px 20px;
-  border-radius: 30px;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 16px;
+}
+.home-faq-label::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
 }
 .home-faq-heading {
   font-family: 'Playfair Display', serif;

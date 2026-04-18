@@ -337,13 +337,22 @@
 
   /* Text column */
   .founder-bio-label {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     text-transform: uppercase;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 2.5px;
     color: #4DB6AC;
     margin-bottom: 14px;
+  }
+  .founder-bio-label::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: #4DB6AC;
+    border-radius: 2px;
   }
   .founder-bio-title {
     font-family: 'Playfair Display', serif;
@@ -1009,13 +1018,22 @@
       margin: 0 auto;
     }
     .about-cta-label {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       text-transform: uppercase;
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 3px;
       color: #4DB6AC;
       margin-bottom: 16px;
+    }
+    .about-cta-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: #4DB6AC;
+      border-radius: 2px;
     }
     .about-cta-title {
       font-family: 'Playfair Display', serif;

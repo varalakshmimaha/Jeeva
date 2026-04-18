@@ -144,13 +144,22 @@
     margin: 0 auto;
   }
   .svc-cta-label {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 3px;
     color: #4DB6AC;
     margin-bottom: 16px;
+  }
+  .svc-cta-label::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: #4DB6AC;
+    border-radius: 2px;
   }
   .svc-cta-title {
     font-family: 'Playfair Display', serif;
