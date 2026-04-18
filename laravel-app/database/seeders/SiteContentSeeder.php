@@ -72,16 +72,7 @@ class SiteContentSeeder extends Seeder
         }
 
         // 4. Seed Services
-        \App\Models\Service::truncate();
-        $services = [
-            ['title' => 'Birth Doula Support', 'subtitle' => 'Continuous Labor Support', 'description' => 'Receive unwavering physical, emotional, and informational support throughout your pregnancy, labor, and the immediate postpartum period. Ensure your birth experience is respected, calm, and deeply empowering.', 'icon' => 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=400&q=80'],
-            ['title' => 'Prenatal Yoga', 'subtitle' => 'Mind & Body Preparation', 'description' => 'Prepare your body for birth with customized prenatal yoga practices. Focus on gentle stretching, breathing techniques, and mental centering to relieve discomfort and increase flexibility.', 'icon' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&q=80'],
-            ['title' => 'Childbirth Education', 'subtitle' => 'Knowledge is Power', 'description' => 'Comprehensive classes covering everything from the stages of labor and comfort measures to postpartum recovery. Feel confident and fully informed as you make choices for your birth plan.', 'icon' => 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80'],
-            ['title' => 'Nutrition Guidance', 'subtitle' => 'Nourishment for Two', 'description' => 'Personalized nutritional counseling to support optimal health during pregnancy and postpartum. Learn how to fuel your body and baby with the right balance of wholesome, nutrient-dense foods.', 'icon' => 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=400&q=80'],
-        ];
-        foreach ($services as $idx => $service) {
-            \App\Models\Service::create(array_merge($service, ['order' => $idx]));
-        }
+        (new \Database\Seeders\ServicesSeeder())->run();
 
         // 5. Seed Testimonials
         \App\Models\Testimonial::truncate();

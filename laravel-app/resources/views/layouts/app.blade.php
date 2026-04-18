@@ -111,5 +111,25 @@
 
 <script src="{{ asset('js/dental-data.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
+
+<script>
+(function () {
+  document.querySelectorAll('form.js-cta-with-datetime').forEach((form) => {
+    form.addEventListener('submit', () => {
+      const dateEl = form.querySelector('input[name="preferred_date"]');
+      const timeEl = form.querySelector('select[name="preferred_time"], input[name="preferred_time"]');
+      const msgEl = form.querySelector('textarea[name="message"]');
+      if (!msgEl) return;
+      const date = dateEl ? dateEl.value : '';
+      const time = timeEl ? timeEl.value : '';
+      if (!date && !time) return;
+      const suffix = `\n\nPreferred date: ${date || '—'} | Preferred time: ${time || '—'}`;
+      if (!msgEl.value.includes('Preferred date:')) {
+        msgEl.value = msgEl.value.trim() + suffix;
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

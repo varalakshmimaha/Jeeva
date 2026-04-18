@@ -5,11 +5,37 @@
 @section('content')
 
 <x-page-banner
-  :title="(isset($banner) && $banner) ? $banner->title : 'What Mamas Say'"
+  class="testi-banner"
+  :title="(isset($banner) && $banner) ? $banner->title : 'What our Client Says'"
   :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'Heartfelt words from the families I have had the honour of supporting through their birth journeys.'"
-  :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('images/banner-about.png')"
+  :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('storage/new born.jpg')"
   :breadcrumbs="[['label' => 'Testimonials']]"
 />
+
+<style>
+  /* Testimonials banner: show full newborn image, no cropping */
+  .page-banner.testi-banner {
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #1e2b30;
+  }
+  .page-banner.testi-banner .page-banner-overlay {
+    background: linear-gradient(90deg, rgba(20,30,35,0.55) 0%, rgba(20,30,35,0.25) 45%, rgba(20,30,35,0) 70%);
+  }
+  .page-banner.testi-banner .page-banner-title {
+    text-shadow: 0 4px 20px rgba(0,0,0,0.55);
+  }
+  .page-banner.testi-banner .page-banner-subtitle {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  @media (max-width: 768px) {
+    .page-banner.testi-banner { background-size: cover; background-position: center; }
+    .page-banner.testi-banner .page-banner-overlay {
+      background: linear-gradient(180deg, rgba(20,30,35,0.55) 0%, rgba(20,30,35,0.35) 100%);
+    }
+  }
+</style>
 
 <!-- Testimonials Precision Grid -->
 <section class="testi-precision-sec">
@@ -126,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="testi-cta-form-wrap reveal d1">
         <h3 class="testi-cta-form-title">Book Consultation</h3>
         <p class="testi-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
-        <form action="{{ route('contact.store') }}" method="POST">
+        <form action="{{ route('contact.store') }}" method="POST" class="js-cta-with-datetime">
           @csrf
           <div class="testi-cta-row">
             <div class="testi-cta-field">
@@ -149,6 +175,24 @@ document.addEventListener('DOMContentLoaded', function() {
               <option value="Lactation Support">Lactation Support</option>
               <option value="Other">Other</option>
             </select>
+          </div>
+          @php
+            $defaultSlots = '09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM';
+            $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
+            $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
+          @endphp
+          <div class="testi-cta-row">
+            <div class="testi-cta-field">
+              <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required>
+            </div>
+            <div class="testi-cta-field">
+              <select name="preferred_time" required>
+                <option value="" disabled selected>Pick a Time *</option>
+                @foreach($timeSlots as $slot)
+                  <option value="{{ $slot }}">{{ $slot }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
           <div class="testi-cta-field">
             <textarea name="message" rows="3" placeholder="Tell us about your journey..." required></textarea>

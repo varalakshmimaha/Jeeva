@@ -3748,71 +3748,76 @@ footer{
   .appointment-field select,
   .appointment-field textarea { padding: 12px 14px; font-size: 14px; }
 
-  /* Footer stacking + centering on mobile */
+  /* Footer stacking on mobile — logo centered, everything else left-aligned */
   .site-footer-main { padding: 40px 5% 28px; }
   .site-footer-grid {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    text-align: center;
+    align-items: stretch !important;
+    text-align: left;
     gap: 28px;
   }
   .site-footer-brand,
   .site-footer-column {
     display: flex;
     flex-direction: column;
-    align-items: center !important;
+    align-items: flex-start !important;
     width: 100%;
-    max-width: 360px;
   }
+  /* Logo — centered */
   .site-footer-brand-link {
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     margin: 0 auto 16px;
+    width: 100%;
   }
   .footer-logo-img {
     height: 90px;
     margin: 0 auto;
   }
+  /* Brand copy + address — left aligned */
   .site-footer-brand-copy {
-    margin: 0 auto 16px;
-    text-align: center;
+    margin: 0 0 16px;
+    text-align: left;
     max-width: 100%;
     font-size: 14px;
   }
   .site-footer-address {
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
   }
+  /* Section titles — left aligned, left underline */
   .site-footer-title {
     width: max-content;
-    margin: 0 auto 18px;
+    margin: 0 0 18px;
     font-size: 18px;
+    text-align: left;
   }
   .site-footer-title::after {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
   }
+  /* Links — left aligned */
   .site-footer-links,
   .site-footer-contact-list {
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
   }
   .site-footer-links a,
   .site-footer-contact-item a {
     font-size: 14px;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .site-footer-contact-item {
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
   }
   .footer-follow {
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
   }
   .site-footer-social-icons {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   /* Buttons universally touchable */

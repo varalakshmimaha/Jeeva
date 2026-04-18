@@ -8,21 +8,24 @@
   <section class="founder-bio-section">
     <div class="container">
       <div class="founder-bio-grid">
-        <!-- Left: Image with decorative frame -->
+        <!-- Left: "I am Anu" heading, then image -->
         <div class="founder-bio-img-col reveal">
           <h2 class="founder-bio-name">I am Anu</h2>
           <div class="founder-img-frame">
             <div class="founder-img-accent"></div>
             <div class="founder-img-dot founder-img-dot--1"></div>
             <div class="founder-img-dot founder-img-dot--2"></div>
-            <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="founder-img">
+            <img
+              src="{{ asset('images/about/founder-mountain.jpg') }}"
+              onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';"
+              alt="Anu with dilation board on a mountain"
+              class="founder-img">
           </div>
         </div>
 
-        <!-- Right: Content -->
+        <!-- Right: Content, "Founder Note" aligns to top of image -->
         <div class="founder-bio-text-col reveal d1">
           <span class="founder-bio-label">Founder Note</span>
-
           <div class="founder-bio-content">
             <p>A Birth Doula, Prenatal Yoga Instructor, Childbirth Educator, Nutritionist, and a mother of two teenage children. My journey as a mother, combined with my professional training and experience, allows me to offer deeply compassionate, knowledgeable, and grounded support to women during one of the most transformative phases of their lives.</p>
             <p>I believe childbirth is not only a physical experience but also an emotional and spiritual transformation. Every journey is unique, and every woman deserves care that honours her choices, her body, and her voice.</p>
@@ -33,27 +36,14 @@
             <p class="founder-beyond-inline-sub">A Life of Strength &amp; Stillness</p>
             <p>Outside of my professional role, I am an ultra marathoner and enjoy running and mountain climbing and love exploring places. These personal practices have shaped my strength, resilience, and mindset, and they naturally reflect in the calm and steady support I offer during birth journeys.</p>
           </div>
-        </div>
-      </div>
 
-    </div>
-  </section>
-
-  <!-- Modern CTA Section -->
-  <section class="cta-modern-section reveal about-cta-wrap">
-    <div class="container">
-      <div class="cta-modern-card cta-modern-card--light">
-        <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(47,169,163,0.10);"></div>
-        <div style="position: absolute; bottom: -30px; left: -20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(47,169,163,0.08);"></div>
-        <div class="cta-content" style="position: relative; z-index: 1;">
-          <p class="cta-quote-light">
+          <!-- Founder quote, inline at end of this slide -->
+          <blockquote class="founder-inline-quote">
             "Dear mama, I look forward to being part of your journey—reminding you that you are powerful, capable, and made for this sacred work of bringing life into the world."
-          </p>
-          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 32px;">
-            <a href="{{ route('contact') }}" class="cta-book-btn">Book Consultation &rarr;</a>
-          </div>
+          </blockquote>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -258,10 +248,13 @@
   }
 
   .founder-bio-section {
-    padding: 160px 6% 100px;
+    padding: 130px 6% 70px;
     background: #fdfbfa;
     overflow: hidden;
     position: relative;
+  }
+  @media (max-width: 768px) {
+    .founder-bio-section { padding-top: 110px; }
   }
   .founder-bio-section::before {
     content: '';
@@ -286,14 +279,21 @@
     position: relative;
     z-index: 1;
   }
-  .founder-bio-name {
+  .founder-bio-img-col .founder-bio-name {
     font-family: 'Playfair Display', serif;
     font-size: clamp(32px, 4vw, 44px);
     font-weight: 700;
     color: #1f3b38;
-    margin: 0 0 28px;
     line-height: 1.15;
+    margin: 0 0 28px;
     text-align: center;
+  }
+  /* Right column sits a bit higher than image so bio fills vertical space */
+  .founder-bio-text-col {
+    padding-top: 18px;
+  }
+  @media (max-width: 991px) {
+    .founder-bio-text-col { padding-top: 0; }
   }
   .founder-img-frame {
     position: relative;
@@ -339,9 +339,9 @@
   .founder-bio-label {
     display: inline-block;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     color: #4DB6AC;
     margin-bottom: 14px;
   }
@@ -373,22 +373,35 @@
   }
 
   .founder-bio-content p {
-    font-size: 16px;
+    font-size: 16.5px;
     color: #666;
-    line-height: 1.85;
-    margin-bottom: 16px;
+    line-height: 1.75;
+    margin-bottom: 12px;
   }
   .founder-bio-content p strong {
     color: #3d2b2b;
   }
-  .founder-bio-beyond { margin-top: 28px; }
+  .founder-inline-quote {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(15px, 1.3vw, 17px);
+    color: #1f3b38;
+    line-height: 1.65;
+    margin: 22px 0 0;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(245,213,213,0.3), rgba(77,182,172,0.08));
+    border-left: 4px solid #4DB6AC;
+    border-radius: 0 16px 16px 0;
+  }
+  .founder-bio-beyond { margin-top: 18px; }
   .founder-beyond-inline-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 2.2vw, 24px);
+    font-size: clamp(18px, 1.8vw, 22px);
     color: #2b2b2b;
     line-height: 1.3;
-    margin: 0 0 6px;
-    font-weight: 500;
+    margin: 0 0 4px;
+    font-weight: 600;
   }
   .founder-beyond-inline-title strong {
     font-weight: 700;
@@ -396,13 +409,13 @@
   }
   .founder-beyond-inline-sub {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-style: normal;
-    font-weight: 700;
-    color: #1f1f1f;
-    margin: 0 0 22px !important;
-    line-height: 1.15;
-    letter-spacing: 0;
+    font-size: clamp(17px, 1.8vw, 22px);
+    font-style: italic;
+    font-weight: 500;
+    color: #4DB6AC;
+    margin: 0 0 12px !important;
+    line-height: 1.25;
+    letter-spacing: 0.3px;
   }
 
   /* Beyond the profession */
@@ -575,11 +588,18 @@
       </div>
 
       <div class="cred-layout">
-        <!-- LEFT column -->
-        <div class="cred-col cred-col-left">
-          <div class="cred-item reveal-left">
+        <!-- LEFT: Yoga Image -->
+        <div class="cred-side-img reveal">
+          <img
+            src="{{ asset('images/about/yoga-pic.jpg') }}"
+            onerror="this.onerror=null;this.src='{{ asset('images/cred-prenatal-yoga.png') }}';"
+            alt="Anu practicing yoga">
+        </div>
+
+        <!-- RIGHT: All features stacked -->
+        <div class="cred-features">
+          <div class="cred-item reveal-right">
             <div class="cred-item-icon">
-              <!-- Maternity/Doula icon matching the attached image -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="6" r="3"></circle>
                 <path d="M8.5 11.5a4.5 4.5 0 0 0 7 0"></path>
@@ -592,65 +612,48 @@
               <h4 class="cred-item-title">DONA-Trained and Certified Birth Doula</h4>
             </div>
           </div>
-          <div class="cred-item reveal-left d1">
+          <div class="cred-item reveal-right d1">
             <div class="cred-item-icon">
-              <!-- Flower icon for StillBirthday -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15"/></svg>
             </div>
             <div class="cred-item-body">
               <h4 class="cred-item-title">StillBirthday Certified Doula</h4>
             </div>
           </div>
-          <div class="cred-item reveal-left d2">
+          <div class="cred-item reveal-right d2">
             <div class="cred-item-icon">
-              <!-- Lotus/Zen icon for Prenatal Yoga -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-2.3-2.3-6-5-6-9 0-3.3 2.7-6 6-6s6 2.7 6 6c0 4-3.7 6.7-6 9z"></path></svg>
             </div>
             <div class="cred-item-body">
               <h4 class="cred-item-title">Certified Prenatal &amp; Postnatal Yoga Instructor</h4>
             </div>
           </div>
-          <div class="cred-item reveal-left d3">
+          <div class="cred-item reveal-right d3">
             <div class="cred-item-icon">
-              <!-- Graduation Cap/Award for Educator -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             </div>
             <div class="cred-item-body">
               <h4 class="cred-item-title">Childbirth Educator</h4>
             </div>
           </div>
-        </div>
-
-        <!-- CENTER image -->
-        <div class="cred-center reveal">
-          <div class="cred-center-img">
-            <img src="{{ asset('images/about-couple.jpeg') }}" alt="Anu supporting expectant parents" onerror="this.onerror=null;this.src='{{ asset('images/founder-portrait.jpeg') }}';">
-          </div>
-        </div>
-
-        <!-- RIGHT column -->
-        <div class="cred-col cred-col-right">
-          <div class="cred-item reveal-right">
+          <div class="cred-item reveal-right d4">
             <div class="cred-item-icon">
-              <!-- Milk droplet icon for Lactation -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
             </div>
             <div class="cred-item-body">
               <h4 class="cred-item-title">Lactation Education</h4>
             </div>
           </div>
-          <div class="cred-item reveal-right d1">
+          <div class="cred-item reveal-right d5">
             <div class="cred-item-icon">
-              <!-- Healing Heart/Therapeutic symbol -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 9.2a2 2 0 0 0-.27 1.35V13h3.29a2 2 0 0 0 1.2-.4l3-2.6"/></svg>
             </div>
             <div class="cred-item-body">
               <h4 class="cred-item-title">Therapeutic Yoga (PCOD/PCOS, Infertility, Postpartum &amp; Menopause)</h4>
             </div>
           </div>
-          <div class="cred-item reveal-right d2">
+          <div class="cred-item reveal-right d6">
             <div class="cred-item-icon">
-              <!-- Medal/Award for Advanced Training -->
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
             </div>
             <div class="cred-item-body">
@@ -673,20 +676,33 @@
     }
     .cred-layout {
       display: grid;
-      grid-template-columns: 1fr 420px 1fr;
-      gap: 40px;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
       align-items: center;
-      max-width: 1280px;
+      max-width: 1240px;
       margin: 0 auto;
     }
-    .cred-col { display: flex; flex-direction: column; gap: 28px; }
+    .cred-side-img {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(77,182,172,0.18);
+      background: linear-gradient(180deg, #fdf2f2 0%, #faece4 100%);
+      aspect-ratio: 4 / 5;
+    }
+    .cred-side-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cred-features { display: flex; flex-direction: column; gap: 22px; }
     .cred-item {
       display: flex;
       align-items: flex-start;
       gap: 16px;
       padding: 4px;
     }
-    .cred-col-left .cred-item { text-align: right; flex-direction: row-reverse; }
     .cred-item-icon {
       flex-shrink: 0;
       width: 70px;
@@ -726,33 +742,10 @@
       margin: 0;
     }
 
-    .cred-center { display: flex; justify-content: center; }
-    .cred-center-img {
-      width: 100%;
-      max-width: 420px;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      overflow: hidden;
-      background: linear-gradient(180deg, #fdf2f2 0%, #faece4 100%);
-      box-shadow: 0 24px 60px rgba(77,182,172,0.18);
-      position: relative;
-    }
-    .cred-center-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    @media (max-width: 1100px) {
-      .cred-layout { grid-template-columns: 1fr 340px 1fr; gap: 24px; }
-      .cred-item-title { font-size: 18px; }
-    }
     @media (max-width: 900px) {
       .cred-layout { grid-template-columns: 1fr; gap: 36px; }
-      .cred-col-left .cred-item { text-align: left; flex-direction: row; }
-      .cred-center { order: -1; }
-      .cred-center-img { max-width: 380px; aspect-ratio: 1 / 1; border-radius: 50%; }
+      .cred-side-img { order: -1; max-width: 420px; margin: 0 auto; aspect-ratio: 1 / 1; }
+      .cred-item-title { font-size: 18px; }
     }
     @media (max-width: 480px) {
       .cred-section { padding: 70px 5%; }
@@ -924,7 +917,7 @@
         <div class="about-cta-form-wrap reveal d1">
           <h3 class="about-cta-form-title">Book Consultation</h3>
           <p class="about-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
-          <form action="{{ route('contact.store') }}" method="POST">
+          <form action="{{ route('contact.store') }}" method="POST" class="js-cta-with-datetime">
             @csrf
             <div class="about-cta-row">
               <div class="about-cta-field">
@@ -947,6 +940,24 @@
                 <option value="Lactation Support">Lactation Support</option>
                 <option value="Other">Other</option>
               </select>
+            </div>
+            @php
+              $defaultSlots = '09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM';
+              $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
+              $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
+            @endphp
+            <div class="about-cta-row">
+              <div class="about-cta-field">
+                <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required>
+              </div>
+              <div class="about-cta-field">
+                <select name="preferred_time" required>
+                  <option value="" disabled selected>Pick a Time *</option>
+                  @foreach($timeSlots as $slot)
+                    <option value="{{ $slot }}">{{ $slot }}</option>
+                  @endforeach
+                </select>
+              </div>
             </div>
             <div class="about-cta-field">
               <textarea name="message" rows="3" placeholder="Tell us about your journey..." required></textarea>

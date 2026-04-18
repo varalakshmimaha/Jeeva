@@ -33,7 +33,21 @@
       <!-- Full Detailed Content -->
       @if($service->content)
       <div class="svc-detail-full-content reveal d1">
-        {!! nl2br(e($service->content)) !!}
+        @php
+          $blocks = preg_split('/\n\s*\n/', trim($service->content));
+        @endphp
+        @foreach($blocks as $block)
+          @php $block = trim($block); @endphp
+          @if($block === '') @continue @endif
+          @if(\Illuminate\Support\Str::endsWith($block, '?') && strlen($block) < 100)
+            <h3 class="svc-detail-heading">{{ $block }}</h3>
+          @elseif(strtolower($block) === 'packages')
+            <h3 class="svc-detail-heading svc-detail-packages">Packages</h3>
+            <p class="svc-detail-packages-note">Personalized package details are shared during your consultation — reach out to discuss what best fits your journey.</p>
+          @else
+            <p>{{ $block }}</p>
+          @endif
+        @endforeach
       </div>
       @endif
 
@@ -44,6 +58,30 @@
           Book Consultation &rarr;
         </a>
       </div>
+
+      <style>
+        .svc-detail-full-content .svc-detail-heading {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(22px, 2.4vw, 28px);
+          color: #1f3b38;
+          margin: 28px 0 14px;
+          font-weight: 700;
+        }
+        .svc-detail-full-content .svc-detail-packages {
+          margin-top: 36px;
+          border-top: 1px solid rgba(77,182,172,0.2);
+          padding-top: 22px;
+        }
+        .svc-detail-full-content .svc-detail-packages-note {
+          color: #6b7280;
+          font-style: italic;
+        }
+        .svc-detail-full-content p {
+          margin-bottom: 14px;
+          line-height: 1.8;
+          color: #3d3d3d;
+        }
+      </style>
 
     </div>
   </div>

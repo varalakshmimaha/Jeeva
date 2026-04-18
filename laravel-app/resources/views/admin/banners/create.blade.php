@@ -56,7 +56,7 @@
                     <div class="adm-form-group">
                         <label class="adm-label">Banner Image</label>
                         <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
-                        <p class="adm-hint">JPG, PNG or WebP. Max 3MB. Recommended: 1920x600px</p>
+                        <p class="adm-hint">JPG, PNG or WebP. Recommended 1920×800 px. Min 800×300, max 4000×2500 px.</p>
                     </div>
                     <div class="adm-form-group">
                         <label class="adm-label">Display Order</label>

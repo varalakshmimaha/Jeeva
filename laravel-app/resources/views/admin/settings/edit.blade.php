@@ -86,6 +86,15 @@
                     <p class="adm-hint">Paste the full iframe embed code from Google Maps</p>
                 </div>
             </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Consultation Booking Time Slots</div>
+                <div class="adm-card-body">
+                    <textarea name="booking_time_slots" class="adm-input" rows="3"
+                        placeholder="09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM">{{ old('booking_time_slots', $settings['booking_time_slots'] ?? '') }}</textarea>
+                    <p class="adm-hint">Comma-separated list of time slots shown in the home-page "Pick a Time" dropdown. Leave blank to use the default list.</p>
+                </div>
+            </div>
         </div>
 
         {{-- Panel: Logo --}}

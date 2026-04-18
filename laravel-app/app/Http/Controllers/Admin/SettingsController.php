@@ -29,6 +29,7 @@ class SettingsController extends Controller
             'facebook_link' => 'nullable|url|max:500',
             'twitter_link' => 'nullable|url|max:500',
             'map_embed' => 'nullable|string',
+            'booking_time_slots' => 'nullable|string|max:1000',
         ]);
 
         // Handle logo upload
@@ -56,6 +57,7 @@ class SettingsController extends Controller
         $this->saveSetting('facebook_link', $validated['facebook_link'] ?? null);
         $this->saveSetting('twitter_link', $validated['twitter_link'] ?? null);
         $this->saveSetting('map_embed', $validated['map_embed'] ?? null);
+        $this->saveSetting('booking_time_slots', $validated['booking_time_slots'] ?? null);
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
     }

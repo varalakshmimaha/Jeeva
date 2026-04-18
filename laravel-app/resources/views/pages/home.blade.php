@@ -4,6 +4,40 @@
 
 @section('content')
 
+<style>
+  /* Home banner: show the FULL uploaded hero image without cropping */
+  .home-banners-section .banner-slide {
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: #1e2b30;
+  }
+  /* Home banner title — uppercase and bright for readability over photo */
+  .home-banners-section .banner-slide-content {
+    max-width: 1320px;
+  }
+  .home-banners-section .banner-slide-title {
+    text-transform: uppercase;
+    color: #FFD357;
+    letter-spacing: 0.6px;
+    text-shadow: 0 3px 14px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.4);
+    font-weight: 800;
+    font-size: clamp(14px, 1.4vw, 20px);
+    line-height: 1.3;
+    max-width: 100%;
+    text-wrap: balance;
+  }
+  @media (max-width: 768px) {
+    .home-banners-section .banner-slide-title {
+      font-size: 16px !important;
+    }
+  }
+  .home-banners-section .banner-slide-description {
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+</style>
+
 <!-- Dynamic Hero Banner Section -->
 <section id="home-banners-section" class="home-banners-section">
   <div class="banner-slider" id="bannerSlider">
@@ -16,19 +50,19 @@
                 <h1 class="banner-slide-title">{{ $banner->title }}</h1>
                 <p class="banner-slide-description">{{ $banner->description }}</p>
                 @if($banner->button_text)
-                  <a href="{{ $banner->button_link ?? route('contact') }}" class="banner-slide-button">{{ $banner->button_text }} <span>&rarr;</span></a>
+                  <a href="{{ $banner->button_link ?? route('contact') }}" class="banner-slide-button">{{ $banner->button_text }}</a>
                 @endif
               </div>
             </div>
           </div>
         @endforeach
       @else
-        <div class="banner-slide is-active" style="background-image: url('{{ asset('images/founder-sitting.jpeg') }}');">
+        <div class="banner-slide is-active" style="background-image: url('{{ asset('storage/Hero Banner.jpeg') }}');">
           <div class="banner-slide-shell">
             <div class="banner-slide-content">
               <h1 class="banner-slide-title">Empowering Your Birth Journey</h1>
               <p class="banner-slide-description">Compassionate birth doula support, prenatal yoga, and childbirth education for your journey into motherhood.</p>
-              <a href="{{ route('contact') }}" class="banner-slide-button">Book Consultation <span>&rarr;</span></a>
+              <a href="{{ route('contact') }}" class="banner-slide-button">Book Consultation</a>
             </div>
           </div>
         </div>
@@ -238,26 +272,8 @@
           <img src="{{ asset('images/why_mindbody.png') }}" alt="Holistic Wellness">
           <div class="why-badge">03</div>
         </div>
-        <div class="why-arrow d-none-mobile">
-          <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
-            <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#4DB6AC" stroke-width="1.5" vector-effect="non-scaling-stroke" />
-          </svg>
-          <svg class="why-arrow-head" viewBox="0 0 10 10">
-            <polygon points="0,0 10,5 0,10" fill="#4DB6AC" />
-          </svg>
-        </div>
         <h3 class="why-card-title">Holistic Wellness</h3>
         <p class="why-card-text">From prenatal yoga to dietary advice, we nurture your physical, emotional, and spiritual well-being.</p>
-      </div>
-
-      <!-- Feature 4 -->
-      <div class="why-journey-step reveal d4">
-        <div class="why-img-wrap">
-          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Evidence-Based Support">
-          <div class="why-badge">04</div>
-        </div>
-        <h3 class="why-card-title">Evidence-Based Support</h3>
-        <p class="why-card-text">Our practices are grounded in research and experience, helping you make informed decisions for your birth.</p>
       </div>
     </div>
   </div>
@@ -400,370 +416,9 @@
 }
 </style>
 
-<!-- Stats Counter Section -->
-<section class="home-stats-sec">
-  <div class="stats-overlay"></div>
-  <div class="stats-inner">
-    <!-- Stat 1 -->
-    <div class="stat-card reveal d1">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="stat-num" data-target="12">0</div>
-      <div class="stat-dot">•</div>
-      <div class="stat-label">Years of Experience</div>
-    </div>
-    <!-- Stat 2 -->
-    <div class="stat-card reveal d2">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="stat-num" data-target="450">0</div>
-      <div class="stat-dot">•</div>
-      <div class="stat-label">Families Supported</div>
-    </div>
-    <!-- Stat 3 -->
-    <div class="stat-card reveal d3">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="stat-num" data-target="25">0</div>
-      <div class="stat-dot">•</div>
-      <div class="stat-label">Professional Certs</div>
-    </div>
-    <!-- Stat 4 -->
-    <div class="stat-card reveal d4">
-      <div class="stat-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.52 4.82 3.889 6.178L6 21l4.5-2.25c.49.085.993.135 1.5.135 4.97 0 9-3.186 9-7.12S16.97 3 12 3Z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="stat-num" data-target="1500" data-suffix="+">0</div>
-      <div class="stat-dot">•</div>
-      <div class="stat-label">Yoga Hours Taught</div>
-    </div>
-  </div>
-</section>
-
-<style>
-/* Stats Counter — Greenscapes Card Design */
-.home-stats-sec {
-  position: relative;
-  background-image: url('{{ asset("images/banner-about.png") }}');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  padding: 100px 5%;
-}
-.stats-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 0;
-}
-.stats-inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 20px;
-  flex-wrap: wrap;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-.stat-card {
-  flex: 1;
-  min-width: 200px;
-  max-width: 260px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 40px 24px;
-  text-align: center;
-  color: #ffffff;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.stat-card:hover {
-  transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.14);
-}
-.stat-icon {
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-}
-.stat-icon svg {
-  width: 28px;
-  height: 28px;
-  color: #4DB6AC;
-  stroke: #4DB6AC;
-}
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(42px, 5vw, 62px);
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-.stat-dot {
-  color: #4DB6AC;
-  font-size: 24px;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-.stat-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 700;
-}
-
-@media (max-width: 860px) {
-  .stats-inner { gap: 14px; }
-  .stat-card { min-width: 160px; padding: 30px 16px; }
-}
-@media (max-width: 600px) {
-  .home-stats-sec { padding: 70px 4%; background-attachment: scroll; }
-  .stats-inner { gap: 12px; }
-  .stat-card { min-width: 140px; }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const stats = document.querySelectorAll('.stat-num');
-  const observerOptions = {
-    threshold: 0.5
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const target = entry.target;
-        const countTo = parseInt(target.getAttribute('data-target'));
-        const suffix = target.getAttribute('data-suffix') || '';
-        let count = 0;
-        const duration = 2000; // 2 seconds
-        const increment = countTo / (duration / 16); // 60fps
-
-        const updateCount = () => {
-          count += increment;
-          if (count < countTo) {
-            target.innerText = Math.floor(count) + suffix;
-            requestAnimationFrame(updateCount);
-          } else {
-            target.innerText = countTo + suffix;
-          }
-        };
-        updateCount();
-        observer.unobserve(target);
-      }
-    });
-  }, observerOptions);
-
-  stats.forEach(stat => observer.observe(stat));
-});
-</script>
 
 
 
-
-
-
-
-
-<!-- Book an Appointment Section -->
-<section class="book-appointment-section" id="book-appointment">
-  <div class="container">
-    <div class="appointment-wrapper">
-      <!-- Left: Form -->
-      <div class="appointment-form-col reveal">
-        <h2 class="appointment-title">Book consultation <span style="color: var(--teal);">today!</span></h2>
-        <p class="appointment-subtitle">Scheduling your session is quick and easy&mdash;connect with Anu today and take the first step toward your empowered birth journey.</p>
-
-        <form action="{{ route('contact') }}" method="GET" class="appointment-form">
-          <div class="appointment-form-row">
-            <div class="appointment-field">
-              <input type="text" name="first_name" placeholder="First Name" required>
-            </div>
-            <div class="appointment-field">
-              <input type="text" name="last_name" placeholder="Last Name">
-            </div>
-          </div>
-          <div class="appointment-form-row">
-            <div class="appointment-field">
-              <input type="email" name="email" placeholder="Email Address" required>
-            </div>
-            <div class="appointment-field">
-              <input type="tel" name="phone" placeholder="Phone Number" required>
-            </div>
-          </div>
-          <div class="appointment-field">
-            <select name="service">
-              <option value="" disabled selected>Choose Services</option>
-              @foreach($services as $service)
-                <option value="{{ $service->title }}">{{ $service->title }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="appointment-field">
-            <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}">
-          </div>
-          <button type="submit" class="appointment-btn">Book A Consultation</button>
-        </form>
-      </div>
-
-      <!-- Right: Image & Hours -->
-      <div class="appointment-image-col reveal d2">
-        <div class="appointment-image-box">
-          <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula & Wellness Expert">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    .book-appointment-section {
-      padding: 90px 6%;
-      background: linear-gradient(180deg, #faf1ec 0%, #fdf8f5 100%);
-    }
-    .appointment-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: stretch;
-      max-width: 1240px;
-      margin: 0 auto;
-    }
-    .appointment-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.15;
-      margin-bottom: 14px;
-    }
-    .appointment-subtitle {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-    .appointment-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .appointment-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .appointment-field input,
-    .appointment-field select {
-      width: 100%;
-      padding: 14px 18px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      background: #fff;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      outline: none;
-      box-sizing: border-box;
-    }
-    .appointment-field input:focus,
-    .appointment-field select:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(77, 182, 172, 0.12);
-    }
-    .appointment-field input::placeholder {
-      color: #a0a0a0;
-    }
-    .appointment-field select {
-      color: #a0a0a0;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%237a6060'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      padding-right: 40px;
-    }
-    .appointment-field select option:not(:first-child) {
-      color: var(--text);
-    }
-    .appointment-btn {
-      padding: 16px 32px;
-      background: var(--grad-teal);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(77, 182, 172, 0.3);
-      transition: all 0.3s;
-      align-self: flex-start;
-    }
-    .appointment-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(77, 182, 172, 0.4);
-    }
-    .appointment-image-col {
-      display: flex;
-      flex-direction: column;
-    }
-    .appointment-image-box {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
-      flex: 1;
-    }
-    .appointment-image-box img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    @media (max-width: 860px) {
-      .appointment-wrapper {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      .appointment-form-row {
-        grid-template-columns: 1fr;
-      }
-      .appointment-image-col {
-        order: -1;
-      }
-      .appointment-btn {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
-</section>
 
 <!-- Services Section -->
 <section class="services-section">
@@ -800,6 +455,297 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+<!-- Book A Complimentary Consultation Section -->
+<section class="book-appointment-section" id="book-appointment">
+  <div class="container">
+    <div class="appointment-wrapper">
+      <div class="appointment-heading">
+        <span class="appointment-eyebrow">Let's Connect</span>
+        <h2 class="appointment-title">Book A Complimentary Consultation</h2>
+        <p class="appointment-subtitle">Pick a date and a time that works for you — Anu will confirm your complimentary consultation shortly.</p>
+      </div>
+
+      <div class="appointment-split">
+        <div class="appointment-image reveal">
+          <img
+            src="{{ asset('images/about/book-consultation.jpg') }}"
+            onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';"
+            alt="Book a complimentary consultation with Anu">
+        </div>
+
+        <div class="appointment-form-col reveal d1">
+
+        <form action="{{ route('contact.store') }}" method="POST" class="appointment-form" id="complimentaryForm">
+          @csrf
+          <input type="hidden" name="subject" value="Complimentary Consultation Booking">
+          <input type="hidden" name="message" id="bookingMessage" value="">
+
+          <div class="appointment-form-row">
+            <div class="appointment-field">
+              <label>Full Name</label>
+              <input type="text" name="name" placeholder="Your full name" required>
+            </div>
+            <div class="appointment-field">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+          <div class="appointment-form-row">
+            <div class="appointment-field">
+              <label>Email Address</label>
+              <input type="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="appointment-field">
+              <label>Service</label>
+              <select name="service_selected" required>
+                <option value="" disabled selected>Choose a service</option>
+                @foreach($services as $service)
+                  <option value="{{ $service->title }}">{{ $service->title }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <!-- Date + Time dropdowns -->
+          <div class="appointment-form-row">
+            <div class="appointment-field">
+              <label>Pick a Date</label>
+              <input type="date" name="preferred_date" id="apptSelectedDate" min="{{ date('Y-m-d') }}" required>
+            </div>
+            <div class="appointment-field">
+              <label>Pick a Time</label>
+              @php
+                $defaultSlots = '09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM';
+                $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
+                $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
+              @endphp
+              <select name="preferred_time" id="apptSelectedTime" required>
+                <option value="" disabled selected>Select a time</option>
+                @foreach($timeSlots as $slot)
+                  <option value="{{ $slot }}">{{ $slot }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="appointment-field">
+            <label>Tell us about your journey</label>
+            <textarea name="journey_note" id="apptJourneyNote" rows="3" placeholder="Tell us about your journey..." required minlength="10"></textarea>
+          </div>
+
+          <button type="submit" class="appointment-btn">Book A Complimentary Consultation</button>
+
+          @if(session('success'))
+            <div class="appt-alert appt-alert--ok">✓ Your consultation request has been received. Anu will reach out shortly.</div>
+          @endif
+          @if($errors->any())
+            <div class="appt-alert appt-alert--err">
+              @foreach($errors->all() as $error){{ $error }}<br>@endforeach
+            </div>
+          @endif
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .book-appointment-section {
+      padding: 90px 6%;
+      background: linear-gradient(180deg, #faf1ec 0%, #fdf8f5 100%);
+    }
+    .appointment-wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .appointment-heading { text-align: center; margin-bottom: 48px; }
+    .appointment-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: stretch;
+    }
+    .appointment-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(47,169,163,0.15);
+      height: 100%;
+    }
+    .appointment-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .appointment-form-col {
+      display: flex;
+      height: 100%;
+    }
+    .appointment-form-col .appointment-form {
+      flex: 1;
+      height: 100%;
+    }
+    @media (max-width: 860px) {
+      .appointment-split { grid-template-columns: 1fr; gap: 28px; }
+      .appointment-image { aspect-ratio: 4 / 3; height: auto; }
+    }
+    .appointment-eyebrow {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .appointment-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 700;
+      color: var(--navy, #1f3b38);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .appointment-subtitle {
+      color: #6b7280;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .appointment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background: #ffffff;
+      padding: 36px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(47,169,163,0.12);
+    }
+    .appointment-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .appointment-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3d2b2b;
+      margin-bottom: 6px;
+    }
+    .appointment-field input,
+    .appointment-field select,
+    .appointment-field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid #e4e4e4;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      color: #2b2b2b;
+      background: #fafafa;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .appointment-field textarea {
+      resize: vertical;
+      min-height: 88px;
+    }
+    .appointment-field input:focus,
+    .appointment-field select:focus,
+    .appointment-field textarea:focus {
+      border-color: var(--teal);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(77, 182, 172, 0.12);
+    }
+    .appointment-field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%237a6060'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .appt-selected-summary {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    .appt-selected-summary.is-ready {
+      color: #1f3b38;
+      font-weight: 600;
+    }
+    .appt-selected-summary.is-error {
+      color: #c0392b;
+      font-weight: 600;
+    }
+
+    .appointment-btn {
+      padding: 16px 32px;
+      background: var(--grad-teal);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(77, 182, 172, 0.3);
+      transition: all 0.3s;
+      align-self: center;
+      min-width: 280px;
+    }
+    .appointment-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(77, 182, 172, 0.4);
+    }
+    .appt-alert {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .appt-alert--ok { background: #e8f8ef; color: #2d7a4b; }
+    .appt-alert--err { background: #fde8e8; color: #c0392b; }
+
+    @media (max-width: 860px) {
+      .appointment-form { padding: 24px; }
+      .appointment-form-row { grid-template-columns: 1fr; }
+      .appointment-btn { width: 100%; min-width: 0; }
+    }
+  </style>
+
+  <script>
+  (function () {
+    const dateInput = document.getElementById('apptSelectedDate');
+    const timeInput = document.getElementById('apptSelectedTime');
+    const journeyInput = document.getElementById('apptJourneyNote');
+    const messageInput = document.getElementById('bookingMessage');
+    const form = document.getElementById('complimentaryForm');
+    if (!dateInput || !timeInput || !form) return;
+
+    form.addEventListener('submit', (e) => {
+      const d = dateInput.value;
+      const t = timeInput.value;
+      const journey = journeyInput ? journeyInput.value.trim() : '';
+      if (!d || !t) {
+        e.preventDefault();
+        return;
+      }
+      const serviceSel = form.querySelector('select[name="service_selected"]');
+      const service = serviceSel ? serviceSel.value : '';
+      messageInput.value = 'Complimentary consultation request — Service: ' + service +
+        ' | Preferred date: ' + d +
+        ' | Preferred time: ' + t +
+        (journey ? ' | Journey: ' + journey : '');
+    });
+  })();
+  </script>
+</section>
+
 <!-- Testimonials Section -->
 <section class="htsd-sec">
   <!-- Background Grass/Leaf Decorations -->
@@ -811,75 +757,69 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="container htsd-wrap">
-    <div class="htsd-grid">
-      <!-- Col 1: Text -->
-      <div class="htsd-info reveal">
-        <span class="htsd-tag">Testimonial</span>
-        <h2 class="htsd-title">The Best Customers Says About Our Action</h2>
-        <a href="{{ route('testimonials') }}" class="htsd-cta-btn">
-          Read All Testimonials
-          <span class="htsd-cta-arrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-      </div>
+    <!-- Centered heading -->
+    <div class="htsd-header reveal">
+      <span class="htsd-tag">Testimonial</span>
+      <h2 class="htsd-title">Voices of the Families We've Supported</h2>
+    </div>
 
-      <!-- Col 2: Rating Card -->
-      <div class="htsd-mid reveal d1">
-        <div class="htsd-rate-card">
-          <div class="htsd-rate-num">4.8</div>
-          <div class="htsd-rate-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="htsd-rate-text">From 3k Members,<br>Reviewed by Google</p>
-          <div class="htsd-avatars">
-            <div class="htsd-av" style="background:#e8b4b8;">V</div>
-            <div class="htsd-av" style="background:#a8d5ba;">A</div>
-            <div class="htsd-av" style="background:#b4c8e8;">R</div>
-            <div class="htsd-av" style="background:#e8d4a8;">S</div>
-            <div class="htsd-av htsd-av-more">+</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Col 3: Review Card -->
-      <div class="htsd-review reveal d2">
+    <div class="htsd-single">
+      <!-- Review Slider -->
+      <div class="htsd-review reveal d1">
         <div class="htsd-slider" id="htsdTrack">
           @if($testimonials->isNotEmpty())
-            @foreach($testimonials as $index => $t)
-            <div class="htsd-card {{ $index === 0 ? 'htsd-card--active' : '' }}">
-              <div class="htsd-q">&ldquo;&rdquo;</div>
-              <div class="htsd-stars">
-                @for($i = 0; $i < ($t->rating ?? 5); $i++)<span class="htsd-s filled">&#9733;</span>@endfor
-                @for($i = ($t->rating ?? 5); $i < 5; $i++)<span class="htsd-s">&#9733;</span>@endfor
-              </div>
-              <p class="htsd-msg">{{ Str::limit($t->message, 300) }}</p>
-              <div class="htsd-author">
-                <div class="htsd-auth-img">
-                  @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}">
-                  @else<span>{{ strtoupper(substr($t->name, 0, 1)) }}</span>@endif
+            @php $pairs = $testimonials->chunk(2)->values(); @endphp
+            @foreach($pairs as $pIndex => $pair)
+            <div class="htsd-pair {{ $pIndex === 0 ? 'htsd-pair--active' : '' }}">
+              @foreach($pair as $t)
+              <div class="htsd-card">
+                <div class="htsd-q">&ldquo;&rdquo;</div>
+                <div class="htsd-stars">
+                  @for($i = 0; $i < ($t->rating ?? 5); $i++)<span class="htsd-s filled">&#9733;</span>@endfor
+                  @for($i = ($t->rating ?? 5); $i < 5; $i++)<span class="htsd-s">&#9733;</span>@endfor
                 </div>
-                <div>
-                  <div class="htsd-auth-name">{{ $t->name }}</div>
-                  <div class="htsd-auth-role">{{ $t->role ?? 'Mother of Two' }}</div>
+                <p class="htsd-msg">{{ Str::limit($t->message, 300) }}</p>
+                <div class="htsd-author">
+                  <div class="htsd-auth-img">
+                    @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}">
+                    @else<span>{{ strtoupper(substr($t->name, 0, 1)) }}</span>@endif
+                  </div>
+                  <div>
+                    <div class="htsd-auth-name">{{ $t->name }}</div>
+                    <div class="htsd-auth-role">{{ $t->role ?? 'Mother of Two' }}</div>
+                  </div>
                 </div>
               </div>
+              @endforeach
             </div>
             @endforeach
           @else
-            <div class="htsd-card htsd-card--active">
-              <div class="htsd-q">&ldquo;&rdquo;</div>
-              <div class="htsd-stars"><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span></div>
-              <p class="htsd-msg">The prenatal yoga classes were a game-changer for my second pregnancy. I felt so much stronger and more prepared compared to my first. The breathing techniques helped immensely during labor.</p>
-              <div class="htsd-author">
-                <div class="htsd-auth-img"><span>A</span></div>
-                <div><div class="htsd-auth-name">Ananya Reddy</div><div class="htsd-auth-role">Mother of Two</div></div>
+            <div class="htsd-pair htsd-pair--active">
+              <div class="htsd-card">
+                <div class="htsd-q">&ldquo;&rdquo;</div>
+                <div class="htsd-stars"><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span></div>
+                <p class="htsd-msg">The prenatal yoga classes were a game-changer for my second pregnancy. I felt so much stronger and more prepared compared to my first.</p>
+                <div class="htsd-author">
+                  <div class="htsd-auth-img"><span>A</span></div>
+                  <div><div class="htsd-auth-name">Ananya Reddy</div><div class="htsd-auth-role">Mother of Two</div></div>
+                </div>
+              </div>
+              <div class="htsd-card">
+                <div class="htsd-q">&ldquo;&rdquo;</div>
+                <div class="htsd-stars"><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span><span class="htsd-s filled">&#9733;</span></div>
+                <p class="htsd-msg">Anu's guidance during my pregnancy was priceless. Her breathing techniques and doula support made my birth journey calm and empowered.</p>
+                <div class="htsd-author">
+                  <div class="htsd-auth-img"><span>P</span></div>
+                  <div><div class="htsd-auth-name">Priya Sharma</div><div class="htsd-auth-role">First-time Mother</div></div>
+                </div>
               </div>
             </div>
           @endif
         </div>
         <div class="htsd-dots" id="htsdDots">
           @if($testimonials->isNotEmpty())
-            @foreach($testimonials as $i => $t)
-              <button class="htsd-dot {{ $i === 0 ? 'htsd-dot--active' : '' }}" data-index="{{ $i }}"></button>
+            @foreach($pairs as $pi => $pair)
+              <button class="htsd-dot {{ $pi === 0 ? 'htsd-dot--active' : '' }}" data-index="{{ $pi }}"></button>
             @endforeach
           @endif
         </div>
@@ -916,22 +856,34 @@ document.addEventListener('DOMContentLoaded', function() {
   width: 100%;
 }
 
-/* Grid */
-.htsd-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1.4fr;
-  gap: 40px;
-  align-items: center;
-  max-width: 1200px;
+/* Centered Header */
+.htsd-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+.htsd-header .htsd-title {
+  margin-bottom: 0;
+}
+/* Single centered slider */
+.htsd-single {
+  max-width: 1080px;
   margin: 0 auto;
 }
-
-/* Col 1: Info */
-.htsd-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.htsd-pair {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  animation: htsdIn 0.45s ease;
 }
+.htsd-pair--active {
+  display: grid;
+}
+@media (max-width: 720px) {
+  .htsd-pair { grid-template-columns: 1fr; }
+  .htsd-single { max-width: 560px; }
+}
+
 .htsd-tag {
   display: inline-block;
   font-size: 11px;
@@ -939,10 +891,9 @@ document.addEventListener('DOMContentLoaded', function() {
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #4DB6AC;
-  background: rgba(77,182,172,0.15);
-  padding: 6px 16px;
-  border-radius: 20px;
-  margin-bottom: 18px;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 12px;
 }
 .htsd-title {
   font-family: 'Playfair Display', serif;
@@ -1042,14 +993,13 @@ document.addEventListener('DOMContentLoaded', function() {
 .htsd-review { position: relative; }
 .htsd-slider { position: relative; }
 .htsd-card {
-  display: none;
   background: #ffffff;
   border-radius: 20px;
   padding: 36px 32px;
   box-shadow: 0 16px 45px rgba(0,0,0,0.25);
-  animation: htsdIn 0.45s ease;
+  display: flex;
+  flex-direction: column;
 }
-.htsd-card--active { display: block; }
 @keyframes htsdIn {
   from { opacity: 0; transform: translateX(14px); }
   to   { opacity: 1; transform: translateX(0); }
@@ -1122,30 +1072,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Responsive */
 @media (max-width: 991px) {
-  .htsd-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-  .htsd-review { grid-column: 1 / -1; }
   .htsd-grass { display: none; }
+  .htsd-single { max-width: 560px; }
 }
 @media (max-width: 600px) {
-  .htsd-grid { grid-template-columns: 1fr; gap: 28px; }
-  .htsd-info { align-items: center; text-align: center; }
   .htsd-sec { padding: 60px 5%; }
   .htsd-card { padding: 28px 22px; }
-  .htsd-rate-card { min-width: 160px; }
+  .htsd-header { margin-bottom: 32px; }
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const cards = document.querySelectorAll('.htsd-card');
+  const pairs = document.querySelectorAll('.htsd-pair');
   const dots  = document.querySelectorAll('.htsd-dot');
-  if (!cards.length || cards.length <= 1) return;
+  if (!pairs.length || pairs.length <= 1) return;
   let current = 0, timer;
   function goTo(idx) {
-    cards[current].classList.remove('htsd-card--active');
+    pairs[current].classList.remove('htsd-pair--active');
     dots[current] && dots[current].classList.remove('htsd-dot--active');
-    current = (idx + cards.length) % cards.length;
-    cards[current].classList.add('htsd-card--active');
+    current = (idx + pairs.length) % pairs.length;
+    pairs[current].classList.add('htsd-pair--active');
     dots[current] && dots[current].classList.add('htsd-dot--active');
   }
   function startTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 5500); }
@@ -1414,28 +1361,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-<!-- Modern CTA Section -->
-<section class="cta-modern-section reveal">
-  <div class="container">
-    <div class="cta-modern-card">
-      <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05);"></div>
-      <div style="position: absolute; bottom: -30px; left: -20px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.03);"></div>
-
-      <div class="cta-content" style="position: relative; z-index: 1;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 52px); margin-bottom: 20px; color: white;">Ready to Begin Your Journey?</h2>
-        <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 700px; margin: 0 auto 32px; line-height: 1.8;">Connect with Anu today and take the first step toward a calm, confident, and empowered birth experience.</p>
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-          <a href="tel:+917483211870" class="btn-ghost">
-             ☎ Call Now
-          </a>
-          <a href="{{ route('contact') }}" class="btn-white-solid">
-            Book Consultation &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 @endsection

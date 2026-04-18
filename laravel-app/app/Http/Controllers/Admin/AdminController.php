@@ -105,7 +105,7 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
             'order' => 'nullable|integer',
         ]);
 
@@ -137,7 +137,7 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
             'order' => 'nullable|integer',
         ]);
 
@@ -178,7 +178,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
             'slug' => 'required|string|unique:blogs',
             'published' => 'boolean',
         ]);
@@ -209,7 +209,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
             'slug' => 'required|string|unique:blogs,slug,' . $id,
             'published' => 'boolean',
         ]);
@@ -277,7 +277,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
             'order' => 'nullable|integer',
         ]);
 
