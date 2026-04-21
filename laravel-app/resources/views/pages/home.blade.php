@@ -233,16 +233,7 @@
       <!-- Feature 1 — Personalized, One-on-One Support -->
       <div class="why-journey-step reveal d1">
         <div class="why-img-wrap why-icon-wrap">
-          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
-            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
-            <!-- two people facing each other -->
-            <circle cx="42" cy="46" r="10" fill="none" stroke="#4DB6AC" stroke-width="3.2"/>
-            <path d="M26 82c2-10 9-16 16-16s14 6 16 16" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
-            <circle cx="78" cy="46" r="10" fill="none" stroke="#2FA9A3" stroke-width="3.2"/>
-            <path d="M62 82c2-10 9-16 16-16s14 6 16 16" fill="none" stroke="#2FA9A3" stroke-width="3.2" stroke-linecap="round"/>
-            <!-- heart between -->
-            <path d="M60 60c-2-3-6-3-6 0 0 2 3 4 6 7 3-3 6-5 6-7 0-3-4-3-6 0z" fill="#f5a6a6"/>
-          </svg>
+          <img src="{{ asset('storage/why-choose/01.svg') }}" alt="Personalized, One-on-One Support" class="why-icon">
           <div class="why-badge">01</div>
         </div>
         <div class="why-arrow d-none-mobile">
@@ -256,17 +247,7 @@
       <!-- Feature 2 — Holistic Approach to Wellness & Birth -->
       <div class="why-journey-step reveal d2">
         <div class="why-img-wrap why-icon-wrap">
-          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
-            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
-            <!-- lotus petals -->
-            <path d="M60 30c-6 10-6 24 0 36 6-12 6-26 0-36z" fill="#4DB6AC" opacity=".85"/>
-            <path d="M60 30c-14 6-22 18-20 32 12-4 20-14 20-32z" fill="#2FA9A3" opacity=".75"/>
-            <path d="M60 30c14 6 22 18 20 32-12-4-20-14-20-32z" fill="#2FA9A3" opacity=".75"/>
-            <path d="M36 56c-6 10-4 22 6 28 6-10 4-22-6-28z" fill="#4DB6AC" opacity=".65"/>
-            <path d="M84 56c6 10 4 22-6 28-6-10-4-22 6-28z" fill="#4DB6AC" opacity=".65"/>
-            <!-- base line -->
-            <path d="M34 90c8 4 44 4 52 0" stroke="#4DB6AC" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          </svg>
+          <img src="{{ asset('storage/why-choose/02.svg') }}" alt="Holistic Approach to Wellness & Birth" class="why-icon">
           <div class="why-badge">02</div>
         </div>
         <div class="why-arrow d-none-mobile">
@@ -280,14 +261,7 @@
       <!-- Feature 3 — Guided by Experience & Understanding -->
       <div class="why-journey-step reveal d3">
         <div class="why-img-wrap why-icon-wrap">
-          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
-            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
-            <!-- mother + child silhouette -->
-            <circle cx="52" cy="44" r="11" fill="none" stroke="#4DB6AC" stroke-width="3.2"/>
-            <path d="M34 92c2-14 10-22 18-22s16 8 18 22" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
-            <circle cx="80" cy="58" r="7" fill="none" stroke="#f5a6a6" stroke-width="3"/>
-            <path d="M70 92c1-10 5-14 10-14s9 4 10 14" fill="none" stroke="#f5a6a6" stroke-width="3" stroke-linecap="round"/>
-          </svg>
+          <img src="{{ asset('storage/why-choose/03.svg') }}" alt="Guided by Experience & Understanding" class="why-icon">
           <div class="why-badge">03</div>
         </div>
         <div class="why-arrow d-none-mobile">
@@ -301,14 +275,7 @@
       <!-- Feature 4 — Ongoing Support & Guidance -->
       <div class="why-journey-step reveal d4">
         <div class="why-img-wrap why-icon-wrap">
-          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
-            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
-            <!-- hands holding heart -->
-            <path d="M60 50c-4-6-14-6-14 2 0 8 14 16 14 22 0-6 14-14 14-22 0-8-10-8-14-2z" fill="#f5a6a6"/>
-            <path d="M30 80c6 10 18 14 30 14s24-4 30-14" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
-            <path d="M30 80c-2-4-2-10 2-12" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
-            <path d="M90 80c2-4 2-10-2-12" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
-          </svg>
+          <img src="{{ asset('storage/why-choose/04.svg') }}" alt="Ongoing Support & Guidance" class="why-icon">
           <div class="why-badge">04</div>
         </div>
         <h3 class="why-card-title">Ongoing Support &amp; Guidance</h3>
