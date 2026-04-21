@@ -156,7 +156,7 @@
     background: #fff;
     border: 1px solid #ede8e3;
     border-radius: 12px;
-    padding: 24px 18px;
+    padding: 0;
     box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   }
   .svc-related-title {
@@ -164,15 +164,15 @@
     font-size: 22px;
     font-weight: 700;
     color: #1a1a1a;
-    margin: 0 0 20px;
-    padding-bottom: 14px;
+    margin: 0;
+    padding: 20px 18px 14px;
     border-bottom: 2px solid #e5e5e5;
   }
   .svc-related-item {
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    padding: 14px 0;
+    padding: 14px 18px;
     border-bottom: 1px solid #f2eeeb;
     text-decoration: none;
   }
