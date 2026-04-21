@@ -12,8 +12,8 @@
 />
 
 <!-- Service Detail - Two Column Layout -->
-<section>
-  <div class="container">
+<section style="padding: 0 !important;">
+  <div class="container" style="padding: 0 !important;">
     <div class="svc-detail-layout">
 
       <!-- Main Content -->
@@ -135,6 +135,10 @@
 </section>
 
 <style>
+  section .container {
+    padding: 0 !important;
+  }
+
   /* Two-column layout */
   .svc-detail-layout {
     display: grid;
