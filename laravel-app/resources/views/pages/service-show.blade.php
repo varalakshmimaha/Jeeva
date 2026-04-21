@@ -123,13 +123,11 @@
               @endif
               <span class="svc-related-name">{{ $related->title }}</span>
             </div>
-            <svg class="svc-related-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </a>
           @empty
           <p style="color:#999;font-size:14px;">No other services available.</p>
           @endforelse
         </div>
-
       </aside>
 
     </div>
@@ -153,46 +151,40 @@
   .svc-detail-sidebar {
     position: sticky;
     top: 100px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
   }
   .svc-related-box {
     background: #fff;
-    border: 1.5px solid #e8e0e0;
-    border-radius: 16px;
-    padding: 24px 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid #ede8e3;
+    border-radius: 12px;
+    padding: 28px 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   }
   .svc-related-title {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
-    color: #1f3b38;
-    margin: 0 0 18px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #4DB6AC;
+    color: #1a1a1a;
+    margin: 0 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #e5e5e5;
   }
   .svc-related-item {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid #f0ebe8;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f2eeeb;
     text-decoration: none;
-    transition: background 0.2s;
-    border-radius: 8px;
   }
-  .svc-related-item:last-child { border-bottom: none; }
+  .svc-related-item:last-child { border-bottom: none; padding-bottom: 0; }
   .svc-related-item:hover .svc-related-name { color: #4DB6AC; }
-  .svc-related-item:hover .svc-related-arrow { color: #4DB6AC; transform: translateX(3px); }
   .svc-related-thumb {
-    width: 56px;
-    height: 56px;
-    border-radius: 10px;
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
     overflow: hidden;
     flex-shrink: 0;
-    background: #f9f5f0;
+    background: #f5f0ec;
   }
   .svc-related-thumb img {
     width: 100%;
@@ -205,30 +197,26 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 5px;
+    padding-top: 2px;
   }
   .svc-related-cat {
-    font-size: 11px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
     color: #4DB6AC;
   }
   .svc-related-name {
     font-family: 'Outfit', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: #2b2b2b;
-    line-height: 1.3;
+    color: #1a1a1a;
+    line-height: 1.4;
     transition: color 0.2s;
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .svc-related-arrow {
-    color: #ccc;
-    flex-shrink: 0;
-    transition: color 0.2s, transform 0.2s;
   }
 
 
