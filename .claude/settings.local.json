@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/c/Users/varalakshmi/Desktop/Dental/**)",
+      "Bash(grep -iE \"\\\\.\\(jpg|jpeg|png\\)$\")",
+      "Bash(git commit -m ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8001/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8004/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8007/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8007/contact)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8007)",
+      "Bash(taskkill /PID 14028 /F)",
+      "Bash(taskkill /PID 13296 /F)",
+      "Bash(cmd /c \"taskkill /PID 14028 /F & taskkill /PID 13296 /F\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8009)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}

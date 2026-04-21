@@ -138,8 +138,8 @@
   /* Two-column layout */
   .svc-detail-layout {
     display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 40px;
+    grid-template-columns: 1fr 300px;
+    gap: 28px;
     align-items: start;
     padding: 40px 0 60px;
   }
@@ -156,7 +156,7 @@
     background: #fff;
     border: 1px solid #ede8e3;
     border-radius: 12px;
-    padding: 28px 22px;
+    padding: 24px 18px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   }
   .svc-related-title {
