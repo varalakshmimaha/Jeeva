@@ -139,7 +139,7 @@
   .svc-detail-layout {
     display: grid;
     grid-template-columns: 1fr 300px;
-    gap: 28px;
+    gap: 0;
     align-items: start;
     padding: 40px 0 60px;
   }
