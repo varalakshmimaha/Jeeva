@@ -37,9 +37,11 @@ class PageController extends Controller
     public function serviceShow($id)
     {
         $service = \App\Models\Service::findOrFail($id);
+        $relatedServices = \App\Models\Service::where('id', '!=', $id)->orderBy('order')->get();
         return view('pages.service-show', [
             'pageName' => 'services',
             'service' => $service,
+            'relatedServices' => $relatedServices,
         ]);
     }
 
