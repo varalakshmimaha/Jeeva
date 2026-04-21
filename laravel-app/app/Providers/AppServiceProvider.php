@@ -71,6 +71,10 @@ class AppServiceProvider extends ServiceProvider
                 $settings['logo_url'] = Storage::url($settings['logo_path']);
             }
 
+            if (! empty($settings['certifications_image_path'])) {
+                $settings['certifications_image_url'] = Storage::url($settings['certifications_image_path']);
+            }
+
             $view->with('siteSettings', $settings);
         });
     }

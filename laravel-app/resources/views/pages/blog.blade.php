@@ -52,8 +52,8 @@
           <a href="tel:+917483211870" class="btn-ghost">
             📞 Call Us
           </a>
-          <a href="{{ route('contact') }}" class="btn-white-solid">
-            Book Consultation →
+          <a href="#" class="btn-white-solid" data-calendly>
+            Book Consultation
           </a>
         </div>
       </div>

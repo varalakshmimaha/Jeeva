@@ -99,6 +99,14 @@ Route::prefix('admin')->group(function () {
         Route::put('/testimonials/{id}', [AdminController::class, 'testimonialsUpdate'])->name('admin.testimonials.update');
         Route::delete('/testimonials/{id}', [AdminController::class, 'testimonialsDestroy'])->name('admin.testimonials.destroy');
 
+        // FAQs
+        Route::get('/faqs', [AdminController::class, 'faqsIndex'])->name('admin.faqs.index');
+        Route::get('/faqs/create', [AdminController::class, 'faqsCreate'])->name('admin.faqs.create');
+        Route::post('/faqs', [AdminController::class, 'faqsStore'])->name('admin.faqs.store');
+        Route::get('/faqs/{id}/edit', [AdminController::class, 'faqsEdit'])->name('admin.faqs.edit');
+        Route::put('/faqs/{id}', [AdminController::class, 'faqsUpdate'])->name('admin.faqs.update');
+        Route::delete('/faqs/{id}', [AdminController::class, 'faqsDestroy'])->name('admin.faqs.destroy');
+
         // Contact Messages
         Route::get('/messages', [AdminController::class, 'messagesIndex'])->name('admin.messages.index');
         Route::get('/messages/{id}', [AdminController::class, 'messagesShow'])->name('admin.messages.show');

@@ -13,11 +13,13 @@ class PageController extends Controller
         $banners = \App\Models\Banner::where('page', 'home')->orderBy('order', 'asc')->get();
         $services = \App\Models\Service::orderBy('order', 'asc')->get();
         $testimonials = \App\Models\Testimonial::where('published', true)->orderBy('order')->take(6)->get();
+        $faqs = \App\Models\Faq::where('is_active', true)->orderBy('order')->get();
         return view('pages.home', [
-            'pageName' => 'home',
-            'banners'  => $banners,
-            'services' => $services,
-            'testimonials' => $testimonials
+            'pageName'     => 'home',
+            'banners'      => $banners,
+            'services'     => $services,
+            'testimonials' => $testimonials,
+            'faqs'         => $faqs,
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Service;
 use App\Models\Banner;
 use App\Models\Blog;
+use App\Models\Faq;
 use App\Models\GalleryItem;
 use App\Models\Testimonial;
 use App\Models\ContactMessage;
@@ -49,9 +50,18 @@ class AdminController extends Controller
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'content' => 'nullable|string',
-            'icon' => 'nullable|string|max:255',
+            'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
         ]);
+
+        if ($request->hasFile('icon')) {
+            $file = $request->file('icon');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/services'), $filename);
+            $validated['icon'] = 'images/services/' . $filename;
+        } else {
+            unset($validated['icon']);
+        }
 
         Service::create($validated);
         return redirect()->route('admin.services.index')->with('success', 'Service created successfully!');
@@ -71,9 +81,18 @@ class AdminController extends Controller
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'content' => 'nullable|string',
-            'icon' => 'nullable|string|max:255',
+            'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
         ]);
+
+        if ($request->hasFile('icon')) {
+            $file = $request->file('icon');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/services'), $filename);
+            $validated['icon'] = 'images/services/' . $filename;
+        } else {
+            unset($validated['icon']);
+        }
 
         $service->update($validated);
         return redirect()->route('admin.services.index')->with('success', 'Service updated successfully!');
@@ -105,7 +124,7 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
         ]);
 
@@ -137,7 +156,7 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
         ]);
 
@@ -178,7 +197,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'slug' => 'required|string|unique:blogs',
             'published' => 'boolean',
         ]);
@@ -209,7 +228,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'slug' => 'required|string|unique:blogs,slug,' . $id,
             'published' => 'boolean',
         ]);
@@ -277,7 +296,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240|dimensions:min_width=800,min_height=300,max_width=4000,max_height=2500',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
         ]);
 
@@ -415,5 +434,56 @@ class AdminController extends Controller
     {
         ContactMessage::findOrFail($id)->delete();
         return redirect()->route('admin.messages.index')->with('success', 'Message deleted.');
+    }
+
+    // === FAQs ===
+    public function faqsIndex()
+    {
+        $faqs = Faq::orderBy('order')->get();
+        return view('admin.faqs.index', compact('faqs'));
+    }
+
+    public function faqsCreate()
+    {
+        return view('admin.faqs.create');
+    }
+
+    public function faqsStore(Request $request)
+    {
+        $validated = $request->validate([
+            'question'  => 'required|string|max:500',
+            'answer'    => 'required|string',
+            'order'     => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+        ]);
+        $validated['is_active'] = $request->boolean('is_active');
+        Faq::create($validated);
+        return redirect()->route('admin.faqs.index')->with('success', 'FAQ created successfully!');
+    }
+
+    public function faqsEdit($id)
+    {
+        $faq = Faq::findOrFail($id);
+        return view('admin.faqs.edit', compact('faq'));
+    }
+
+    public function faqsUpdate(Request $request, $id)
+    {
+        $faq = Faq::findOrFail($id);
+        $validated = $request->validate([
+            'question'  => 'required|string|max:500',
+            'answer'    => 'required|string',
+            'order'     => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+        ]);
+        $validated['is_active'] = $request->boolean('is_active');
+        $faq->update($validated);
+        return redirect()->route('admin.faqs.index')->with('success', 'FAQ updated successfully!');
+    }
+
+    public function faqsDestroy($id)
+    {
+        Faq::findOrFail($id)->delete();
+        return redirect()->route('admin.faqs.index')->with('success', 'FAQ deleted.');
     }
 }

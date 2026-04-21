@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.services.update', $service->id) }}" method="POST">
+    <form action="{{ route('admin.services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -47,9 +47,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="adm-fl">Icon</td>
+                        <td class="adm-fl">Image</td>
                         <td class="adm-fi">
-                            <input type="text" name="icon" value="{{ old('icon', $service->icon) }}" maxlength="10" class="adm-input">
+                            @if($service->icon)
+                                <div style="margin-bottom:10px;">
+                                    <img src="{{ asset($service->icon) }}" alt="Current image" style="max-height:100px;border-radius:8px;border:1px solid #e5e7eb;">
+                                    <p class="adm-hint" style="margin-top:4px;">Current image — upload a new one to replace it</p>
+                                </div>
+                            @endif
+                            <input type="file" name="icon" accept="image/jpeg,image/png,image/webp" class="adm-input">
                         </td>
                     </tr>
                     <tr>

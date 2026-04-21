@@ -142,6 +142,27 @@
                     </table>
                 </div>
             </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Footer Certifications / Accreditation Logos</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['certifications_image_path']) && $settings['certifications_image_path'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset('storage/' . $settings['certifications_image_path']) }}" alt="Certifications" style="max-width:220px; background:#fff; padding:8px; border-radius:8px;">
+                            <span class="adm-img-tag">Current Certifications Image</span>
+                        </div>
+                    @endif
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Image</td>
+                            <td class="adm-fi">
+                                <input type="file" name="certifications_image" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Upload logos/badges shown in the footer Contact Us column. PNG with transparent background recommended. Max 2MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
 
         {{-- Panel: Footer & Social --}}

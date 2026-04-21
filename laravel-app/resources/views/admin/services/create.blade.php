@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.services.store') }}" method="POST">
+    <form action="{{ route('admin.services.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="adm-card">
@@ -46,9 +46,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="adm-fl">Icon</td>
+                        <td class="adm-fl">Image</td>
                         <td class="adm-fi">
-                            <input type="text" name="icon" value="{{ old('icon') }}" maxlength="10" class="adm-input" placeholder="Emoji or character">
+                            <input type="file" name="icon" accept="image/jpeg,image/png,image/webp" class="adm-input">
                         </td>
                     </tr>
                     <tr>

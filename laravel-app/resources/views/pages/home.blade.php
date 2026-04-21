@@ -62,7 +62,7 @@
             <div class="banner-slide-content">
               <h1 class="banner-slide-title">Empowering Your Birth Journey</h1>
               <p class="banner-slide-description">Compassionate birth doula support, prenatal yoga, and childbirth education for your journey into motherhood.</p>
-              <a href="{{ route('contact') }}" class="banner-slide-button">Book Consultation</a>
+              <a href="#" class="banner-slide-button" data-calendly>Book Consultation</a>
             </div>
           </div>
         </div>
@@ -226,54 +226,93 @@
     <div class="why-header reveal">
       <span class="why-eyebrow">Why Families Choose Us</span>
       <h2 class="why-title">What Makes Us Different</h2>
-      <p class="why-subtitle">Providing a sanctuary of support, knowledge, and empowerment for your unique birthing journey.</p>
+      <p class="why-subtitle">Compassionate support for a calm, empowered birth journey.</p>
     </div>
 
-    <div class="why-journey-grid">
-      <!-- Feature 1 -->
+    <div class="why-journey-grid why-journey-grid--four">
+      <!-- Feature 1 — Personalized, One-on-One Support -->
       <div class="why-journey-step reveal d1">
-        <div class="why-img-wrap">
-          <img src="{{ asset('images/why_support.png') }}" alt="Compassionate Care">
+        <div class="why-img-wrap why-icon-wrap">
+          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
+            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
+            <!-- two people facing each other -->
+            <circle cx="42" cy="46" r="10" fill="none" stroke="#4DB6AC" stroke-width="3.2"/>
+            <path d="M26 82c2-10 9-16 16-16s14 6 16 16" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="78" cy="46" r="10" fill="none" stroke="#2FA9A3" stroke-width="3.2"/>
+            <path d="M62 82c2-10 9-16 16-16s14 6 16 16" fill="none" stroke="#2FA9A3" stroke-width="3.2" stroke-linecap="round"/>
+            <!-- heart between -->
+            <path d="M60 60c-2-3-6-3-6 0 0 2 3 4 6 7 3-3 6-5 6-7 0-3-4-3-6 0z" fill="#f5a6a6"/>
+          </svg>
           <div class="why-badge">01</div>
         </div>
         <div class="why-arrow d-none-mobile">
-          <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
-            <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#4DB6AC" stroke-width="1.5" vector-effect="non-scaling-stroke" />
-          </svg>
-          <svg class="why-arrow-head" viewBox="0 0 10 10">
-            <polygon points="0,0 10,5 0,10" fill="#4DB6AC" />
-          </svg>
+          <span class="why-arrow-line"></span>
+          <span class="why-arrow-tip"></span>
         </div>
-        <h3 class="why-card-title">Compassionate Care</h3>
-        <p class="why-card-text">We provide deeply personal and empathetic support, ensuring you feel seen and heard at every step.</p>
+        <h3 class="why-card-title">Personalized, One-on-One Support</h3>
+        <p class="why-card-text">Every plan and session is tailored to your body, your needs, and your journey.</p>
       </div>
 
-      <!-- Feature 2 -->
+      <!-- Feature 2 — Holistic Approach to Wellness & Birth -->
       <div class="why-journey-step reveal d2">
-        <div class="why-img-wrap">
-          <img src="{{ asset('images/why_advocacy.png') }}" alt="Expert Guidance">
+        <div class="why-img-wrap why-icon-wrap">
+          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
+            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
+            <!-- lotus petals -->
+            <path d="M60 30c-6 10-6 24 0 36 6-12 6-26 0-36z" fill="#4DB6AC" opacity=".85"/>
+            <path d="M60 30c-14 6-22 18-20 32 12-4 20-14 20-32z" fill="#2FA9A3" opacity=".75"/>
+            <path d="M60 30c14 6 22 18 20 32-12-4-20-14-20-32z" fill="#2FA9A3" opacity=".75"/>
+            <path d="M36 56c-6 10-4 22 6 28 6-10 4-22-6-28z" fill="#4DB6AC" opacity=".65"/>
+            <path d="M84 56c6 10 4 22-6 28-6-10-4-22 6-28z" fill="#4DB6AC" opacity=".65"/>
+            <!-- base line -->
+            <path d="M34 90c8 4 44 4 52 0" stroke="#4DB6AC" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
           <div class="why-badge">02</div>
         </div>
         <div class="why-arrow d-none-mobile">
-          <svg preserveAspectRatio="none" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
-            <path d="M0,38 Q50,-5 99,38" fill="none" stroke="#4DB6AC" stroke-width="1.5" vector-effect="non-scaling-stroke" />
-          </svg>
-          <svg class="why-arrow-head" viewBox="0 0 10 10">
-            <polygon points="0,0 10,5 0,10" fill="#4DB6AC" />
-          </svg>
+          <span class="why-arrow-line"></span>
+          <span class="why-arrow-tip"></span>
         </div>
-        <h3 class="why-card-title">Expert Guidance</h3>
-        <p class="why-card-text">With professional training in doula care and nutrition, we offer knowledgeable guidance for a healthy journey.</p>
+        <h3 class="why-card-title">Holistic Approach to Wellness &amp; Birth</h3>
+        <p class="why-card-text">A unique blend of nutrition, prenatal yoga, and doula support to guide you physically and emotionally.</p>
       </div>
 
-      <!-- Feature 3 -->
+      <!-- Feature 3 — Guided by Experience & Understanding -->
       <div class="why-journey-step reveal d3">
-        <div class="why-img-wrap">
-          <img src="{{ asset('images/why_mindbody.png') }}" alt="Holistic Wellness">
+        <div class="why-img-wrap why-icon-wrap">
+          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
+            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
+            <!-- mother + child silhouette -->
+            <circle cx="52" cy="44" r="11" fill="none" stroke="#4DB6AC" stroke-width="3.2"/>
+            <path d="M34 92c2-14 10-22 18-22s16 8 18 22" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="80" cy="58" r="7" fill="none" stroke="#f5a6a6" stroke-width="3"/>
+            <path d="M70 92c1-10 5-14 10-14s9 4 10 14" fill="none" stroke="#f5a6a6" stroke-width="3" stroke-linecap="round"/>
+          </svg>
           <div class="why-badge">03</div>
         </div>
-        <h3 class="why-card-title">Holistic Wellness</h3>
-        <p class="why-card-text">From prenatal yoga to dietary advice, we nurture your physical, emotional, and spiritual well-being.</p>
+        <div class="why-arrow d-none-mobile">
+          <span class="why-arrow-line"></span>
+          <span class="why-arrow-tip"></span>
+        </div>
+        <h3 class="why-card-title">Guided by Experience &amp; Understanding</h3>
+        <p class="why-card-text">As a mother of two, I bring both professional knowledge and real-life empathy to every client I support &mdash; helping you make informed decisions for your birth.</p>
+      </div>
+
+      <!-- Feature 4 — Ongoing Support & Guidance -->
+      <div class="why-journey-step reveal d4">
+        <div class="why-img-wrap why-icon-wrap">
+          <svg viewBox="0 0 120 120" class="why-icon" aria-hidden="true">
+            <circle cx="60" cy="60" r="56" fill="#e6f6f5"/>
+            <!-- hands holding heart -->
+            <path d="M60 50c-4-6-14-6-14 2 0 8 14 16 14 22 0-6 14-14 14-22 0-8-10-8-14-2z" fill="#f5a6a6"/>
+            <path d="M30 80c6 10 18 14 30 14s24-4 30-14" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
+            <path d="M30 80c-2-4-2-10 2-12" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
+            <path d="M90 80c2-4 2-10-2-12" fill="none" stroke="#4DB6AC" stroke-width="3.2" stroke-linecap="round"/>
+          </svg>
+          <div class="why-badge">04</div>
+        </div>
+        <h3 class="why-card-title">Ongoing Support &amp; Guidance</h3>
+        <p class="why-card-text">You're never alone in your journey &mdash; I'm here to support you every step of the way.</p>
       </div>
     </div>
   </div>
@@ -330,8 +369,14 @@
   max-width: 1300px;
   margin: 0 auto;
 }
+.why-journey-grid--four {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
 @media (max-width: 1200px) {
-  .why-journey-grid {
+  .why-journey-grid,
+  .why-journey-grid--four {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 60px 30px;
@@ -363,6 +408,14 @@
   border-radius: 50%;
   box-shadow: 0 10px 20px rgba(0,0,0,0.06);
 }
+.why-icon-wrap .why-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+  background: #ffffff;
+}
 .why-badge {
   position: absolute;
   top: 5px;
@@ -384,21 +437,28 @@
 }
 .why-arrow {
   position: absolute;
-  top: 90px;
-  left: calc(50% + 120px);
-  width: calc(100% - 240px);
-  height: 40px;
+  top: 100px;
+  left: calc(50% + 115px);
+  width: calc(100% - 200px);
+  height: 20px;
+  display: flex;
+  align-items: center;
   z-index: 10;
   pointer-events: none;
+  overflow: visible;
 }
-.why-arrow-head {
-  position: absolute;
-  right: -3px;
-  bottom: -1px;
-  width: 12px;
-  height: 12px;
-  transform: rotate(38deg);
-  transform-origin: center;
+.why-arrow-line {
+  flex: 1;
+  height: 0;
+  border-top: 2px dotted #4DB6AC;
+}
+.why-arrow-tip {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 9px solid #4DB6AC;
+  margin-left: 2px;
 }
 .why-card-title {
   font-family: 'Playfair Display', serif;
@@ -477,8 +537,7 @@
       <div class="appointment-split">
         <div class="appointment-image reveal">
           <img
-            src="{{ asset('images/about/book-consultation.jpg') }}"
-            onerror="this.onerror=null;this.src='{{ asset('images/founder-casual.jpeg') }}';"
+            src="{{ asset('storage/Baby.jpeg') }}"
             alt="Book a complimentary consultation with Anu">
         </div>
 
@@ -515,34 +574,38 @@
             </div>
           </div>
 
-          <!-- Date + Time dropdowns -->
-          <div class="appointment-form-row">
-            <div class="appointment-field">
-              <label>Pick a Date</label>
-              <input type="date" name="preferred_date" id="apptSelectedDate" min="{{ date('Y-m-d') }}" required>
+          <!-- Pick a Date & Time — inline calendar -->
+          <div class="appointment-field">
+            <label>Pick a Date &amp; Time <span style="color:#e06b6b;">*</span></label>
+            <input type="text" id="home-selected-time" name="preferred_time_label" placeholder="Pick from calendar below" readonly required
+              style="width:100%;padding:11px 14px;border:1.5px solid #e5e0d8;border-radius:8px;background:#fff;font-family:inherit;font-size:14px;color:#2b2b2b;outline:none;box-sizing:border-box;margin-bottom:12px;">
+          </div>
+
+          <!-- Inline Calendar Widget -->
+          <div class="appt-cal-wrap">
+            <div class="appt-cal-card">
+              <div class="appt-cal-header">
+                <button type="button" class="appt-cal-nav" id="apptCalPrev">&#8249;</button>
+                <span class="appt-cal-label" id="apptCalMonthYear"></span>
+                <button type="button" class="appt-cal-nav" id="apptCalNext">&#8250;</button>
+              </div>
+              <div class="appt-cal-days">
+                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+              </div>
+              <div class="appt-cal-grid" id="apptCalGrid"></div>
             </div>
-            <div class="appointment-field">
-              <label>Pick a Time</label>
-              @php
-                $defaultSlots = '09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM';
-                $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
-                $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
-              @endphp
-              <select name="preferred_time" id="apptSelectedTime" required>
-                <option value="" disabled selected>Select a time</option>
-                @foreach($timeSlots as $slot)
-                  <option value="{{ $slot }}">{{ $slot }}</option>
-                @endforeach
-              </select>
+            <div id="apptSlotSection" style="display:none;">
+              <div class="appt-slot-label" id="apptSlotDateLabel"></div>
+              <div class="appt-slots-grid" id="apptSlotsGrid"></div>
             </div>
           </div>
 
           <div class="appointment-field">
-            <label>Tell us about your journey</label>
-            <textarea name="journey_note" id="apptJourneyNote" rows="3" placeholder="Tell us about your journey..." required minlength="10"></textarea>
+            <label>Other Notes</label>
+            <textarea name="message" id="apptJourneyNote" rows="3" placeholder="Anything you'd like to share"></textarea>
           </div>
 
-          <button type="submit" class="appointment-btn">Book A Complimentary Consultation</button>
+          <button type="submit" class="appointment-btn">Book Consultation</button>
 
           @if(session('success'))
             <div class="appt-alert appt-alert--ok">✓ Your consultation request has been received. Anu will reach out shortly.</div>
@@ -729,10 +792,110 @@
     .appt-alert--ok { background: #e8f8ef; color: #2d7a4b; }
     .appt-alert--err { background: #fde8e8; color: #c0392b; }
 
+    /* Inline Calendar */
+    .appt-cal-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+      background: #f9f9f9;
+      border: 1.5px solid #e5e0d8;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .appt-cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .appt-cal-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2b2b2b;
+    }
+    .appt-cal-nav {
+      background: none;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 6px;
+      width: 28px; height: 28px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #555;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .appt-cal-nav:hover { border-color: #4DB6AC; color: #2FA9A3; }
+    .appt-cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .appt-cal-days span {
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+      padding: 3px 0;
+    }
+    .appt-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+    }
+    .appt-day {
+      aspect-ratio: 1;
+      border: none;
+      background: none;
+      border-radius: 6px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      color: #2b2b2b;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .appt-day:hover { background: #e8f7f5; color: #2FA9A3; }
+    .appt-day--past { color: #ccc; cursor: default; }
+    .appt-day--empty { background: none; cursor: default; }
+    .appt-day--selected { background: #2FA9A3; color: #fff; font-weight: 700; }
+    .appt-slot-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2b2b2b;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .appt-slots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .appt-slot {
+      padding: 8px 6px;
+      background: #fff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 7px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      color: #2b2b2b;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .appt-slot:hover { border-color: #4DB6AC; color: #2FA9A3; background: #f0fbfa; }
+    .appt-slot.is-active { background: #2FA9A3; color: #fff; border-color: #2FA9A3; font-weight: 700; }
+
     @media (max-width: 860px) {
       .appointment-form { padding: 24px; }
       .appointment-form-row { grid-template-columns: 1fr; }
       .appointment-btn { width: 100%; min-width: 0; }
+      .appt-cal-wrap { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .appointment-form { padding: 18px 16px; }
@@ -755,13 +918,77 @@
   </style>
 
   <script>
+  /* Home page inline calendar */
+  (function() {
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    @php
+      $defaultSlots = '09:00, 09:30, 10:00, 10:30, 11:00, 11:30, 12:00, 12:30, 14:00, 14:30, 15:00, 15:30, 16:00, 16:30, 17:00, 17:30';
+      $homeSlotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
+      $homeSlots = array_values(array_filter(array_map('trim', explode(',', $homeSlotsRaw))));
+    @endphp
+    var HOME_SLOTS = @json($homeSlots);
+    var hYear, hMonth, hSelectedDate = null;
+
+    function initHomeCal() {
+      var now = new Date(); hYear = now.getFullYear(); hMonth = now.getMonth();
+      renderHomeCal();
+    }
+    function renderHomeCal() {
+      document.getElementById('apptCalMonthYear').textContent = MONTHS[hMonth] + ' ' + hYear;
+      var grid = document.getElementById('apptCalGrid'); grid.innerHTML = '';
+      var today = new Date(); today.setHours(0,0,0,0);
+      var first = new Date(hYear, hMonth, 1).getDay();
+      var days  = new Date(hYear, hMonth + 1, 0).getDate();
+      for (var i = 0; i < first; i++) {
+        var b = document.createElement('span'); b.className = 'appt-day appt-day--empty'; grid.appendChild(b);
+      }
+      for (var d = 1; d <= days; d++) {
+        var cell = document.createElement('button'); cell.type = 'button'; cell.textContent = d;
+        var cellDate = new Date(hYear, hMonth, d);
+        if (cellDate < today) {
+          cell.className = 'appt-day appt-day--past'; cell.disabled = true;
+        } else {
+          cell.className = 'appt-day';
+          if (hSelectedDate && cellDate.toDateString() === hSelectedDate.toDateString()) cell.classList.add('appt-day--selected');
+          cell.addEventListener('click', (function(date){ return function(){ onHomeDatePick(date); }; })(new Date(hYear, hMonth, d)));
+        }
+        grid.appendChild(cell);
+      }
+    }
+    function onHomeDatePick(date) {
+      hSelectedDate = date;
+      document.getElementById('home-selected-time').value = '';
+      renderHomeCal();
+      var label = date.getDate() + ' ' + MONTHS[date.getMonth()] + ' ' + date.getFullYear();
+      document.getElementById('apptSlotDateLabel').textContent = label + ' — Pick a time';
+      var sg = document.getElementById('apptSlotsGrid'); sg.innerHTML = '';
+      HOME_SLOTS.forEach(function(slot) {
+        var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'appt-slot'; btn.textContent = slot;
+        btn.addEventListener('click', function() {
+          sg.querySelectorAll('.appt-slot').forEach(function(b){ b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          document.getElementById('home-selected-time').value = label + ' at ' + slot;
+        });
+        sg.appendChild(btn);
+      });
+      document.getElementById('apptSlotSection').style.display = 'block';
+    }
+    document.getElementById('apptCalPrev').addEventListener('click', function() {
+      hMonth--; if (hMonth < 0) { hMonth = 11; hYear--; } renderHomeCal();
+    });
+    document.getElementById('apptCalNext').addEventListener('click', function() {
+      hMonth++; if (hMonth > 11) { hMonth = 0; hYear++; } renderHomeCal();
+    });
+    initHomeCal();
+  })();
+
   (function () {
     const dateInput = document.getElementById('apptSelectedDate');
     const timeInput = document.getElementById('apptSelectedTime');
     const journeyInput = document.getElementById('apptJourneyNote');
     const messageInput = document.getElementById('bookingMessage');
     const form = document.getElementById('complimentaryForm');
-    if (!dateInput || !timeInput || !form) return;
+    if (!form) return;
 
     form.addEventListener('submit', (e) => {
       const d = dateInput.value;
@@ -1180,45 +1407,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <!-- Right: Accordion -->
       <div class="home-faq-right reveal d1">
-        <div class="home-faq-item" data-faq>
-          <button class="home-faq-question" type="button">
-            <span>What is a birth doula and how can one help me?</span>
-            <span class="home-faq-icon">+</span>
-          </button>
-          <div class="home-faq-answer">
-            <p>A birth doula provides continuous physical, emotional, and informational support during pregnancy, labor, and the postpartum period. Anu helps you feel calm, informed, and empowered throughout your birthing journey.</p>
+        @if(isset($faqs) && $faqs->isNotEmpty())
+          @foreach($faqs as $faq)
+          <div class="home-faq-item" data-faq>
+            <button class="home-faq-question" type="button">
+              <span>{{ $faq->question }}</span>
+              <span class="home-faq-icon">+</span>
+            </button>
+            <div class="home-faq-answer">
+              <p>{{ $faq->answer }}</p>
+            </div>
           </div>
-        </div>
-
-        <div class="home-faq-item" data-faq>
-          <button class="home-faq-question" type="button">
-            <span>When should I hire a birth doula?</span>
-            <span class="home-faq-icon">+</span>
-          </button>
-          <div class="home-faq-answer">
-            <p>Ideally, connect with your doula during the second trimester so there's enough time for prenatal sessions, birth planning, and building a trusting relationship before your due date.</p>
+          @endforeach
+        @else
+          <div class="home-faq-item" data-faq>
+            <button class="home-faq-question" type="button">
+              <span>What is a birth doula and how can one help me?</span>
+              <span class="home-faq-icon">+</span>
+            </button>
+            <div class="home-faq-answer">
+              <p>A birth doula provides continuous physical, emotional, and informational support during pregnancy, labor, and the postpartum period. Anu helps you feel calm, informed, and empowered throughout your birthing journey.</p>
+            </div>
           </div>
-        </div>
-
-        <div class="home-faq-item" data-faq>
-          <button class="home-faq-question" type="button">
-            <span>Do you offer prenatal yoga and nutrition guidance?</span>
-            <span class="home-faq-icon">+</span>
-          </button>
-          <div class="home-faq-answer">
-            <p>Yes! Jiva Birth and Beyond offers prenatal yoga sessions and personalized nutrition consultations to support your physical and mental well-being throughout pregnancy.</p>
+          <div class="home-faq-item" data-faq>
+            <button class="home-faq-question" type="button">
+              <span>When should I hire a birth doula?</span>
+              <span class="home-faq-icon">+</span>
+            </button>
+            <div class="home-faq-answer">
+              <p>Ideally, connect with your doula during the second trimester so there's enough time for prenatal sessions, birth planning, and building a trusting relationship before your due date.</p>
+            </div>
           </div>
-        </div>
-
-        <div class="home-faq-item" data-faq>
-          <button class="home-faq-question" type="button">
-            <span>Can I book a consultation before deciding?</span>
-            <span class="home-faq-icon">+</span>
-          </button>
-          <div class="home-faq-answer">
-            <p>Absolutely. We offer a free initial consultation where you can discuss your needs, ask questions, and understand how Anu can support your unique birth plan.</p>
+          <div class="home-faq-item" data-faq>
+            <button class="home-faq-question" type="button">
+              <span>Do you offer prenatal yoga and nutrition guidance?</span>
+              <span class="home-faq-icon">+</span>
+            </button>
+            <div class="home-faq-answer">
+              <p>Yes! Jiva Birth and Beyond offers prenatal yoga sessions and personalized nutrition consultations to support your physical and mental well-being throughout pregnancy.</p>
+            </div>
           </div>
-        </div>
+          <div class="home-faq-item" data-faq>
+            <button class="home-faq-question" type="button">
+              <span>Can I book a consultation before deciding?</span>
+              <span class="home-faq-icon">+</span>
+            </button>
+            <div class="home-faq-answer">
+              <p>Absolutely. We offer a free initial consultation where you can discuss your needs, ask questions, and understand how Anu can support your unique birth plan.</p>
+            </div>
+          </div>
+        @endif
       </div>
     </div>
   </div>

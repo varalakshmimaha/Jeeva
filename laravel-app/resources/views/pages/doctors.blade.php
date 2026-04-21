@@ -77,7 +77,7 @@
       <h2>Want to Consult?</h2>
       <p>Schedule a consultation for personalized guidance on your journey.</p>
     </div>
-    <a href="{{ route('contact') }}" class="btn-white reveal-right">Book Consultation</a>
+    <a href="#" class="btn-white reveal-right" data-calendly>Book Consultation</a>
   </div>
 </div>
 

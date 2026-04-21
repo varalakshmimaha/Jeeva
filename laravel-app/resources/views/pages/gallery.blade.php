@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;">Schedule your consultation and take the first step toward an empowered birth experience.</p>
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
           <a href="tel:+917483211870" class="btn-ghost">Call Us</a>
-          <a href="{{ route('contact') }}" class="btn-white-solid">Book Now &rarr;</a>
+          <a href="{{ route('contact') }}" class="btn-white-solid">Book Now</a>
         </div>
       </div>
     </div>

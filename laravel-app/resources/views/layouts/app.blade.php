@@ -10,6 +10,8 @@
 <link rel="icon" href="{{ asset($siteSettings['favicon_path']) }}" type="image/png">
 @endif
 <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ @filemtime(public_path('css/style.css')) ?: time() }}">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body data-page-name="{{ $pageName ?? 'home' }}">
 
@@ -26,10 +28,10 @@
     <ul class="nav-links">
       <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
       <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
-      <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Services</a></li>
+      <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Our Services</a></li>
       <li><a href="{{ route('testimonials') }}" class="{{ request()->routeIs('testimonials') ? 'active' : '' }}">Testimonials</a></li>
+      <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
     </ul>
-    <a href="{{ route('contact') }}" class="nav-cta-btn">Contact Us</a>
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
@@ -79,7 +81,7 @@
     <a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond" target="_blank" rel="noopener noreferrer" class="mob-menu-cta-call">
       📞 Call Now: 74832 11870
     </a>
-    <a href="{{ route('contact') }}" class="mob-menu-cta-book">
+    <a href="#" class="mob-menu-cta-book" data-calendly>
       📅 Book Consultation
     </a>
   </div>
@@ -108,20 +110,46 @@
 
 <script>
 (function () {
-  document.querySelectorAll('form.js-cta-with-datetime').forEach((form) => {
-    form.addEventListener('submit', () => {
-      const dateEl = form.querySelector('input[name="preferred_date"]');
-      const timeEl = form.querySelector('select[name="preferred_time"], input[name="preferred_time"]');
-      const msgEl = form.querySelector('textarea[name="message"]');
-      if (!msgEl) return;
-      const date = dateEl ? dateEl.value : '';
-      const time = timeEl ? timeEl.value : '';
-      if (!date && !time) return;
-      const suffix = `\n\nPreferred date: ${date || '—'} | Preferred time: ${time || '—'}`;
-      if (!msgEl.value.includes('Preferred date:')) {
-        msgEl.value = msgEl.value.trim() + suffix;
-      }
+  var CALENDLY_URL = 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1';
+  window.openJivaCalendly = function () {
+    if (typeof Calendly === 'undefined' || !Calendly.initPopupWidget) return false;
+    Calendly.initPopupWidget({ url: CALENDLY_URL });
+    return false;
+  };
+
+  document.querySelectorAll('[data-calendly]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.openJivaCalendly();
     });
+    if (el.hasAttribute('tabindex')) {
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.openJivaCalendly();
+        }
+      });
+    }
+  });
+
+  window.addEventListener('message', function (e) {
+    if (!e.data || typeof e.data.event !== 'string') return;
+    if (e.data.event.indexOf('calendly') !== 0) return;
+    if (e.data.event === 'calendly.date_and_time_selected') {
+      document.querySelectorAll('input[data-calendly-time]').forEach(function (input) {
+        input.value = '✓ Date & time selected';
+        input.classList.add('is-filled');
+        var wrap = input.closest('.jiva-pickdate');
+        if (wrap) wrap.classList.add('is-filled');
+      });
+      /* Close popup immediately — click overlay close button first, fallback to API */
+      var closeBtn = document.querySelector('.calendly-close-overlay');
+      if (closeBtn) {
+        closeBtn.click();
+      } else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) {
+        Calendly.closePopupWidget();
+      }
+    }
   });
 })();
 </script>

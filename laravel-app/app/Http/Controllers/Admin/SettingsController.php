@@ -24,6 +24,7 @@ class SettingsController extends Controller
             'company_hours' => 'nullable|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'favicon' => 'nullable|image|mimes:ico,png,jpg,jpeg|max:1024',
+            'certifications_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'whatsapp_link' => 'nullable|url|max:500',
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
@@ -44,6 +45,12 @@ class SettingsController extends Controller
             $filename = 'favicon.' . $file->getClientOriginalExtension();
             $file->move(public_path(), $filename);
             $this->saveSetting('favicon_path', $filename);
+        }
+
+        // Handle certifications image upload
+        if ($request->hasFile('certifications_image')) {
+            $certPath = $request->file('certifications_image')->store('certifications', 'public');
+            $this->saveSetting('certifications_image_path', $certPath);
         }
 
         // Save other settings
