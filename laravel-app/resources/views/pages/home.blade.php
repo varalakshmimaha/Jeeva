@@ -513,7 +513,6 @@
         <form action="{{ route('contact.store') }}" method="POST" class="appointment-form" id="complimentaryForm">
           @csrf
           <input type="hidden" name="subject" value="Complimentary Consultation Booking">
-          <input type="hidden" name="message" id="bookingMessage" value="">
 
           <div class="appointment-form-row">
             <div class="appointment-field">
@@ -888,12 +887,7 @@
 
     const dateTimeInput = form.querySelector('input[data-calendly-time]');
     const messageInput = form.querySelector('textarea[name="message"]');
-    const messageHiddenInput = form.querySelector('input[name="message"][type="hidden"]');
     const serviceSelect = form.querySelector('select[name="service_selected"]');
-    const nameInput = form.querySelector('input[name="name"]');
-    const emailInput = form.querySelector('input[name="email"]');
-    const phoneSelect = form.querySelector('select[name="country_code"]');
-    const phoneInput = form.querySelector('input[name="phone"]');
     let isSubmitting = false;
 
     form.addEventListener('submit', (e) => {
@@ -911,9 +905,9 @@
       const service = serviceSelect ? serviceSelect.value : '';
       const notes = messageInput ? messageInput.value.trim() : '';
 
-      /* Populate hidden message field with booking details */
-      if (messageHiddenInput) {
-        messageHiddenInput.value = 'Selected Date & Time: ' + dateTime + '\nService: ' + service +
+      /* Populate message field with booking details */
+      if (messageInput) {
+        messageInput.value = 'Selected Date & Time: ' + dateTime + '\nService: ' + service +
           (notes ? '\nAdditional Notes: ' + notes : '');
       }
 
