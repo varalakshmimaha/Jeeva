@@ -25,6 +25,7 @@
         <div class="st-tabs">
             <button type="button" class="st-tab is-active" data-tab="general">General</button>
             <button type="button" class="st-tab" data-tab="logo">Logo & Favicon</button>
+            <button type="button" class="st-tab" data-tab="backgrounds">Background Images</button>
             <button type="button" class="st-tab" data-tab="social">Footer & Social</button>
         </div>
 
@@ -158,6 +159,53 @@
                             <td class="adm-fi">
                                 <input type="file" name="certifications_image" accept="image/*" class="adm-input">
                                 <p class="adm-hint">Upload logos/badges shown in the footer Contact Us column. PNG with transparent background recommended. Max 2MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {{-- Panel: Background Images --}}
+        <div class="st-panel" data-panel="backgrounds">
+            <div class="adm-card">
+                <div class="adm-card-head">CTA Section Background Image</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['cta_bg_image_path']) && $settings['cta_bg_image_path'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset('storage/' . $settings['cta_bg_image_path']) }}" alt="CTA Background" style="max-width:400px; max-height:250px;">
+                            <span class="adm-img-tag">Current CTA Background</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Image</td>
+                            <td class="adm-fi">
+                                <input type="file" name="cta_bg_image" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Background image for all Call-to-Action (CTA) sections. Recommended: 1600x900px or larger. Max 5MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Vision & Mission Section Background Image</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['vision_mission_bg_image_path']) && $settings['vision_mission_bg_image_path'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset('storage/' . $settings['vision_mission_bg_image_path']) }}" alt="Vision & Mission Background" style="max-width:400px; max-height:250px;">
+                            <span class="adm-img-tag">Current Vision & Mission Background</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Image</td>
+                            <td class="adm-fi">
+                                <input type="file" name="vision_mission_bg_image" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Background image for Vision & Mission section on About page. Recommended: 1600x900px or larger. Max 5MB.</p>
                             </td>
                         </tr>
                     </table>

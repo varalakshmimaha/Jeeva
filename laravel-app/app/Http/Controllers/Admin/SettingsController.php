@@ -25,6 +25,8 @@ class SettingsController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'favicon' => 'nullable|image|mimes:ico,png,jpg,jpeg|max:1024',
             'certifications_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'cta_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'vision_mission_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'whatsapp_link' => 'nullable|url|max:500',
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
@@ -51,6 +53,18 @@ class SettingsController extends Controller
         if ($request->hasFile('certifications_image')) {
             $certPath = $request->file('certifications_image')->store('certifications', 'public');
             $this->saveSetting('certifications_image_path', $certPath);
+        }
+
+        // Handle CTA background image upload
+        if ($request->hasFile('cta_bg_image')) {
+            $ctaBgPath = $request->file('cta_bg_image')->store('backgrounds/cta', 'public');
+            $this->saveSetting('cta_bg_image_path', $ctaBgPath);
+        }
+
+        // Handle Vision & Mission background image upload
+        if ($request->hasFile('vision_mission_bg_image')) {
+            $visionBgPath = $request->file('vision_mission_bg_image')->store('backgrounds/vision', 'public');
+            $this->saveSetting('vision_mission_bg_image_path', $visionBgPath);
         }
 
         // Save other settings
