@@ -81,9 +81,7 @@
 
       <!-- Right: Calendly Popup Container -->
       <div class="book-card book-calendly-card">
-        <div id="calendly-popup-container" style="min-height:630px;display:flex;align-items:center;justify-content:center;">
-          <p style="text-align:center;color:#999;font-size:14px;">Click "Select Date & Time" to open the calendar</p>
-        </div>
+        <div id="calendly-popup-container" style="min-height:630px;display:flex;align-items:center;justify-content:center;"></div>
       </div>
 
     </div>
@@ -443,21 +441,39 @@
     var pickDateBtn = document.querySelector('[data-calendly]');
     var popupContainer = document.getElementById('calendly-popup-container');
 
-    // Handle Calendly date picker button
+    // Initialize Calendly calendar on page load
+    function initCalendlyWidget() {
+      if (typeof Calendly !== 'undefined' && popupContainer) {
+        Calendly.initInlineWidget({
+          url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1',
+          parentElement: popupContainer,
+          prefillHostUrl: 'https://jivabirthandbeyond.com'
+        });
+      }
+    }
+
+    // Initialize on page load
+    if (typeof Calendly !== 'undefined') {
+      initCalendlyWidget();
+    } else {
+      // Wait for Calendly to load if not already loaded
+      window.addEventListener('message', function waitForCalendly(e) {
+        if (typeof Calendly !== 'undefined') {
+          initCalendlyWidget();
+          window.removeEventListener('message', waitForCalendly);
+        }
+      });
+      // Try again after a short delay
+      setTimeout(initCalendlyWidget, 1000);
+    }
+
+    // Handle Calendly date picker button (for manual opening)
     if (pickDateBtn) {
       pickDateBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        if (typeof Calendly !== 'undefined') {
-          // Remove placeholder text
-          if (popupContainer) {
-            popupContainer.innerHTML = '';
-          }
-          // Initialize inline widget in the right side container
-          Calendly.initInlineWidget({
-            url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1',
-            parentElement: popupContainer,
-            prefillHostUrl: 'https://jivabirthandbeyond.com'
-          });
+        // Scroll to calendar or highlight it
+        if (popupContainer) {
+          popupContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
     }
