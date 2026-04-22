@@ -108,7 +108,7 @@ nav.scrolled{
   backface-visibility:hidden;
   transform:translateZ(0);
   border-radius:50%;
-  margin:0 0 5px 0;
+  margin:0;
   padding:0;
   line-height:1;
 }
@@ -124,7 +124,7 @@ nav.scrolled .logo-img{
   height:160px;width:160px;
   filter:none;border-radius:50%;
   line-height:1;
-  margin:0 0 5px 0;
+  margin:0;
 }
 
 .nav-links{
