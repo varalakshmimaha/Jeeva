@@ -57,10 +57,7 @@
           </div>
           <div class="bf-field">
             <label class="bf-label">Select Date & Time <span class="bf-req">*</span></label>
-            <div class="bf-calendly-embed">
-              <div data-calendly-inline-widget data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
-            </div>
-            <input type="hidden" name="preferred_time_label" class="jiva-pickdate__input" data-calendly-time>
+            <input type="text" name="preferred_time_label" class="bf-input" id="contactDatePicker" placeholder="Click to select date and time" data-calendly-time>
           </div>
           <div class="bf-field">
             <label class="bf-label">Other Notes</label>
@@ -448,31 +445,9 @@
     const form = document.getElementById('contactBookForm');
     if (!form) return;
 
-    const nameInput = form.querySelector('input[name="name"]');
-    const emailInput = form.querySelector('input[name="email"]');
-    const phoneInput = form.querySelector('input[name="phone"]');
-    const messageInput = form.querySelector('textarea[name="message"]');
     let isSubmitting = false;
 
     console.log('[Contact Form] Initialized');
-
-    /* Auto-submit when Calendly completes a booking */
-    window.addEventListener('message', function(e) {
-      if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
-
-      console.log('[Contact Form] Calendly booking completed');
-
-      /* Set default message since Calendly captured the booking */
-      if (messageInput && !messageInput.value.trim()) {
-        messageInput.value = 'Booked via Calendly - Details confirmed in calendar invitation';
-      }
-
-      /* Auto-submit after a brief delay */
-      setTimeout(() => {
-        console.log('[Contact Form] Auto-submitting form');
-        form.submit();
-      }, 500);
-    });
 
     form.addEventListener('submit', (e) => {
       if (isSubmitting) {
@@ -480,12 +455,11 @@
         return;
       }
 
-      /* Browser validation will handle required fields */
       /* Prevent double submission */
       isSubmitting = true;
       form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
 
-      console.log('[Contact Form] Submitted');
+      console.log('[Contact Form] Submitting...');
     });
   })();
   </script>
