@@ -80,12 +80,12 @@
       </div>
 
       <!-- Right: Image -->
-      <div class="book-card book-image-card">
+      <div class="book-image-card">
         <div class="book-image-wrapper">
           @if(!empty($siteSettings['contact_image']))
             <img src="{{ asset($siteSettings['contact_image']) }}" alt="Book Consultation" class="book-image">
           @else
-            <img src="{{ asset('storage/moutain.jpg') }}" alt="Book Consultation" class="book-image">
+            <img src="https://images.unsplash.com/photo-1494623930402-ab7213d7d44d?w=500&h=500&fit=crop" alt="Book Consultation" class="book-image">
           @endif
         </div>
       </div>
@@ -245,12 +245,13 @@
       box-shadow: none;
       background: transparent;
       display: flex;
-      align-items: stretch;
-      height: 700px;
+      align-items: center;
+      justify-content: center;
     }
     .book-image-wrapper {
       width: 100%;
-      height: 100%;
+      max-width: 450px;
+      height: 450px;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
