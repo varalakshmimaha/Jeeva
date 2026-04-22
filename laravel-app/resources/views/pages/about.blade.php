@@ -689,6 +689,13 @@
         <!-- LEFT: Yoga Image -->
         <div class="cred-side-img reveal">
           <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img">
+          
+          <div class="cred-cert-overlay">
+            @php
+              $dynamicCertImage = \App\Models\SiteSetting::where('key', 'certifications_image_path')->value('value');
+            @endphp
+            <img src="{{ $dynamicCertImage ? asset('storage/' . $dynamicCertImage) : asset('storage/certificate.png') }}" alt="Professional Certifications">
+          </div>
         </div>
 
         <!-- RIGHT: All certifications stacked -->
@@ -774,7 +781,6 @@
     }
     .cred-side-img {
       border-radius: 32px;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -795,30 +801,33 @@
     }
     .cred-cert-overlay {
       position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 340px;
-      height: 340px;
-      border-radius: 0;
-      background: transparent;
-      padding: 0;
-      box-shadow: none;
+      bottom: -40px;
+      right: -30px;
+      width: 220px; 
+      height: 145px;
+      z-index: 5;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: none;
-      overflow: visible;
-      z-index: 2;
-      backdrop-filter: blur(8px);
     }
     .cred-cert-overlay img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      border-radius: 0;
+      width: 220px;
+      height: 220px; 
+      object-fit: cover;
       display: block;
-      filter: url(#removeLightBg);
+      /* Gracefully trims away the ugly massive white margins embedded in the source image */
+      transform: scale(1.4); 
+    }
+    @media (max-width: 900px) {
+      .cred-cert-overlay {
+        bottom: -40px;
+        right: -20px;
+        width: 75%;
+      }
     }
     .cred-cert-card {
       margin-bottom: 60px;
