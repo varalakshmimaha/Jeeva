@@ -79,9 +79,11 @@
         </form>
       </div>
 
-      <!-- Right: Calendly Embedded -->
+      <!-- Right: Calendly Popup Container -->
       <div class="book-card book-calendly-card">
-        <div class="calendly-inline-widget" data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
+        <div id="calendly-popup-container" style="min-height:630px;display:flex;align-items:center;justify-content:center;">
+          <p style="text-align:center;color:#999;font-size:14px;">Click "Select Date & Time" to open the calendar</p>
+        </div>
       </div>
 
     </div>
@@ -238,19 +240,23 @@
       padding: 0 !important;
       box-shadow: none;
       background: transparent;
+    }
+    #calendly-popup-container {
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 16px;
+      overflow: hidden;
     }
     .calendly-inline-widget {
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      width: 100% !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
     }
-    /* Hide Privacy Policy link from Calendly */
     .calendly-inline-widget iframe {
-      border: none;
-      border-radius: 16px;
+      border: none !important;
+      border-radius: 16px !important;
     }
     .bf-field { margin-bottom: 16px; }
     .bf-req { color: #e05252; font-weight: 700; margin-left: 2px; }
@@ -435,14 +441,22 @@
   document.addEventListener('DOMContentLoaded', function() {
     var dateTimeField = document.querySelector('[data-calendly-time]');
     var pickDateBtn = document.querySelector('[data-calendly]');
+    var popupContainer = document.getElementById('calendly-popup-container');
 
     // Handle Calendly date picker button
     if (pickDateBtn) {
       pickDateBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
-          Calendly.initPopupWidget({
-            url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1'
+        if (typeof Calendly !== 'undefined') {
+          // Remove placeholder text
+          if (popupContainer) {
+            popupContainer.innerHTML = '';
+          }
+          // Initialize inline widget in the right side container
+          Calendly.initInlineWidget({
+            url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1',
+            parentElement: popupContainer,
+            prefillHostUrl: 'https://jivabirthandbeyond.com'
           });
         }
       });
