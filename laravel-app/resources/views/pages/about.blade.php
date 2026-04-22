@@ -773,8 +773,8 @@
     }
     .cred-layout {
       display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 48px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 56px;
       align-items: flex-start;
       max-width: 1240px;
       margin: 0 auto;
@@ -784,7 +784,17 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      margin-top: -20px;
+      justify-content: center;
+      background: #f9f9f9;
+      position: relative;
+    }
+    .cred-side-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(77,182,172,0.05) 0%, rgba(245,213,213,0.03) 100%);
+      pointer-events: none;
+      border-radius: 20px;
     }
     .cred-side-img img {
       width: 100%;
@@ -793,6 +803,8 @@
       object-position: center;
       display: block;
       border-radius: 20px;
+      padding: 20px;
+      box-sizing: border-box;
     }
     .cred-cert-card {
       margin-bottom: 60px;
@@ -806,53 +818,61 @@
       box-shadow: 0 20px 50px rgba(77, 182, 172, 0.15);
       display: inline-block;
     }
-    .cred-features { display: flex; flex-direction: column; gap: 10px; }
+    .cred-features { display: flex; flex-direction: column; gap: 14px; }
     .cred-item {
       display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 2px;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px;
+      transition: all 0.3s ease;
     }
     .cred-item-icon {
       flex-shrink: 0;
-      width: 54px;
-      height: 54px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      background: linear-gradient(135deg, rgba(77,182,172,0.12) 0%, rgba(77,182,172,0.06) 100%);
+      border: 2px solid rgba(77,182,172,0.15);
+      box-shadow: 0 4px 16px rgba(77,182,172,0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 3px;
+      padding: 0;
       transition: all 0.3s ease;
+      margin-top: 2px;
     }
     .cred-item:hover .cred-item-icon {
-      background: rgba(77, 182, 172, 0.1);
+      background: linear-gradient(135deg, rgba(77, 182, 172, 0.18) 0%, rgba(77, 182, 172, 0.1) 100%);
+      border-color: rgba(77, 182, 172, 0.3);
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(77, 182, 172, 0.15);
+      box-shadow: 0 8px 26px rgba(77, 182, 172, 0.18);
     }
-    .cred-item-icon svg { width: 26px; height: 26px; stroke: #4DB6AC; transition: all 0.3s ease; }
-    .cred-item:hover .cred-item-icon svg { transform: scale(1.1); }
+    .cred-item-icon svg { width: 28px; height: 28px; stroke: #4DB6AC; transition: all 0.3s ease; flex-shrink: 0; }
+    .cred-item:hover .cred-item-icon svg { transform: scale(1.08); }
     .cred-item-body { flex: 1; }
     .cred-item-title {
       font-family: 'Playfair Display', serif;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
-      color: #2c3e3a;
+      color: #2b2b2b;
       margin: 0;
-      line-height: 1.3;
+      line-height: 1.4;
+      letter-spacing: 0.2px;
     }
 
     @media (max-width: 900px) {
-      .cred-layout { grid-template-columns: 1fr; gap: 36px; }
-      .cred-side-img { order: -1; max-width: 420px; margin: 0 auto; }
-      .cred-item-title { font-size: 18px; }
+      .cred-layout { grid-template-columns: 1fr; gap: 40px; }
+      .cred-side-img { order: -1; max-width: 450px; margin: 0 auto; }
+      .cred-features { gap: 12px; }
+      .cred-item-title { font-size: 16px; }
     }
     @media (max-width: 480px) {
       .cred-section { padding: 70px 5%; }
       .cred-header { margin-bottom: 40px; }
-      .cred-item-icon { width: 60px; height: 60px; padding: 3px; }
-      .cred-item-title { font-size: 17px; }
+      .cred-item { padding: 8px; gap: 12px; }
+      .cred-item-icon { width: 52px; height: 52px; }
+      .cred-item-icon svg { width: 24px; height: 24px; }
+      .cred-item-title { font-size: 15px; }
     }
   </style>
 
