@@ -138,10 +138,28 @@
 <script src="{{ asset('js/script.js') }}"></script>
 
 <script>
+/* Check if Calendly is loaded */
+window.addEventListener('load', function() {
+  if (typeof Calendly !== 'undefined') {
+    console.log('[Calendly] ✓ Calendly widget loaded');
+  } else {
+    console.warn('[Calendly] ⚠ Calendly widget NOT loaded - check if script tag is present');
+  }
+});
+
 (function () {
   var CALENDLY_URL = 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1';
   window.openJivaCalendly = function () {
-    if (typeof Calendly === 'undefined' || !Calendly.initPopupWidget) return false;
+    console.log('[Calendly] Opening popup...');
+    if (typeof Calendly === 'undefined') {
+      console.error('[Calendly] Calendly object not defined! Widget script may not have loaded.');
+      return false;
+    }
+    if (!Calendly.initPopupWidget) {
+      console.error('[Calendly] initPopupWidget not available');
+      return false;
+    }
+    console.log('[Calendly] Initializing popup widget');
     Calendly.initPopupWidget({ url: CALENDLY_URL });
     return false;
   };
@@ -149,12 +167,14 @@
   document.querySelectorAll('[data-calendly]').forEach(function (el) {
     el.addEventListener('click', function (e) {
       e.preventDefault();
+      console.log('[Calendly] Calendly element clicked');
       window.openJivaCalendly();
     });
     if (el.hasAttribute('tabindex')) {
       el.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          console.log('[Calendly] Calendly element keyboard activated');
           window.openJivaCalendly();
         }
       });
@@ -183,6 +203,7 @@
   /* Monitor Calendly inputs for changes (fallback method) */
   (function() {
     var monitoredInputs = new WeakSet();
+    var isCalendlyOpen = false;
 
     function setupInputMonitor(input) {
       if (monitoredInputs.has(input)) return;
@@ -191,10 +212,13 @@
       var originalValue = input.value;
       var checkCount = 0;
 
-      /* Check every 300ms for up to 30 seconds if the input was updated by Calendly */
+      console.log('[Calendly] Started monitoring input, original value:', originalValue);
+
+      /* Check every 200ms for up to 30 seconds if the input was updated by Calendly */
       var monitor = setInterval(function() {
         checkCount++;
-        if (checkCount > 100 || !document.body.contains(input)) {
+        if (checkCount > 150 || !document.body.contains(input)) {
+          console.log('[Calendly] Stopped monitoring after', checkCount, 'checks');
           clearInterval(monitor);
           return;
         }
@@ -207,6 +231,7 @@
                          currentValue !== originalValue;
 
         if (isValidDate) {
+          console.log('[Calendly] ✓ Date detected:', currentValue);
           input.classList.add('is-filled');
           var wrap = input.closest('.jiva-pickdate');
           if (wrap) wrap.classList.add('is-filled');
@@ -214,13 +239,18 @@
           /* Close popup when date is detected */
           setTimeout(function() {
             var closeBtn = document.querySelector('.calendly-close-overlay');
-            if (closeBtn) closeBtn.click();
-            else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) Calendly.closePopupWidget();
+            if (closeBtn) {
+              closeBtn.click();
+              console.log('[Calendly] Closed popup via overlay button');
+            } else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) {
+              Calendly.closePopupWidget();
+              console.log('[Calendly] Closed popup via Calendly API');
+            }
           }, 100);
 
           clearInterval(monitor);
         }
-      }, 300);
+      }, 200);
     }
 
     /* Setup monitoring on all calendly date inputs */
@@ -232,6 +262,8 @@
     document.addEventListener('click', function(e) {
       var calendlyBtn = e.target.closest('[data-calendly]');
       if (calendlyBtn) {
+        isCalendlyOpen = true;
+        console.log('[Calendly] Button clicked, calendar should open');
         var input = calendlyBtn.querySelector('input[data-calendly-time]');
         if (input) setupInputMonitor(input);
       }
@@ -241,6 +273,8 @@
   window.addEventListener('message', function (e) {
     if (!e.data || typeof e.data.event !== 'string') return;
     if (e.data.event.indexOf('calendly') !== 0) return;
+
+    console.log('[Calendly] PostMessage received:', e.data.event, e.data);
 
     /* Handle date and time selected via postMessage */
     if (e.data.event === 'calendly.date_and_time_selected') {
@@ -275,6 +309,7 @@
 
       /* Fill all form date/time inputs with selected date */
       if (selectedDateTime) {
+        console.log('[Calendly] ✓ Setting date on inputs:', selectedDateTime);
         document.querySelectorAll('input[data-calendly-time]').forEach(function (input) {
           input.value = selectedDateTime;
           input.classList.add('is-filled');
@@ -286,6 +321,8 @@
         if (footerDateInput) {
           footerDateInput.value = selectedDateTime;
         }
+      } else {
+        console.warn('[Calendly] Could not extract datetime from payload');
       }
 
       /* Close popup immediately after time selection */
