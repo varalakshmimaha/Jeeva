@@ -308,7 +308,4 @@
   }
 </style>
 
-<!-- Book Consultation CTA -->
-<x-book-consultation-form />
-
 @endsection
