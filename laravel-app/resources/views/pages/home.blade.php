@@ -511,7 +511,20 @@
         <div class="appointment-form-col reveal d1">
 
         @if(session('success'))
-          <div class="book-alert book-alert--ok">{{ session('success') }}</div>
+          <div id="bookingSuccessModal" class="booking-modal-overlay">
+            <div class="booking-modal-card">
+              <div class="booking-modal-icon">
+                <svg viewBox="0 0 52 52" width="46" height="46" aria-hidden="true">
+                  <circle cx="26" cy="26" r="24" fill="none" stroke="#2FA9A3" stroke-width="3" class="bm-circle"/>
+                  <path d="M14 27l8 8 16-18" fill="none" stroke="#2FA9A3" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="bm-check"/>
+                </svg>
+              </div>
+              <h3 class="booking-modal-title">Slot Booked</h3>
+              <p class="booking-modal-text">{{ session('success') }}</p>
+              <p class="booking-modal-sub">Anu will reach out shortly to confirm your session details.</p>
+              <button type="button" class="booking-modal-btn" onclick="document.getElementById('bookingSuccessModal').remove()">Got it</button>
+            </div>
+          </div>
         @endif
         @if($errors->any())
           <div class="book-alert book-alert--err">
@@ -648,8 +661,99 @@
       background: linear-gradient(180deg, #faf1ec 0%, #fdf8f5 100%);
     }
     .book-alert { padding: 13px 16px; border-radius: 12px; font-size: 14px; margin-bottom: 16px; font-family: 'Outfit', sans-serif; }
-    .book-alert--ok { background: #eafaf4; color: #1d6b52; border: 1px solid #bfeadb; }
     .book-alert--err { background: #fdecec; color: #a22d2d; border: 1px solid #f3c6c6; }
+
+    /* Booking success modal */
+    .booking-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 43, 40, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+      font-family: 'Outfit', sans-serif;
+      animation: bmFadeIn .28s ease;
+    }
+    .booking-modal-card {
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 440px;
+      width: 100%;
+      padding: 44px 36px 36px;
+      text-align: center;
+      box-shadow: 0 40px 100px -20px rgba(0,0,0,0.35);
+      animation: bmSlideUp .4s cubic-bezier(.2,.7,.2,1);
+    }
+    .booking-modal-icon {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #eafaf8 0%, #d4f3ef 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .booking-modal-icon .bm-circle {
+      stroke-dasharray: 160;
+      stroke-dashoffset: 160;
+      animation: bmDraw .6s ease-out .1s forwards;
+    }
+    .booking-modal-icon .bm-check {
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: bmDraw .4s ease-out .5s forwards;
+    }
+    @keyframes bmDraw { to { stroke-dashoffset: 0; } }
+    .booking-modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #1f3b38;
+      margin: 0 0 10px;
+      letter-spacing: .3px;
+    }
+    .booking-modal-text {
+      color: #2b4a47;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 0 8px;
+      font-weight: 500;
+    }
+    .booking-modal-sub {
+      color: #6f8481;
+      font-size: 13.5px;
+      line-height: 1.65;
+      margin: 0 0 28px;
+    }
+    .booking-modal-btn {
+      display: inline-block;
+      padding: 13px 38px;
+      background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 10px 24px -8px rgba(47,169,163,0.5);
+    }
+    .booking-modal-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px -10px rgba(47,169,163,0.6);
+    }
+    @keyframes bmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes bmSlideUp {
+      from { transform: translateY(20px) scale(.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
     .book-form {
       display: flex;
       flex-direction: column;

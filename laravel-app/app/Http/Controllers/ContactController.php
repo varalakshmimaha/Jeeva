@@ -45,10 +45,10 @@ class ContactController extends Controller
         $this->sendConfirmationEmail($booking);
 
         if (!empty($validated['subject']) && $validated['subject'] === 'Complimentary Consultation Booking') {
-            return redirect(route('home') . '#book-appointment')->with('success', '✓ Thank you! A confirmation email is on its way.');
+            return redirect(route('home') . '#book-appointment')->with('success', 'Thank you! Your slot has been booked successfully.');
         }
 
-        return redirect()->back()->with('success', '✓ Thank you! A confirmation email is on its way.');
+        return redirect()->back()->with('success', 'Thank you! Your slot has been booked successfully.');
     }
 
     private function sendBookingEmail($booking)

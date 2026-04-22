@@ -800,17 +800,18 @@
     }
     .cred-cert-overlay {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
-      width: 100px;
-      height: 100px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.95);
-      padding: 8px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      bottom: 20px;
+      right: 20px;
+      width: 180px;
+      height: 180px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.97);
+      padding: 14px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 2px solid rgba(77,182,172,0.3);
       z-index: 2;
       backdrop-filter: blur(8px);
     }
@@ -877,7 +878,7 @@
     @media (max-width: 900px) {
       .cred-layout { grid-template-columns: 1fr; gap: 40px; }
       .cred-side-img { order: -1; max-width: 100%; margin: 0 auto; }
-      .cred-cert-overlay { width: 100px; height: 100px; bottom: 12px; right: 12px; }
+      .cred-cert-overlay { width: 140px; height: 140px; bottom: 16px; right: 16px; padding: 10px; }
       .cred-features { gap: 12px; }
       .cred-item-title { font-size: 16px; }
     }
@@ -885,7 +886,7 @@
       .cred-section { padding: 70px 5%; }
       .cred-header { margin-bottom: 40px; }
       .cred-side-img { max-width: 100%; }
-      .cred-cert-overlay { width: 80px; height: 80px; bottom: 8px; right: 8px; }
+      .cred-cert-overlay { width: 110px; height: 110px; bottom: 12px; right: 12px; padding: 8px; }
       .cred-item { padding: 8px; gap: 12px; }
       .cred-item-icon { width: 52px; height: 52px; }
       .cred-item-icon svg { width: 24px; height: 24px; }
