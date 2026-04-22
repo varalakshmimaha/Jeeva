@@ -433,10 +433,8 @@
       font-weight: 700;
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 768px) {
       .book-grid { grid-template-columns: 1fr !important; gap: 30px; }
-    }
-    @media (max-width: 900px) {
       .touch-grid { grid-template-columns: 1fr !important; gap: 30px; }
       .touch-form-card { padding: 26px 20px; }
       .book-card { padding: 22px; }
