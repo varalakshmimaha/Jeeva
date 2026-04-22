@@ -41,7 +41,7 @@
                             <div style="font-size:11px;color:#4DB6AC;margin-top:4px;">📅 {{ $bookingDate }}</div>
                         @endif
                     </td>
-                    <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->diffForHumans() }}</td>
+                    <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->format('M d, Y h:i A') }}</td>
                     <td>
                         @php
                             $statusConfig = [
