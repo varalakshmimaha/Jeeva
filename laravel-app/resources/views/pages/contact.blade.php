@@ -18,7 +18,7 @@
       <!-- Left: Form -->
       <div class="book-card book-form-card">
         <h3 class="book-title">Book Consultation</h3>
-        <form action="{{ route('contact.store') }}" method="POST" class="book-form">
+        <form action="{{ route('contact.store') }}" method="POST" class="book-form" id="contactBookForm">
           @csrf
           <div class="bf-field">
             <label class="bf-label">Name <span class="bf-req">*</span></label>
@@ -29,9 +29,9 @@
             <input type="email" name="email" class="bf-input" placeholder="Enter your email" required>
           </div>
           <div class="bf-field">
-            <label class="bf-label">Phone <span class="bf-req">*</span></label>
+            <label class="bf-label">Phone</label>
             <div class="phone-row">
-              <select name="country_code" class="bf-input phone-cc" required>
+              <select name="country_code" class="bf-input phone-cc">
                 <option value="">Code</option>
                 <option value="+1">+1</option>
                 <option value="+91" selected>+91</option>
@@ -41,12 +41,13 @@
                 <option value="+64">+64</option>
                 <option value="+27">+27</option>
               </select>
-              <input type="tel" name="phone" class="bf-input" placeholder="Phone Number" required>
+              <input type="tel" name="phone" class="bf-input" placeholder="Phone Number">
             </div>
           </div>
           <div class="bf-field">
-            <label class="bf-label">Service <span class="bf-req">*</span></label>
-            <select name="subject" class="bf-input" required>
+            <label class="bf-label">Service</label>
+            <select name="subject" class="bf-input">
+              <option value="">Select a service</option>
               <option value="Birth Doula Package">Birth Doula Package</option>
               <option value="Prenatal Yoga">Prenatal Yoga</option>
               <option value="Labour Management & Comfort Measures">Labour Management &amp; Comfort Measures</option>
@@ -444,22 +445,34 @@
   <script>
   /* Contact page booking form */
   (function() {
-    const form = document.querySelector('.book-form');
+    const form = document.getElementById('contactBookForm');
     if (!form) return;
 
-    const dateTimeInput = form.querySelector('input[data-calendly-time]');
+    const nameInput = form.querySelector('input[name="name"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
     const messageInput = form.querySelector('textarea[name="message"]');
-    const serviceSelect = form.querySelector('select[name="subject"]');
     let isSubmitting = false;
 
-    if (dateTimeInput) {
-      dateTimeInput.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (typeof window.openJivaCalendly === 'function') {
-          window.openJivaCalendly();
-        }
-      });
-    }
+    console.log('[Contact Form] Initialized');
+
+    /* Auto-submit when Calendly completes a booking */
+    window.addEventListener('message', function(e) {
+      if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
+
+      console.log('[Contact Form] Calendly booking completed');
+
+      /* Set default message since Calendly captured the booking */
+      if (messageInput && !messageInput.value.trim()) {
+        messageInput.value = 'Booked via Calendly - Details confirmed in calendar invitation';
+      }
+
+      /* Auto-submit after a brief delay */
+      setTimeout(() => {
+        console.log('[Contact Form] Auto-submitting form');
+        form.submit();
+      }, 500);
+    });
 
     form.addEventListener('submit', (e) => {
       if (isSubmitting) {
@@ -467,32 +480,12 @@
         return;
       }
 
-      const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
-      if (!dateTime) {
-        e.preventDefault();
-        return;
-      }
-
-      const service = serviceSelect ? serviceSelect.value : '';
-
-      /* Populate message with date/time if user didn't add notes */
-      if (messageInput && !messageInput.value.trim()) {
-        messageInput.value = 'Selected Date & Time: ' + dateTime + '\nService: ' + service;
-      }
-
+      /* Browser validation will handle required fields */
       /* Prevent double submission */
       isSubmitting = true;
       form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
 
-      /* Clear form after submission success */
-      setTimeout(() => {
-        form.reset();
-        dateTimeInput.classList.remove('is-filled');
-        const wrap = dateTimeInput.closest('.jiva-pickdate');
-        if (wrap) wrap.classList.remove('is-filled');
-        isSubmitting = false;
-        form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = false);
-      }, 1000);
+      console.log('[Contact Form] Submitted');
     });
   })();
   </script>

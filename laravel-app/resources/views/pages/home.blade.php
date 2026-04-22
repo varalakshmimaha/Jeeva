@@ -516,13 +516,13 @@
 
           <div class="appointment-form-row">
             <div class="appointment-field">
-              <label>Full Name</label>
+              <label>Full Name <span style="color:#e06b6b;">*</span></label>
               <input type="text" name="name" placeholder="Your full name" required>
             </div>
             <div class="appointment-field">
               <label>Phone Number</label>
               <div style="display:grid;grid-template-columns:100px 1fr;gap:8px;">
-                <select name="country_code" required style="padding:11px 8px;border:1.5px solid #e5e0d8;border-radius:8px;background:#fff;font-family:inherit;font-size:14px;color:#2b2b2b;outline:none;">
+                <select name="country_code" style="padding:11px 8px;border:1.5px solid #e5e0d8;border-radius:8px;background:#fff;font-family:inherit;font-size:14px;color:#2b2b2b;outline:none;">
                   <option value="">Code</option>
                   <option value="+1">🇺🇸 +1</option>
                   <option value="+91" selected>🇮🇳 +91</option>
@@ -532,19 +532,19 @@
                   <option value="+64">🇳🇿 +64</option>
                   <option value="+27">🇿🇦 +27</option>
                 </select>
-                <input type="tel" name="phone" placeholder="XXXXX XXXXX" required>
+                <input type="tel" name="phone" placeholder="XXXXX XXXXX">
               </div>
             </div>
           </div>
           <div class="appointment-form-row">
             <div class="appointment-field">
-              <label>Email Address</label>
+              <label>Email Address <span style="color:#e06b6b;">*</span></label>
               <input type="email" name="email" placeholder="you@example.com" required>
             </div>
             <div class="appointment-field">
               <label>Service</label>
-              <select name="service_selected" required>
-                <option value="" disabled selected>Choose a service</option>
+              <select name="service_selected">
+                <option value="">Choose a service</option>
                 @foreach($services as $service)
                   <option value="{{ $service->title }}">{{ $service->title }}</option>
                 @endforeach
@@ -884,15 +884,31 @@
     const form = document.getElementById('complimentaryForm');
     if (!form) return;
 
-    const dateTimeInput = form.querySelector('input[data-calendly-time]');
-    const pickdateWrapper = form.querySelector('.jiva-pickdate');
+    const nameInput = form.querySelector('input[name="name"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
     const messageInput = form.querySelector('textarea[name="message"]');
-    const serviceSelect = form.querySelector('select[name="service_selected"]');
     let isSubmitting = false;
 
-    console.log('[Form] Complimentary form initialized');
-    console.log('[Form] Date input element:', dateTimeInput);
-    console.log('[Form] Pickdate wrapper:', pickdateWrapper);
+    console.log('[Home Form] Complimentary form initialized');
+
+    /* Auto-submit when Calendly completes a booking */
+    window.addEventListener('message', function(e) {
+      if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
+
+      console.log('[Home Form] Calendly booking completed');
+
+      /* Set default message since Calendly captured the booking */
+      if (messageInput && !messageInput.value.trim()) {
+        messageInput.value = 'Booked via Calendly - Details confirmed in calendar invitation';
+      }
+
+      /* Auto-submit after a brief delay */
+      setTimeout(() => {
+        console.log('[Home Form] Auto-submitting form');
+        form.submit();
+      }, 500);
+    });
 
     form.addEventListener('submit', (e) => {
       if (isSubmitting) {
@@ -900,46 +916,12 @@
         return;
       }
 
-      const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
-      const placeholder = 'Pick a Date & Time';
-
-      console.log('[Form] Form submission - date value:', dateTime);
-
-      /* Validate that a date was actually selected (not just placeholder) */
-      if (!dateTime || dateTime === placeholder || dateTime === 'Date & time selected') {
-        e.preventDefault();
-        console.warn('[Form] No date selected - showing error');
-        if (pickdateWrapper) {
-          pickdateWrapper.style.borderColor = '#e06b6b';
-          setTimeout(() => pickdateWrapper.style.borderColor = '', 2000);
-        }
-        return;
-      }
-
-      const service = serviceSelect ? serviceSelect.value : '';
-      const notes = messageInput ? messageInput.value.trim() : '';
-
-      /* Populate message field with booking details */
-      if (messageInput) {
-        messageInput.value = 'Selected Date & Time: ' + dateTime + '\nService: ' + service +
-          (notes ? '\nAdditional Notes: ' + notes : '');
-      }
-
+      /* Browser validation will handle required fields */
       /* Prevent double submission */
       isSubmitting = true;
       form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
 
-      /* Clear form after submission success */
-      setTimeout(() => {
-        form.reset();
-        if (dateTimeInput) {
-          dateTimeInput.classList.remove('is-filled');
-          const wrap = dateTimeInput.closest('.jiva-pickdate');
-          if (wrap) wrap.classList.remove('is-filled');
-        }
-        isSubmitting = false;
-        form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = false);
-      }, 1000);
+      console.log('[Home Form] Submitted');
     });
   })();
   </script>
