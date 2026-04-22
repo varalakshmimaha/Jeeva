@@ -30,7 +30,7 @@
       <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
       <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Our Services</a></li>
       <li><a href="{{ route('testimonials') }}" class="{{ request()->routeIs('testimonials') ? 'active' : '' }}">Testimonials</a></li>
-      <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+      <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">CONTACT US</a></li>
     </ul>
     <div class="hamburger" id="hamburger">
       <span></span>
@@ -71,7 +71,7 @@
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('contact') }}" class="mob-menu-link {{ request()->routeIs('contact') ? 'mob-menu-link--active' : '' }}">
-      <span>Contact</span>
+      <span>CONTACT US</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
   </div>
