@@ -227,10 +227,6 @@
       padding: 32px 28px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
-    .book-form-card {
-      max-height: 750px;
-      overflow-y: auto;
-    }
     .book-title {
       font-family: 'Playfair Display', serif;
       font-size: 24px;
