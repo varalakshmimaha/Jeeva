@@ -804,22 +804,24 @@
       right: 20px;
       width: 180px;
       height: 180px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.97);
-      padding: 14px;
+      border-radius: 0;
+      background: #ffffff;
+      padding: 0;
       box-shadow: 0 20px 45px rgba(0,0,0,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       border: 2px solid rgba(77,182,172,0.3);
+      overflow: hidden;
       z-index: 2;
       backdrop-filter: blur(8px);
     }
     .cred-cert-overlay img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      border-radius: 16px;
+      object-fit: cover;
+      border-radius: 0;
+      display: block;
     }
     .cred-cert-card {
       margin-bottom: 60px;
