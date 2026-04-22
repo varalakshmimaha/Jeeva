@@ -691,67 +691,69 @@
           <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
         </div>
 
-        <!-- RIGHT: All certifications stacked -->
-        <div class="cred-features">
-          <div class="cred-item reveal-right">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"></circle><path d="M8.5 11.5a4.5 4.5 0 0 0 7 0"></path><path d="M6 21c0-3.5 1.5-6.5 4-8.5"></path><path d="M18 21c0-3.5-1.5-6.5-4-8.5"></path><path d="M9 21c0-2.5 1.5-4 3-4s3 1.5 3 4"></path></svg>
+        <!-- RIGHT: All certifications stacked with logo -->
+        <div class="cred-features-wrapper">
+          <div class="cred-features">
+            <div class="cred-item reveal-right">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"></circle><path d="M8.5 11.5a4.5 4.5 0 0 0 7 0"></path><path d="M6 21c0-3.5 1.5-6.5 4-8.5"></path><path d="M18 21c0-3.5-1.5-6.5-4-8.5"></path><path d="M9 21c0-2.5 1.5-4 3-4s3 1.5 3 4"></path></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">DONA-Trained and Certified Birth Doula</h4>
+              </div>
             </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">DONA-Trained and Certified Birth Doula</h4>
+            <div class="cred-item reveal-right d1">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15"/></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">StillBirthday Certified Doula</h4>
+              </div>
             </div>
-          </div>
-          <div class="cred-item reveal-right d1">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15"/></svg>
+            <div class="cred-item reveal-right d2">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-2.3-2.3-6-5-6-9 0-3.3 2.7-6 6-6s6 2.7 6 6c0 4-3.7 6.7-6 9z"></path></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">International Certified Prenatal &amp; Postnatal Yoga Instructor</h4>
+              </div>
             </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">StillBirthday Certified Doula</h4>
+            <div class="cred-item reveal-right d3">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">Childbirth Educator</h4>
+              </div>
             </div>
-          </div>
-          <div class="cred-item reveal-right d2">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-2.3-2.3-6-5-6-9 0-3.3 2.7-6 6-6s6 2.7 6 6c0 4-3.7 6.7-6 9z"></path></svg>
+            <div class="cred-item reveal-right d4">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">Lactation Education</h4>
+              </div>
             </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">International Certified Prenatal &amp; Postnatal Yoga Instructor</h4>
+            <div class="cred-item reveal-right d5">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 9.2a2 2 0 0 0-.27 1.35V13h3.29a2 2 0 0 0 1.2-.4l3-2.6"/></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">International Certified Therapeutic Yoga (PCOD/PCOS, Infertility, Postpartum &amp; Menopause)</h4>
+              </div>
             </div>
-          </div>
-          <div class="cred-item reveal-right d3">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">Childbirth Educator</h4>
-            </div>
-          </div>
-          <div class="cred-item reveal-right d4">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-            </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">Lactation Education</h4>
-            </div>
-          </div>
-          <div class="cred-item reveal-right d5">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 9.2a2 2 0 0 0-.27 1.35V13h3.29a2 2 0 0 0 1.2-.4l3-2.6"/></svg>
-            </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">International Certified Therapeutic Yoga (PCOD/PCOS, Infertility, Postpartum &amp; Menopause)</h4>
-            </div>
-          </div>
-          <div class="cred-item reveal-right d6">
-            <div class="cred-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            </div>
-            <div class="cred-item-body">
-              <h4 class="cred-item-title">International Certified Advanced Yoga Teacher Training</h4>
+            <div class="cred-item reveal-right d6">
+              <div class="cred-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <div class="cred-item-body">
+                <h4 class="cred-item-title">International Certified Advanced Yoga Teacher Training</h4>
+              </div>
             </div>
           </div>
           @if(!empty($siteSettings['certifications_image_url']))
-            <div style="margin-top: 32px;">
-              <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="max-width: 220px; display: block;">
+            <div class="cred-cert-logo">
+              <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="max-width: 100%; display: block;">
             </div>
           @endif
         </div>
@@ -791,6 +793,7 @@
       display: block;
       border-radius: 20px;
     }
+    .cred-features-wrapper { display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: flex-start; }
     .cred-features { display: flex; flex-direction: column; gap: 10px; }
     .cred-item {
       display: flex;
