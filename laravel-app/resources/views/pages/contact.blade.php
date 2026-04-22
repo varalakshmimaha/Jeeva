@@ -210,15 +210,15 @@
   <style>
     /* Book Consultation */
     .book-wrap {
-      padding: 80px 6% 60px;
+      padding: 80px 4% 60px;
       background: linear-gradient(180deg, #fcefe6 0%, #fdf6ef 100%);
     }
     .book-grid {
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 32px;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
       align-items: start;
     }
     .book-card {
@@ -428,8 +428,11 @@
       font-weight: 700;
     }
 
+    @media (max-width: 1100px) {
+      .book-grid { grid-template-columns: 1fr !important; gap: 30px; }
+    }
     @media (max-width: 900px) {
-      .book-grid, .touch-grid { grid-template-columns: 1fr !important; gap: 30px; }
+      .touch-grid { grid-template-columns: 1fr !important; gap: 30px; }
       .touch-form-card { padding: 26px 20px; }
       .book-card { padding: 22px; }
     }
