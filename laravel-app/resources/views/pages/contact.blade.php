@@ -214,24 +214,24 @@
       background: linear-gradient(180deg, #fcefe6 0%, #fdf6ef 100%);
     }
     .book-grid {
-      max-width: 1400px;
+      max-width: 1100px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 20px;
       align-items: start;
     }
     .book-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 32px 28px;
+      padding: 24px 22px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
     .book-title {
       font-family: 'Playfair Display', serif;
-      font-size: 24px;
+      font-size: 20px;
       color: #2b2b2b;
-      margin: 0 0 22px;
+      margin: 0 0 16px;
       font-weight: 700;
     }
     .book-calendly-card {
