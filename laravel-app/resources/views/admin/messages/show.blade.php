@@ -15,27 +15,52 @@
         <div class="adm-card-body">
             <table class="adm-form-table">
                 <tr>
-                    <td class="adm-fl">Name</td>
+                    <td class="adm-fl">Full Name</td>
                     <td class="adm-fi" style="font-weight:600;">{{ $message->name }}</td>
                 </tr>
                 <tr>
-                    <td class="adm-fl">Email</td>
+                    <td class="adm-fl">Email Address</td>
                     <td class="adm-fi">{{ $message->email }}</td>
                 </tr>
                 @if($message->phone)
                 <tr>
-                    <td class="adm-fl">Phone</td>
+                    <td class="adm-fl">Phone Number</td>
                     <td class="adm-fi">{{ $message->phone }}</td>
                 </tr>
                 @endif
                 @if($message->subject)
                 <tr>
-                    <td class="adm-fl">Subject</td>
+                    <td class="adm-fl">Service</td>
                     <td class="adm-fi" style="font-weight:600;">{{ $message->subject }}</td>
                 </tr>
                 @endif
+
+                @php
+                    $bookingMatch = preg_match('/Selected Date & Time:\s*(.+?)\n/', $message->message, $matches);
+                    $bookingDate = $bookingMatch ? trim($matches[1]) : null;
+
+                    $notesMatch = preg_match('/Additional Notes:\s*(.+?)$/s', $message->message, $notesMatches);
+                    $notes = $notesMatch ? trim($notesMatches[1]) : null;
+                @endphp
+
+                @if($bookingDate)
                 <tr>
-                    <td class="adm-fl" style="vertical-align:top;padding-top:20px;">Message</td>
+                    <td class="adm-fl">Pick a Date & Time</td>
+                    <td class="adm-fi" style="font-weight:600;">{{ $bookingDate }}</td>
+                </tr>
+                @endif
+
+                @if($notes)
+                <tr>
+                    <td class="adm-fl" style="vertical-align:top;padding-top:10px;">Other Notes</td>
+                    <td class="adm-fi">
+                        <div class="adm-detail-box">{{ $notes }}</div>
+                    </td>
+                </tr>
+                @endif
+
+                <tr>
+                    <td class="adm-fl" style="vertical-align:top;padding-top:10px;">Full Message</td>
                     <td class="adm-fi">
                         <div class="adm-detail-box">{{ $message->message }}</div>
                     </td>
