@@ -38,6 +38,23 @@ class ContactController extends Controller
             }
         }
 
+        if (!empty($validated['phone']) && !empty($validated['preferred_date'])) {
+            $normalizedPhone = preg_replace('/\D+/', '', $validated['phone']);
+
+            $duplicatePhone = ContactMessage::whereNotNull('phone')
+                ->whereDate('preferred_date', $validated['preferred_date'])
+                ->get()
+                ->first(function ($m) use ($normalizedPhone) {
+                    return preg_replace('/\D+/', '', (string) $m->phone) === $normalizedPhone;
+                });
+
+            if ($duplicatePhone) {
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['phone' => 'This phone number already has a booking for the selected date. Only one booking per day is allowed. Please pick a different date or contact us if you need to reschedule.']);
+            }
+        }
+
         $booking = ContactMessage::create($validated);
 
         /* Send email notification to admin + confirmation to user */
