@@ -685,17 +685,15 @@
         <h2 class="section-title reveal d1">Professional Training & Certifications</h2>
       </div>
 
-      <!-- Certificate Card -->
-      @if(!empty($siteSettings['certifications_image_url']))
-      <div class="cred-cert-card reveal">
-        <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications">
-      </div>
-      @endif
-
       <div class="cred-layout">
-        <!-- LEFT: Yoga Image (background removed via mix-blend-mode) -->
+        <!-- LEFT: Yoga Image with Certificate Overlay -->
         <div class="cred-side-img reveal">
-          <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
+          <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img">
+          @if(!empty($siteSettings['certifications_image_url']))
+          <div class="cred-cert-overlay">
+            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications">
+          </div>
+          @endif
         </div>
 
         <!-- RIGHT: All certifications stacked -->
@@ -773,21 +771,22 @@
     }
     .cred-layout {
       display: grid;
-      grid-template-columns: 0.6fr 1.4fr;
+      grid-template-columns: 1fr 1.2fr;
       gap: 56px;
       align-items: flex-start;
       max-width: 1240px;
       margin: 0 auto;
     }
     .cred-side-img {
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #f9f9f9;
       position: relative;
-      max-width: 280px;
+      width: 100%;
+      max-width: 380px;
     }
     .cred-side-img::before {
       content: '';
@@ -795,17 +794,40 @@
       inset: 0;
       background: linear-gradient(135deg, rgba(77,182,172,0.05) 0%, rgba(245,213,213,0.03) 100%);
       pointer-events: none;
-      border-radius: 16px;
+      border-radius: 20px;
+      z-index: 1;
     }
-    .cred-side-img img {
+    .cred-yoga-img {
       width: 100%;
       height: auto;
       object-fit: contain;
       object-position: center;
       display: block;
-      border-radius: 16px;
-      padding: 16px;
+      border-radius: 20px;
+      padding: 20px;
       box-sizing: border-box;
+    }
+    .cred-cert-overlay {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.95);
+      padding: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      backdrop-filter: blur(8px);
+    }
+    .cred-cert-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
     }
     .cred-cert-card {
       margin-bottom: 60px;
@@ -863,13 +885,16 @@
 
     @media (max-width: 900px) {
       .cred-layout { grid-template-columns: 1fr; gap: 40px; }
-      .cred-side-img { order: -1; max-width: 300px; margin: 0 auto; }
+      .cred-side-img { order: -1; max-width: 380px; margin: 0 auto; }
+      .cred-cert-overlay { width: 90px; height: 90px; bottom: 10px; right: 10px; }
       .cred-features { gap: 12px; }
       .cred-item-title { font-size: 16px; }
     }
     @media (max-width: 480px) {
       .cred-section { padding: 70px 5%; }
       .cred-header { margin-bottom: 40px; }
+      .cred-side-img { max-width: 100%; }
+      .cred-cert-overlay { width: 80px; height: 80px; bottom: 8px; right: 8px; }
       .cred-item { padding: 8px; gap: 12px; }
       .cred-item-icon { width: 52px; height: 52px; }
       .cred-item-icon svg { width: 24px; height: 24px; }
