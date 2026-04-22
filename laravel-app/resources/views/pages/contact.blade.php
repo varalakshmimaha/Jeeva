@@ -210,7 +210,7 @@
   <style>
     /* Book Consultation */
     .book-wrap {
-      padding: 80px 4% 60px;
+      padding: 60px 4% 60px;
       background: linear-gradient(180deg, #fcefe6 0%, #fdf6ef 100%);
     }
     .book-grid {
@@ -240,7 +240,7 @@
       background: transparent;
       display: flex;
       align-items: stretch;
-      min-height: 700px;
+      height: 600px;
     }
     #calendly-popup-container {
       display: flex;
@@ -249,7 +249,7 @@
       border-radius: 16px;
       overflow: hidden;
       width: 100%;
-      min-height: 700px;
+      height: 600px;
     }
     .calendly-inline-widget {
       border-radius: 16px;
@@ -261,7 +261,7 @@
       border: none !important;
       border-radius: 16px !important;
     }
-    .bf-field { margin-bottom: 16px; }
+    .bf-field { margin-bottom: 12px; }
     .bf-req { color: #e05252; font-weight: 700; margin-left: 2px; }
     .bf-label {
       display: block;
@@ -287,7 +287,7 @@
       border-color: #4DB6AC;
       box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
     }
-    .bf-textarea { resize: vertical; min-height: 80px; font-family: inherit; }
+    .bf-textarea { resize: vertical; min-height: 60px; font-family: inherit; }
     select.bf-input {
       appearance: none;
       -webkit-appearance: none;
