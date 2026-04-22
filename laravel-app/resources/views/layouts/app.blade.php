@@ -93,8 +93,7 @@
 
 <x-footer-contact />
 
-<!-- Floating Social Icons (About Page Only) -->
-@if(request()->routeIs('about'))
+<!-- Floating Social Icons -->
 <div class="floating-social">
   @if(!empty($siteSettings['facebook_link']))
   <a href="{{ $siteSettings['facebook_link'] }}"
@@ -134,7 +133,6 @@
     </svg>
   </a>
 </div>
-@endif
 
 <script src="{{ asset('js/dental-data.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>

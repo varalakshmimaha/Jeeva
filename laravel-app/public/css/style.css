@@ -3693,13 +3693,13 @@ footer{
 }
 
 .instagram-float {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 10px 25px rgba(224, 103, 60, 0.4);
 }
 
 .instagram-float:hover {
   transform: scale(1.1);
-  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 15px 35px rgba(224, 103, 60, 0.5);
 }
 
 .whatsapp-float {
