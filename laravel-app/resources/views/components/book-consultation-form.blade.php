@@ -22,7 +22,7 @@
             <select name="country_code" class="bcf-input bcf-country-code" required>
               <option value="">Country Code</option>
               <option value="+1">🇺🇸 +1 (US)</option>
-              <option value="+91">🇮🇳 +91 (India)</option>
+              <option value="+91" selected>🇮🇳 +91 (India)</option>
               <option value="+44">🇬🇧 +44 (UK)</option>
               <option value="+61">🇦🇺 +61 (Australia)</option>
               <option value="+1-CA">🇨🇦 +1 (Canada)</option>
@@ -31,8 +31,11 @@
             </select>
             <input type="tel" name="phone" placeholder="Phone Number *" class="bcf-input" required>
           </div>
+        </div>
+
+        <div class="bcf-row">
           <div class="bcf-field">
-            <input type="text" name="datetime" placeholder="Select Date & Time *" class="bcf-input" data-calendly readonly required>
+            <input type="text" name="datetime" placeholder="Select Date & Time (Optional)" class="bcf-input" data-calendly readonly>
           </div>
         </div>
 

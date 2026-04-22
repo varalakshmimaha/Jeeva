@@ -35,18 +35,26 @@ class ContactController extends Controller
             'email' => 'required|email',
             'country_code' => 'required|string|max:20',
             'phone' => 'required|string|max:20',
-            'datetime' => 'required|string',
+            'datetime' => 'nullable|string',
             'notes' => 'nullable|string|max:1000',
         ]);
 
         $phone = trim($validated['country_code']) . ' ' . trim($validated['phone']);
+
+        $message = 'Consultation Booking Request';
+        if (!empty($validated['datetime'])) {
+            $message .= "\nPreferred Date/Time: " . $validated['datetime'];
+        }
+        if (!empty($validated['notes'])) {
+            $message .= "\nNotes: " . $validated['notes'];
+        }
 
         ContactMessage::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $phone,
             'subject' => 'Consultation Booking',
-            'message' => 'Preferred Date/Time: ' . $validated['datetime'] . "\n\nNotes: " . ($validated['notes'] ?? 'No additional notes'),
+            'message' => $message,
         ]);
 
         return redirect()->back()->with('success', 'Consultation booking submitted! We will contact you shortly.');
