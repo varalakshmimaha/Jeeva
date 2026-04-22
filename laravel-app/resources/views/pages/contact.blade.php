@@ -79,13 +79,9 @@
         </form>
       </div>
 
-      <!-- Right: Calendly -->
+      <!-- Right: Calendly Embedded -->
       <div class="book-card book-calendly-card">
-        <div class="calendly-placeholder">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <h3>Select Your Time</h3>
-          <p>Pick a date and time in the form to the left to schedule your consultation</p>
-        </div>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
       </div>
 
     </div>
@@ -239,35 +235,22 @@
       font-weight: 700;
     }
     .book-calendly-card {
+      padding: 0 !important;
+      box-shadow: none;
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
-    .calendly-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      padding: 20px;
+    .calendly-inline-widget {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
-    .calendly-placeholder svg {
-      opacity: 0.6;
-    }
-    .calendly-placeholder h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: #2b2b2b;
-      margin: 0;
-      font-weight: 700;
-    }
-    .calendly-placeholder p {
-      font-family: 'Outfit', sans-serif;
-      font-size: 14px;
-      color: #6b5a5a;
-      margin: 0;
-      line-height: 1.6;
-      max-width: 280px;
+    /* Hide Privacy Policy link from Calendly */
+    .calendly-inline-widget iframe {
+      border: none;
+      border-radius: 16px;
     }
     .bf-field { margin-bottom: 16px; }
     .bf-req { color: #e05252; font-weight: 700; margin-left: 2px; }
@@ -447,5 +430,35 @@
       .book-card { padding: 22px; }
     }
   </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Calendly !== 'undefined') {
+      Calendly.initInlineWidget({
+        url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1',
+        parentElement: document.querySelector('.calendly-inline-widget'),
+        prefillHostUrl: 'https://jivabirthandbeyond.com'
+      });
+    }
+
+    // Hide Privacy Policy link from Calendly embed
+    setTimeout(function() {
+      var iframes = document.querySelectorAll('.calendly-inline-widget iframe');
+      iframes.forEach(function(iframe) {
+        try {
+          var doc = iframe.contentDocument || iframe.contentWindow.document;
+          if (doc) {
+            var privacyLinks = doc.querySelectorAll('a[href*="privacy"]');
+            privacyLinks.forEach(function(link) {
+              link.style.display = 'none';
+            });
+          }
+        } catch (e) {
+          // Cross-origin iframe, cannot access
+        }
+      });
+    }, 1000);
+  });
+</script>
 
 @endsection
