@@ -184,8 +184,8 @@
     if (!e.data || typeof e.data.event !== 'string') return;
     if (e.data.event.indexOf('calendly') !== 0) return;
 
-    /* Handle event scheduled - booking is confirmed */
-    if (e.data.event === 'calendly.event_scheduled') {
+    /* Handle date and time selected - close popup immediately */
+    if (e.data.event === 'calendly.date_and_time_selected') {
       var selectedDateTime = 'Date & time selected';
       var startTime = null;
 
@@ -222,15 +222,13 @@
         footerDateInput.value = selectedDateTime;
       }
 
-      /* Close popup after booking is confirmed */
-      setTimeout(function() {
-        var closeBtn = document.querySelector('.calendly-close-overlay');
-        if (closeBtn) {
-          closeBtn.click();
-        } else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) {
-          Calendly.closePopupWidget();
-        }
-      }, 500);
+      /* Close popup immediately after time selection */
+      var closeBtn = document.querySelector('.calendly-close-overlay');
+      if (closeBtn) {
+        closeBtn.click();
+      } else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) {
+        Calendly.closePopupWidget();
+      }
     }
   });
 })();

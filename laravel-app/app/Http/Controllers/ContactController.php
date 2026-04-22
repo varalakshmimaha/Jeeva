@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -23,13 +24,30 @@ class ContactController extends Controller
         }
         unset($validated['country_code']);
 
-        ContactMessage::create($validated);
+        $booking = ContactMessage::create($validated);
+
+        /* Send email notification to admin */
+        $this->sendBookingEmail($booking);
 
         if (!empty($validated['subject']) && $validated['subject'] === 'Complimentary Consultation Booking') {
             return redirect(route('home') . '#book-appointment')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
         }
 
         return redirect()->back()->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+    }
+
+    private function sendBookingEmail($booking)
+    {
+        $adminEmail = config('mail.from.address') ?? 'noreply@jivabirthandbeyond.com';
+
+        try {
+            Mail::send('emails.booking-notification', ['booking' => $booking], function ($message) use ($adminEmail) {
+                $message->to($adminEmail)
+                        ->subject('New Booking Request: ' . ($booking->subject ?? 'Contact Message'));
+            });
+        } catch (\Exception $e) {
+            \Log::error('Failed to send booking email: ' . $e->getMessage());
+        }
     }
 
     public function submit(Request $request)
