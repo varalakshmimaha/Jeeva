@@ -3074,14 +3074,14 @@ footer{
 }
 
 .service-icon-bg {
-  width: 140px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   background: var(--cream);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 32px;
+  margin: 0 auto 28px;
   box-shadow: 0 8px 30px rgba(10, 22, 40, 0.08);
   transition: all 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
   overflow: hidden;
