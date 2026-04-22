@@ -686,9 +686,13 @@
       </div>
 
       <div class="cred-layout">
-        <!-- LEFT: Yoga Image (background removed via mix-blend-mode) -->
+        <!-- LEFT: Certifications Image -->
         <div class="cred-side-img reveal">
-          <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
+          @if(!empty($siteSettings['certifications_image_url']))
+            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="object-fit: contain;">
+          @else
+            <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
+          @endif
         </div>
 
         <!-- RIGHT: All certifications stacked -->
