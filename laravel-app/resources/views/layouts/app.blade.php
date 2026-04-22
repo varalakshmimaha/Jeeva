@@ -93,13 +93,6 @@
 
 <x-footer-contact />
 
-<!-- Floating Certifications Logo -->
-@if(!empty($siteSettings['certifications_image_url']))
-<div class="cert-logo-float">
-  <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" />
-</div>
-@endif
-
 <!-- Floating Social Icons (About Page Only) -->
 @if(request()->routeIs('about'))
 <div class="floating-social">
