@@ -111,6 +111,7 @@ Route::prefix('admin')->group(function () {
         // Contact Messages
         Route::get('/messages', [AdminController::class, 'messagesIndex'])->name('admin.messages.index');
         Route::get('/messages/{id}', [AdminController::class, 'messagesShow'])->name('admin.messages.show');
+        Route::put('/messages/{id}/status', [AdminController::class, 'messagesUpdateStatus'])->name('admin.messages.update-status');
         Route::delete('/messages/{id}', [AdminController::class, 'messagesDestroy'])->name('admin.messages.destroy');
 
         // Settings

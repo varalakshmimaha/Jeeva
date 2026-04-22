@@ -436,6 +436,16 @@ class AdminController extends Controller
         return redirect()->route('admin.messages.index')->with('success', 'Message deleted.');
     }
 
+    public function messagesUpdateStatus(Request $request, $id)
+    {
+        $message = ContactMessage::findOrFail($id);
+        $validated = $request->validate([
+            'consultation_status' => 'required|in:pending,consulted,no_response,scheduled',
+        ]);
+        $message->update($validated);
+        return redirect()->route('admin.messages.show', $id)->with('success', 'Status updated successfully!');
+    }
+
     // === FAQs ===
     public function faqsIndex()
     {

@@ -31,14 +31,29 @@
                         <div style="font-weight:{{ !$msg->is_read ? '700' : '500' }};">{{ $msg->name }}</div>
                         <div style="font-size:12px;color:var(--muted);font-weight:400;">{{ $msg->email }}</div>
                     </td>
-                    <td style="color:var(--muted);">{{ Str::limit($msg->subject ?? $msg->message, 40) }}</td>
+                    <td style="color:var(--muted);">
+                        <div>{{ Str::limit($msg->subject ?? $msg->message, 40) }}</div>
+                        @php
+                            $bookingMatch = preg_match('/Selected Date & Time:\s*(.+?)\n/', $msg->message, $matches);
+                            $bookingDate = $bookingMatch ? trim($matches[1]) : null;
+                        @endphp
+                        @if($bookingDate)
+                            <div style="font-size:11px;color:#4DB6AC;margin-top:4px;">📅 {{ $bookingDate }}</div>
+                        @endif
+                    </td>
                     <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->diffForHumans() }}</td>
                     <td>
-                        @if(!$msg->is_read)
-                            <span class="adm-badge adm-badge-red">Unread</span>
-                        @else
-                            <span class="adm-badge adm-badge-green">Read</span>
-                        @endif
+                        @php
+                            $statusConfig = [
+                                'pending' => ['label' => '⏳ Pending', 'class' => 'adm-badge-orange'],
+                                'consulted' => ['label' => '✓ Consulted', 'class' => 'adm-badge-green'],
+                                'scheduled' => ['label' => '📅 Scheduled', 'class' => 'adm-badge-blue'],
+                                'no_response' => ['label' => '✗ No Response', 'class' => 'adm-badge-red'],
+                            ];
+                            $status = $msg->consultation_status ?? 'pending';
+                            $config = $statusConfig[$status] ?? $statusConfig['pending'];
+                        @endphp
+                        <span class="adm-badge {{ $config['class'] }}">{{ $config['label'] }}</span>
                     </td>
                     <td class="col-center">
                         <div class="adm-actions" style="justify-content:center;">

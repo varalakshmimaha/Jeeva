@@ -44,6 +44,23 @@
         </div>
     </div>
 
+    <!-- Consultation Status -->
+    <div class="adm-card">
+        <div class="adm-card-head">Consultation Status</div>
+        <div class="adm-card-body">
+            <form action="{{ route('admin.messages.update-status', $message->id) }}" method="POST" style="display: flex; gap: 12px; align-items: center;">
+                @csrf @method('PUT')
+                <select name="consultation_status" class="adm-input" style="flex: 1; max-width: 300px;">
+                    <option value="pending" {{ $message->consultation_status === 'pending' ? 'selected' : '' }}>⏳ Pending</option>
+                    <option value="consulted" {{ $message->consultation_status === 'consulted' ? 'selected' : '' }}>✓ Consulted</option>
+                    <option value="scheduled" {{ $message->consultation_status === 'scheduled' ? 'selected' : '' }}>📅 Scheduled</option>
+                    <option value="no_response" {{ $message->consultation_status === 'no_response' ? 'selected' : '' }}>✗ No Response</option>
+                </select>
+                <button type="submit" class="adm-btn adm-btn-primary">Update Status</button>
+            </form>
+        </div>
+    </div>
+
     <div class="adm-form-actions">
         <a href="mailto:{{ $message->email }}" class="adm-btn adm-btn-primary">Reply via Email</a>
         @if($message->phone)
