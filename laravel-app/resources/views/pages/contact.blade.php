@@ -15,65 +15,10 @@
   <section class="book-wrap" id="book">
     <div class="book-grid">
 
-      <!-- Left: Form -->
+      <!-- Left: Calendly Calendar -->
       <div class="book-card book-form-card">
         <h3 class="book-title">Book Consultation</h3>
-        <form action="{{ route('contact.store') }}" method="POST" class="book-form" id="contactBookForm">
-          @csrf
-          <div class="bf-field">
-            <label class="bf-label">Name <span class="bf-req">*</span></label>
-            <input type="text" name="name" class="bf-input" placeholder="Enter your name" required>
-          </div>
-          <div class="bf-field">
-            <label class="bf-label">Email <span class="bf-req">*</span></label>
-            <input type="email" name="email" class="bf-input" placeholder="Enter your email" required>
-          </div>
-          <div class="bf-field">
-            <label class="bf-label">Phone</label>
-            <div class="phone-row">
-              <select name="country_code" class="bf-input phone-cc">
-                <option value="">Code</option>
-                <option value="+1">+1</option>
-                <option value="+91" selected>+91</option>
-                <option value="+44">+44</option>
-                <option value="+61">+61</option>
-                <option value="+1-CA">+1</option>
-                <option value="+64">+64</option>
-                <option value="+27">+27</option>
-              </select>
-              <input type="tel" name="phone" class="bf-input" placeholder="Phone Number">
-            </div>
-          </div>
-          <div class="bf-field">
-            <label class="bf-label">Service</label>
-            <select name="subject" class="bf-input">
-              <option value="">Select a service</option>
-              <option value="Birth Doula Package">Birth Doula Package</option>
-              <option value="Prenatal Yoga">Prenatal Yoga</option>
-              <option value="Labour Management & Comfort Measures">Labour Management &amp; Comfort Measures</option>
-              <option value="Postpartum Rebalance">Postpartum Rebalance</option>
-              <option value="Fat Loss program">Fat Loss program</option>
-            </select>
-          </div>
-          <div class="bf-field">
-            <label class="bf-label">Select Date & Time <span class="bf-req">*</span></label>
-            <input type="text" name="preferred_time_label" class="bf-input" id="contactDatePicker" placeholder="Click to select date and time" data-calendly-time>
-          </div>
-          <div class="bf-field">
-            <label class="bf-label">Other Notes</label>
-            <textarea name="message" class="bf-input bf-textarea" rows="3" placeholder="Anything you'd like to share"></textarea>
-          </div>
-          <button type="submit" class="bf-submit">Book Consultation</button>
-
-          @if($errors->any())
-            <div class="bf-alert bf-alert--err">
-              @foreach($errors->all() as $error){{ $error }}<br>@endforeach
-            </div>
-          @endif
-          @if(session('success'))
-            <div class="bf-alert bf-alert--ok">✓ Thank you! We'll be in touch shortly.</div>
-          @endif
-        </form>
+        <div data-calendly-inline-widget data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
       </div>
 
       <!-- Right: Image -->
@@ -439,29 +384,5 @@
     }
   </style>
 
-  <script>
-  /* Contact page booking form */
-  (function() {
-    const form = document.getElementById('contactBookForm');
-    if (!form) return;
-
-    let isSubmitting = false;
-
-    console.log('[Contact Form] Initialized');
-
-    form.addEventListener('submit', (e) => {
-      if (isSubmitting) {
-        e.preventDefault();
-        return;
-      }
-
-      /* Prevent double submission */
-      isSubmitting = true;
-      form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
-
-      console.log('[Contact Form] Submitting...');
-    });
-  })();
-  </script>
 
 @endsection

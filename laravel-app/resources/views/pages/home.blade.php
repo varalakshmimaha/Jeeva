@@ -510,70 +510,9 @@
 
         <div class="appointment-form-col reveal d1">
 
-        <form action="{{ route('contact.store') }}" method="POST" class="appointment-form" id="complimentaryForm">
-          @csrf
-          <input type="hidden" name="subject" value="Complimentary Consultation Booking">
-
-          <div class="appointment-form-row">
-            <div class="appointment-field">
-              <label>Full Name <span style="color:#e06b6b;">*</span></label>
-              <input type="text" name="name" placeholder="Your full name" required>
-            </div>
-            <div class="appointment-field">
-              <label>Phone Number</label>
-              <div style="display:grid;grid-template-columns:100px 1fr;gap:8px;">
-                <select name="country_code" style="padding:11px 8px;border:1.5px solid #e5e0d8;border-radius:8px;background:#fff;font-family:inherit;font-size:14px;color:#2b2b2b;outline:none;">
-                  <option value="">Code</option>
-                  <option value="+1">🇺🇸 +1</option>
-                  <option value="+91" selected>🇮🇳 +91</option>
-                  <option value="+44">🇬🇧 +44</option>
-                  <option value="+61">🇦🇺 +61</option>
-                  <option value="+1-CA">🇨🇦 +1</option>
-                  <option value="+64">🇳🇿 +64</option>
-                  <option value="+27">🇿🇦 +27</option>
-                </select>
-                <input type="tel" name="phone" placeholder="XXXXX XXXXX">
-              </div>
-            </div>
-          </div>
-          <div class="appointment-form-row">
-            <div class="appointment-field">
-              <label>Email Address <span style="color:#e06b6b;">*</span></label>
-              <input type="email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="appointment-field">
-              <label>Service</label>
-              <select name="service_selected">
-                <option value="">Choose a service</option>
-                @foreach($services as $service)
-                  <option value="{{ $service->title }}">{{ $service->title }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-
-          <!-- Pick a Date & Time — Date/Time Picker -->
-          <div class="appointment-field">
-            <label>Pick a Date &amp; Time <span style="color:#e06b6b;">*</span></label>
-            <input type="text" name="preferred_time_label" class="appointment-date-input" id="homeAptDatePicker" placeholder="Click to select date and time" data-calendly-time required>
-          </div>
-
-          <div class="appointment-field">
-            <label>Other Notes</label>
-            <textarea name="message" id="apptJourneyNote" rows="3" placeholder="Anything you'd like to share"></textarea>
-          </div>
-
-          <button type="submit" class="appointment-btn">Book Consultation</button>
-
-          @if(session('success'))
-            <div class="appt-alert appt-alert--ok">✓ Your consultation request has been received. Anu will reach out shortly.</div>
-          @endif
-          @if($errors->any())
-            <div class="appt-alert appt-alert--err">
-              @foreach($errors->all() as $error){{ $error }}<br>@endforeach
-            </div>
-          @endif
-        </form>
+        <div class="appointment-calendly-embed">
+          <div data-calendly-inline-widget data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
+        </div>
         </div>
       </div>
     </div>
@@ -875,43 +814,6 @@
     }
   </style>
 
-  <script>
-  /* Home page booking form */
-  (function() {
-    const form = document.getElementById('complimentaryForm');
-    if (!form) return;
-
-    const messageInput = form.querySelector('textarea[name="message"]');
-    const dateInput = form.querySelector('input[name="preferred_time_label"]');
-    const serviceInput = form.querySelector('select[name="service_selected"]');
-    let isSubmitting = false;
-
-    console.log('[Home Form] Complimentary form initialized');
-
-    form.addEventListener('submit', (e) => {
-      if (isSubmitting) {
-        e.preventDefault();
-        return;
-      }
-
-      /* Populate message with booking details if not already filled */
-      if (messageInput && !messageInput.value.trim()) {
-        const dateTime = dateInput ? dateInput.value.trim() : '';
-        const service = serviceInput ? serviceInput.value : '';
-        if (dateTime || service) {
-          messageInput.value = (dateTime ? 'Selected Date & Time: ' + dateTime + '\n' : '') +
-                              (service ? 'Service: ' + service : '');
-        }
-      }
-
-      /* Prevent double submission */
-      isSubmitting = true;
-      form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
-
-      console.log('[Home Form] Submitting...');
-    });
-  })();
-  </script>
 </section>
 
 <!-- Testimonials Section -->

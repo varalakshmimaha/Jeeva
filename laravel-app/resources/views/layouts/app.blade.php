@@ -10,9 +10,8 @@
 <link rel="icon" href="{{ asset($siteSettings['favicon_path']) }}" type="image/png">
 @endif
 <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ @filemtime(public_path('css/style.css')) ?: time() }}">
-<!-- Flatpickr Date/Time Picker -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body data-page-name="{{ $pageName ?? 'home' }}">
 
@@ -139,48 +138,8 @@
 <script src="{{ asset('js/script.js') }}"></script>
 
 <script>
-/* Initialize Flatpickr date/time pickers */
+/* Auto-scroll to success/error messages */
 document.addEventListener('DOMContentLoaded', function() {
-  if (typeof flatpickr === 'undefined') {
-    console.error('[DatePicker] Flatpickr not loaded');
-    return;
-  }
-
-  console.log('[DatePicker] Initializing date/time pickers');
-
-  /* Home page date picker */
-  var homeAptPicker = document.getElementById('homeAptDatePicker');
-  if (homeAptPicker) {
-    flatpickr(homeAptPicker, {
-      enableTime: true,
-      dateFormat: 'D, M d, Y, h:i K',
-      minDate: 'today',
-      time_24hr: false,
-      defaultHour: 10,
-      defaultMinute: 0,
-      minuteIncrement: 30,
-      placeholder: 'Click to select date and time'
-    });
-    console.log('[DatePicker] Home page picker initialized');
-  }
-
-  /* Contact page date picker */
-  var contactPicker = document.getElementById('contactDatePicker');
-  if (contactPicker) {
-    flatpickr(contactPicker, {
-      enableTime: true,
-      dateFormat: 'D, M d, Y, h:i K',
-      minDate: 'today',
-      time_24hr: false,
-      defaultHour: 10,
-      defaultMinute: 0,
-      minuteIncrement: 30,
-      placeholder: 'Click to select date and time'
-    });
-    console.log('[DatePicker] Contact page picker initialized');
-  }
-
-  /* Auto-scroll to success/error messages */
   var successAlert = document.querySelector('.bf-alert--ok');
   if (successAlert) {
     setTimeout(function() {
