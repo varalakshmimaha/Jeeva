@@ -29,6 +29,22 @@
             <input type="email" name="email" class="bf-input" placeholder="Enter your email" required>
           </div>
           <div class="bf-field">
+            <label class="bf-label">Phone <span class="bf-req">*</span></label>
+            <div class="phone-row">
+              <select name="country_code" class="bf-input phone-cc" required>
+                <option value="">Code</option>
+                <option value="+1">+1</option>
+                <option value="+91" selected>+91</option>
+                <option value="+44">+44</option>
+                <option value="+61">+61</option>
+                <option value="+1-CA">+1</option>
+                <option value="+64">+64</option>
+                <option value="+27">+27</option>
+              </select>
+              <input type="tel" name="phone" class="bf-input" placeholder="Phone Number" required>
+            </div>
+          </div>
+          <div class="bf-field">
             <label class="bf-label">Purpose <span class="bf-req">*</span></label>
             <select name="subject" class="bf-input" required>
               <option value="Birth Doula Package">Birth Doula Package</option>
@@ -39,8 +55,12 @@
             </select>
           </div>
           <div class="bf-field">
-            <label class="bf-label">Selected Time <span class="bf-req">*</span></label>
-            <input type="text" id="bf-selected-time" name="preferred_time_label" class="bf-input" placeholder="Pick from the calendar →" readonly required>
+            <label class="bf-label">Select Date & Time <span class="bf-req">*</span></label>
+            <div class="jiva-pickdate" data-calendly tabindex="0" role="button" aria-label="Pick a date and time">
+              <svg class="jiva-pickdate__ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <input type="text" name="preferred_time_label" class="jiva-pickdate__input" placeholder="Pick a Date & Time *" readonly required data-calendly-time>
+              <svg class="jiva-pickdate__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
           </div>
           <div class="bf-field">
             <label class="bf-label">Other Notes</label>
@@ -59,111 +79,35 @@
         </form>
       </div>
 
-      <!-- Right: Calendar -->
-      <div class="book-card book-cal-card">
-        <!-- Month navigation -->
-        <div class="cal-header">
-          <button type="button" class="cal-nav" id="calPrev">&#8249;</button>
-          <span class="cal-month-label" id="calMonthYear"></span>
-          <button type="button" class="cal-nav" id="calNext">&#8250;</button>
+      <!-- Right: Info -->
+      <div class="book-card book-info-card">
+        <h3 class="book-info-title">Why Book With Us?</h3>
+        <div class="book-info-item">
+          <svg class="book-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-14v4m0 4v.01"/></svg>
+          <div>
+            <h4>Personalized Guidance</h4>
+            <p>One-on-one consultation tailored to your journey</p>
+          </div>
         </div>
-        <!-- Day headers -->
-        <div class="cal-days-row">
-          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        <div class="book-info-item">
+          <svg class="book-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <div>
+            <h4>Expert Support</h4>
+            <p>Guidance from certified birth and wellness experts</p>
+          </div>
         </div>
-        <!-- Dates -->
-        <div class="cal-grid" id="calGrid"></div>
-
-        <!-- Time slots (shown after date pick) -->
-        <div id="calSlotSection" style="display:none; margin-top:18px;">
-          <div class="cal-slot-header" id="calSlotDateLabel"></div>
-          <div class="cal-slots-grid" id="calSlotsGrid"></div>
+        <div class="book-info-item">
+          <svg class="book-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6v6l4 2"/></svg>
+          <div>
+            <h4>Flexible Scheduling</h4>
+            <p>Choose a time that works best for you</p>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  @php
-    $defaultSlots = '09:00, 09:30, 10:00, 10:30, 11:00, 11:30, 12:00, 12:30, 14:00, 14:30, 15:00, 15:30, 16:00, 16:30, 17:00, 17:30';
-    $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
-    $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
-  @endphp
-
-  <script>
-    var TIME_SLOTS = @json($timeSlots);
-    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var DAYS   = ['S','M','T','W','T','F','S'];
-    var calYear, calMonth, selectedDate = null, pickedSlot = null;
-
-    function initCal() {
-      var now = new Date();
-      calYear  = now.getFullYear();
-      calMonth = now.getMonth();
-      renderCal();
-    }
-
-    function renderCal() {
-      document.getElementById('calMonthYear').textContent = MONTHS[calMonth] + ' ' + calYear;
-      var grid = document.getElementById('calGrid');
-      grid.innerHTML = '';
-      var today = new Date(); today.setHours(0,0,0,0);
-      var first = new Date(calYear, calMonth, 1).getDay();
-      var days  = new Date(calYear, calMonth + 1, 0).getDate();
-
-      for (var i = 0; i < first; i++) {
-        var blank = document.createElement('span'); blank.className = 'cal-day cal-day--empty'; grid.appendChild(blank);
-      }
-      for (var d = 1; d <= days; d++) {
-        var cell = document.createElement('button');
-        cell.type = 'button';
-        cell.textContent = d;
-        var cellDate = new Date(calYear, calMonth, d);
-        if (cellDate < today) {
-          cell.className = 'cal-day cal-day--past'; cell.disabled = true;
-        } else {
-          cell.className = 'cal-day';
-          if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
-            cell.classList.add('cal-day--selected');
-          }
-          cell.addEventListener('click', (function(date) {
-            return function() { onDatePick(date); };
-          })(new Date(calYear, calMonth, d)));
-        }
-        grid.appendChild(cell);
-      }
-    }
-
-    function onDatePick(date) {
-      selectedDate = date; pickedSlot = null;
-      document.getElementById('bf-selected-time').value = '';
-      renderCal();
-      var label = date.getDate() + ' ' + MONTHS[date.getMonth()] + ' ' + date.getFullYear();
-      document.getElementById('calSlotDateLabel').textContent = label + '  —  Pick a time';
-      var sg = document.getElementById('calSlotsGrid'); sg.innerHTML = '';
-      TIME_SLOTS.forEach(function(slot) {
-        var btn = document.createElement('button');
-        btn.type = 'button'; btn.className = 'cal-slot'; btn.textContent = slot;
-        btn.addEventListener('click', function() {
-          sg.querySelectorAll('.cal-slot').forEach(function(b){ b.classList.remove('is-active'); });
-          btn.classList.add('is-active');
-          pickedSlot = slot;
-          document.getElementById('bf-selected-time').value = label + ' at ' + slot;
-        });
-        sg.appendChild(btn);
-      });
-      document.getElementById('calSlotSection').style.display = 'block';
-    }
-
-    document.getElementById('calPrev').addEventListener('click', function() {
-      calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal();
-    });
-    document.getElementById('calNext').addEventListener('click', function() {
-      calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal();
-    });
-
-    initCal();
-  </script>
 
 
   <!-- Get in Touch + Send Enquiry -->
@@ -311,96 +255,45 @@
       margin: 0 0 22px;
       font-weight: 700;
     }
-    /* Calendar */
-    .cal-header {
+    .book-info-card {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
+      flex-direction: column;
+      justify-content: center;
     }
-    .cal-month-label {
+    .book-info-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #2b2b2b;
+      margin: 0 0 24px;
+      font-weight: 700;
+    }
+    .book-info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+    }
+    .book-info-item:last-child {
+      margin-bottom: 0;
+    }
+    .book-info-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .book-info-item h4 {
       font-family: 'Outfit', sans-serif;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       color: #2b2b2b;
+      margin: 0 0 6px;
     }
-    .cal-nav {
-      background: none;
-      border: 1.5px solid #e0e0e0;
-      border-radius: 8px;
-      width: 32px; height: 32px;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-      color: #555;
-      transition: all 0.2s;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cal-nav:hover { border-color: #4DB6AC; color: #2FA9A3; }
-    .cal-days-row {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-      margin-bottom: 6px;
-    }
-    .cal-days-row span {
-      font-family: 'Outfit', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: #999;
-      padding: 4px 0;
-    }
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-    }
-    .cal-day {
-      aspect-ratio: 1;
-      border: none;
-      background: none;
-      border-radius: 8px;
+    .book-info-item p {
       font-family: 'Outfit', sans-serif;
       font-size: 14px;
-      color: #2b2b2b;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-      display: flex; align-items: center; justify-content: center;
+      color: #6b5a5a;
+      margin: 0;
+      line-height: 1.6;
     }
-    .cal-day:hover { background: #e8f7f5; color: #2FA9A3; }
-    .cal-day--past { color: #ccc; cursor: default; }
-    .cal-day--empty { background: none; cursor: default; }
-    .cal-day--selected { background: #2FA9A3; color: #fff; font-weight: 700; }
-    .cal-day--selected:hover { background: #26908a; color: #fff; }
-    .cal-slot-header {
-      font-family: 'Outfit', sans-serif;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: #2b2b2b;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .cal-slots-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-    .cal-slot {
-      padding: 10px 8px;
-      background: #ffffff;
-      border: 1.5px solid #e0e0e0;
-      border-radius: 8px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: #2b2b2b;
-      cursor: pointer;
-      transition: all 0.15s;
-      text-align: center;
-    }
-    .cal-slot:hover { border-color: #4DB6AC; color: #2FA9A3; background: #f0fbfa; }
-    .cal-slot.is-active { background: #2FA9A3; color: #fff; border-color: #2FA9A3; font-weight: 700; }
     .bf-field { margin-bottom: 16px; }
     .bf-req { color: #e05252; font-weight: 700; margin-left: 2px; }
     .bf-label {
@@ -485,13 +378,16 @@
     /* Phone row */
     .phone-row {
       display: grid;
-      grid-template-columns: 150px 1fr;
+      grid-template-columns: 100px 1fr;
       gap: 8px;
     }
     .phone-cc {
       padding: 11px 10px;
       font-size: 12.5px;
       padding-right: 28px;
+    }
+    .phone-cc option {
+      padding: 2px 6px;
     }
 
     /* Get in Touch */
