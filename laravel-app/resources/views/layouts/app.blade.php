@@ -142,6 +142,15 @@
 window.addEventListener('load', function() {
   if (typeof Calendly !== 'undefined') {
     console.log('[Calendly] ✓ Calendly widget loaded');
+    /* Initialize inline widgets */
+    if (Calendly.initInlineWidget) {
+      console.log('[Calendly] Initializing inline widgets');
+      Calendly.initInlineWidget({
+        url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1',
+        parentElement: document.querySelector('[data-calendly-inline-widget]'),
+        prefill: {}
+      });
+    }
   } else {
     console.warn('[Calendly] ⚠ Calendly widget NOT loaded - check if script tag is present');
   }
@@ -163,37 +172,6 @@ window.addEventListener('load', function() {
     Calendly.initPopupWidget({ url: CALENDLY_URL });
     return false;
   };
-
-  /* Use event delegation to handle both initially present and dynamically added elements */
-  document.addEventListener('click', function(e) {
-    var calendlyEl = e.target.closest('[data-calendly]');
-    if (calendlyEl) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('[Calendly] Calendly element clicked via delegation');
-      window.openJivaCalendly();
-    }
-  });
-
-  /* Also handle direct listeners for existing elements */
-  document.querySelectorAll('[data-calendly]').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('[Calendly] Calendly element clicked (direct listener)');
-      window.openJivaCalendly();
-    });
-
-    /* Keyboard support */
-    el.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('[Calendly] Calendly element keyboard activated');
-        window.openJivaCalendly();
-      }
-    });
-  });
 
   /* Handle footer date/time input click */
   var footerDateInput = document.querySelector('input[name="datetime"]');
@@ -289,6 +267,48 @@ window.addEventListener('load', function() {
     if (e.data.event.indexOf('calendly') !== 0) return;
 
     console.log('[Calendly] PostMessage received:', e.data.event, e.data);
+
+    /* Handle event_scheduled (booking completed) */
+    if (e.data.event === 'calendly.event_scheduled') {
+      console.log('[Calendly] ✓ Event scheduled - booking confirmed');
+      console.log('[Calendly] Event data:', e.data.payload);
+
+      try {
+        var payload = e.data.payload;
+        var startTime = null;
+
+        if (payload && payload.event && payload.event.start_time) {
+          startTime = payload.event.start_time;
+        } else if (payload && payload.start_time) {
+          startTime = payload.start_time;
+        }
+
+        if (startTime) {
+          var eventDate = new Date(startTime);
+          if (!isNaN(eventDate.getTime())) {
+            var selectedDateTime = eventDate.toLocaleString('en-US', {
+              weekday: 'short',
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+
+            console.log('[Calendly] ✓ Setting date from scheduled event:', selectedDateTime);
+            document.querySelectorAll('input[data-calendly-time]').forEach(function (input) {
+              input.value = selectedDateTime;
+              input.classList.add('is-filled');
+              var wrap = input.closest('.jiva-pickdate');
+              if (wrap) wrap.classList.add('is-filled');
+            });
+          }
+        }
+      } catch (err) {
+        console.error('[Calendly] Error processing scheduled event:', err);
+      }
+      return;
+    }
 
     /* Handle date and time selected via postMessage */
     if (e.data.event === 'calendly.date_and_time_selected') {
