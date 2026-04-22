@@ -107,6 +107,8 @@ nav.scrolled{
   backface-visibility:hidden;
   transform:translateZ(0);
   border-radius:50%;
+  margin:0;
+  padding:0;
 }
 nav.scrolled .nav-inner{
   height:108px;
