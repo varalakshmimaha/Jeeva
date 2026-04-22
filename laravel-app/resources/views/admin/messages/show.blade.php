@@ -43,21 +43,17 @@
                     $notes = $notesMatch ? trim($notesMatches[1]) : null;
                 @endphp
 
-                @if($bookingDate)
                 <tr>
                     <td class="adm-fl">Pick a Date & Time</td>
-                    <td class="adm-fi" style="font-weight:600;">{{ $bookingDate }}</td>
+                    <td class="adm-fi" style="font-weight:600;">{{ $bookingDate ?? 'Not provided' }}</td>
                 </tr>
-                @endif
 
-                @if($notes)
                 <tr>
-                    <td class="adm-fl" style="vertical-align:top;padding-top:10px;">Other Notes</td>
+                    <td class="adm-fl">Other Notes</td>
                     <td class="adm-fi">
-                        <div class="adm-detail-box">{{ $notes }}</div>
+                        <div class="adm-detail-box">{{ $notes ?? 'No notes added' }}</div>
                     </td>
                 </tr>
-                @endif
 
                 <tr>
                     <td class="adm-fl" style="vertical-align:top;padding-top:10px;">Full Message</td>
