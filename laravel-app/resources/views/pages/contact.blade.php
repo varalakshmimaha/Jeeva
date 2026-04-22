@@ -442,5 +442,39 @@
     }
   </style>
 
+  <script>
+  /* Contact page booking form */
+  (function() {
+    const form = document.querySelector('.book-form');
+    if (!form) return;
+
+    const dateTimeInput = form.querySelector('input[data-calendly-time]');
+    const messageInput = form.querySelector('textarea[name="message"]');
+    const serviceSelect = form.querySelector('select[name="subject"]');
+
+    if (dateTimeInput) {
+      dateTimeInput.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (typeof window.openJivaCalendly === 'function') {
+          window.openJivaCalendly();
+        }
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
+      if (!dateTime) {
+        e.preventDefault();
+        return;
+      }
+
+      const service = serviceSelect ? serviceSelect.value : '';
+
+      if (messageInput && !messageInput.value.trim()) {
+        messageInput.value = 'Service: ' + service + ' | Preferred date/time: ' + dateTime;
+      }
+    });
+  })();
+  </script>
 
 @endsection

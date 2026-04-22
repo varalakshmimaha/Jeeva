@@ -61,6 +61,6 @@ class ContactController extends Controller
             'message' => $message,
         ]);
 
-        return redirect(route('contact') . '#book-consultation')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+        return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
     }
 }
