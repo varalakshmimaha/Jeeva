@@ -522,7 +522,19 @@
             </div>
             <div class="appointment-field">
               <label>Phone Number</label>
-              <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+              <div style="display:grid;grid-template-columns:100px 1fr;gap:8px;">
+                <select name="country_code" required style="padding:11px 8px;border:1.5px solid #e5e0d8;border-radius:8px;background:#fff;font-family:inherit;font-size:14px;color:#2b2b2b;outline:none;">
+                  <option value="">Code</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+91" selected>🇮🇳 +91</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+61">🇦🇺 +61</option>
+                  <option value="+1-CA">🇨🇦 +1</option>
+                  <option value="+64">🇳🇿 +64</option>
+                  <option value="+27">🇿🇦 +27</option>
+                </select>
+                <input type="tel" name="phone" placeholder="XXXXX XXXXX" required>
+              </div>
             </div>
           </div>
           <div class="appointment-form-row">
