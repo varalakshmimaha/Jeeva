@@ -159,7 +159,19 @@ document.addEventListener('DOMContentLoaded', function() {
               <input type="text" name="name" placeholder="Your Name *" required>
             </div>
             <div class="testi-cta-field">
-              <input type="tel" name="phone" placeholder="Phone Number">
+              <div style="display:grid;grid-template-columns:80px 1fr;gap:8px;width:100%;">
+                <select name="country_code" style="padding:10px 8px;border:1.5px solid #d4e6e4;border-radius:12px;background:#ffffff;font-family:inherit;font-size:15px;color:#2b2b2b;outline:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237a6060%27 stroke-width=%272%27%3E%3Cpath d=%27M6 9l6 6 6-6%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 8px center;background-size:12px;padding-right:28px;">
+                  <option value="">Code</option>
+                  <option value="+1">+1</option>
+                  <option value="+91" selected>+91</option>
+                  <option value="+44">+44</option>
+                  <option value="+61">+61</option>
+                  <option value="+1-CA">+1</option>
+                  <option value="+64">+64</option>
+                  <option value="+27">+27</option>
+                </select>
+                <input type="tel" name="phone" placeholder="Phone Number" style="width:100%;">
+              </div>
             </div>
           </div>
           <div class="testi-cta-field">
