@@ -150,8 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <!-- Right: Form -->
       <div class="testi-cta-form-wrap reveal d1">
-        <h3 class="testi-cta-form-title">Book Consultation</h3>
-        <p class="testi-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
+        <h3 class="testi-cta-form-title">Ready to Begin Your Journey?</h3>
+        <p class="testi-cta-form-sub">Schedule your free consultation with Anu today.</p>
+        <p class="testi-cta-desc">Join countless families who have found support and guidance through our services. Book your consultation and take the first step towards an empowered birth experience.</p>
         <button class="testi-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book My Consultation</button>
       </div>
     </div>
@@ -263,6 +264,12 @@ document.addEventListener('DOMContentLoaded', function() {
     color: #7a6060;
     margin-bottom: 28px;
     line-height: 1.6;
+  }
+  .testi-cta-desc {
+    font-size: 14px;
+    color: rgba(0,0,0,0.7);
+    margin-bottom: 24px;
+    line-height: 1.7;
   }
   .testi-cta-row {
     display: grid;

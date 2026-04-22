@@ -54,8 +54,9 @@
 
       <!-- Right: Consultation Form -->
       <div class="svc-cta-form-wrap reveal d1">
-        <h3 class="svc-cta-form-title">Book Consultation</h3>
-        <p class="svc-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
+        <h3 class="svc-cta-form-title">Ready for Compassionate Support?</h3>
+        <p class="svc-cta-form-sub">Let's plan your empowered birth journey.</p>
+        <p class="svc-cta-desc">Book a one-on-one consultation to discover how we can guide you into motherhood. Explore which service aligns best with your needs and get personalized support for your journey.</p>
         <button class="svc-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book My Consultation</button>
       </div>
     </div>
@@ -153,6 +154,12 @@
     color: #7a6060;
     margin-bottom: 28px;
     line-height: 1.6;
+  }
+  .svc-cta-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 24px;
+    line-height: 1.7;
   }
   .svc-cta-form-row {
     display: grid;

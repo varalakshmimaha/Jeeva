@@ -1055,6 +1055,7 @@
         <div class="about-cta-form-wrap reveal d1">
           <h3 class="about-cta-form-title">Book Consultation</h3>
           <p class="about-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
+          <p class="about-cta-desc">Connect with Anu for a personalized consultation. Discuss your birth journey, ask questions, and explore how our services can support you through this transformative time.</p>
           <button class="about-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book Consultation</button>
         </div>
       </div>
@@ -1165,6 +1166,12 @@
       color: #7a6060;
       margin-bottom: 28px;
       line-height: 1.6;
+    }
+    .about-cta-desc {
+      font-size: 14px;
+      color: #5a5a5a;
+      margin-bottom: 24px;
+      line-height: 1.7;
     }
     .about-cta-row {
       display: grid;
