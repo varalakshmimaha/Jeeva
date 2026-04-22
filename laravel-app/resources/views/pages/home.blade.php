@@ -1591,9 +1591,6 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
-<!-- Book Consultation CTA -->
-<x-book-consultation-form />
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-faq]').forEach(item => {
