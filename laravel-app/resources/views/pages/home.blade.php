@@ -887,13 +887,51 @@
     if (!form) return;
 
     const dateTimeInput = form.querySelector('input[data-calendly-time]');
+    const messageInput = form.querySelector('textarea[name="message"]');
+    const messageHiddenInput = form.querySelector('input[name="message"][type="hidden"]');
+    const serviceSelect = form.querySelector('select[name="service_selected"]');
+    const nameInput = form.querySelector('input[name="name"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const phoneSelect = form.querySelector('select[name="country_code"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
+    let isSubmitting = false;
 
     form.addEventListener('submit', (e) => {
+      if (isSubmitting) {
+        e.preventDefault();
+        return;
+      }
+
       const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
       if (!dateTime) {
         e.preventDefault();
         return;
       }
+
+      const service = serviceSelect ? serviceSelect.value : '';
+      const notes = messageInput ? messageInput.value.trim() : '';
+
+      /* Populate hidden message field with booking details */
+      if (messageHiddenInput) {
+        messageHiddenInput.value = 'Selected Date & Time: ' + dateTime + '\nService: ' + service +
+          (notes ? '\nAdditional Notes: ' + notes : '');
+      }
+
+      /* Prevent double submission */
+      isSubmitting = true;
+      form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
+
+      /* Clear form after submission success */
+      setTimeout(() => {
+        form.reset();
+        if (dateTimeInput) {
+          dateTimeInput.classList.remove('is-filled');
+          const wrap = dateTimeInput.closest('.jiva-pickdate');
+          if (wrap) wrap.classList.remove('is-filled');
+        }
+        isSubmitting = false;
+        form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = false);
+      }, 1000);
     });
 
     if (dateTimeInput) {

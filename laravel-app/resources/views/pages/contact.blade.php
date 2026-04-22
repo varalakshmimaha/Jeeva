@@ -449,6 +449,9 @@
     if (!form) return;
 
     const dateTimeInput = form.querySelector('input[data-calendly-time]');
+    const messageInput = form.querySelector('textarea[name="message"]');
+    const serviceSelect = form.querySelector('select[name="subject"]');
+    let isSubmitting = false;
 
     if (dateTimeInput) {
       dateTimeInput.addEventListener('click', function(e) {
@@ -460,11 +463,37 @@
     }
 
     form.addEventListener('submit', (e) => {
+      if (isSubmitting) {
+        e.preventDefault();
+        return;
+      }
+
       const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
       if (!dateTime) {
         e.preventDefault();
         return;
       }
+
+      const service = serviceSelect ? serviceSelect.value : '';
+
+      /* Populate message with date/time if user didn't add notes */
+      if (messageInput && !messageInput.value.trim()) {
+        messageInput.value = 'Selected Date & Time: ' + dateTime + '\nService: ' + service;
+      }
+
+      /* Prevent double submission */
+      isSubmitting = true;
+      form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = true);
+
+      /* Clear form after submission success */
+      setTimeout(() => {
+        form.reset();
+        dateTimeInput.classList.remove('is-filled');
+        const wrap = dateTimeInput.closest('.jiva-pickdate');
+        if (wrap) wrap.classList.remove('is-filled');
+        isSubmitting = false;
+        form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = false);
+      }, 1000);
     });
   })();
   </script>
