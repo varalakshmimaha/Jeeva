@@ -211,6 +211,28 @@
                     </table>
                 </div>
             </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Contact Page - Book Consultation Image</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['contact_image']) && $settings['contact_image'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset($settings['contact_image']) }}" alt="Book Consultation" style="max-width:400px; max-height:400px; object-fit: cover;">
+                            <span class="adm-img-tag">Current Book Consultation Image</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Image</td>
+                            <td class="adm-fi">
+                                <input type="file" name="contact_image" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Image displayed on the right side of the Book Consultation form on Contact page. Recommended: 450x450px (square). Max 3MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
 
         {{-- Panel: Footer & Social --}}

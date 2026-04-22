@@ -27,6 +27,7 @@ class SettingsController extends Controller
             'certifications_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'cta_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'vision_mission_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'contact_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
             'whatsapp_link' => 'nullable|url|max:500',
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
@@ -65,6 +66,12 @@ class SettingsController extends Controller
         if ($request->hasFile('vision_mission_bg_image')) {
             $visionBgPath = $request->file('vision_mission_bg_image')->store('backgrounds/vision', 'public');
             $this->saveSetting('vision_mission_bg_image_path', $visionBgPath);
+        }
+
+        // Handle Contact page book consultation image upload
+        if ($request->hasFile('contact_image')) {
+            $contactImgPath = $request->file('contact_image')->store('contact', 'public');
+            $this->saveSetting('contact_image', 'storage/' . $contactImgPath);
         }
 
         // Save other settings

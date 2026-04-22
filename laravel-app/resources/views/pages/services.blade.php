@@ -44,20 +44,12 @@
   <div class="svc-cta-bg" style="background-image: url('{{ asset('storage/moutain.jpg') }}');"></div>
   <div class="svc-cta-overlay"></div>
   <div class="container">
-    <div class="svc-cta-grid">
-      <!-- Left: Text Content -->
-      <div class="svc-cta-text reveal">
+    <div class="svc-cta-single">
+      <div class="svc-cta-content reveal">
         <span class="svc-cta-label">Your Inquiry</span>
         <h2 class="svc-cta-title">Ready for Compassionate Support?</h2>
-        <p class="svc-cta-desc">Let's plan your empowered birth journey. Book a one-on-one consultation today to discover how we can guide you into motherhood.</p>
-      </div>
-
-      <!-- Right: Consultation Form -->
-      <div class="svc-cta-form-wrap reveal d1">
-        <h3 class="svc-cta-form-title">Ready for Compassionate Support?</h3>
-        <p class="svc-cta-form-sub">Let's plan your empowered birth journey.</p>
-        <p class="svc-cta-desc">Book a one-on-one consultation to discover how we can guide you into motherhood. Explore which service aligns best with your needs and get personalized support for your journey.</p>
-        <button class="svc-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book My Consultation</button>
+        <p class="svc-cta-desc">Discover which service is perfect for your journey. Book a consultation and let's create your personalized birth experience.</p>
+        <a href="{{ route('contact') }}" class="svc-cta-submit">Book Consultation</a>
       </div>
     </div>
   </div>
@@ -67,9 +59,9 @@
   /* Service CTA - Split Layout */
   .svc-cta-section {
     position: relative;
-    padding: 25px 6%;
+    padding: 0 6%;
     overflow: hidden;
-    min-height: 200px;
+    min-height: 450px;
     display: flex;
     align-items: center;
     border-radius: 40px;
@@ -95,13 +87,12 @@
     z-index: 2;
     width: 100%;
   }
-  .svc-cta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    max-width: 1200px;
+  .svc-cta-single {
+    max-width: 700px;
     margin: 0 auto;
+  }
+  .svc-cta-content {
+    text-align: center;
   }
   .svc-cta-label {
     display: inline-flex;
@@ -123,17 +114,19 @@
   }
   .svc-cta-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(28px, 3.2vw, 40px);
     color: #ffffff;
     line-height: 1.2;
     margin-bottom: 20px;
+    white-space: nowrap;
   }
   .svc-cta-desc {
-    font-size: 17px;
-    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
     line-height: 1.75;
-    margin-bottom: 32px;
-    max-width: 480px;
+    margin: 0 auto 32px;
+    max-width: 520px;
+    font-weight: 500;
   }
   /* Form Card */
   .svc-cta-form-wrap {
@@ -207,8 +200,9 @@
   }
   .svc-cta-submit {
     width: 100%;
-    padding: 16px;
-    background: var(--grad-teal);
+    max-width: 400px;
+    padding: 16px 40px;
+    background: rgba(77, 182, 172, 0.85);
     color: #ffffff;
     font-family: 'Outfit', sans-serif;
     font-size: 16px;
@@ -216,15 +210,38 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     border: none;
-    border-radius: 12px;
+    border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 4px;
+    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    margin: 4px auto 0;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(77, 182, 172, 0.3);
+  }
+  .svc-cta-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
   }
   .svc-cta-submit:hover {
+    background: rgba(77, 182, 172, 1);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(77, 182, 172, 0.6), 0 0 40px rgba(77, 182, 172, 0.4);
+  }
+  .svc-cta-submit:hover::before {
+    left: 100%;
+  }
+  .svc-cta-submit:active {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(77,182,172,0.4);
-    opacity: 0.9;
+    box-shadow: 0 5px 15px rgba(77, 182, 172, 0.4);
   }
 
   @media (max-width: 991px) {

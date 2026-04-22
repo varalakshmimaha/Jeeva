@@ -1041,9 +1041,8 @@
         <div class="about-cta-content reveal">
           <span class="about-cta-label">Let's Connect</span>
           <h2 class="about-cta-title">Begin Your Empowered Birth Journey</h2>
-          <p class="about-cta-subtitle">Share your details and we'll respond with the right guidance for your journey.</p>
-          <p class="about-cta-desc">Whether you're expecting, planning, or simply curious — I'd love to hear from you. Let's create a birth experience that feels safe, supported, and truly yours.</p>
-          <button class="about-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book Consultation</button>
+          <p class="about-cta-desc">Let's create a birth experience that feels safe, supported, and truly yours. Reach out and we'll guide you with compassion and care.</p>
+          <a href="{{ route('contact') }}" class="about-cta-submit">Book Consultation</a>
         </div>
       </div>
     </div>
@@ -1052,9 +1051,9 @@
   <style>
     .about-cta-section {
       position: relative;
-      padding: 25px 6%;
+      padding: 0 6%;
       overflow: hidden;
-      min-height: 200px;
+      min-height: 450px;
       display: flex;
       align-items: center;
       border-radius: 40px;
@@ -1107,23 +1106,19 @@
     }
     .about-cta-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 48px);
+      font-size: clamp(28px, 3.2vw, 40px);
       color: #ffffff;
       line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .about-cta-subtitle {
-      font-size: 15px;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 16px;
-      line-height: 1.6;
+      margin-bottom: 20px;
+      white-space: nowrap;
     }
     .about-cta-desc {
-      font-size: 17px;
-      color: rgba(255,255,255,0.8);
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
       line-height: 1.75;
-      margin-bottom: 32px;
-      max-width: 480px;
+      margin: 0 auto 32px;
+      max-width: 520px;
+      font-weight: 500;
     }
     .about-cta-trust {
       display: flex;
@@ -1158,12 +1153,6 @@
       color: #7a6060;
       margin-bottom: 28px;
       line-height: 1.6;
-    }
-    .about-cta-desc {
-      font-size: 14px;
-      color: #5a5a5a;
-      margin-bottom: 24px;
-      line-height: 1.7;
     }
     .about-cta-row {
       display: grid;
@@ -1210,9 +1199,11 @@
       min-height: 60px;
     }
     .about-cta-submit {
-      display: inline-block;
+      display: block;
+      width: 100%;
+      max-width: 400px;
       padding: 16px 40px;
-      background: var(--grad-teal);
+      background: rgba(77, 182, 172, 0.85);
       color: #ffffff;
       font-family: 'Outfit', sans-serif;
       font-size: 16px;
@@ -1220,10 +1211,15 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       border: none;
-      border-radius: 12px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 8px;
+      transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+      margin: 8px auto 0;
+      text-decoration: none;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(77, 182, 172, 0.3);
     }
     .about-cta-pickdate-btn {
       width: 100%;
@@ -1271,10 +1267,27 @@
       color: #2FA9A3;
       font-weight: 600;
     }
+    .about-cta-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
     .about-cta-submit:hover {
+      background: rgba(77, 182, 172, 1);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(77, 182, 172, 0.6), 0 0 40px rgba(77, 182, 172, 0.4);
+    }
+    .about-cta-submit:hover::before {
+      left: 100%;
+    }
+    .about-cta-submit:active {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(77,182,172,0.4);
-      opacity: 0.9;
+      box-shadow: 0 5px 15px rgba(77, 182, 172, 0.4);
     }
     @media (max-width: 991px) {
       .about-cta-grid {

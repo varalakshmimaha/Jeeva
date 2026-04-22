@@ -25,7 +25,11 @@ class ContactController extends Controller
 
         ContactMessage::create($validated);
 
-        return redirect()->back()->with('success', 'Thank you! We received your message.');
+        if (!empty($validated['subject']) && $validated['subject'] === 'Complimentary Consultation Booking') {
+            return redirect(route('home') . '#book-appointment')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+        }
+
+        return redirect()->back()->with('success', '✓ Thank you! We\'ll be in touch shortly.');
     }
 
     public function submit(Request $request)
@@ -57,6 +61,6 @@ class ContactController extends Controller
             'message' => $message,
         ]);
 
-        return redirect()->back()->with('success', 'Consultation booking submitted! We will contact you shortly.');
+        return redirect(route('contact') . '#book-consultation')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
     }
 }

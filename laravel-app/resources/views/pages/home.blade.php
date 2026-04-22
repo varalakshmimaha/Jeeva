@@ -881,52 +881,41 @@
   </style>
 
   <script>
-  /* Home page inline calendar */
+  /* Home page booking form */
   (function() {
-    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    @php
-      $defaultSlots = '09:00, 09:30, 10:00, 10:30, 11:00, 11:30, 12:00, 12:30, 14:00, 14:30, 15:00, 15:30, 16:00, 16:30, 17:00, 17:30';
-      $homeSlotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
-      $homeSlots = array_values(array_filter(array_map('trim', explode(',', $homeSlotsRaw))));
-    @endphp
-    var HOME_SLOTS = @json($homeSlots);
-    var hYear, hMonth, hSelectedDate = null;
+    const form = document.getElementById('complimentaryForm');
+    if (!form) return;
 
-    /* Calendly integration for home page booking form */
-    var homeBookingInput = document.querySelector('input[data-calendly-time]');
-    if (homeBookingInput) {
-      homeBookingInput.addEventListener('click', function(e) {
+    const dateTimeInput = form.querySelector('input[data-calendly-time]');
+    const journeyInput = form.querySelector('textarea[name="message"]');
+    const messageInput = form.querySelector('input[name="message"]');
+
+    form.addEventListener('submit', (e) => {
+      const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
+      if (!dateTime) {
+        e.preventDefault();
+        return;
+      }
+
+      const serviceSel = form.querySelector('select[name="service_selected"]');
+      const service = serviceSel ? serviceSel.value : '';
+      const journey = journeyInput ? journeyInput.value.trim() : '';
+
+      if (messageInput) {
+        messageInput.value = 'Complimentary consultation request — Service: ' + service +
+          ' | Preferred date/time: ' + dateTime +
+          (journey ? ' | Notes: ' + journey : '');
+      }
+    });
+
+    if (dateTimeInput) {
+      dateTimeInput.addEventListener('click', function(e) {
         e.preventDefault();
         if (typeof window.openJivaCalendly === 'function') {
           window.openJivaCalendly();
         }
       });
     }
-  })();
-
-  (function () {
-    const dateInput = document.getElementById('apptSelectedDate');
-    const timeInput = document.getElementById('apptSelectedTime');
-    const journeyInput = document.getElementById('apptJourneyNote');
-    const messageInput = document.getElementById('bookingMessage');
-    const form = document.getElementById('complimentaryForm');
-    if (!form) return;
-
-    form.addEventListener('submit', (e) => {
-      const d = dateInput.value;
-      const t = timeInput.value;
-      const journey = journeyInput ? journeyInput.value.trim() : '';
-      if (!d || !t) {
-        e.preventDefault();
-        return;
-      }
-      const serviceSel = form.querySelector('select[name="service_selected"]');
-      const service = serviceSel ? serviceSel.value : '';
-      messageInput.value = 'Complimentary consultation request — Service: ' + service +
-        ' | Preferred date: ' + d +
-        ' | Preferred time: ' + t +
-        (journey ? ' | Journey: ' + journey : '');
-    });
   })();
   </script>
 </section>

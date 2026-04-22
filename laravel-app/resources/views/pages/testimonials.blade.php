@@ -126,34 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="testi-cta-bg" style="background-image: url('{{ asset('storage/moutain.jpg') }}');"></div>
   <div class="testi-cta-overlay"></div>
   <div class="container">
-    <div class="testi-cta-grid">
-      <!-- Left: Text -->
-      <div class="testi-cta-text reveal">
+    <div class="testi-cta-single">
+      <div class="testi-cta-content reveal">
         <span class="testi-cta-label">Begin Your Journey</span>
         <h2 class="testi-cta-title">Ready to Begin Your Journey?</h2>
-        <p class="testi-cta-desc">Connect with Anu and experience the compassionate support that these families are talking about.</p>
-        <div class="testi-cta-trust">
-          <div class="testi-cta-trust-item">
-            <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span>Personalised birth plans</span>
-          </div>
-          <div class="testi-cta-trust-item">
-            <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span>Prenatal & postnatal support</span>
-          </div>
-          <div class="testi-cta-trust-item">
-            <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span>Free initial consultation</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: Form -->
-      <div class="testi-cta-form-wrap reveal d1">
-        <h3 class="testi-cta-form-title">Ready to Begin Your Journey?</h3>
-        <p class="testi-cta-form-sub">Schedule your free consultation with Anu today.</p>
-        <p class="testi-cta-desc">Join countless families who have found support and guidance through our services. Book your consultation and take the first step towards an empowered birth experience.</p>
-        <button class="testi-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book My Consultation</button>
+        <p class="testi-cta-desc">Experience the compassionate support our families are talking about. Book your consultation and take the first step towards an empowered birth experience.</p>
+        <a href="{{ route('contact') }}" class="testi-cta-submit">Book Consultation</a>
       </div>
     </div>
   </div>
@@ -162,9 +140,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
   .testi-cta-section {
     position: relative;
-    padding: 25px 6%;
+    padding: 0 6%;
     overflow: hidden;
-    min-height: 200px;
+    min-height: 450px;
     display: flex;
     align-items: center;
     border-radius: 40px;
@@ -190,13 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
     z-index: 2;
     width: 100%;
   }
-  .testi-cta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    max-width: 1200px;
+  .testi-cta-single {
+    max-width: 700px;
     margin: 0 auto;
+  }
+  .testi-cta-content {
+    text-align: center;
   }
   .testi-cta-label {
     display: inline-flex;
@@ -218,58 +195,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   .testi-cta-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(28px, 3.2vw, 40px);
     color: #ffffff;
     line-height: 1.2;
     margin-bottom: 20px;
+    white-space: nowrap;
   }
   .testi-cta-desc {
-    font-size: 17px;
-    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
     line-height: 1.75;
-    margin-bottom: 32px;
-    max-width: 480px;
-  }
-  .testi-cta-trust {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .testi-cta-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: rgba(255,255,255,0.85);
-    font-size: 15px;
+    margin: 0 auto 32px;
+    max-width: 520px;
     font-weight: 500;
-  }
-  .testi-cta-trust-item svg { flex-shrink: 0; }
-
-  /* Form */
-  .testi-cta-form-wrap {
-    background: rgba(255,255,255,0.97);
-    border-radius: 24px;
-    padding: 40px 36px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-  .testi-cta-form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #3d2b2b;
-    margin-bottom: 8px;
-  }
-  .testi-cta-form-sub {
-    font-size: 14px;
-    color: #7a6060;
-    margin-bottom: 28px;
-    line-height: 1.6;
-  }
-  .testi-cta-desc {
-    font-size: 14px;
-    color: rgba(0,0,0,0.7);
-    margin-bottom: 24px;
-    line-height: 1.7;
   }
   .testi-cta-row {
     display: grid;
@@ -317,8 +255,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   .testi-cta-submit {
     width: 100%;
-    padding: 16px;
-    background: var(--grad-teal);
+    padding: 16px 40px;
+    background: rgba(77, 182, 172, 0.85);
     color: #ffffff;
     font-family: 'Outfit', sans-serif;
     font-size: 16px;
@@ -326,28 +264,46 @@ document.addEventListener('DOMContentLoaded', function() {
     text-transform: uppercase;
     letter-spacing: 2px;
     border: none;
-    border-radius: 12px;
+    border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
     margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(77, 182, 172, 0.3);
+  }
+  .testi-cta-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
   }
   .testi-cta-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(77,182,172,0.4);
-    opacity: 0.9;
+    background: rgba(77, 182, 172, 1);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(77, 182, 172, 0.6), 0 0 40px rgba(77, 182, 172, 0.4);
   }
-  @media (max-width: 991px) {
-    .testi-cta-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .testi-cta-text { text-align: center; }
-    .testi-cta-desc { margin-left: auto; margin-right: auto; }
-    .testi-cta-trust { align-items: center; }
+  .testi-cta-submit:hover::before {
+    left: 100%;
+  }
+  .testi-cta-submit:active {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(77, 182, 172, 0.4);
+  }
+  .testi-cta-submit {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 25px;
+    text-decoration: none;
+    text-align: center;
   }
   @media (max-width: 480px) {
-    .testi-cta-row { grid-template-columns: 1fr; }
-    .testi-cta-form-wrap { padding: 28px 22px; }
     .testi-cta-section { padding: 60px 5%; border-radius: 24px; margin: 0 3% 40px; }
     .testi-cta-submit {
       padding: 14px 18px;

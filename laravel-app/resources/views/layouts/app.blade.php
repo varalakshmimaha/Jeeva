@@ -170,19 +170,42 @@
     });
   }
 
+  /* Auto-scroll to success/error messages */
+  document.addEventListener('DOMContentLoaded', function() {
+    var successAlert = document.querySelector('.bf-alert--ok');
+    if (successAlert) {
+      setTimeout(function() {
+        successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  });
+
   window.addEventListener('message', function (e) {
     if (!e.data || typeof e.data.event !== 'string') return;
     if (e.data.event.indexOf('calendly') !== 0) return;
     if (e.data.event === 'calendly.date_and_time_selected') {
+      var selectedDateTime = 'Date & time selected';
+      if (e.data.payload && e.data.payload.event && e.data.payload.event.start_time) {
+        var eventDate = new Date(e.data.payload.event.start_time);
+        selectedDateTime = eventDate.toLocaleString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
       document.querySelectorAll('input[data-calendly-time]').forEach(function (input) {
-        input.value = '✓ Date & time selected';
+        input.value = selectedDateTime;
         input.classList.add('is-filled');
         var wrap = input.closest('.jiva-pickdate');
         if (wrap) wrap.classList.add('is-filled');
       });
       /* Also handle footer form date input */
       if (footerDateInput) {
-        footerDateInput.value = '✓ Date & time selected';
+        footerDateInput.value = selectedDateTime;
       }
       /* Close popup immediately — click overlay close button first, fallback to API */
       var closeBtn = document.querySelector('.calendly-close-overlay');
