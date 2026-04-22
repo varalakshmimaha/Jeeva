@@ -97,6 +97,7 @@ nav.scrolled{
   transition:width .3s ease,height .3s ease;
   overflow:hidden;
   padding:0;
+  line-height:1;
 }
 .logo-img{
   height:160px;width:160px;object-fit:contain;
@@ -109,6 +110,7 @@ nav.scrolled{
   border-radius:50%;
   margin:0;
   padding:0;
+  line-height:1;
 }
 nav.scrolled .nav-inner{
   height:108px;
@@ -121,6 +123,7 @@ nav.scrolled .logo{
 nav.scrolled .logo-img{
   height:160px;width:160px;
   filter:none;border-radius:50%;
+  line-height:1;
 }
 
 .nav-links{
