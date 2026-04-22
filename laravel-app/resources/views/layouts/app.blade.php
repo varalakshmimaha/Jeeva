@@ -161,6 +161,15 @@
     }
   });
 
+  /* Handle footer date/time input click */
+  var footerDateInput = document.querySelector('input[name="datetime"]');
+  if (footerDateInput) {
+    footerDateInput.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.openJivaCalendly();
+    });
+  }
+
   window.addEventListener('message', function (e) {
     if (!e.data || typeof e.data.event !== 'string') return;
     if (e.data.event.indexOf('calendly') !== 0) return;
@@ -171,6 +180,10 @@
         var wrap = input.closest('.jiva-pickdate');
         if (wrap) wrap.classList.add('is-filled');
       });
+      /* Also handle footer form date input */
+      if (footerDateInput) {
+        footerDateInput.value = '✓ Date & time selected';
+      }
       /* Close popup immediately — click overlay close button first, fallback to API */
       var closeBtn = document.querySelector('.calendly-close-overlay');
       if (closeBtn) {

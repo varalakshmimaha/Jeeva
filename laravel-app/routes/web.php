@@ -22,6 +22,7 @@ Route::get('/terms-and-conditions', [PageController::class, 'terms'])->name('ter
 
 // Contact Form Submission
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Testing & Debugging
 Route::get('/debug/settings', function () {
