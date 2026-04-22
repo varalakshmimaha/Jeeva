@@ -449,8 +449,6 @@
     if (!form) return;
 
     const dateTimeInput = form.querySelector('input[data-calendly-time]');
-    const messageInput = form.querySelector('textarea[name="message"]');
-    const serviceSelect = form.querySelector('select[name="subject"]');
 
     if (dateTimeInput) {
       dateTimeInput.addEventListener('click', function(e) {
@@ -466,12 +464,6 @@
       if (!dateTime) {
         e.preventDefault();
         return;
-      }
-
-      const service = serviceSelect ? serviceSelect.value : '';
-
-      if (messageInput && !messageInput.value.trim()) {
-        messageInput.value = 'Service: ' + service + ' | Preferred date/time: ' + dateTime;
       }
     });
   })();

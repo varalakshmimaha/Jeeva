@@ -887,24 +887,12 @@
     if (!form) return;
 
     const dateTimeInput = form.querySelector('input[data-calendly-time]');
-    const journeyInput = form.querySelector('textarea[name="message"]');
-    const messageInput = form.querySelector('input[name="message"]');
 
     form.addEventListener('submit', (e) => {
       const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
       if (!dateTime) {
         e.preventDefault();
         return;
-      }
-
-      const serviceSel = form.querySelector('select[name="service_selected"]');
-      const service = serviceSel ? serviceSel.value : '';
-      const journey = journeyInput ? journeyInput.value.trim() : '';
-
-      if (messageInput) {
-        messageInput.value = 'Complimentary consultation request — Service: ' + service +
-          ' | Preferred date/time: ' + dateTime +
-          (journey ? ' | Notes: ' + journey : '');
       }
     });
 

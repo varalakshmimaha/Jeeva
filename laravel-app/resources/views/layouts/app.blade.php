@@ -207,9 +207,7 @@
       if (footerDateInput) {
         footerDateInput.value = selectedDateTime;
       }
-    }
-    /* Close popup only after booking is confirmed */
-    if (e.data.event === 'calendly.event_scheduled') {
+      /* Close popup immediately after date/time selection */
       var closeBtn = document.querySelector('.calendly-close-overlay');
       if (closeBtn) {
         closeBtn.click();
