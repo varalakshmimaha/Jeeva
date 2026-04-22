@@ -1037,25 +1037,12 @@
     <div class="about-cta-bg" style="background-image: url('{{ asset('storage/moutain.jpg') }}');"></div>
     <div class="about-cta-overlay"></div>
     <div class="container">
-      <div class="about-cta-grid">
-        <!-- Left: Text -->
-        <div class="about-cta-text reveal">
+      <div class="about-cta-single">
+        <div class="about-cta-content reveal">
           <span class="about-cta-label">Let's Connect</span>
           <h2 class="about-cta-title">Begin Your Empowered Birth Journey</h2>
+          <p class="about-cta-subtitle">Share your details and we'll respond with the right guidance for your journey.</p>
           <p class="about-cta-desc">Whether you're expecting, planning, or simply curious — I'd love to hear from you. Let's create a birth experience that feels safe, supported, and truly yours.</p>
-          <div class="about-cta-trust">
-            <div class="about-cta-trust-item">
-              <svg width="24" height="24" fill="none" stroke="#4DB6AC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Free initial consultation</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Form -->
-        <div class="about-cta-form-wrap reveal d1">
-          <h3 class="about-cta-form-title">Book Consultation</h3>
-          <p class="about-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
-          <p class="about-cta-desc">Connect with Anu for a personalized consultation. Discuss your birth journey, ask questions, and explore how our services can support you through this transformative time.</p>
           <button class="about-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book Consultation</button>
         </div>
       </div>
@@ -1093,13 +1080,12 @@
       z-index: 2;
       width: 100%;
     }
-    .about-cta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      max-width: 1200px;
+    .about-cta-single {
+      max-width: 700px;
       margin: 0 auto;
+    }
+    .about-cta-content {
+      text-align: center;
     }
     .about-cta-label {
       display: inline-flex;
@@ -1124,7 +1110,13 @@
       font-size: clamp(32px, 4vw, 48px);
       color: #ffffff;
       line-height: 1.2;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+    }
+    .about-cta-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 16px;
+      line-height: 1.6;
     }
     .about-cta-desc {
       font-size: 17px;
@@ -1218,8 +1210,8 @@
       min-height: 60px;
     }
     .about-cta-submit {
-      width: 100%;
-      padding: 16px;
+      display: inline-block;
+      padding: 16px 40px;
       background: var(--grad-teal);
       color: #ffffff;
       font-family: 'Outfit', sans-serif;
@@ -1231,7 +1223,7 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 4px;
+      margin-top: 8px;
     }
     .about-cta-pickdate-btn {
       width: 100%;
