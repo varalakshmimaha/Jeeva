@@ -185,16 +185,26 @@
     if (e.data.event.indexOf('calendly') !== 0) return;
     if (e.data.event === 'calendly.date_and_time_selected') {
       var selectedDateTime = 'Date & time selected';
+      var startTime = null;
+
       if (e.data.payload && e.data.payload.event && e.data.payload.event.start_time) {
-        var eventDate = new Date(e.data.payload.event.start_time);
-        selectedDateTime = eventDate.toLocaleString('en-US', {
-          weekday: 'short',
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
+        startTime = e.data.payload.event.start_time;
+      } else if (e.data.payload && e.data.payload.start_time) {
+        startTime = e.data.payload.start_time;
+      }
+
+      if (startTime) {
+        var eventDate = new Date(startTime);
+        if (!isNaN(eventDate.getTime())) {
+          selectedDateTime = eventDate.toLocaleString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        }
       }
 
       document.querySelectorAll('input[data-calendly-time]').forEach(function (input) {
