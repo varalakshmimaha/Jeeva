@@ -60,16 +60,5 @@
             </form>
         </div>
     </div>
-
-    <div class="adm-form-actions">
-        <a href="mailto:{{ $message->email }}" class="adm-btn adm-btn-primary">Reply via Email</a>
-        @if($message->phone)
-            <a href="tel:{{ preg_replace('/[^0-9+]/', '', $message->phone) }}" class="adm-btn adm-btn-cancel">Call</a>
-        @endif
-        <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Delete this message?')">
-            @csrf @method('DELETE')
-            <button type="submit" class="adm-btn adm-btn-danger">Delete</button>
-        </form>
-    </div>
 </div>
 @endsection
