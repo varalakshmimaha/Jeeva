@@ -553,29 +553,13 @@
             </div>
           </div>
 
-          <!-- Pick a Date & Time — inline calendar -->
+          <!-- Pick a Date & Time — Calendly Integration -->
           <div class="appointment-field">
             <label>Pick a Date &amp; Time <span style="color:#e06b6b;">*</span></label>
-            <input type="text" id="home-selected-time" name="preferred_time_label" placeholder="Pick from calendar below" readonly required
-              style="width:100%;padding:11px 14px;border:1.5px solid #e5e0d8;border-radius:8px;background:#fff;font-family:inherit;font-size:14px;color:#2b2b2b;outline:none;box-sizing:border-box;margin-bottom:12px;">
-          </div>
-
-          <!-- Inline Calendar Widget -->
-          <div class="appt-cal-wrap">
-            <div class="appt-cal-card">
-              <div class="appt-cal-header">
-                <button type="button" class="appt-cal-nav" id="apptCalPrev">&#8249;</button>
-                <span class="appt-cal-label" id="apptCalMonthYear"></span>
-                <button type="button" class="appt-cal-nav" id="apptCalNext">&#8250;</button>
-              </div>
-              <div class="appt-cal-days">
-                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-              </div>
-              <div class="appt-cal-grid" id="apptCalGrid"></div>
-            </div>
-            <div id="apptSlotSection" style="display:none;">
-              <div class="appt-slot-label" id="apptSlotDateLabel"></div>
-              <div class="appt-slots-grid" id="apptSlotsGrid"></div>
+            <div class="jiva-pickdate" data-calendly tabindex="0" role="button" aria-label="Pick a date and time">
+              <svg class="jiva-pickdate__ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <input type="text" name="preferred_time_label" class="jiva-pickdate__input" placeholder="Pick a Date &amp; Time" readonly required data-calendly-time>
+              <svg class="jiva-pickdate__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
           </div>
 
@@ -908,57 +892,16 @@
     var HOME_SLOTS = @json($homeSlots);
     var hYear, hMonth, hSelectedDate = null;
 
-    function initHomeCal() {
-      var now = new Date(); hYear = now.getFullYear(); hMonth = now.getMonth();
-      renderHomeCal();
-    }
-    function renderHomeCal() {
-      document.getElementById('apptCalMonthYear').textContent = MONTHS[hMonth] + ' ' + hYear;
-      var grid = document.getElementById('apptCalGrid'); grid.innerHTML = '';
-      var today = new Date(); today.setHours(0,0,0,0);
-      var first = new Date(hYear, hMonth, 1).getDay();
-      var days  = new Date(hYear, hMonth + 1, 0).getDate();
-      for (var i = 0; i < first; i++) {
-        var b = document.createElement('span'); b.className = 'appt-day appt-day--empty'; grid.appendChild(b);
-      }
-      for (var d = 1; d <= days; d++) {
-        var cell = document.createElement('button'); cell.type = 'button'; cell.textContent = d;
-        var cellDate = new Date(hYear, hMonth, d);
-        if (cellDate < today) {
-          cell.className = 'appt-day appt-day--past'; cell.disabled = true;
-        } else {
-          cell.className = 'appt-day';
-          if (hSelectedDate && cellDate.toDateString() === hSelectedDate.toDateString()) cell.classList.add('appt-day--selected');
-          cell.addEventListener('click', (function(date){ return function(){ onHomeDatePick(date); }; })(new Date(hYear, hMonth, d)));
+    /* Calendly integration for home page booking form */
+    var homeBookingInput = document.querySelector('input[data-calendly-time]');
+    if (homeBookingInput) {
+      homeBookingInput.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (typeof window.openJivaCalendly === 'function') {
+          window.openJivaCalendly();
         }
-        grid.appendChild(cell);
-      }
-    }
-    function onHomeDatePick(date) {
-      hSelectedDate = date;
-      document.getElementById('home-selected-time').value = '';
-      renderHomeCal();
-      var label = date.getDate() + ' ' + MONTHS[date.getMonth()] + ' ' + date.getFullYear();
-      document.getElementById('apptSlotDateLabel').textContent = label + ' — Pick a time';
-      var sg = document.getElementById('apptSlotsGrid'); sg.innerHTML = '';
-      HOME_SLOTS.forEach(function(slot) {
-        var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'appt-slot'; btn.textContent = slot;
-        btn.addEventListener('click', function() {
-          sg.querySelectorAll('.appt-slot').forEach(function(b){ b.classList.remove('is-active'); });
-          btn.classList.add('is-active');
-          document.getElementById('home-selected-time').value = label + ' at ' + slot;
-        });
-        sg.appendChild(btn);
       });
-      document.getElementById('apptSlotSection').style.display = 'block';
     }
-    document.getElementById('apptCalPrev').addEventListener('click', function() {
-      hMonth--; if (hMonth < 0) { hMonth = 11; hYear--; } renderHomeCal();
-    });
-    document.getElementById('apptCalNext').addEventListener('click', function() {
-      hMonth++; if (hMonth > 11) { hMonth = 0; hYear++; } renderHomeCal();
-    });
-    initHomeCal();
   })();
 
   (function () {
