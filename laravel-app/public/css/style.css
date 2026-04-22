@@ -3075,7 +3075,7 @@ footer{
 
 .service-icon-bg {
   width: 140px;
-  height: 140px;
+  height: 120px;
   background: var(--cream);
   border-radius: 20px;
   display: flex;
