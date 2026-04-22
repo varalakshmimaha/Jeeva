@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="bf-field">
-            <label class="bf-label">Purpose <span class="bf-req">*</span></label>
+            <label class="bf-label">Service <span class="bf-req">*</span></label>
             <select name="subject" class="bf-input" required>
               <option value="Birth Doula Package">Birth Doula Package</option>
               <option value="Prenatal Yoga">Prenatal Yoga</option>
@@ -79,29 +79,12 @@
         </form>
       </div>
 
-      <!-- Right: Info -->
-      <div class="book-card book-info-card">
-        <h3 class="book-info-title">Why Book With Us?</h3>
-        <div class="book-info-item">
-          <svg class="book-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-14v4m0 4v.01"/></svg>
-          <div>
-            <h4>Personalized Guidance</h4>
-            <p>One-on-one consultation tailored to your journey</p>
-          </div>
-        </div>
-        <div class="book-info-item">
-          <svg class="book-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            <div>
-            <h4>Expert Support</h4>
-            <p>Guidance from certified birth and wellness experts</p>
-          </div>
-        </div>
-        <div class="book-info-item">
-          <svg class="book-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6v6l4 2"/></svg>
-          <div>
-            <h4>Flexible Scheduling</h4>
-            <p>Choose a time that works best for you</p>
-          </div>
+      <!-- Right: Calendly -->
+      <div class="book-card book-calendly-card">
+        <div class="calendly-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <h3>Select Your Time</h3>
+          <p>Pick a date and time in the form to the left to schedule your consultation</p>
         </div>
       </div>
 
@@ -255,44 +238,36 @@
       margin: 0 0 22px;
       font-weight: 700;
     }
-    .book-info-card {
+    .book-calendly-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .calendly-placeholder {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-    }
-    .book-info-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: #2b2b2b;
-      margin: 0 0 24px;
-      font-weight: 700;
-    }
-    .book-info-item {
-      display: flex;
+      align-items: center;
       gap: 16px;
-      margin-bottom: 24px;
-      align-items: flex-start;
+      padding: 20px;
     }
-    .book-info-item:last-child {
-      margin-bottom: 0;
+    .calendly-placeholder svg {
+      opacity: 0.6;
     }
-    .book-info-icon {
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .book-info-item h4 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
+    .calendly-placeholder h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
       color: #2b2b2b;
-      margin: 0 0 6px;
+      margin: 0;
+      font-weight: 700;
     }
-    .book-info-item p {
+    .calendly-placeholder p {
       font-family: 'Outfit', sans-serif;
       font-size: 14px;
       color: #6b5a5a;
       margin: 0;
       line-height: 1.6;
+      max-width: 280px;
     }
     .bf-field { margin-bottom: 16px; }
     .bf-req { color: #e05252; font-weight: 700; margin-left: 2px; }
