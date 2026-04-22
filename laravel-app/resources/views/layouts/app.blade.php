@@ -93,10 +93,17 @@
 
 <x-footer-contact />
 
+<!-- Floating Certifications Logo -->
+@if(!empty($siteSettings['certifications_image_url']))
+<div class="cert-logo-float">
+  <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" />
+</div>
+@endif
+
 <!-- Floating WhatsApp Button -->
-<a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond" 
-   class="whatsapp-float" 
-   target="_blank" 
+<a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond"
+   class="whatsapp-float"
+   target="_blank"
    rel="noopener noreferrer"
    aria-label="Contact us on WhatsApp">
   <div class="whatsapp-pulse"></div>

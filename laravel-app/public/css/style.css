@@ -3644,6 +3644,21 @@ footer{
 /* ══════════════════════════════════
    FLOATING WHATSAPP BUTTON
    ══════════════════════════════════ */
+.cert-logo-float {
+  position: fixed;
+  width: 140px;
+  bottom: 110px;
+  right: 20px;
+  z-index: 999;
+  display: block;
+}
+
+.cert-logo-float img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .whatsapp-float {
   position: fixed;
   width: 60px;
