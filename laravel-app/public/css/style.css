@@ -92,8 +92,8 @@ nav.scrolled{
   border-radius:50%;
   box-shadow:none;
   margin-left:48px;
-  margin-top:10px;
-  margin-bottom:-10px;
+  margin-top:0;
+  margin-bottom:0;
   transition:width .3s ease,height .3s ease;
   overflow:hidden;
   padding:0;
