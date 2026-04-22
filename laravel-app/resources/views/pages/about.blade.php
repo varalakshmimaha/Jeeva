@@ -783,19 +783,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f9f9f9;
+      background: transparent;
       position: relative;
       width: 100%;
       max-width: 520px;
-    }
-    .cred-side-img::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(77,182,172,0.05) 0%, rgba(245,213,213,0.03) 100%);
-      pointer-events: none;
-      border-radius: 20px;
-      z-index: 1;
     }
     .cred-yoga-img {
       width: 100%;
