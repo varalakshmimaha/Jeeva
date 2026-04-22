@@ -105,10 +105,26 @@ class PageController extends Controller
     public function contact()
     {
         $banner = \App\Models\Banner::where('page', 'contact')->orderBy('order', 'asc')->first();
+        $services = \App\Models\Service::orderBy('order', 'asc')->get();
         return view('pages.contact', [
             'pageName' => 'contact',
             'banner' => $banner,
+            'services' => $services,
         ]);
+    }
+
+    public function bookedSlots(\Illuminate\Http\Request $request)
+    {
+        $date = $request->query('date');
+        if (!$date) {
+            return response()->json(['booked' => []]);
+        }
+        $booked = \App\Models\ContactMessage::whereDate('preferred_date', $date)
+            ->whereNotNull('preferred_time')
+            ->pluck('preferred_time')
+            ->unique()
+            ->values();
+        return response()->json(['booked' => $booked]);
     }
 
     public function privacy()

@@ -18,8 +18,9 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Subject</th>
-                    <th>Date</th>
+                    <th>Service</th>
+                    <th>Slot</th>
+                    <th>Submitted</th>
                     <th>Status</th>
                     <th class="col-center">Actions</th>
                 </tr>
@@ -30,15 +31,22 @@
                     <td>
                         <div style="font-weight:{{ !$msg->is_read ? '700' : '500' }};">{{ $msg->name }}</div>
                         <div style="font-size:12px;color:var(--muted);font-weight:400;">{{ $msg->email }}</div>
+                        @if($msg->phone)
+                            <div style="font-size:11px;color:var(--muted);font-weight:400;">{{ $msg->phone }}</div>
+                        @endif
                     </td>
                     <td style="color:var(--muted);">
-                        <div>{{ Str::limit($msg->subject ?? $msg->message, 40) }}</div>
-                        @php
-                            $bookingMatch = preg_match('/Selected Date & Time:\s*(.+?)\n/', $msg->message, $matches);
-                            $bookingDate = $bookingMatch ? trim($matches[1]) : null;
-                        @endphp
-                        @if($bookingDate)
-                            <div style="font-size:11px;color:#4DB6AC;margin-top:4px;">📅 {{ $bookingDate }}</div>
+                        {{ Str::limit($msg->service_selected ?? $msg->subject ?? '—', 40) }}
+                    </td>
+                    <td style="font-size:12px;">
+                        @if($msg->preferred_date)
+                            <div style="color:#2FA9A3;font-weight:600;">📅 {{ \Carbon\Carbon::parse($msg->preferred_date)->format('M d, Y') }}</div>
+                        @endif
+                        @if($msg->preferred_time)
+                            <div style="color:#2FA9A3;font-weight:600;">🕐 {{ $msg->preferred_time }}</div>
+                        @endif
+                        @if(!$msg->preferred_date && !$msg->preferred_time)
+                            <span style="color:var(--muted);">—</span>
                         @endif
                     </td>
                     <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->format('M d, Y h:i A') }}</td>
@@ -67,7 +75,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" style="text-align:center;color:var(--muted);padding:40px;">No messages yet.</td>
+                    <td colspan="6" style="text-align:center;color:var(--muted);padding:40px;">No messages yet.</td>
                 </tr>
                 @endforelse
             </tbody>

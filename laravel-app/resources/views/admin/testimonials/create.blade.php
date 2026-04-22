@@ -53,7 +53,7 @@
                 <div class="adm-form-group" style="margin-top:16px;">
                     <label class="adm-label">Client Photo</label>
                     <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
-                    <p class="adm-hint">JPG, PNG or WebP. Optional client headshot.</p>
+                    <p class="adm-hint">JPG, PNG or WebP. Recommended: <strong>400×400 px</strong> (square headshot). Max 2MB. Optional.</p>
                 </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">

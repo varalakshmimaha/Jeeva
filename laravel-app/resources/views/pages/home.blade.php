@@ -510,18 +510,272 @@
 
         <div class="appointment-form-col reveal d1">
 
-        <div class="appointment-calendly-embed">
-          <div data-calendly-inline-widget data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
-        </div>
+        @if(session('success'))
+          <div class="book-alert book-alert--ok">{{ session('success') }}</div>
+        @endif
+        @if($errors->any())
+          <div class="book-alert book-alert--err">
+            @foreach($errors->all() as $error){{ $error }}<br>@endforeach
+          </div>
+        @endif
+
+        <form action="{{ route('contact.store') }}" method="POST" class="book-form" id="homeBookConsultationForm">
+          @csrf
+          <input type="hidden" name="subject" value="Complimentary Consultation Booking">
+
+          <div class="bf-row">
+            <div class="bf-field">
+              <label>Full Name *</label>
+              <input type="text" name="name" placeholder="Your full name" value="{{ old('name') }}" required>
+            </div>
+            <div class="bf-field">
+              <label>Email Address *</label>
+              <input type="email" name="email" placeholder="you@example.com" value="{{ old('email') }}" required>
+            </div>
+          </div>
+
+          <div class="bf-field">
+            <label>Phone *</label>
+            <div class="bf-phone-group">
+              <select name="country_code" class="bf-phone-code" required>
+                <option value="+91"  {{ old('country_code','+91') === '+91'  ? 'selected' : '' }}>IN +91</option>
+                <option value="+1"   {{ old('country_code') === '+1'   ? 'selected' : '' }}>CA +1</option>
+                <option value="+44"  {{ old('country_code') === '+44'  ? 'selected' : '' }}>UK +44</option>
+                <option value="+61"  {{ old('country_code') === '+61'  ? 'selected' : '' }}>AU +61</option>
+                <option value="+971" {{ old('country_code') === '+971' ? 'selected' : '' }}>AE +971</option>
+                <option value="+65"  {{ old('country_code') === '+65'  ? 'selected' : '' }}>SG +65</option>
+                <option value="+60"  {{ old('country_code') === '+60'  ? 'selected' : '' }}>MY +60</option>
+                <option value="+64"  {{ old('country_code') === '+64'  ? 'selected' : '' }}>NZ +64</option>
+                <option value="+49"  {{ old('country_code') === '+49'  ? 'selected' : '' }}>DE +49</option>
+                <option value="+33"  {{ old('country_code') === '+33'  ? 'selected' : '' }}>FR +33</option>
+              </select>
+              <input type="tel" name="phone" class="bf-phone-number" placeholder="Phone Number" value="{{ old('phone') }}" required>
+            </div>
+          </div>
+
+          <div class="bf-field">
+            <label>Service *</label>
+            <select name="service_selected" required>
+              <option value="" disabled {{ old('service_selected') ? '' : 'selected' }}>Choose a service</option>
+              @foreach(($services ?? []) as $service)
+                <option value="{{ $service->title }}" {{ old('service_selected') === $service->title ? 'selected' : '' }}>{{ $service->title }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="bf-row">
+            <div class="bf-field">
+              <label>Pick a Date *</label>
+              <input type="date" name="preferred_date" id="homeBfDate" min="{{ date('Y-m-d') }}" value="{{ old('preferred_date') }}" required>
+            </div>
+            <div class="bf-field">
+              <label>Pick a Time *</label>
+              @php
+                $defaultSlots = '09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM';
+                $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
+                $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
+              @endphp
+              <select name="preferred_time" id="homeBfTime" required>
+                <option value="" disabled selected>Select a time</option>
+                @foreach($timeSlots as $slot)
+                  <option value="{{ $slot }}" {{ old('preferred_time') === $slot ? 'selected' : '' }}>{{ $slot }}</option>
+                @endforeach
+              </select>
+              <small id="homeBfTimeHint" class="bf-hint">Pick a date to see available times.</small>
+            </div>
+          </div>
+
+          <div class="bf-field">
+            <label>Other Notes</label>
+            <textarea name="message" rows="3" placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
+          </div>
+
+          <button type="submit" class="book-submit">Book Consultation</button>
+        </form>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+  (function () {
+    var dateEl = document.getElementById('homeBfDate');
+    var timeEl = document.getElementById('homeBfTime');
+    var hintEl = document.getElementById('homeBfTimeHint');
+    if (!dateEl || !timeEl) return;
+
+    var allSlots = Array.prototype.slice.call(timeEl.querySelectorAll('option'))
+      .filter(function (o) { return o.value; })
+      .map(function (o) { return o.value; });
+
+    function rebuildOptions(bookedSlots) {
+      var current = timeEl.value;
+      timeEl.innerHTML = '<option value="" disabled selected>Select a time</option>';
+      allSlots.forEach(function (slot) {
+        if (bookedSlots.indexOf(slot) !== -1) return;
+        var opt = document.createElement('option');
+        opt.value = slot;
+        opt.textContent = slot;
+        timeEl.appendChild(opt);
+      });
+      if (current && bookedSlots.indexOf(current) === -1) {
+        timeEl.value = current;
+      }
+      if (!timeEl.querySelector('option[value]:not([disabled])')) {
+        hintEl.textContent = 'All slots are booked for this date. Please pick another date.';
+      } else {
+        hintEl.textContent = 'Showing available times for the selected date.';
+      }
+    }
+
+    function fetchBooked(date) {
+      if (!date) return;
+      hintEl.textContent = 'Checking available times...';
+      fetch('{{ route('booked.slots') }}?date=' + encodeURIComponent(date), { headers: { 'Accept': 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (data) { rebuildOptions(data.booked || []); })
+        .catch(function () { rebuildOptions([]); });
+    }
+
+    dateEl.addEventListener('change', function () { fetchBooked(dateEl.value); });
+    if (dateEl.value) fetchBooked(dateEl.value);
+  })();
+  </script>
+
   <style>
     .book-appointment-section {
       padding: 90px 6%;
       background: linear-gradient(180deg, #faf1ec 0%, #fdf8f5 100%);
+    }
+    .book-alert { padding: 13px 16px; border-radius: 12px; font-size: 14px; margin-bottom: 16px; font-family: 'Outfit', sans-serif; }
+    .book-alert--ok { background: #eafaf4; color: #1d6b52; border: 1px solid #bfeadb; }
+    .book-alert--err { background: #fdecec; color: #a22d2d; border: 1px solid #f3c6c6; }
+    .book-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background: #ffffff;
+      padding: 40px 36px;
+      border-radius: 24px;
+      box-shadow: 0 30px 70px -20px rgba(47,169,163,0.18), 0 8px 24px -8px rgba(0,0,0,0.04);
+      border: 1px solid #f3ebe5;
+      font-family: 'Outfit', sans-serif;
+    }
+    .bf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .bf-field { display: flex; flex-direction: column; }
+    .bf-field label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1f3b38;
+      margin-bottom: 8px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+    .bf-field input,
+    .bf-field select,
+    .bf-field textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1.5px solid #ead9d1;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      background: #fdfaf8;
+      color: #2b2b2b;
+      transition: border-color .25s, box-shadow .25s, background .25s;
+      letter-spacing: .2px;
+    }
+    .bf-field textarea {
+      border-radius: 18px;
+      min-height: 110px;
+      padding: 14px 18px;
+    }
+    .bf-field input::placeholder,
+    .bf-field textarea::placeholder { color: #b0a59f; font-weight: 400; }
+    .bf-field input:focus,
+    .bf-field select:focus,
+    .bf-field textarea:focus {
+      outline: none;
+      border-color: #4DB6AC;
+      box-shadow: 0 0 0 4px rgba(77,182,172,0.14);
+      background: #ffffff;
+    }
+    .bf-field select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232FA9A3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 20px center;
+      padding-right: 46px;
+      cursor: pointer;
+    }
+    .bf-field textarea { resize: vertical; }
+    .bf-hint { font-family: 'Outfit', sans-serif; font-size: 12px; color: #9d8f88; margin-top: 8px; font-style: italic; }
+    .bf-phone-group {
+      display: flex;
+      align-items: stretch;
+      border: 1.5px solid #ead9d1;
+      border-radius: 999px;
+      background: #fdfaf8;
+      overflow: hidden;
+      transition: border-color .25s, box-shadow .25s, background .25s;
+    }
+    .bf-phone-group:focus-within {
+      border-color: #4DB6AC;
+      box-shadow: 0 0 0 4px rgba(77,182,172,0.14);
+      background: #ffffff;
+    }
+    .bf-phone-group .bf-phone-code {
+      border: none !important;
+      background: transparent !important;
+      border-right: 1.5px solid #ead9d1 !important;
+      border-radius: 0 !important;
+      padding: 14px 40px 14px 18px !important;
+      width: auto !important;
+      min-width: 108px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #1f3b38;
+      box-shadow: none !important;
+      cursor: pointer;
+      background-position: right 14px center !important;
+    }
+    .bf-phone-group .bf-phone-code:focus { outline: none; }
+    .bf-phone-group .bf-phone-number {
+      border: none !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      flex: 1;
+      padding: 14px 22px !important;
+      box-shadow: none !important;
+    }
+    .bf-phone-group .bf-phone-number:focus { outline: none; }
+    .book-submit {
+      margin-top: 10px;
+      padding: 16px 30px;
+      background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, background .3s;
+      box-shadow: 0 14px 30px -10px rgba(47,169,163,0.55);
+    }
+    .book-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px -12px rgba(47,169,163,0.65);
+      background: linear-gradient(135deg, #33b8b1 0%, #238f89 100%);
+    }
+    @media (max-width: 560px) {
+      .bf-row { grid-template-columns: 1fr; }
+      .book-form { padding: 28px 22px; }
     }
     .appointment-wrapper {
       max-width: 1180px;

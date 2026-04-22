@@ -37,9 +37,23 @@
             </div>
 
             <div class="field">
-                <div class="label">Service / Subject</div>
-                <div class="value">{{ $booking->subject ?? 'General Inquiry' }}</div>
+                <div class="label">Service</div>
+                <div class="value">{{ $booking->service_selected ?? $booking->subject ?? 'General Inquiry' }}</div>
             </div>
+
+            @if($booking->preferred_date)
+            <div class="field">
+                <div class="label">Preferred Date</div>
+                <div class="value">{{ \Carbon\Carbon::parse($booking->preferred_date)->format('l, d M Y') }}</div>
+            </div>
+            @endif
+
+            @if($booking->preferred_time)
+            <div class="field">
+                <div class="label">Preferred Time</div>
+                <div class="value">{{ $booking->preferred_time }}</div>
+            </div>
+            @endif
 
             <div class="divider"></div>
 

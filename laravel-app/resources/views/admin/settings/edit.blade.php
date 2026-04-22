@@ -93,7 +93,7 @@
                 <div class="adm-card-body">
                     <textarea name="booking_time_slots" class="adm-input" rows="3"
                         placeholder="09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM">{{ old('booking_time_slots', $settings['booking_time_slots'] ?? '') }}</textarea>
-                    <p class="adm-hint">Comma-separated list of time slots shown in the home-page "Pick a Time" dropdown. Leave blank to use the default list.</p>
+                    <p class="adm-hint">Comma-separated list of time slots shown in the "Pick a Time" dropdown on the Home and Contact booking forms. Already-booked slots are automatically hidden from visitors. Leave blank to use the default list.</p>
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@
                             <td class="adm-fl">Upload Logo</td>
                             <td class="adm-fi">
                                 <input type="file" name="logo" accept="image/*" class="adm-input">
-                                <p class="adm-hint">Accepted formats: JPEG, PNG, WebP. Max size: 2MB</p>
+                                <p class="adm-hint">JPEG, PNG or WebP. Recommended: <strong>400×400 px</strong> (square, transparent PNG preferred). Max 2MB.</p>
                             </td>
                         </tr>
                     </table>
@@ -279,6 +279,16 @@
                                 <input type="url" name="twitter_link" class="adm-input"
                                     value="{{ old('twitter_link', $settings['twitter_link'] ?? '') }}"
                                     placeholder="https://x.com/yourprofile">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">
+                                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#FF0000;margin-right:6px;vertical-align:middle;"></span> YouTube
+                            </td>
+                            <td class="adm-fi">
+                                <input type="url" name="youtube_link" class="adm-input"
+                                    value="{{ old('youtube_link', $settings['youtube_link'] ?? '') }}"
+                                    placeholder="https://youtube.com/@yourchannel">
                             </td>
                         </tr>
                     </table>

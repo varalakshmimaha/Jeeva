@@ -45,7 +45,7 @@
                             </div>
                         @endif
                         <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
-                        <p class="adm-hint">Leave empty to keep current image. JPG, PNG or WebP. Max 3MB.</p>
+                        <p class="adm-hint">Leave empty to keep current image. JPG, PNG or WebP. Recommended: <strong>1200×630 px</strong> (blog cover / social share). Max 3MB.</p>
                     </div>
                 </div>
                 <div class="adm-form-group" style="margin-top:16px;">

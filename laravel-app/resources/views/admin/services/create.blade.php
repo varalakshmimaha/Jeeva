@@ -49,6 +49,7 @@
                         <td class="adm-fl">Image</td>
                         <td class="adm-fi">
                             <input type="file" name="icon" accept="image/jpeg,image/png,image/webp" class="adm-input">
+                            <p class="adm-hint">JPG, PNG or WebP. Recommended: <strong>800×600 px</strong> (4:3 ratio) for service cards. Max 2MB.</p>
                         </td>
                     </tr>
                     <tr>

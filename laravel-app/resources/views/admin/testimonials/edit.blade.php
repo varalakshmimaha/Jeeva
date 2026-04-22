@@ -61,7 +61,7 @@
                         </label>
                     @endif
                     <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input">
-                    <p class="adm-hint">Leave empty to keep current photo. JPG, PNG or WebP. Tick "Remove current photo" to clear it without uploading a replacement.</p>
+                    <p class="adm-hint">Leave empty to keep current photo. JPG, PNG or WebP. Recommended: <strong>400×400 px</strong> (square headshot). Max 2MB. Tick "Remove current photo" to clear it without uploading a replacement.</p>
                 </div>
                 <div class="adm-form-grid" style="margin-top:16px;">
                     <div class="adm-form-group">

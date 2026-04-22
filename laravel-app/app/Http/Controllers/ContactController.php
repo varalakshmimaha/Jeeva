@@ -17,6 +17,9 @@ class ContactController extends Controller
             'phone' => 'nullable|string|max:20',
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:1000',
+            'preferred_date' => 'nullable|date',
+            'preferred_time' => 'nullable|string|max:20',
+            'service_selected' => 'nullable|string|max:255',
         ]);
 
         if (!empty($validated['phone']) && !empty($validated['country_code'])) {
@@ -24,16 +27,28 @@ class ContactController extends Controller
         }
         unset($validated['country_code']);
 
-        $booking = ContactMessage::create($validated);
-
-        /* Send email notification to admin */
-        $this->sendBookingEmail($booking);
-
-        if (!empty($validated['subject']) && $validated['subject'] === 'Complimentary Consultation Booking') {
-            return redirect(route('home') . '#book-appointment')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+        if (!empty($validated['preferred_date']) && !empty($validated['preferred_time'])) {
+            $taken = ContactMessage::whereDate('preferred_date', $validated['preferred_date'])
+                ->where('preferred_time', $validated['preferred_time'])
+                ->exists();
+            if ($taken) {
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['preferred_time' => 'Sorry, that slot was just booked. Please pick another time.']);
+            }
         }
 
-        return redirect()->back()->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+        $booking = ContactMessage::create($validated);
+
+        /* Send email notification to admin + confirmation to user */
+        $this->sendBookingEmail($booking);
+        $this->sendConfirmationEmail($booking);
+
+        if (!empty($validated['subject']) && $validated['subject'] === 'Complimentary Consultation Booking') {
+            return redirect(route('home') . '#book-appointment')->with('success', '✓ Thank you! A confirmation email is on its way.');
+        }
+
+        return redirect()->back()->with('success', '✓ Thank you! A confirmation email is on its way.');
     }
 
     private function sendBookingEmail($booking)
@@ -43,10 +58,26 @@ class ContactController extends Controller
         try {
             Mail::send('emails.booking-notification', ['booking' => $booking], function ($message) use ($adminEmail) {
                 $message->to($adminEmail)
-                        ->subject('New Booking Request: ' . ($booking->subject ?? 'Contact Message'));
+                        ->subject('New Booking Request: ' . ($booking->service_selected ?? $booking->subject ?? 'Contact Message'));
             });
         } catch (\Exception $e) {
             \Log::error('Failed to send booking email: ' . $e->getMessage());
+        }
+    }
+
+    private function sendConfirmationEmail($booking)
+    {
+        if (empty($booking->email)) {
+            return;
+        }
+
+        try {
+            Mail::send('emails.booking-confirmation', ['booking' => $booking], function ($message) use ($booking) {
+                $message->to($booking->email, $booking->name)
+                        ->subject('Your consultation booking with Jiva Birth & Beyond');
+            });
+        } catch (\Exception $e) {
+            \Log::error('Failed to send confirmation email: ' . $e->getMessage());
         }
     }
 

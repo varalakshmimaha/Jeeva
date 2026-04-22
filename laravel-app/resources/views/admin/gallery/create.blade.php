@@ -33,7 +33,7 @@
                     <div class="adm-form-group">
                         <label class="adm-label">Image *</label>
                         <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="adm-input" required>
-                        <p class="adm-hint">JPG, PNG or WebP. Max 3MB.</p>
+                        <p class="adm-hint">JPG, PNG or WebP. Recommended: <strong>1200×800 px</strong> (3:2 landscape) or <strong>1000×1000 px</strong> (square). Max 3MB.</p>
                     </div>
                     <div class="adm-form-group">
                         <label class="adm-label">Display Order</label>
