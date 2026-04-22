@@ -686,13 +686,9 @@
       </div>
 
       <div class="cred-layout">
-        <!-- LEFT: Certifications Image -->
+        <!-- LEFT: Yoga Image (background removed via mix-blend-mode) -->
         <div class="cred-side-img reveal">
-          @if(!empty($siteSettings['certifications_image_url']))
-            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="object-fit: contain;">
-          @else
-            <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
-          @endif
+          <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
         </div>
 
         <!-- RIGHT: All certifications stacked -->
@@ -753,6 +749,11 @@
               <h4 class="cred-item-title">International Certified Advanced Yoga Teacher Training</h4>
             </div>
           </div>
+          @if(!empty($siteSettings['certifications_image_url']))
+            <div style="margin-top: 32px;">
+              <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="max-width: 220px; display: block;">
+            </div>
+          @endif
         </div>
       </div>
     </div>
