@@ -295,14 +295,30 @@ window.addEventListener('load', function() {
       var selectedDateTime = null;
       var startTime = null;
 
+      console.log('[Calendly] Full payload:', JSON.stringify(e.data.payload));
+
       try {
-        if (e.data.payload && e.data.payload.event && e.data.payload.event.start_time) {
-          startTime = e.data.payload.event.start_time;
-        } else if (e.data.payload && e.data.payload.start_time) {
-          startTime = e.data.payload.start_time;
-        } else if (e.data.payload && e.data.payload.invitee && e.data.payload.invitee.start_time) {
-          startTime = e.data.payload.invitee.start_time;
+        var payload = e.data.payload;
+
+        /* Try multiple payload structures */
+        if (payload && payload.event && payload.event.start_time) {
+          startTime = payload.event.start_time;
+        } else if (payload && payload.start_time) {
+          startTime = payload.start_time;
+        } else if (payload && payload.invitee && payload.invitee.start_time) {
+          startTime = payload.invitee.start_time;
+        } else if (payload && payload.startTime) {
+          startTime = payload.startTime;
+        } else if (typeof payload === 'string') {
+          /* Sometimes payload might be a JSON string */
+          try {
+            var parsed = JSON.parse(payload);
+            if (parsed && parsed.start_time) startTime = parsed.start_time;
+            else if (parsed && parsed.event && parsed.event.start_time) startTime = parsed.event.start_time;
+          } catch (e) {}
         }
+
+        console.log('[Calendly] Extracted startTime:', startTime);
 
         if (startTime) {
           var eventDate = new Date(startTime);
@@ -315,10 +331,13 @@ window.addEventListener('load', function() {
               hour: '2-digit',
               minute: '2-digit'
             });
+            console.log('[Calendly] ✓ Formatted datetime:', selectedDateTime);
+          } else {
+            console.warn('[Calendly] Invalid date from startTime:', startTime);
           }
         }
       } catch (err) {
-        console.error('Error processing Calendly date:', err);
+        console.error('[Calendly] Error processing date:', err);
       }
 
       /* Fill all form date/time inputs with selected date */
@@ -329,6 +348,7 @@ window.addEventListener('load', function() {
           input.classList.add('is-filled');
           var wrap = input.closest('.jiva-pickdate');
           if (wrap) wrap.classList.add('is-filled');
+          console.log('[Calendly] Set value on input:', input);
         });
 
         /* Also handle footer form date input */
@@ -344,8 +364,10 @@ window.addEventListener('load', function() {
         var closeBtn = document.querySelector('.calendly-close-overlay');
         if (closeBtn) {
           closeBtn.click();
+          console.log('[Calendly] Closed popup');
         } else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) {
           Calendly.closePopupWidget();
+          console.log('[Calendly] Closed popup via API');
         }
       }, 300);
     }
