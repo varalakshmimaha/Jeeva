@@ -210,7 +210,7 @@
   <style>
     /* Book Consultation */
     .book-wrap {
-      padding: 60px 4% 60px;
+      padding: 40px 4% 60px;
       background: linear-gradient(180deg, #fcefe6 0%, #fdf6ef 100%);
     }
     .book-grid {
@@ -240,7 +240,7 @@
       background: transparent;
       display: flex;
       align-items: stretch;
-      height: 600px;
+      height: 700px;
     }
     #calendly-popup-container {
       display: flex;
@@ -249,7 +249,7 @@
       border-radius: 16px;
       overflow: hidden;
       width: 100%;
-      height: 600px;
+      height: 700px;
     }
     .calendly-inline-widget {
       border-radius: 16px;
