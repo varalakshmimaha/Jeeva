@@ -555,9 +555,9 @@
           <!-- Pick a Date & Time — Calendly Integration -->
           <div class="appointment-field">
             <label>Pick a Date &amp; Time <span style="color:#e06b6b;">*</span></label>
-            <div class="jiva-pickdate" data-calendly tabindex="0" role="button" aria-label="Pick a date and time">
+            <div class="jiva-pickdate" data-calendly tabindex="0" role="button" aria-label="Pick a date and time" style="cursor: pointer;">
               <svg class="jiva-pickdate__ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <input type="text" name="preferred_time_label" class="jiva-pickdate__input" placeholder="Pick a Date &amp; Time" required data-calendly-time style="pointer-events: none; cursor: pointer;">
+              <input type="text" name="preferred_time_label" class="jiva-pickdate__input" placeholder="Pick a Date &amp; Time" required data-calendly-time style="background: transparent; border: none; cursor: pointer; user-select: none;">
               <svg class="jiva-pickdate__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
           </div>
@@ -891,6 +891,10 @@
     const serviceSelect = form.querySelector('select[name="service_selected"]');
     let isSubmitting = false;
 
+    console.log('[Form] Complimentary form initialized');
+    console.log('[Form] Date input element:', dateTimeInput);
+    console.log('[Form] Pickdate wrapper:', pickdateWrapper);
+
     form.addEventListener('submit', (e) => {
       if (isSubmitting) {
         e.preventDefault();
@@ -900,9 +904,12 @@
       const dateTime = dateTimeInput ? dateTimeInput.value.trim() : '';
       const placeholder = 'Pick a Date & Time';
 
+      console.log('[Form] Form submission - date value:', dateTime);
+
       /* Validate that a date was actually selected (not just placeholder) */
       if (!dateTime || dateTime === placeholder || dateTime === 'Date & time selected') {
         e.preventDefault();
+        console.warn('[Form] No date selected - showing error');
         if (pickdateWrapper) {
           pickdateWrapper.style.borderColor = '#e06b6b';
           setTimeout(() => pickdateWrapper.style.borderColor = '', 2000);
@@ -935,23 +942,6 @@
         form.querySelectorAll('button[type="submit"]').forEach(btn => btn.disabled = false);
       }, 1000);
     });
-
-    if (pickdateWrapper) {
-      pickdateWrapper.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (typeof window.openJivaCalendly === 'function') {
-          window.openJivaCalendly();
-        }
-      });
-      pickdateWrapper.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          if (typeof window.openJivaCalendly === 'function') {
-            window.openJivaCalendly();
-          }
-        }
-      });
-    }
   })();
   </script>
 </section>

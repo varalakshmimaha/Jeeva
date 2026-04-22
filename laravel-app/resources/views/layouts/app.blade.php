@@ -164,21 +164,35 @@ window.addEventListener('load', function() {
     return false;
   };
 
+  /* Use event delegation to handle both initially present and dynamically added elements */
+  document.addEventListener('click', function(e) {
+    var calendlyEl = e.target.closest('[data-calendly]');
+    if (calendlyEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('[Calendly] Calendly element clicked via delegation');
+      window.openJivaCalendly();
+    }
+  });
+
+  /* Also handle direct listeners for existing elements */
   document.querySelectorAll('[data-calendly]').forEach(function (el) {
     el.addEventListener('click', function (e) {
       e.preventDefault();
-      console.log('[Calendly] Calendly element clicked');
+      e.stopPropagation();
+      console.log('[Calendly] Calendly element clicked (direct listener)');
       window.openJivaCalendly();
     });
-    if (el.hasAttribute('tabindex')) {
-      el.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          console.log('[Calendly] Calendly element keyboard activated');
-          window.openJivaCalendly();
-        }
-      });
-    }
+
+    /* Keyboard support */
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[Calendly] Calendly element keyboard activated');
+        window.openJivaCalendly();
+      }
+    });
   });
 
   /* Handle footer date/time input click */
