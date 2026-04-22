@@ -771,8 +771,8 @@
     }
     .cred-layout {
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      gap: 56px;
+      grid-template-columns: 0.9fr 1.3fr;
+      gap: 48px;
       align-items: flex-start;
       max-width: 1240px;
       margin: 0 auto;
@@ -786,7 +786,7 @@
       background: transparent;
       position: relative;
       width: 100%;
-      max-width: 520px;
+      max-width: 360px;
     }
     .cred-yoga-img {
       width: 100%;
@@ -876,7 +876,7 @@
 
     @media (max-width: 900px) {
       .cred-layout { grid-template-columns: 1fr; gap: 40px; }
-      .cred-side-img { order: -1; max-width: 500px; margin: 0 auto; }
+      .cred-side-img { order: -1; max-width: 360px; margin: 0 auto; }
       .cred-cert-overlay { width: 90px; height: 90px; bottom: 10px; right: 10px; }
       .cred-features { gap: 12px; }
       .cred-item-title { font-size: 16px; }
