@@ -778,7 +778,7 @@
       margin: 0 auto;
     }
     .cred-side-img {
-      border-radius: 20px;
+      border-radius: 32px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -794,7 +794,7 @@
       object-fit: contain;
       object-position: center;
       display: block;
-      border-radius: 20px;
+      border-radius: 32px;
       padding: 20px;
       box-sizing: border-box;
     }
@@ -804,7 +804,7 @@
       right: 12px;
       width: 100px;
       height: 100px;
-      border-radius: 12px;
+      border-radius: 20px;
       background: rgba(255,255,255,0.95);
       padding: 8px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
@@ -818,7 +818,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 8px;
+      border-radius: 16px;
     }
     .cred-cert-card {
       margin-bottom: 60px;
