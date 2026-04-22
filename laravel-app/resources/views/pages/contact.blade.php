@@ -81,7 +81,7 @@
 
       <!-- Right: Calendly Popup Container -->
       <div class="book-card book-calendly-card">
-        <div id="calendly-popup-container" style="min-height:630px;display:flex;align-items:center;justify-content:center;"></div>
+        <div id="calendly-popup-container"></div>
       </div>
 
     </div>
@@ -227,6 +227,10 @@
       padding: 32px 28px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
+    .book-form-card {
+      max-height: 750px;
+      overflow-y: auto;
+    }
     .book-title {
       font-family: 'Playfair Display', serif;
       font-size: 24px;
@@ -238,6 +242,9 @@
       padding: 0 !important;
       box-shadow: none;
       background: transparent;
+      display: flex;
+      align-items: stretch;
+      min-height: 700px;
     }
     #calendly-popup-container {
       display: flex;
@@ -245,6 +252,8 @@
       justify-content: center;
       border-radius: 16px;
       overflow: hidden;
+      width: 100%;
+      min-height: 700px;
     }
     .calendly-inline-widget {
       border-radius: 16px;
