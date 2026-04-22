@@ -685,15 +685,21 @@
         <h2 class="section-title reveal d1">Professional Training & Certifications</h2>
       </div>
 
+      <!-- Certificate Card -->
+      @if(!empty($siteSettings['certifications_image_url']))
+      <div class="cred-cert-card reveal">
+        <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications">
+      </div>
+      @endif
+
       <div class="cred-layout">
         <!-- LEFT: Yoga Image (background removed via mix-blend-mode) -->
         <div class="cred-side-img reveal">
           <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga">
         </div>
 
-        <!-- RIGHT: All certifications stacked with logo -->
-        <div class="cred-features-wrapper">
-          <div class="cred-features">
+        <!-- RIGHT: All certifications stacked -->
+        <div class="cred-features">
             <div class="cred-item reveal-right">
               <div class="cred-item-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4DB6AC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"></circle><path d="M8.5 11.5a4.5 4.5 0 0 0 7 0"></path><path d="M6 21c0-3.5 1.5-6.5 4-8.5"></path><path d="M18 21c0-3.5-1.5-6.5-4-8.5"></path><path d="M9 21c0-2.5 1.5-4 3-4s3 1.5 3 4"></path></svg>
@@ -751,11 +757,6 @@
               </div>
             </div>
           </div>
-          @if(!empty($siteSettings['certifications_image_url']))
-            <div class="cred-cert-logo">
-              <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="max-width: 100%; display: block;">
-            </div>
-          @endif
         </div>
       </div>
     </div>
@@ -793,7 +794,18 @@
       display: block;
       border-radius: 20px;
     }
-    .cred-features-wrapper { display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: flex-start; }
+    .cred-cert-card {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .cred-cert-card img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(77, 182, 172, 0.15);
+      display: inline-block;
+    }
     .cred-features { display: flex; flex-direction: column; gap: 10px; }
     .cred-item {
       display: flex;
