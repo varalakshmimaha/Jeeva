@@ -180,11 +180,69 @@
     }
   });
 
+  /* Monitor Calendly inputs for changes (fallback method) */
+  (function() {
+    var monitoredInputs = new WeakSet();
+
+    function setupInputMonitor(input) {
+      if (monitoredInputs.has(input)) return;
+      monitoredInputs.add(input);
+
+      var originalValue = input.value;
+      var checkCount = 0;
+
+      /* Check every 300ms for up to 30 seconds if the input was updated by Calendly */
+      var monitor = setInterval(function() {
+        checkCount++;
+        if (checkCount > 100 || !document.body.contains(input)) {
+          clearInterval(monitor);
+          return;
+        }
+
+        var currentValue = input.value ? input.value.trim() : '';
+        var isValidDate = currentValue &&
+                         currentValue !== 'Date & time selected' &&
+                         currentValue !== 'Pick a Date & Time' &&
+                         currentValue !== 'Pick a Date & Time *' &&
+                         currentValue !== originalValue;
+
+        if (isValidDate) {
+          input.classList.add('is-filled');
+          var wrap = input.closest('.jiva-pickdate');
+          if (wrap) wrap.classList.add('is-filled');
+
+          /* Close popup when date is detected */
+          setTimeout(function() {
+            var closeBtn = document.querySelector('.calendly-close-overlay');
+            if (closeBtn) closeBtn.click();
+            else if (typeof Calendly !== 'undefined' && Calendly.closePopupWidget) Calendly.closePopupWidget();
+          }, 100);
+
+          clearInterval(monitor);
+        }
+      }, 300);
+    }
+
+    /* Setup monitoring on all calendly date inputs */
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('input[data-calendly-time]').forEach(setupInputMonitor);
+    });
+
+    /* Also monitor when calendly buttons are clicked */
+    document.addEventListener('click', function(e) {
+      var calendlyBtn = e.target.closest('[data-calendly]');
+      if (calendlyBtn) {
+        var input = calendlyBtn.querySelector('input[data-calendly-time]');
+        if (input) setupInputMonitor(input);
+      }
+    });
+  })();
+
   window.addEventListener('message', function (e) {
     if (!e.data || typeof e.data.event !== 'string') return;
     if (e.data.event.indexOf('calendly') !== 0) return;
 
-    /* Handle date and time selected */
+    /* Handle date and time selected via postMessage */
     if (e.data.event === 'calendly.date_and_time_selected') {
       var selectedDateTime = null;
       var startTime = null;
