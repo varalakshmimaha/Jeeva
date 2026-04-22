@@ -79,9 +79,15 @@
         </form>
       </div>
 
-      <!-- Right: Calendly Popup Container -->
-      <div class="book-card book-calendly-card">
-        <div id="calendly-popup-container"></div>
+      <!-- Right: Image -->
+      <div class="book-card book-image-card">
+        <div class="book-image-wrapper">
+          @if(!empty($siteSettings['contact_image']))
+            <img src="{{ asset($siteSettings['contact_image']) }}" alt="Book Consultation" class="book-image">
+          @else
+            <img src="{{ asset('storage/moutain.jpg') }}" alt="Book Consultation" class="book-image">
+          @endif
+        </div>
       </div>
 
     </div>
@@ -234,7 +240,7 @@
       margin: 0 0 16px;
       font-weight: 700;
     }
-    .book-calendly-card {
+    .book-image-card {
       padding: 0 !important;
       box-shadow: none;
       background: transparent;
@@ -242,24 +248,18 @@
       align-items: stretch;
       height: 700px;
     }
-    #calendly-popup-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      overflow: hidden;
+    .book-image-wrapper {
       width: 100%;
-      height: 700px;
-    }
-    .calendly-inline-widget {
+      height: 100%;
       border-radius: 16px;
       overflow: hidden;
-      width: 100% !important;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
-    .calendly-inline-widget iframe {
-      border: none !important;
-      border-radius: 16px !important;
+    .book-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
     }
     .bf-field { margin-bottom: 12px; }
     .bf-req { color: #e05252; font-weight: 700; margin-left: 2px; }
@@ -441,73 +441,5 @@
     }
   </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var dateTimeField = document.querySelector('[data-calendly-time]');
-    var pickDateBtn = document.querySelector('[data-calendly]');
-    var popupContainer = document.getElementById('calendly-popup-container');
-
-    // Initialize Calendly calendar on page load
-    function initCalendlyWidget() {
-      if (typeof Calendly !== 'undefined' && popupContainer) {
-        Calendly.initInlineWidget({
-          url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1',
-          parentElement: popupContainer,
-          prefillHostUrl: 'https://jivabirthandbeyond.com'
-        });
-      }
-    }
-
-    // Initialize on page load
-    if (typeof Calendly !== 'undefined') {
-      initCalendlyWidget();
-    } else {
-      // Wait for Calendly to load if not already loaded
-      window.addEventListener('message', function waitForCalendly(e) {
-        if (typeof Calendly !== 'undefined') {
-          initCalendlyWidget();
-          window.removeEventListener('message', waitForCalendly);
-        }
-      });
-      // Try again after a short delay
-      setTimeout(initCalendlyWidget, 1000);
-    }
-
-    // Handle Calendly date picker button (for manual opening)
-    if (pickDateBtn) {
-      pickDateBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Scroll to calendar or highlight it
-        if (popupContainer) {
-          popupContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      });
-    }
-
-    // Listen for Calendly event when date is selected
-    if (typeof window !== 'undefined') {
-      window.addEventListener('message', function(e) {
-        if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-          // Date was selected in Calendly
-          var selectedDate = e.data.payload;
-          if (selectedDate && selectedDate.scheduled_event && selectedDate.scheduled_event.start_time) {
-            var startTime = new Date(selectedDate.scheduled_event.start_time);
-            var dateStr = startTime.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            });
-            if (dateTimeField) {
-              dateTimeField.value = '✓ ' + dateStr;
-              dateTimeField.classList.add('is-filled');
-            }
-          }
-        }
-      });
-    }
-  });
-</script>
 
 @endsection
