@@ -773,20 +773,21 @@
     }
     .cred-layout {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
+      grid-template-columns: 0.6fr 1.4fr;
       gap: 56px;
       align-items: flex-start;
       max-width: 1240px;
       margin: 0 auto;
     }
     .cred-side-img {
-      border-radius: 20px;
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #f9f9f9;
       position: relative;
+      max-width: 280px;
     }
     .cred-side-img::before {
       content: '';
@@ -794,7 +795,7 @@
       inset: 0;
       background: linear-gradient(135deg, rgba(77,182,172,0.05) 0%, rgba(245,213,213,0.03) 100%);
       pointer-events: none;
-      border-radius: 20px;
+      border-radius: 16px;
     }
     .cred-side-img img {
       width: 100%;
@@ -802,8 +803,8 @@
       object-fit: contain;
       object-position: center;
       display: block;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 16px;
       box-sizing: border-box;
     }
     .cred-cert-card {
@@ -862,7 +863,7 @@
 
     @media (max-width: 900px) {
       .cred-layout { grid-template-columns: 1fr; gap: 40px; }
-      .cred-side-img { order: -1; max-width: 450px; margin: 0 auto; }
+      .cred-side-img { order: -1; max-width: 300px; margin: 0 auto; }
       .cred-features { gap: 12px; }
       .cred-item-title { font-size: 16px; }
     }
