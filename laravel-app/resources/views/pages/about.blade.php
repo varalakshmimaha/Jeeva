@@ -1055,53 +1055,7 @@
         <div class="about-cta-form-wrap reveal d1">
           <h3 class="about-cta-form-title">Book Consultation</h3>
           <p class="about-cta-form-sub">Share your details and we'll respond with the right guidance for your journey.</p>
-          <form action="{{ route('contact.store') }}" method="POST" class="js-cta-with-datetime">
-            @csrf
-            <div class="about-cta-row">
-              <div class="about-cta-field">
-                <input type="text" name="name" placeholder="Your Name *" required>
-              </div>
-              <div class="about-cta-field">
-                <div style="display:grid;grid-template-columns:80px 1fr;gap:8px;width:100%;">
-                  <select name="country_code" style="padding:10px 8px;border:1.5px solid #d4e6e4;border-radius:12px;background:#ffffff;font-family:inherit;font-size:15px;color:#2b2b2b;outline:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237a6060%27 stroke-width=%272%27%3E%3Cpath d=%27M6 9l6 6 6-6%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 8px center;background-size:12px;padding-right:28px;">
-                    <option value="">Code</option>
-                    <option value="+1">+1</option>
-                    <option value="+91" selected>+91</option>
-                    <option value="+44">+44</option>
-                    <option value="+61">+61</option>
-                    <option value="+1-CA">+1</option>
-                    <option value="+64">+64</option>
-                    <option value="+27">+27</option>
-                  </select>
-                  <input type="tel" name="phone" placeholder="Phone Number" style="width:100%;">
-                </div>
-              </div>
-            </div>
-            <div class="about-cta-field">
-              <input type="email" name="email" placeholder="Email Address *" required>
-            </div>
-            <div class="about-cta-field">
-              <select name="subject" required>
-                <option value="" disabled selected>What are you looking for? *</option>
-                <option value="Birth Doula Package">Birth Doula Package</option>
-                <option value="Prenatal Yoga">Prenatal Yoga</option>
-                <option value="Labour Management & Comfort Measures">Labour Management &amp; Comfort Measures</option>
-                <option value="Postpartum Rebalance">Postpartum Rebalance</option>
-                <option value="Fat Loss program">Fat Loss program</option>
-              </select>
-            </div>
-            <div class="about-cta-field">
-              <div class="jiva-pickdate" data-calendly tabindex="0" role="button" aria-label="Pick a date and time">
-                <svg class="jiva-pickdate__ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <input type="text" name="preferred_time_label" class="jiva-pickdate__input" placeholder="Pick a Date &amp; Time *" readonly required data-calendly-time>
-                <svg class="jiva-pickdate__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </div>
-            </div>
-            <div class="about-cta-field">
-              <textarea name="message" rows="3" placeholder="Other Notes"></textarea>
-            </div>
-            <button type="submit" class="about-cta-submit">Book Consultation</button>
-          </form>
+          <button class="about-cta-submit" data-calendly onclick="window.openJivaCalendly ? window.openJivaCalendly() : void(0)">Book Consultation</button>
         </div>
       </div>
     </div>
