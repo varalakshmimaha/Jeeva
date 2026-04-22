@@ -686,7 +686,7 @@
       </div>
 
       <div class="cred-layout">
-        <!-- LEFT: Yoga Image with Certificate Overlay -->
+        <!-- LEFT: Yoga Image with large Certificate Overlay -->
         <div class="cred-side-img reveal">
           <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img">
           @if(!empty($siteSettings['certifications_image_url']))
@@ -800,18 +800,18 @@
     }
     .cred-cert-overlay {
       position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 180px;
-      height: 180px;
+      bottom: 24px;
+      right: 24px;
+      width: 320px;
+      height: 320px;
       border-radius: 0;
       background: #ffffff;
       padding: 0;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid rgba(77,182,172,0.3);
+      border: 2px solid rgba(77,182,172,0.35);
       overflow: hidden;
       z-index: 2;
       backdrop-filter: blur(8px);
@@ -820,6 +820,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       border-radius: 0;
       display: block;
     }
@@ -880,7 +881,7 @@
     @media (max-width: 900px) {
       .cred-layout { grid-template-columns: 1fr; gap: 40px; }
       .cred-side-img { order: -1; max-width: 100%; margin: 0 auto; }
-      .cred-cert-overlay { width: 140px; height: 140px; bottom: 16px; right: 16px; padding: 10px; }
+      .cred-cert-overlay { width: 240px; height: 240px; bottom: 18px; right: 18px; padding: 0; }
       .cred-features { gap: 12px; }
       .cred-item-title { font-size: 16px; }
     }
@@ -888,7 +889,7 @@
       .cred-section { padding: 70px 5%; }
       .cred-header { margin-bottom: 40px; }
       .cred-side-img { max-width: 100%; }
-      .cred-cert-overlay { width: 110px; height: 110px; bottom: 12px; right: 12px; padding: 8px; }
+      .cred-cert-overlay { width: 170px; height: 170px; bottom: 14px; right: 14px; padding: 0; }
       .cred-item { padding: 8px; gap: 12px; }
       .cred-item-icon { width: 52px; height: 52px; }
       .cred-item-icon svg { width: 24px; height: 24px; }
