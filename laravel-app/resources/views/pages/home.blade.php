@@ -238,7 +238,7 @@
       <!-- Feature 1 — Personalized, One-on-One Support -->
       <div class="why-journey-step reveal d1">
         <div class="why-img-wrap why-icon-wrap">
-          <img src="{{ asset('storage/why-choose/01_new.png') }}" alt="Personalized, One-on-One Support" class="why-icon">
+          <img src="{{ asset('images/why-choose/01_new.png') }}" alt="Personalized, One-on-One Support" class="why-icon">
           <div class="why-badge">01</div>
         </div>
         <div class="why-arrow d-none-mobile">
@@ -252,7 +252,7 @@
       <!-- Feature 2 — Holistic Approach to Wellness & Birth -->
       <div class="why-journey-step reveal d2">
         <div class="why-img-wrap why-icon-wrap">
-          <img src="{{ asset('storage/why-choose/02_new.png') }}" alt="Holistic Approach to Wellness & Birth" class="why-icon">
+          <img src="{{ asset('images/why-choose/02_new.png') }}" alt="Holistic Approach to Wellness & Birth" class="why-icon">
           <div class="why-badge">02</div>
         </div>
         <div class="why-arrow d-none-mobile">
@@ -266,7 +266,7 @@
       <!-- Feature 3 — Guided by Experience & Understanding -->
       <div class="why-journey-step reveal d3">
         <div class="why-img-wrap why-icon-wrap">
-          <img src="{{ asset('storage/why-choose/03_new.png') }}" alt="Guided by Experience & Understanding" class="why-icon">
+          <img src="{{ asset('images/why-choose/03_new.png') }}" alt="Guided by Experience & Understanding" class="why-icon">
           <div class="why-badge">03</div>
         </div>
         <div class="why-arrow d-none-mobile">
@@ -280,7 +280,7 @@
       <!-- Feature 4 — Ongoing Support & Guidance -->
       <div class="why-journey-step reveal d4">
         <div class="why-img-wrap why-icon-wrap">
-          <img src="{{ asset('storage/why-choose/04_new.png') }}" alt="Ongoing Support & Guidance" class="why-icon">
+          <img src="{{ asset('images/why-choose/04_new.png') }}" alt="Ongoing Support & Guidance" class="why-icon">
           <div class="why-badge">04</div>
         </div>
         <h3 class="why-card-title">Ongoing Support &amp; Guidance</h3>
