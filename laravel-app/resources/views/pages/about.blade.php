@@ -687,15 +687,8 @@
 
       <div class="cred-layout">
         <!-- LEFT: Yoga Image -->
-        <div class="cred-side-img reveal">
-          <img src="{{ asset('storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img">
-          
-          <div class="cred-cert-overlay">
-            @php
-              $dynamicCertImage = \App\Models\SiteSetting::where('key', 'certifications_image_path')->value('value');
-            @endphp
-            <img src="{{ $dynamicCertImage ? asset('storage/' . $dynamicCertImage) : asset('storage/certificate.png') }}" alt="Professional Certifications">
-          </div>
+        <div class="cred-side-wrapper reveal">
+          <img src="{{ asset(!empty($siteSettings['expertise_image']) ? $siteSettings['expertise_image'] : 'storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img">
         </div>
 
         <!-- RIGHT: All certifications stacked -->
@@ -779,54 +772,53 @@
       max-width: 1240px;
       margin: 0 auto;
     }
-    .cred-side-img {
-      border-radius: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
+    .cred-side-wrapper {
       position: relative;
       width: 100%;
-      max-width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
     }
     .cred-yoga-img {
       width: 100%;
       height: auto;
-      object-fit: contain;
-      object-position: center;
+      border-radius: 28px;
       display: block;
-      border-radius: 32px;
-      padding: 20px;
-      box-sizing: border-box;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      border: 6px solid #ffffff;
     }
-    .cred-cert-overlay {
+    .cred-badge-card {
       position: absolute;
-      bottom: -40px;
-      right: -30px;
-      width: 220px; 
+      bottom: -20px;
+      right: -25px;
+      width: 220px;
       height: 145px;
-      z-index: 5;
       background: #ffffff;
       border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      z-index: 10;
       overflow: hidden;
+      padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid #f0f0f0;
     }
-    .cred-cert-overlay img {
-      width: 220px;
-      height: 220px; 
-      object-fit: cover;
+    .cred-badge-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
       display: block;
-      /* Gracefully trims away the ugly massive white margins embedded in the source image */
-      transform: scale(1.4); 
+      /* Extremely scale and center to force the logos to fill the entire card area */
+      transform: scale(3.5) translateY(12%);
+      transform-origin: center;
     }
+
     @media (max-width: 900px) {
-      .cred-cert-overlay {
-        bottom: -40px;
-        right: -20px;
-        width: 75%;
+      .cred-badge-card {
+        width: 180px;
+        height: 120px;
+        bottom: -15px;
+        right: -15px;
       }
     }
     .cred-cert-card {
@@ -904,7 +896,7 @@
 
   <!-- Vision & Mission Section -->
   <section class="vm-section">
-    <img src="{{ asset('storage/vi and mi.jpg') }}" alt="Our Mission & Vision" class="vm-bg-img">
+    <img src="{{ !empty($siteSettings['vision_mission_bg_image_path']) ? asset('storage/' . $siteSettings['vision_mission_bg_image_path']) : asset('storage/vi and mi.jpg') }}" alt="Our Mission & Vision" class="vm-bg-img">
     <div class="vm-overlay"></div>
     <div class="container">
       <div class="vm-header">
@@ -1043,7 +1035,7 @@
 
   <!-- Book Consultation CTA -->
   <section class="about-cta-section">
-    <div class="about-cta-bg" style="background-image: url('{{ asset('storage/moutain.jpg') }}');"></div>
+    <div class="about-cta-bg" style="background-image: url('{{ !empty($siteSettings['cta_bg_image_path']) ? asset('storage/' . $siteSettings['cta_bg_image_path']) : asset('storage/moutain.jpg') }}');"></div>
     <div class="about-cta-overlay"></div>
     <div class="container">
       <div class="about-cta-single">

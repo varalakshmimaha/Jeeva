@@ -440,7 +440,7 @@ class AdminController extends Controller
     {
         $message = ContactMessage::findOrFail($id);
         $validated = $request->validate([
-            'consultation_status' => 'required|in:pending,consulted,no_response,scheduled',
+            'consultation_status' => 'required|in:pending,consulted,no_response',
         ]);
         $message->update($validated);
         return redirect()->route('admin.messages.show', $id)->with('success', 'Status updated successfully!');

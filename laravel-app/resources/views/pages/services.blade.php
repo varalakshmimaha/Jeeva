@@ -41,7 +41,7 @@
 
 <!-- Book Consultation CTA Section -->
 <section class="svc-cta-section">
-  <div class="svc-cta-bg" style="background-image: url('{{ asset('storage/moutain.jpg') }}');"></div>
+  <div class="svc-cta-bg" style="background-image: url('{{ !empty($siteSettings['cta_bg_image_path']) ? asset('storage/' . $siteSettings['cta_bg_image_path']) : asset('storage/moutain.jpg') }}');"></div>
   <div class="svc-cta-overlay"></div>
   <div class="container">
     <div class="svc-cta-single">

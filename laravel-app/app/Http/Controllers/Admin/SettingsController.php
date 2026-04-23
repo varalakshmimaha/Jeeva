@@ -28,6 +28,7 @@ class SettingsController extends Controller
             'cta_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'vision_mission_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'contact_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
+            'expertise_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
             'whatsapp_link' => 'nullable|url|max:500',
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
@@ -73,6 +74,12 @@ class SettingsController extends Controller
         if ($request->hasFile('contact_image')) {
             $contactImgPath = $request->file('contact_image')->store('contact', 'public');
             $this->saveSetting('contact_image', 'storage/' . $contactImgPath);
+        }
+
+        // Handle About-page Expertise yoga image upload
+        if ($request->hasFile('expertise_image')) {
+            $expertiseImgPath = $request->file('expertise_image')->store('expertise', 'public');
+            $this->saveSetting('expertise_image', 'storage/' . $expertiseImgPath);
         }
 
         // Save other settings

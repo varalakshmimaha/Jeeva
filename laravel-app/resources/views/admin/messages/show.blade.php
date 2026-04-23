@@ -80,7 +80,6 @@
                 $statusBadge = [
                     'pending' => ['label' => '⏳ Pending', 'color' => '#b9770e', 'bg' => '#fdf2e5'],
                     'consulted' => ['label' => '✓ Consulted', 'color' => '#1d7b52', 'bg' => '#e8f7ef'],
-                    'scheduled' => ['label' => '📅 Scheduled', 'color' => '#1f6b93', 'bg' => '#e8f1f9'],
                     'no_response' => ['label' => '✗ No Response', 'color' => '#a52d2d', 'bg' => '#fdecec'],
                 ];
                 $curStatus = $message->consultation_status ?? 'pending';
@@ -94,7 +93,6 @@
                 <select name="consultation_status" class="adm-input" style="flex: 1; max-width: 300px;">
                     <option value="pending" {{ $curStatus === 'pending' ? 'selected' : '' }}>⏳ Pending</option>
                     <option value="consulted" {{ $curStatus === 'consulted' ? 'selected' : '' }}>✓ Consulted</option>
-                    <option value="scheduled" {{ $curStatus === 'scheduled' ? 'selected' : '' }}>📅 Scheduled</option>
                     <option value="no_response" {{ $curStatus === 'no_response' ? 'selected' : '' }}>✗ No Response</option>
                 </select>
                 <button type="submit" class="adm-btn adm-btn-primary">Update Status</button>

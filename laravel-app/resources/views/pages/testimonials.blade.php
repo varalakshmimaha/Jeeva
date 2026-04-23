@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Book Consultation CTA -->
 <section class="testi-cta-section">
-  <div class="testi-cta-bg" style="background-image: url('{{ asset('storage/moutain.jpg') }}');"></div>
+  <div class="testi-cta-bg" style="background-image: url('{{ !empty($siteSettings['cta_bg_image_path']) ? asset('storage/' . $siteSettings['cta_bg_image_path']) : asset('storage/moutain.jpg') }}');"></div>
   <div class="testi-cta-overlay"></div>
   <div class="container">
     <div class="testi-cta-single">

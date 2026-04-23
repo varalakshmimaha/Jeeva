@@ -233,6 +233,28 @@
                     </table>
                 </div>
             </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">About Page - Expertise Yoga Image</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['expertise_image']) && $settings['expertise_image'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset($settings['expertise_image']) }}" alt="Expertise Yoga" style="max-width:400px; max-height:500px; object-fit: cover;">
+                            <span class="adm-img-tag">Current Expertise Image</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Image</td>
+                            <td class="adm-fi">
+                                <input type="file" name="expertise_image" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Image shown next to the "Expertise &amp; Qualifications" list on the About page. Recommended: <strong>800×1000 px</strong> (4:5 portrait). Max 3MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
 
         {{-- Panel: Footer & Social --}}

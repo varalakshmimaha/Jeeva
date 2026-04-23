@@ -77,7 +77,6 @@
                                 $statusConfig = [
                                     'pending' => ['label' => '⏳ Pending', 'class' => 'adm-badge-orange'],
                                     'consulted' => ['label' => '✓ Consulted', 'class' => 'adm-badge-green'],
-                                    'scheduled' => ['label' => '📅 Scheduled', 'class' => 'adm-badge-blue'],
                                     'no_response' => ['label' => '✗ No Response', 'class' => 'adm-badge-red'],
                                 ];
                                 $status = $msg->consultation_status ?? 'pending';
