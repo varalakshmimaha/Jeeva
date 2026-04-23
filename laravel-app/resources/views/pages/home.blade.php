@@ -44,7 +44,12 @@
     <div class="banner-slider-track">
       @if($banners->isNotEmpty())
         @foreach($banners as $index => $banner)
-          <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}" style="background-image: url('{{ asset($banner->image) }}');">
+          @php
+            $bannerImg = $banner->image && file_exists(public_path($banner->image))
+              ? asset($banner->image)
+              : asset('storage/Hero Banner.jpeg');
+          @endphp
+          <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}" style="background-image: url('{{ $bannerImg }}');">
             <div class="banner-slide-shell">
               <div class="banner-slide-content">
                 <h1 class="banner-slide-title">{{ $banner->title }}</h1>
