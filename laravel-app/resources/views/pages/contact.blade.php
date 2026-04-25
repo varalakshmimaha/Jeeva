@@ -574,35 +574,44 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
+      border-radius: 8px;
       font-family: 'Outfit', sans-serif;
-      font-size: 12.5px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 400;
       color: #2b2b2b;
       cursor: pointer;
       border: none;
       background: transparent;
       transition: background .18s, color .18s;
     }
+    .bf-cal-day:not(:disabled):not(.is-empty) {
+      background: #edf1f5;
+      font-weight: 500;
+    }
     .bf-cal-day:hover:not(:disabled):not(.is-empty) {
-      background: #e8f7f5;
+      background: #d4eeec;
       color: #2FA9A3;
     }
     .bf-cal-day.is-today {
-      border: 1.5px solid #4DB6AC;
-      color: #2FA9A3;
-      font-weight: 700;
+      background: #e4f5f3 !important;
+      color: #2FA9A3 !important;
+      font-weight: 700 !important;
+      border: 1.5px solid #4DB6AC !important;
+      border-radius: 50% !important;
     }
     .bf-cal-day.is-selected {
-      background: linear-gradient(135deg, #2FA9A3, #1f8c87) !important;
+      background: #2FA9A3 !important;
       color: #fff !important;
-      font-weight: 700;
+      font-weight: 700 !important;
+      border-radius: 50% !important;
+      border: none !important;
     }
     .bf-cal-day.is-empty,
     .bf-cal-day:disabled {
-      color: #d5ccc8;
+      color: #cdc6c0;
       cursor: default;
-      background: transparent;
+      background: transparent !important;
+      font-weight: 400;
     }
     .bf-cal-day.is-empty { pointer-events: none; }
     /* Time slots */
@@ -870,6 +879,7 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
+      padding: 22px 22px 0;
     }
     .bk-title {
       font-family: 'Playfair Display', serif;
@@ -882,61 +892,61 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px 10px;
-      background: linear-gradient(135deg, #2FA9A3, #1f8c87);
+      padding: 0 0 14px;
+      background: transparent;
     }
     .bk-cal-month-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: .3px;
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #1f3b38;
+      letter-spacing: .2px;
     }
     .bk-cal-nav {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: #fff;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-size: 22px;
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid #d5cec8;
+      border-radius: 6px;
+      background: #fff;
+      color: #666;
+      font-size: 17px;
       line-height: 1;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background .2s;
+      transition: border-color .2s, color .2s, background .2s;
     }
-    .bk-cal-nav:hover { background: rgba(255,255,255,0.35); }
+    .bk-cal-nav:hover { border-color: #2FA9A3; color: #2FA9A3; background: #f2faf9; }
     .bk-cal-dow {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      background: #f2faf9;
-      border-bottom: 1px solid #e5f5f3;
-      padding: 0 16px;
+      background: transparent;
+      border-bottom: 1px solid #f0ebe6;
+      padding: 0;
     }
     .bk-cal-dow span {
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      color: #2FA9A3;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9d8f88;
       text-transform: uppercase;
       letter-spacing: .5px;
-      padding: 6px 0;
+      padding: 0 0 8px;
     }
     .bk-cal-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      padding: 6px 16px 10px;
-      gap: 2px;
+      padding: 8px 0 10px;
+      gap: 3px;
       justify-items: center;
       align-items: center;
     }
     .bk-ts-wrap {
-      border-top: 1px solid #ede8e3;
-      padding: 10px 12px 12px;
-      background: #fdfaf8;
+      border-top: 1px solid #f0ebe6;
+      padding: 12px 0 4px;
+      background: transparent;
     }
     .bk-ts-grid {
       display: grid;
@@ -972,13 +982,14 @@
       cursor: not-allowed;
     }
     .bk-cal-footer {
-      text-align: center;
+      text-align: left;
       font-family: 'Outfit', sans-serif;
-      font-size: 12px;
-      color: #9d8f88;
-      padding: 7px 12px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2FA9A3;
+      padding: 10px 0 18px;
       margin-top: auto;
-      font-style: italic;
+      font-style: normal;
     }
     .bk-submit-btn {
       width: 100%;
@@ -1141,7 +1152,7 @@
   function isoDate(d) { return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
 
   function renderCalendar() {
-    calLabel.textContent = MONTHS[curMonth] + ' ' + curYear;
+    calLabel.innerHTML = MONTHS[curMonth] + ' <span style="color:#2FA9A3">' + curYear + '</span>';
     calGrid.innerHTML = '';
     var first = new Date(curYear, curMonth, 1);
     var startDow = first.getDay();
