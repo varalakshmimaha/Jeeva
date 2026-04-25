@@ -368,17 +368,17 @@
     .book-form {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 11px;
       font-family: 'Outfit', sans-serif;
     }
     .bf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .bf-field { display: flex; flex-direction: column; }
     .bf-field label {
       font-family: 'Outfit', sans-serif;
-      font-size: 13px;
+      font-size: 11.5px;
       font-weight: 600;
       color: #1f3b38;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       letter-spacing: .3px;
       text-transform: uppercase;
     }
@@ -386,10 +386,10 @@
     .bf-field select,
     .bf-field textarea {
       width: 100%;
-      padding: 14px 18px;
+      padding: 10px 16px;
       border: 1.5px solid #ead9d1;
       border-radius: 999px;
-      font-size: 14.5px;
+      font-size: 13.5px;
       font-family: 'Outfit', sans-serif;
       font-weight: 400;
       background: #fdfaf8;
@@ -398,8 +398,8 @@
       letter-spacing: .2px;
     }
     .bf-field textarea {
-      border-radius: 18px;
-      min-height: 110px;
+      border-radius: 14px;
+      min-height: 68px;
     }
     .bf-field input::placeholder,
     .bf-field textarea::placeholder { color: #b0a59f; font-weight: 400; }
@@ -704,15 +704,15 @@
       background: transparent !important;
       border-right: 1.5px solid #ead9d1 !important;
       border-radius: 0 !important;
-      padding: 14px 40px 14px 18px !important;
+      padding: 10px 36px 10px 16px !important;
       width: auto !important;
-      min-width: 108px;
+      min-width: 100px;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13.5px;
       color: #1f3b38;
       box-shadow: none !important;
       cursor: pointer;
-      background-position: right 14px center !important;
+      background-position: right 12px center !important;
     }
     .bf-phone-group .bf-phone-code:focus { outline: none; }
     .bf-phone-group .bf-phone-number {
@@ -720,7 +720,7 @@
       background: transparent !important;
       border-radius: 0 !important;
       flex: 1;
-      padding: 14px 22px !important;
+      padding: 10px 18px !important;
       box-shadow: none !important;
     }
     .bf-phone-group .bf-phone-number:focus { outline: none; }
@@ -830,17 +830,17 @@
 
     /* ── New split layout ── */
     .bk-split {
-      max-width: 1200px;
+      max-width: 1160px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: start;
+      gap: 24px;
+      align-items: stretch;
     }
     .bk-form-card {
       background: #ffffff;
       border-radius: 20px;
-      padding: 36px 32px;
+      padding: 26px 24px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
     .bk-cal-card {
@@ -848,14 +848,14 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-      position: sticky;
-      top: 24px;
+      display: flex;
+      flex-direction: column;
     }
     .bk-title {
       font-family: 'Playfair Display', serif;
-      font-size: 24px;
+      font-size: 20px;
       color: #2b2b2b;
-      margin: 0 0 24px;
+      margin: 0 0 16px;
       font-weight: 700;
     }
     .bk-cal-header {
@@ -954,29 +954,29 @@
       font-size: 13px;
       color: #9d8f88;
       padding: 10px 16px 14px;
-      margin: 0;
+      margin-top: auto;
       font-style: italic;
     }
     .bk-submit-btn {
       width: 100%;
-      margin-top: 8px;
-      padding: 16px 30px;
+      margin-top: 6px;
+      padding: 13px 24px;
       background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
       color: #ffffff;
       border: none;
       border-radius: 999px;
       font-family: 'Outfit', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       letter-spacing: .6px;
       text-transform: uppercase;
       cursor: pointer;
       transition: transform .25s, box-shadow .25s;
-      box-shadow: 0 14px 30px -10px rgba(47,169,163,0.55);
+      box-shadow: 0 12px 26px -10px rgba(47,169,163,0.55);
     }
     .bk-submit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 22px 40px -12px rgba(47,169,163,0.65);
+      box-shadow: 0 18px 36px -10px rgba(47,169,163,0.65);
     }
     .bk-time-display {
       background: #f5fbfa !important;
@@ -984,12 +984,11 @@
       font-weight: 600 !important;
       cursor: default;
     }
-    @media (max-width: 900px) {
-      .bk-split { grid-template-columns: 1fr; gap: 24px; }
-      .bk-cal-card { position: static; }
+    @media (max-width: 860px) {
+      .bk-split { grid-template-columns: 1fr; gap: 20px; }
     }
     @media (max-width: 480px) {
-      .bk-form-card { padding: 24px 18px; }
+      .bk-form-card { padding: 20px 16px; }
     }
 
     /* Phone row */
