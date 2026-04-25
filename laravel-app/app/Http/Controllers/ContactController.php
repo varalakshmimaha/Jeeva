@@ -136,7 +136,9 @@ class ContactController extends Controller
 
     private function sendBookingEmail($booking)
     {
-        $adminEmail = config('mail.from.address') ?? 'noreply@jivabirthandbeyond.com';
+        $adminEmail = \App\Models\SiteSetting::where('key', 'company_email')->value('value')
+                      ?: config('mail.from.address')
+                      ?: 'noreply@jivabirthandbeyond.com';
         $zoomLink   = $this->getZoomLink();
         $icsContent = $this->buildIcs($booking, $zoomLink);
         $gcalLink   = $this->buildGcalLink($booking, $zoomLink);
