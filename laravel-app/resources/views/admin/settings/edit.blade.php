@@ -90,23 +90,6 @@
             </div>
 
             <div class="adm-card">
-                <div class="adm-card-head">Google Analytics</div>
-                <div class="adm-card-body">
-                    <table class="adm-form-table">
-                        <tr>
-                            <td class="adm-fl">Measurement ID</td>
-                            <td class="adm-fi">
-                                <input type="text" name="google_analytics_id" class="adm-input"
-                                    value="{{ old('google_analytics_id', $settings['google_analytics_id'] ?? '') }}"
-                                    placeholder="G-XXXXXXXXXX">
-                                <p class="adm-hint">Enter your Google Analytics 4 Measurement ID (e.g. <strong>G-XXXXXXXXXX</strong>). Leave blank to disable tracking. Find it in Google Analytics → Admin → Data Streams → your stream.</p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="adm-card">
                 <div class="adm-card-head">Cal.com Booking Link</div>
                 <div class="adm-card-body">
                     <table class="adm-form-table">
