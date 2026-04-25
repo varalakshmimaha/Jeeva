@@ -13,28 +13,29 @@
 
   <!-- Book Consultation + Calendar -->
   <section class="book-wrap" id="book">
-    <div class="book-grid">
+    @php
+      $calLink   = trim($siteSettings['cal_link'] ?? '');
+      $useCalCom = !empty($calLink);
+      $rawSlots  = $siteSettings['booking_time_slots'] ?? '9:00 AM,10:00 AM,11:00 AM,12:00 PM,2:00 PM,3:00 PM,4:00 PM,5:00 PM';
+      $timeSlots = array_values(array_filter(array_map('trim', explode(',', $rawSlots))));
+    @endphp
 
-      <!-- Left: Calendly Calendar -->
-      <div class="book-card book-form-card">
-        <h3 class="book-title">Book Consultation</h3>
-        <p class="book-sub">Share your details and pick a time that works best for you.</p>
+    <div class="bk-split">
+
+      <!-- Left: Form -->
+      <div class="bk-form-card">
+        <h3 class="bk-title">Book Consultation</h3>
 
         @if(session('success'))
           @php
             $successKind = session('success_kind', 'booking');
-            $modalTitle = $successKind === 'enquiry' ? 'Message Sent' : 'Slot Booked';
-            $modalSub = $successKind === 'enquiry'
-              ? 'We\'ll review your message and get back to you as soon as possible.'
-              : '';
+            $modalTitle  = $successKind === 'enquiry' ? 'Message Sent' : 'Slot Booked';
+            $modalSub    = $successKind === 'enquiry' ? 'We\'ll review your message and get back to you as soon as possible.' : '';
           @endphp
           <div id="bookingSuccessModal" class="booking-modal-overlay">
             <div class="booking-modal-card">
               <div class="booking-modal-icon">
-                <svg viewBox="0 0 52 52" width="46" height="46" aria-hidden="true">
-                  <circle cx="26" cy="26" r="24" fill="none" stroke="#2FA9A3" stroke-width="3" class="bm-circle"/>
-                  <path d="M14 27l8 8 16-18" fill="none" stroke="#2FA9A3" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="bm-check"/>
-                </svg>
+                <svg viewBox="0 0 52 52" width="46" height="46"><circle cx="26" cy="26" r="24" fill="none" stroke="#2FA9A3" stroke-width="3" class="bm-circle"/><path d="M14 27l8 8 16-18" fill="none" stroke="#2FA9A3" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="bm-check"/></svg>
               </div>
               <h3 class="booking-modal-title">{{ $modalTitle }}</h3>
               <p class="booking-modal-text">{{ session('success') }}</p>
@@ -43,6 +44,7 @@
             </div>
           </div>
         @endif
+
         @if($errors->any())
           <div class="book-alert book-alert--err">
             @foreach($errors->all() as $error){{ $error }}<br>@endforeach
@@ -52,20 +54,21 @@
         <form action="{{ route('contact.store') }}" method="POST" class="book-form" id="bookConsultationForm">
           @csrf
           <input type="hidden" name="subject" value="Contact Page Booking">
+          <input type="hidden" name="preferred_date" id="bfDate" value="{{ old('preferred_date') }}">
+          <input type="hidden" name="preferred_time" id="bfTime" value="{{ old('preferred_time') }}">
 
-          <div class="bf-row">
-            <div class="bf-field">
-              <label>Full Name *</label>
-              <input type="text" name="name" placeholder="Your full name" value="{{ old('name') }}" required>
-            </div>
-            <div class="bf-field">
-              <label>Email Address *</label>
-              <input type="email" name="email" placeholder="you@example.com" value="{{ old('email') }}" required>
-            </div>
+          <div class="bf-field">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Enter your name" value="{{ old('name') }}" required>
           </div>
 
           <div class="bf-field">
-            <label>Phone *</label>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+          </div>
+
+          <div class="bf-field">
+            <label>Phone</label>
             <div class="bf-phone-group">
               @include('partials.country-codes', ['default' => '+91'])
               <input type="tel" name="phone" class="bf-phone-number" placeholder="Phone Number" value="{{ old('phone') }}" required>
@@ -73,103 +76,54 @@
           </div>
 
           <div class="bf-field">
-            <label>Service *</label>
+            <label>Purpose</label>
             <select name="service_selected" required>
-              <option value="" disabled {{ old('service_selected') ? '' : 'selected' }}>Choose a service</option>
+              <option value="" disabled {{ old('service_selected') ? '' : 'selected' }}>Consultation</option>
               @foreach(($services ?? []) as $service)
                 <option value="{{ $service->title }}" {{ old('service_selected') === $service->title ? 'selected' : '' }}>{{ $service->title }}</option>
               @endforeach
             </select>
           </div>
 
-          <input type="hidden" name="preferred_date" id="bfDate" value="{{ old('preferred_date') }}">
-          <input type="hidden" name="preferred_time" id="bfTime" value="{{ old('preferred_time') }}">
-
           <div class="bf-field">
-            <label>Pick a Date &amp; Time *</label>
-
-            @php
-              $calLink  = trim($siteSettings['cal_link'] ?? '');
-              $useCalCom = !empty($calLink);
-              $rawSlots = $siteSettings['booking_time_slots'] ?? '9:00 AM,10:00 AM,11:00 AM,12:00 PM,2:00 PM,3:00 PM,4:00 PM,5:00 PM';
-              $timeSlots = array_values(array_filter(array_map('trim', explode(',', $rawSlots))));
-            @endphp
-
-            @if($useCalCom)
-              {{-- Cal.com inline embed --}}
-              <p class="bf-hint" style="margin: -2px 0 12px;">Choose a slot on the calendar — your booking will be confirmed instantly.</p>
-              <div class="bf-cal-com-wrap">
-                <div id="bfCalComWidget" style="width:100%;height:680px;overflow:scroll;"></div>
-              </div>
-              <div id="bfSlotConfirm" class="bf-slot-confirm" style="display:none;">
-                <span class="bf-slot-confirm-icon">✓</span>
-                <div>
-                  <strong>Slot selected</strong>
-                  <span id="bfSlotConfirmText"></span>
-                </div>
-              </div>
-            @else
-              {{-- Built-in custom calendar picker --}}
-              <div class="bf-dropdown-wrap">
-                <button type="button" class="bf-dt-trigger" id="bfTrigger">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <span id="bfTriggerText">Select a date &amp; time</span>
-                  <svg class="bf-dt-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="bf-picker" id="bfPicker" style="display:none;">
-                  <div class="bf-cal-header">
-                    <button type="button" class="bf-cal-nav" id="bfCalPrev">&#8249;</button>
-                    <span class="bf-cal-month-label" id="bfCalLabel"></span>
-                    <button type="button" class="bf-cal-nav" id="bfCalNext">&#8250;</button>
-                  </div>
-                  <div class="bf-cal-dow">
-                    <span>Sun</span><span>Mon</span><span>Tue</span>
-                    <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                  </div>
-                  <div class="bf-cal-grid" id="bfCalGrid"></div>
-                  <div class="bf-ts-wrap" id="bfTsWrap" style="display:none;">
-                    <div class="bf-ts-heading">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                      Available Times
-                    </div>
-                    <div class="bf-ts-grid" id="bfTsGrid">
-                      @foreach($timeSlots as $slot)
-                        <button type="button" class="bf-ts-pill" data-time="{{ $slot }}">{{ $slot }}</button>
-                      @endforeach
-                    </div>
-                    <p class="bf-ts-note" id="bfTsNote" style="display:none;"></p>
-                  </div>
-                  <div class="bf-pick-confirm" id="bfPickConfirm" style="display:none;">
-                    <span class="bf-pick-confirm-icon">✓</span>
-                    <div>
-                      <strong id="bfPickConfirmDate"></strong>
-                      <span id="bfPickConfirmTime"></span>
-                    </div>
-                    <button type="button" class="bf-pick-confirm-reset" id="bfPickReset">Change</button>
-                  </div>
-                </div>
-              </div>
-            @endif
+            <label>Selected Time</label>
+            <input type="text" id="bfSelectedTimeDisplay" placeholder="Select date and time" readonly class="bk-time-display">
           </div>
 
           <div class="bf-field">
-            <label>Other Notes</label>
-            <textarea name="message" rows="3" placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
+            <label>Notes</label>
+            <textarea name="message" rows="2" placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
           </div>
 
-          <button type="submit" class="book-submit">Book My Consultation</button>
+          <button type="submit" class="bk-submit-btn">Book Consultation</button>
         </form>
       </div>
 
-      <!-- Right: Image -->
-      <div class="book-image-card">
-        <div class="book-image-wrapper">
-          @if(!empty($siteSettings['contact_image']))
-            <img src="{{ asset($siteSettings['contact_image']) }}" alt="Book Consultation" class="book-image">
-          @else
-            <img src="https://images.unsplash.com/photo-1494623930402-ab7213d7d44d?w=500&h=500&fit=crop" alt="Book Consultation" class="book-image">
-          @endif
-        </div>
+      <!-- Right: Calendar (always visible) -->
+      <div class="bk-cal-card">
+        @if($useCalCom)
+          <div style="width:100%;height:680px;overflow:scroll;" id="bfCalComWidget"></div>
+        @else
+          <div class="bk-cal-header">
+            <button type="button" class="bk-cal-nav" id="bfCalPrev">&#8249;</button>
+            <span class="bk-cal-month-label" id="bfCalLabel"></span>
+            <button type="button" class="bk-cal-nav" id="bfCalNext">&#8250;</button>
+          </div>
+          <div class="bk-cal-dow">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+          </div>
+          <div class="bk-cal-grid" id="bfCalGrid"></div>
+
+          <div class="bk-ts-wrap" id="bfTsWrap" style="display:none;">
+            <div class="bk-ts-grid" id="bfTsGrid">
+              @foreach($timeSlots as $slot)
+                <button type="button" class="bk-ts-pill" data-time="{{ $slot }}">{{ $slot }}</button>
+              @endforeach
+            </div>
+          </div>
+
+          <p class="bk-cal-footer" id="bfCalFooter">Select a Date</p>
+        @endif
       </div>
 
     </div>
@@ -874,6 +828,170 @@
       .cal-slots-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ── New split layout ── */
+    .bk-split {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .bk-form-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    .bk-cal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 24px;
+    }
+    .bk-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #2b2b2b;
+      margin: 0 0 24px;
+      font-weight: 700;
+    }
+    .bk-cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 14px;
+      background: linear-gradient(135deg, #2FA9A3, #1f8c87);
+    }
+    .bk-cal-month-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .3px;
+    }
+    .bk-cal-nav {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .bk-cal-nav:hover { background: rgba(255,255,255,0.35); }
+    .bk-cal-dow {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: #f2faf9;
+      border-bottom: 1px solid #e5f5f3;
+    }
+    .bk-cal-dow span {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #2FA9A3;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 8px 0;
+    }
+    .bk-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 8px 10px 12px;
+      gap: 2px;
+    }
+    .bk-ts-wrap {
+      border-top: 1px solid #ede8e3;
+      padding: 14px 16px 16px;
+      background: #fdfaf8;
+    }
+    .bk-ts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+      gap: 8px;
+    }
+    .bk-ts-pill {
+      padding: 9px 10px;
+      border: 1.5px solid #ead9d1;
+      background: #fff;
+      color: #2b2b2b;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .18s;
+      text-align: center;
+    }
+    .bk-ts-pill:hover:not(:disabled) {
+      border-color: #4DB6AC;
+      background: #eafaf8;
+      color: #2FA9A3;
+    }
+    .bk-ts-pill.is-active {
+      background: linear-gradient(135deg, #2FA9A3, #1f8c87);
+      border-color: #2FA9A3;
+      color: #fff;
+    }
+    .bk-ts-pill:disabled {
+      opacity: .32;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+    .bk-cal-footer {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      color: #9d8f88;
+      padding: 10px 16px 14px;
+      margin: 0;
+      font-style: italic;
+    }
+    .bk-submit-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 16px 30px;
+      background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 14px 30px -10px rgba(47,169,163,0.55);
+    }
+    .bk-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px -12px rgba(47,169,163,0.65);
+    }
+    .bk-time-display {
+      background: #f5fbfa !important;
+      color: #2FA9A3 !important;
+      font-weight: 600 !important;
+      cursor: default;
+    }
+    @media (max-width: 900px) {
+      .bk-split { grid-template-columns: 1fr; gap: 24px; }
+      .bk-cal-card { position: static; }
+    }
+    @media (max-width: 480px) {
+      .bk-form-card { padding: 24px 18px; }
+    }
+
     /* Phone row */
     .phone-row {
       display: grid;
@@ -976,39 +1094,23 @@
 @if(empty($siteSettings['cal_link']))
 <script>
 (function () {
-  var dateHidden   = document.getElementById('bfDate');
-  var timeHidden   = document.getElementById('bfTime');
-  var calGrid      = document.getElementById('bfCalGrid');
-  var calLabel     = document.getElementById('bfCalLabel');
-  var tsWrap       = document.getElementById('bfTsWrap');
-  var tsGrid       = document.getElementById('bfTsGrid');
-  var tsNote       = document.getElementById('bfTsNote');
-  var confirmBox   = document.getElementById('bfPickConfirm');
-  var confirmDate  = document.getElementById('bfPickConfirmDate');
-  var confirmTime  = document.getElementById('bfPickConfirmTime');
-  var resetBtn     = document.getElementById('bfPickReset');
-  var form         = document.getElementById('bookConsultationForm');
-  var trigger      = document.getElementById('bfTrigger');
-  var triggerText  = document.getElementById('bfTriggerText');
-  var picker       = document.getElementById('bfPicker');
+  var dateHidden  = document.getElementById('bfDate');
+  var timeHidden  = document.getElementById('bfTime');
+  var calGrid     = document.getElementById('bfCalGrid');
+  var calLabel    = document.getElementById('bfCalLabel');
+  var tsWrap      = document.getElementById('bfTsWrap');
+  var tsGrid      = document.getElementById('bfTsGrid');
+  var calFooter   = document.getElementById('bfCalFooter');
+  var timeDisplay = document.getElementById('bfSelectedTimeDisplay');
+  var form        = document.getElementById('bookConsultationForm');
+  var calCard     = document.querySelector('.bk-cal-card');
 
   if (!calGrid) return;
 
-  function openPicker()  { picker.style.display = 'block'; trigger.classList.add('is-open'); }
-  function closePicker() { picker.style.display = 'none';  trigger.classList.remove('is-open'); }
-
-  trigger.addEventListener('click', function() {
-    picker.style.display === 'none' ? openPicker() : closePicker();
-  });
-  picker.addEventListener('click', function(e) { e.stopPropagation(); });
-  document.addEventListener('click', function(e) {
-    if (!trigger.contains(e.target)) closePicker();
-  });
-
-  var today     = new Date(); today.setHours(0,0,0,0);
-  var curYear   = today.getFullYear();
-  var curMonth  = today.getMonth();
-  var selDate   = null;
+  var today    = new Date(); today.setHours(0,0,0,0);
+  var curYear  = today.getFullYear();
+  var curMonth = today.getMonth();
+  var selDate  = null;
   var bookedMap = {};
 
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -1020,10 +1122,9 @@
     calLabel.textContent = MONTHS[curMonth] + ' ' + curYear;
     calGrid.innerHTML = '';
     var first = new Date(curYear, curMonth, 1);
-    var startDow = first.getDay(); // 0=Sun
+    var startDow = first.getDay();
     var daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
 
-    // blank cells before first day
     for (var i = 0; i < startDow; i++) {
       var blank = document.createElement('button');
       blank.type = 'button';
@@ -1057,15 +1158,15 @@
     dateHidden.value = iso;
     timeHidden.value = '';
 
-    // reset time selection UI
-    document.querySelectorAll('.bf-ts-pill').forEach(function(p){ p.disabled = false; p.classList.remove('is-active'); });
-    if (tsNote) { tsNote.style.display = 'none'; tsNote.textContent = ''; }
-    if (confirmBox) confirmBox.style.display = 'none';
+    document.querySelectorAll('.bk-ts-pill').forEach(function(p){ p.disabled = false; p.classList.remove('is-active'); });
     tsWrap.style.display = 'block';
+
+    var dayLabel = selDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    if (calFooter) calFooter.textContent = dayLabel + ' — pick a time below';
+    if (timeDisplay) { timeDisplay.value = ''; timeDisplay.placeholder = 'Now select a time slot →'; }
 
     renderCalendar();
 
-    // Fetch already-booked slots for this date
     if (bookedMap[iso] !== undefined) {
       applyBooked(iso, bookedMap[iso]);
     } else {
@@ -1083,20 +1184,16 @@
 
   function applyBooked(iso, booked) {
     if (!selDate || isoDate(selDate) !== iso) return;
-    document.querySelectorAll('.bf-ts-pill').forEach(function(p){
+    document.querySelectorAll('.bk-ts-pill').forEach(function(p){
       p.disabled = booked.indexOf(p.dataset.time) !== -1;
     });
-    if (booked.length) {
-      tsNote.style.display = 'none';
-    }
   }
 
-  // Time slot click
   if (tsGrid) {
     tsGrid.addEventListener('click', function(e) {
-      var pill = e.target.closest('.bf-ts-pill');
+      var pill = e.target.closest('.bk-ts-pill');
       if (!pill || pill.disabled) return;
-      document.querySelectorAll('.bf-ts-pill').forEach(function(p){ p.classList.remove('is-active'); });
+      document.querySelectorAll('.bk-ts-pill').forEach(function(p){ p.classList.remove('is-active'); });
       pill.classList.add('is-active');
       timeHidden.value = pill.dataset.time;
       showConfirm();
@@ -1106,31 +1203,11 @@
   function showConfirm() {
     if (!selDate || !timeHidden.value) return;
     var label = selDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-    confirmDate.textContent = label;
-    confirmTime.textContent = ' at ' + timeHidden.value;
-    confirmBox.style.display = 'flex';
-    triggerText.textContent = label + ' at ' + timeHidden.value;
-    trigger.classList.add('has-value');
-    closePicker();
+    var full  = label + ' at ' + timeHidden.value;
+    if (timeDisplay) timeDisplay.value = full;
+    if (calFooter)   calFooter.textContent = '✓ ' + full;
   }
 
-  // Reset
-  if (resetBtn) {
-    resetBtn.addEventListener('click', function() {
-      selDate = null;
-      dateHidden.value = '';
-      timeHidden.value = '';
-      tsWrap.style.display = 'none';
-      confirmBox.style.display = 'none';
-      document.querySelectorAll('.bf-ts-pill').forEach(function(p){ p.classList.remove('is-active'); p.disabled = false; });
-      triggerText.textContent = 'Select a date & time';
-      trigger.classList.remove('has-value');
-      openPicker();
-      renderCalendar();
-    });
-  }
-
-  // Prev / Next month
   document.getElementById('bfCalPrev').addEventListener('click', function() {
     curMonth--; if (curMonth < 0) { curMonth = 11; curYear--; }
     renderCalendar();
@@ -1140,13 +1217,11 @@
     renderCalendar();
   });
 
-  // Form submit validation
   if (form) {
     form.addEventListener('submit', function(e) {
       if (!dateHidden.value || !timeHidden.value) {
         e.preventDefault();
-        openPicker();
-        trigger.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (calCard) calCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         alert('Please pick both a date and a time slot before booking.');
       }
     });
