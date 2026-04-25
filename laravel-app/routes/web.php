@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\AdminSettingsController;
 
 // Page Routes
@@ -114,6 +115,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/messages/{id}', [AdminController::class, 'messagesShow'])->name('admin.messages.show');
         Route::put('/messages/{id}/status', [AdminController::class, 'messagesUpdateStatus'])->name('admin.messages.update-status');
         Route::delete('/messages/{id}', [AdminController::class, 'messagesDestroy'])->name('admin.messages.destroy');
+
+        // Analytics
+        Route::get('/analytics', [AnalyticsController::class, 'index'])->name('admin.analytics');
 
         // Settings
         Route::get('/settings', [SettingsController::class, 'edit'])->name('admin.settings.edit');

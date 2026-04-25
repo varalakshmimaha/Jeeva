@@ -21,6 +21,13 @@
         <p class="book-sub">Share your details and pick a time that works best for you.</p>
 
         @if(session('success'))
+          @php
+            $successKind = session('success_kind', 'booking');
+            $modalTitle = $successKind === 'enquiry' ? 'Message Sent' : 'Slot Booked';
+            $modalSub = $successKind === 'enquiry'
+              ? 'We\'ll review your message and get back to you as soon as possible.'
+              : '';
+          @endphp
           <div id="bookingSuccessModal" class="booking-modal-overlay">
             <div class="booking-modal-card">
               <div class="booking-modal-icon">
@@ -29,9 +36,9 @@
                   <path d="M14 27l8 8 16-18" fill="none" stroke="#2FA9A3" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="bm-check"/>
                 </svg>
               </div>
-              <h3 class="booking-modal-title">Slot Booked</h3>
+              <h3 class="booking-modal-title">{{ $modalTitle }}</h3>
               <p class="booking-modal-text">{{ session('success') }}</p>
-              <p class="booking-modal-sub">Anu will reach out shortly to confirm your session details.</p>
+              @if($modalSub)<p class="booking-modal-sub">{{ $modalSub }}</p>@endif
               <button type="button" class="booking-modal-btn" onclick="document.getElementById('bookingSuccessModal').remove()">Got it</button>
             </div>
           </div>
@@ -60,18 +67,7 @@
           <div class="bf-field">
             <label>Phone *</label>
             <div class="bf-phone-group">
-              <select name="country_code" class="bf-phone-code" required>
-                <option value="+91"  {{ old('country_code','+91') === '+91'  ? 'selected' : '' }}>IN +91</option>
-                <option value="+1"   {{ old('country_code') === '+1'   ? 'selected' : '' }}>CA +1</option>
-                <option value="+44"  {{ old('country_code') === '+44'  ? 'selected' : '' }}>UK +44</option>
-                <option value="+61"  {{ old('country_code') === '+61'  ? 'selected' : '' }}>AU +61</option>
-                <option value="+971" {{ old('country_code') === '+971' ? 'selected' : '' }}>AE +971</option>
-                <option value="+65"  {{ old('country_code') === '+65'  ? 'selected' : '' }}>SG +65</option>
-                <option value="+60"  {{ old('country_code') === '+60'  ? 'selected' : '' }}>MY +60</option>
-                <option value="+64"  {{ old('country_code') === '+64'  ? 'selected' : '' }}>NZ +64</option>
-                <option value="+49"  {{ old('country_code') === '+49'  ? 'selected' : '' }}>DE +49</option>
-                <option value="+33"  {{ old('country_code') === '+33'  ? 'selected' : '' }}>FR +33</option>
-              </select>
+              @include('partials.country-codes', ['default' => '+91'])
               <input type="tel" name="phone" class="bf-phone-number" placeholder="Phone Number" value="{{ old('phone') }}" required>
             </div>
           </div>
@@ -86,26 +82,74 @@
             </select>
           </div>
 
-          <div class="bf-row">
-            <div class="bf-field">
-              <label>Pick a Date *</label>
-              <input type="date" name="preferred_date" id="bfDate" min="{{ date('Y-m-d') }}" value="{{ old('preferred_date') }}" required>
-            </div>
-            <div class="bf-field">
-              <label>Pick a Time *</label>
-              @php
-                $defaultSlots = '09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM';
-                $slotsRaw = trim($siteSettings['booking_time_slots'] ?? '') ?: $defaultSlots;
-                $timeSlots = array_values(array_filter(array_map('trim', explode(',', $slotsRaw))));
-              @endphp
-              <select name="preferred_time" id="bfTime" required>
-                <option value="" disabled selected>Select a time</option>
-                @foreach($timeSlots as $slot)
-                  <option value="{{ $slot }}" {{ old('preferred_time') === $slot ? 'selected' : '' }}>{{ $slot }}</option>
-                @endforeach
-              </select>
-              <small id="bfTimeHint" class="bf-hint">Pick a date to see available times.</small>
-            </div>
+          <input type="hidden" name="preferred_date" id="bfDate" value="{{ old('preferred_date') }}">
+          <input type="hidden" name="preferred_time" id="bfTime" value="{{ old('preferred_time') }}">
+
+          <div class="bf-field">
+            <label>Pick a Date &amp; Time *</label>
+
+            @php
+              $calLink  = trim($siteSettings['cal_link'] ?? '');
+              $useCalCom = !empty($calLink);
+              $rawSlots = $siteSettings['booking_time_slots'] ?? '9:00 AM,10:00 AM,11:00 AM,12:00 PM,2:00 PM,3:00 PM,4:00 PM,5:00 PM';
+              $timeSlots = array_values(array_filter(array_map('trim', explode(',', $rawSlots))));
+            @endphp
+
+            @if($useCalCom)
+              {{-- Cal.com inline embed --}}
+              <p class="bf-hint" style="margin: -2px 0 12px;">Choose a slot on the calendar — your booking will be confirmed instantly.</p>
+              <div class="bf-cal-com-wrap">
+                <div id="bfCalComWidget" style="width:100%;height:680px;overflow:scroll;"></div>
+              </div>
+              <div id="bfSlotConfirm" class="bf-slot-confirm" style="display:none;">
+                <span class="bf-slot-confirm-icon">✓</span>
+                <div>
+                  <strong>Slot selected</strong>
+                  <span id="bfSlotConfirmText"></span>
+                </div>
+              </div>
+            @else
+              {{-- Built-in custom calendar picker --}}
+              <div class="bf-dropdown-wrap">
+                <button type="button" class="bf-dt-trigger" id="bfTrigger">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span id="bfTriggerText">Select a date &amp; time</span>
+                  <svg class="bf-dt-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="bf-picker" id="bfPicker" style="display:none;">
+                  <div class="bf-cal-header">
+                    <button type="button" class="bf-cal-nav" id="bfCalPrev">&#8249;</button>
+                    <span class="bf-cal-month-label" id="bfCalLabel"></span>
+                    <button type="button" class="bf-cal-nav" id="bfCalNext">&#8250;</button>
+                  </div>
+                  <div class="bf-cal-dow">
+                    <span>Sun</span><span>Mon</span><span>Tue</span>
+                    <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                  </div>
+                  <div class="bf-cal-grid" id="bfCalGrid"></div>
+                  <div class="bf-ts-wrap" id="bfTsWrap" style="display:none;">
+                    <div class="bf-ts-heading">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      Available Times
+                    </div>
+                    <div class="bf-ts-grid" id="bfTsGrid">
+                      @foreach($timeSlots as $slot)
+                        <button type="button" class="bf-ts-pill" data-time="{{ $slot }}">{{ $slot }}</button>
+                      @endforeach
+                    </div>
+                    <p class="bf-ts-note" id="bfTsNote" style="display:none;"></p>
+                  </div>
+                  <div class="bf-pick-confirm" id="bfPickConfirm" style="display:none;">
+                    <span class="bf-pick-confirm-icon">✓</span>
+                    <div>
+                      <strong id="bfPickConfirmDate"></strong>
+                      <span id="bfPickConfirmTime"></span>
+                    </div>
+                    <button type="button" class="bf-pick-confirm-reset" id="bfPickReset">Change</button>
+                  </div>
+                </div>
+              </div>
+            @endif
           </div>
 
           <div class="bf-field">
@@ -209,35 +253,7 @@
           <div class="bf-field">
             <label class="bf-label">Phone</label>
             <div class="phone-row">
-              <select name="country_code" class="bf-input phone-cc" aria-label="Country code">
-                <option value="+1" selected>🇨🇦 +1 Canada</option>
-                <option value="+1">🇺🇸 +1 USA</option>
-                <option value="+91">🇮🇳 +91 India</option>
-                <option value="+44">🇬🇧 +44 UK</option>
-                <option value="+61">🇦🇺 +61 Australia</option>
-                <option value="+64">🇳🇿 +64 New Zealand</option>
-                <option value="+971">🇦🇪 +971 UAE</option>
-                <option value="+65">🇸🇬 +65 Singapore</option>
-                <option value="+60">🇲🇾 +60 Malaysia</option>
-                <option value="+49">🇩🇪 +49 Germany</option>
-                <option value="+33">🇫🇷 +33 France</option>
-                <option value="+39">🇮🇹 +39 Italy</option>
-                <option value="+34">🇪🇸 +34 Spain</option>
-                <option value="+31">🇳🇱 +31 Netherlands</option>
-                <option value="+46">🇸🇪 +46 Sweden</option>
-                <option value="+41">🇨🇭 +41 Switzerland</option>
-                <option value="+81">🇯🇵 +81 Japan</option>
-                <option value="+82">🇰🇷 +82 S. Korea</option>
-                <option value="+86">🇨🇳 +86 China</option>
-                <option value="+852">🇭🇰 +852 Hong Kong</option>
-                <option value="+966">🇸🇦 +966 Saudi Arabia</option>
-                <option value="+974">🇶🇦 +974 Qatar</option>
-                <option value="+973">🇧🇭 +973 Bahrain</option>
-                <option value="+968">🇴🇲 +968 Oman</option>
-                <option value="+27">🇿🇦 +27 S. Africa</option>
-                <option value="+55">🇧🇷 +55 Brazil</option>
-                <option value="+52">🇲🇽 +52 Mexico</option>
-              </select>
+              @include('partials.country-codes', ['default' => '+91'])
               <input type="tel" name="phone" class="bf-input phone-num" placeholder="Phone Number">
             </div>
           </div>
@@ -452,6 +468,269 @@
     }
     .bf-field textarea { resize: vertical; }
     .bf-hint { font-family: 'Outfit', sans-serif; font-size: 12px; color: #9d8f88; margin-top: 8px; font-style: italic; }
+    .bf-time-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+      gap: 10px;
+    }
+    .bf-time-pill {
+      padding: 11px 14px;
+      border: 1.5px solid #ead9d1;
+      background: #fdfaf8;
+      color: #1f3b38;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .bf-time-pill:hover:not(:disabled) {
+      border-color: #4DB6AC;
+      background: #ffffff;
+      color: #2FA9A3;
+    }
+    .bf-time-pill.is-active {
+      background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
+      border-color: #2FA9A3;
+      color: #ffffff;
+    }
+    .bf-time-pill:disabled,
+    .bf-time-pill.is-disabled {
+      opacity: 0.35;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+    /* ── Cal.com wrapper ── */
+    .bf-cal-com-wrap {
+      border: 1.5px solid #ead9d1;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      margin-bottom: 10px;
+    }
+    .bf-slot-confirm {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: #eafaf4;
+      border: 1px solid #bfeadb;
+      color: #1d6b52;
+      font-family: 'Outfit', sans-serif;
+    }
+    .bf-slot-confirm strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .bf-slot-confirm span { font-size: 13px; color: #2b6b58; }
+    .bf-slot-confirm-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; min-width: 28px; border-radius: 50%;
+      background: #2FA9A3; color: #fff; font-weight: 700; font-size: 14px;
+    }
+
+    /* ── Custom date/time picker ── */
+    .bf-dropdown-wrap { position: relative; }
+    .bf-dt-trigger {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid #ead9d1; border-radius: 12px;
+      background: #fff; cursor: pointer; font-size: 14px; color: #888;
+      text-align: left; transition: border-color .2s, color .2s; font-family: inherit;
+    }
+    .bf-dt-trigger:hover, .bf-dt-trigger.is-open { border-color: #4DB6AC; }
+    .bf-dt-trigger.has-value { color: #1f3b38; font-weight: 600; }
+    .bf-dt-chev { margin-left: auto; flex-shrink: 0; transition: transform .2s; }
+    .bf-dt-trigger.is-open .bf-dt-chev { transform: rotate(180deg); }
+    .bf-picker {
+      position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 200;
+      border: 1.5px solid #ead9d1; border-radius: 18px; overflow: hidden;
+      background: #fff; box-shadow: 0 8px 32px rgba(47,169,163,0.18);
+    }
+    .bf-cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 12px;
+      background: linear-gradient(135deg, #2FA9A3, #1f8c87);
+    }
+    .bf-cal-month-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .3px;
+    }
+    .bf-cal-nav {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .bf-cal-nav:hover { background: rgba(255,255,255,0.35); }
+    .bf-cal-dow {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: #f2faf9;
+      border-bottom: 1px solid #e5f5f3;
+    }
+    .bf-cal-dow span {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #2FA9A3;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 8px 0;
+    }
+    .bf-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 8px 10px 12px;
+      gap: 4px;
+    }
+    .bf-cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #2b2b2b;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: background .18s, color .18s;
+    }
+    .bf-cal-day:hover:not(:disabled):not(.is-empty) {
+      background: #e8f7f5;
+      color: #2FA9A3;
+    }
+    .bf-cal-day.is-today {
+      border: 1.5px solid #4DB6AC;
+      color: #2FA9A3;
+      font-weight: 700;
+    }
+    .bf-cal-day.is-selected {
+      background: linear-gradient(135deg, #2FA9A3, #1f8c87) !important;
+      color: #fff !important;
+      font-weight: 700;
+    }
+    .bf-cal-day.is-empty,
+    .bf-cal-day:disabled {
+      color: #d5ccc8;
+      cursor: default;
+      background: transparent;
+    }
+    .bf-cal-day.is-empty { pointer-events: none; }
+    /* Time slots */
+    .bf-ts-wrap {
+      border-top: 1px solid #ede8e3;
+      padding: 16px 18px 18px;
+      background: #fdfaf8;
+    }
+    .bf-ts-heading {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #2FA9A3;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 12px;
+    }
+    .bf-ts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+    }
+    .bf-ts-pill {
+      padding: 9px 10px;
+      border: 1.5px solid #ead9d1;
+      background: #fff;
+      color: #2b2b2b;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all .18s;
+      text-align: center;
+    }
+    .bf-ts-pill:hover:not(:disabled) {
+      border-color: #4DB6AC;
+      background: #eafaf8;
+      color: #2FA9A3;
+    }
+    .bf-ts-pill.is-active {
+      background: linear-gradient(135deg, #2FA9A3, #1f8c87);
+      border-color: #2FA9A3;
+      color: #fff;
+    }
+    .bf-ts-pill:disabled {
+      opacity: .32;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+    .bf-ts-note {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      color: #e07c2e;
+      margin: 10px 0 0;
+      font-style: italic;
+    }
+    /* Confirmation bar */
+    .bf-pick-confirm {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: #eafaf4;
+      border-top: 1px solid #bfeadb;
+      font-family: 'Outfit', sans-serif;
+    }
+    .bf-pick-confirm-icon {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      background: #2FA9A3;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .bf-pick-confirm strong { font-size: 13.5px; color: #1d5c4e; display: block; }
+    .bf-pick-confirm span  { font-size: 12.5px; color: #2b6b58; }
+    .bf-pick-confirm-reset {
+      margin-left: auto;
+      background: transparent;
+      border: 1.5px solid #4DB6AC;
+      color: #2FA9A3;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .18s, color .18s;
+    }
+    .bf-pick-confirm-reset:hover { background: #2FA9A3; color: #fff; }
     .bf-phone-group {
       display: flex;
       align-items: stretch;
@@ -694,49 +973,269 @@
     }
   </style>
 
+@if(empty($siteSettings['cal_link']))
 <script>
 (function () {
-  var dateEl = document.getElementById('bfDate');
-  var timeEl = document.getElementById('bfTime');
-  var hintEl = document.getElementById('bfTimeHint');
-  if (!dateEl || !timeEl) return;
+  var dateHidden   = document.getElementById('bfDate');
+  var timeHidden   = document.getElementById('bfTime');
+  var calGrid      = document.getElementById('bfCalGrid');
+  var calLabel     = document.getElementById('bfCalLabel');
+  var tsWrap       = document.getElementById('bfTsWrap');
+  var tsGrid       = document.getElementById('bfTsGrid');
+  var tsNote       = document.getElementById('bfTsNote');
+  var confirmBox   = document.getElementById('bfPickConfirm');
+  var confirmDate  = document.getElementById('bfPickConfirmDate');
+  var confirmTime  = document.getElementById('bfPickConfirmTime');
+  var resetBtn     = document.getElementById('bfPickReset');
+  var form         = document.getElementById('bookConsultationForm');
+  var trigger      = document.getElementById('bfTrigger');
+  var triggerText  = document.getElementById('bfTriggerText');
+  var picker       = document.getElementById('bfPicker');
 
-  var allSlots = Array.prototype.slice.call(timeEl.querySelectorAll('option'))
-    .filter(function (o) { return o.value; })
-    .map(function (o) { return o.value; });
+  if (!calGrid) return;
 
-  function rebuildOptions(bookedSlots) {
-    var current = timeEl.value;
-    timeEl.innerHTML = '<option value="" disabled selected>Select a time</option>';
-    allSlots.forEach(function (slot) {
-      if (bookedSlots.indexOf(slot) !== -1) return;
-      var opt = document.createElement('option');
-      opt.value = slot;
-      opt.textContent = slot;
-      timeEl.appendChild(opt);
-    });
-    if (current && bookedSlots.indexOf(current) === -1) {
-      timeEl.value = current;
+  function openPicker()  { picker.style.display = 'block'; trigger.classList.add('is-open'); }
+  function closePicker() { picker.style.display = 'none';  trigger.classList.remove('is-open'); }
+
+  trigger.addEventListener('click', function() {
+    picker.style.display === 'none' ? openPicker() : closePicker();
+  });
+  picker.addEventListener('click', function(e) { e.stopPropagation(); });
+  document.addEventListener('click', function(e) {
+    if (!trigger.contains(e.target)) closePicker();
+  });
+
+  var today     = new Date(); today.setHours(0,0,0,0);
+  var curYear   = today.getFullYear();
+  var curMonth  = today.getMonth();
+  var selDate   = null;
+  var bookedMap = {};
+
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function pad(n) { return ('0' + n).slice(-2); }
+  function isoDate(d) { return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+
+  function renderCalendar() {
+    calLabel.textContent = MONTHS[curMonth] + ' ' + curYear;
+    calGrid.innerHTML = '';
+    var first = new Date(curYear, curMonth, 1);
+    var startDow = first.getDay(); // 0=Sun
+    var daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+
+    // blank cells before first day
+    for (var i = 0; i < startDow; i++) {
+      var blank = document.createElement('button');
+      blank.type = 'button';
+      blank.className = 'bf-cal-day is-empty';
+      calGrid.appendChild(blank);
     }
-    if (!timeEl.querySelector('option[value]:not([disabled])')) {
-      hintEl.textContent = 'All slots are booked for this date. Please pick another date.';
+
+    for (var d = 1; d <= daysInMonth; d++) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bf-cal-day';
+      btn.textContent = d;
+      var dt = new Date(curYear, curMonth, d);
+      var iso = isoDate(dt);
+      btn.dataset.iso = iso;
+
+      if (dt < today) {
+        btn.disabled = true;
+      } else {
+        if (dt.getTime() === today.getTime()) btn.classList.add('is-today');
+        if (selDate && iso === isoDate(selDate)) btn.classList.add('is-selected');
+        btn.addEventListener('click', function () { pickDate(this); });
+      }
+      calGrid.appendChild(btn);
+    }
+  }
+
+  function pickDate(btn) {
+    var iso = btn.dataset.iso;
+    selDate = new Date(iso + 'T00:00:00');
+    dateHidden.value = iso;
+    timeHidden.value = '';
+
+    // reset time selection UI
+    document.querySelectorAll('.bf-ts-pill').forEach(function(p){ p.disabled = false; p.classList.remove('is-active'); });
+    if (tsNote) { tsNote.style.display = 'none'; tsNote.textContent = ''; }
+    if (confirmBox) confirmBox.style.display = 'none';
+    tsWrap.style.display = 'block';
+
+    renderCalendar();
+
+    // Fetch already-booked slots for this date
+    if (bookedMap[iso] !== undefined) {
+      applyBooked(iso, bookedMap[iso]);
     } else {
-      hintEl.textContent = 'Showing available times for the selected date.';
+      fetch('/booked-slots?date=' + iso)
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          bookedMap[iso] = data.booked || [];
+          applyBooked(iso, bookedMap[iso]);
+        })
+        .catch(function(){});
+    }
+
+    tsWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function applyBooked(iso, booked) {
+    if (!selDate || isoDate(selDate) !== iso) return;
+    document.querySelectorAll('.bf-ts-pill').forEach(function(p){
+      p.disabled = booked.indexOf(p.dataset.time) !== -1;
+    });
+    if (booked.length) {
+      tsNote.style.display = 'none';
     }
   }
 
-  function fetchBooked(date) {
-    if (!date) return;
-    hintEl.textContent = 'Checking available times...';
-    fetch('{{ route('booked.slots') }}?date=' + encodeURIComponent(date), { headers: { 'Accept': 'application/json' } })
-      .then(function (r) { return r.json(); })
-      .then(function (data) { rebuildOptions(data.booked || []); })
-      .catch(function () { rebuildOptions([]); });
+  // Time slot click
+  if (tsGrid) {
+    tsGrid.addEventListener('click', function(e) {
+      var pill = e.target.closest('.bf-ts-pill');
+      if (!pill || pill.disabled) return;
+      document.querySelectorAll('.bf-ts-pill').forEach(function(p){ p.classList.remove('is-active'); });
+      pill.classList.add('is-active');
+      timeHidden.value = pill.dataset.time;
+      showConfirm();
+    });
   }
 
-  dateEl.addEventListener('change', function () { fetchBooked(dateEl.value); });
-  if (dateEl.value) fetchBooked(dateEl.value);
+  function showConfirm() {
+    if (!selDate || !timeHidden.value) return;
+    var label = selDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    confirmDate.textContent = label;
+    confirmTime.textContent = ' at ' + timeHidden.value;
+    confirmBox.style.display = 'flex';
+    triggerText.textContent = label + ' at ' + timeHidden.value;
+    trigger.classList.add('has-value');
+    closePicker();
+  }
+
+  // Reset
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      selDate = null;
+      dateHidden.value = '';
+      timeHidden.value = '';
+      tsWrap.style.display = 'none';
+      confirmBox.style.display = 'none';
+      document.querySelectorAll('.bf-ts-pill').forEach(function(p){ p.classList.remove('is-active'); p.disabled = false; });
+      triggerText.textContent = 'Select a date & time';
+      trigger.classList.remove('has-value');
+      openPicker();
+      renderCalendar();
+    });
+  }
+
+  // Prev / Next month
+  document.getElementById('bfCalPrev').addEventListener('click', function() {
+    curMonth--; if (curMonth < 0) { curMonth = 11; curYear--; }
+    renderCalendar();
+  });
+  document.getElementById('bfCalNext').addEventListener('click', function() {
+    curMonth++; if (curMonth > 11) { curMonth = 0; curYear++; }
+    renderCalendar();
+  });
+
+  // Form submit validation
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      if (!dateHidden.value || !timeHidden.value) {
+        e.preventDefault();
+        openPicker();
+        trigger.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        alert('Please pick both a date and a time slot before booking.');
+      }
+    });
+  }
+
+  renderCalendar();
 })();
 </script>
+@endif
+
+@if(!empty($siteSettings['cal_link']))
+{{-- Cal.com embed script — only loaded when a link is configured --}}
+<script type="text/javascript">
+(function (C, A, L) {
+  let p = function (a, ar) { a.q.push(ar); };
+  let d = C.document;
+  C.Cal = C.Cal || function () {
+    let cal = C.Cal; let ar = arguments;
+    if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
+    if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar); return; }
+    p(cal, ar);
+  };
+})(window, "https://app.cal.com/embed/embed.js", "init");
+
+Cal("init", "jiva", { origin: "https://cal.com" });
+
+Cal.ns.jiva("inline", {
+  elementOrSelector: "#bfCalComWidget",
+  config: { layout: "month_view" },
+  calLink: "{{ $siteSettings['cal_link'] }}",
+});
+
+Cal.ns.jiva("ui", {
+  styles: { branding: { brandColor: "#2FA9A3" } },
+  hideEventTypeDetails: false,
+  layout: "month_view"
+});
+
+// Capture booking details from Cal.com postMessage event
+(function () {
+  var dateHidden  = document.getElementById('bfDate');
+  var timeHidden  = document.getElementById('bfTime');
+  var confirmBox  = document.getElementById('bfSlotConfirm');
+  var confirmText = document.getElementById('bfSlotConfirmText');
+  var form        = document.getElementById('bookConsultationForm');
+
+  window.addEventListener('message', function (e) {
+    if (!e || !e.data) return;
+    var data = e.data;
+    // Cal.com fires cal:bookingSuccessfulV2
+    if (data.type !== 'cal:bookingSuccessfulV2' && data.type !== 'booking_successful') return;
+
+    var booking = data.data || data.booking || {};
+    var startTime = booking.startTime || booking.start_time || '';
+    if (!startTime) return;
+
+    var d = new Date(startTime);
+    if (isNaN(d.getTime())) return;
+
+    var y   = d.getFullYear();
+    var mo  = ('0' + (d.getMonth() + 1)).slice(-2);
+    var day = ('0' + d.getDate()).slice(-2);
+    dateHidden.value = y + '-' + mo + '-' + day;
+
+    var h   = d.getHours();
+    var min = ('0' + d.getMinutes()).slice(-2);
+    var ap  = h >= 12 ? 'PM' : 'AM';
+    var h12 = ('0' + (h % 12 === 0 ? 12 : h % 12)).slice(-2);
+    timeHidden.value = h12 + ':' + min + ' ' + ap;
+
+    if (confirmBox) {
+      confirmBox.style.display = 'flex';
+      if (confirmText) {
+        confirmText.textContent = d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' at ' + h12 + ':' + min + ' ' + ap;
+      }
+    }
+  });
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      if (!dateHidden.value || !timeHidden.value) {
+        e.preventDefault();
+        document.getElementById('bfCalComWidget').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        alert('Please complete your booking on the calendar above before submitting.');
+      }
+    });
+  }
+})();
+</script>
+@endif
 
 @endsection

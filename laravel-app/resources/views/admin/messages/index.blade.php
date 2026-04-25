@@ -3,10 +3,10 @@
 @section('admin-content')
 @php
     $bookings = $messages->filter(function ($m) {
-        return !empty($m->preferred_date) || !empty($m->preferred_time) || !empty($m->service_selected);
+        return !empty($m->preferred_date) || !empty($m->preferred_time);
     })->values();
     $enquiries = $messages->reject(function ($m) {
-        return !empty($m->preferred_date) || !empty($m->preferred_time) || !empty($m->service_selected);
+        return !empty($m->preferred_date) || !empty($m->preferred_time);
     })->values();
     $activeTab = request('tab', 'bookings');
 @endphp

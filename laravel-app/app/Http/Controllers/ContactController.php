@@ -27,55 +27,135 @@ class ContactController extends Controller
         }
         unset($validated['country_code']);
 
-        if (!empty($validated['preferred_date']) && !empty($validated['preferred_time'])) {
-            $taken = ContactMessage::whereDate('preferred_date', $validated['preferred_date'])
-                ->where('preferred_time', $validated['preferred_time'])
-                ->exists();
-            if ($taken) {
-                return redirect()->back()
-                    ->withInput()
-                    ->withErrors(['preferred_time' => 'Sorry, that slot was just booked. Please pick another time.']);
-            }
-        }
-
-        if (!empty($validated['phone']) && !empty($validated['preferred_date'])) {
-            $normalizedPhone = preg_replace('/\D+/', '', $validated['phone']);
-
-            $duplicatePhone = ContactMessage::whereNotNull('phone')
-                ->whereDate('preferred_date', $validated['preferred_date'])
-                ->get()
-                ->first(function ($m) use ($normalizedPhone) {
-                    return preg_replace('/\D+/', '', (string) $m->phone) === $normalizedPhone;
-                });
-
-            if ($duplicatePhone) {
-                return redirect()->back()
-                    ->withInput()
-                    ->withErrors(['phone' => 'This phone number already has a booking for the selected date. Only one booking per day is allowed. Please pick a different date or contact us if you need to reschedule.']);
-            }
-        }
-
         $booking = ContactMessage::create($validated);
 
-        /* Send email notification to admin + confirmation to user */
         $this->sendBookingEmail($booking);
         $this->sendConfirmationEmail($booking);
 
+        $isBooking = !empty($validated['preferred_date']) || !empty($validated['preferred_time']) || !empty($validated['service_selected']);
+        $successMessage = $isBooking
+            ? 'Thank you! Your slot has been booked successfully.'
+            : 'Thank you! Your message has been submitted. We\'ll reach out to you shortly.';
+        $successKind = $isBooking ? 'booking' : 'enquiry';
+
         if (!empty($validated['subject']) && $validated['subject'] === 'Complimentary Consultation Booking') {
-            return redirect(route('home') . '#book-appointment')->with('success', 'Thank you! Your slot has been booked successfully.');
+            return redirect(route('home') . '#book-appointment')
+                ->with('success', $successMessage)
+                ->with('success_kind', $successKind);
         }
 
-        return redirect()->back()->with('success', 'Thank you! Your slot has been booked successfully.');
+        return redirect()->back()
+            ->with('success', $successMessage)
+            ->with('success_kind', $successKind);
+    }
+
+    private function getZoomLink(): string
+    {
+        return \App\Models\SiteSetting::where('key', 'zoom_link')->value('value') ?? '';
+    }
+
+    private function buildIcs($booking, string $zoomLink): string
+    {
+        if (!$booking->preferred_date || !$booking->preferred_time) {
+            return '';
+        }
+
+        try {
+            $dateStr  = \Carbon\Carbon::parse($booking->preferred_date)->format('Y-m-d');
+            $timeStr  = date('H:i', strtotime($booking->preferred_time));
+            $start    = \Carbon\Carbon::parse($dateStr . ' ' . $timeStr);
+            $end      = $start->copy()->addMinutes(30);
+
+            $dtStart  = $start->format('Ymd\THis');
+            $dtEnd    = $end->format('Ymd\THis');
+            $dtStamp  = now()->format('Ymd\THis\Z');
+            $uid      = uniqid('jiva-', true) . '@jivabirthandbeyond.com';
+
+            $title    = 'Consultation with Jiva Birth & Beyond';
+            $service  = $booking->service_selected ?? 'Consultation';
+            $location = $zoomLink ?: 'Zoom Meeting';
+
+            $description = "Service: {$service}\\n";
+            $description .= "Client: {$booking->name}\\n";
+            if ($zoomLink) {
+                $description .= "Join Zoom: {$zoomLink}\\n";
+            }
+
+            return implode("\r\n", [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Jiva Birth and Beyond//Booking//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:REQUEST',
+                'BEGIN:VEVENT',
+                "DTSTART:{$dtStart}",
+                "DTEND:{$dtEnd}",
+                "DTSTAMP:{$dtStamp}",
+                "UID:{$uid}",
+                "SUMMARY:{$title}",
+                "DESCRIPTION:{$description}",
+                "LOCATION:{$location}",
+                'STATUS:CONFIRMED',
+                'END:VEVENT',
+                'END:VCALENDAR',
+            ]);
+        } catch (\Exception $e) {
+            return '';
+        }
+    }
+
+    private function buildGcalLink($booking, string $zoomLink): string
+    {
+        if (!$booking->preferred_date || !$booking->preferred_time) {
+            return '';
+        }
+
+        try {
+            $dateStr = \Carbon\Carbon::parse($booking->preferred_date)->format('Y-m-d');
+            $timeStr = date('H:i', strtotime($booking->preferred_time));
+            $start   = \Carbon\Carbon::parse($dateStr . ' ' . $timeStr);
+            $end     = $start->copy()->addMinutes(30);
+
+            $service = $booking->service_selected ?? 'Consultation';
+            $details = "Service: {$service}";
+            if ($zoomLink) {
+                $details .= "\nJoin Zoom: {$zoomLink}";
+            }
+
+            return 'https://calendar.google.com/calendar/render?' . http_build_query([
+                'action'   => 'TEMPLATE',
+                'text'     => 'Consultation with Jiva Birth & Beyond',
+                'dates'    => $start->format('Ymd\THis') . '/' . $end->format('Ymd\THis'),
+                'details'  => $details,
+                'location' => $zoomLink ?: 'Zoom Meeting',
+            ]);
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 
     private function sendBookingEmail($booking)
     {
         $adminEmail = config('mail.from.address') ?? 'noreply@jivabirthandbeyond.com';
+        $zoomLink   = $this->getZoomLink();
+        $icsContent = $this->buildIcs($booking, $zoomLink);
+        $gcalLink   = $this->buildGcalLink($booking, $zoomLink);
 
         try {
-            Mail::send('emails.booking-notification', ['booking' => $booking], function ($message) use ($adminEmail) {
+            Mail::send('emails.booking-notification', [
+                'booking'  => $booking,
+                'zoomLink' => $zoomLink,
+                'gcalLink' => $gcalLink,
+            ], function ($message) use ($adminEmail, $booking, $icsContent) {
                 $message->to($adminEmail)
                         ->subject('New Booking Request: ' . ($booking->service_selected ?? $booking->subject ?? 'Contact Message'));
+                if ($icsContent) {
+                    $message->attachData(
+                        $icsContent,
+                        'consultation.ics',
+                        ['mime' => 'text/calendar']
+                    );
+                }
             });
         } catch (\Exception $e) {
             \Log::error('Failed to send booking email: ' . $e->getMessage());
@@ -88,10 +168,25 @@ class ContactController extends Controller
             return;
         }
 
+        $zoomLink   = $this->getZoomLink();
+        $icsContent = $this->buildIcs($booking, $zoomLink);
+        $gcalLink   = $this->buildGcalLink($booking, $zoomLink);
+
         try {
-            Mail::send('emails.booking-confirmation', ['booking' => $booking], function ($message) use ($booking) {
+            Mail::send('emails.booking-confirmation', [
+                'booking'  => $booking,
+                'zoomLink' => $zoomLink,
+                'gcalLink' => $gcalLink,
+            ], function ($message) use ($booking, $icsContent) {
                 $message->to($booking->email, $booking->name)
                         ->subject('Your consultation booking with Jiva Birth & Beyond');
+                if ($icsContent) {
+                    $message->attachData(
+                        $icsContent,
+                        'consultation.ics',
+                        ['mime' => 'text/calendar']
+                    );
+                }
             });
         } catch (\Exception $e) {
             \Log::error('Failed to send confirmation email: ' . $e->getMessage());
@@ -120,9 +215,9 @@ class ContactController extends Controller
         }
 
         ContactMessage::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'phone' => $phone,
+            'name'    => $validated['name'],
+            'email'   => $validated['email'],
+            'phone'   => $phone,
             'subject' => 'Consultation Booking',
             'message' => $message,
         ]);

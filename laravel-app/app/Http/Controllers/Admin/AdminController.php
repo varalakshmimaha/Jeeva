@@ -50,8 +50,13 @@ class AdminController extends Controller
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'content' => 'nullable|string',
+            'benefits' => 'nullable|string',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
+            'packages' => 'nullable|array',
+            'packages.*.title' => 'nullable|string|max:255',
+            'packages.*.price' => 'nullable|string|max:50',
+            'packages.*.includes' => 'nullable|string',
         ]);
 
         if ($request->hasFile('icon')) {
@@ -63,8 +68,29 @@ class AdminController extends Controller
             unset($validated['icon']);
         }
 
+        $validated['packages'] = $this->cleanPackages($validated['packages'] ?? []);
+
         Service::create($validated);
         return redirect()->route('admin.services.index')->with('success', 'Service created successfully!');
+    }
+
+    private function cleanPackages(array $packages): array
+    {
+        return array_values(array_filter(array_map(function ($pkg) {
+            $title = trim($pkg['title'] ?? '');
+            $price = trim($pkg['price'] ?? '');
+            $includesRaw = trim($pkg['includes'] ?? '');
+            if ($title === '' && $price === '' && $includesRaw === '') {
+                return null;
+            }
+            $includes = array_values(array_filter(array_map('trim', preg_split('/\r?\n/', $includesRaw))));
+            return [
+                'title'    => $title,
+                'price'    => $price,
+                'includes' => $includes,
+                'featured' => !empty($pkg['featured']),
+            ];
+        }, $packages)));
     }
 
     public function servicesEdit($id)
@@ -81,8 +107,13 @@ class AdminController extends Controller
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'content' => 'nullable|string',
+            'benefits' => 'nullable|string',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'order' => 'nullable|integer',
+            'packages' => 'nullable|array',
+            'packages.*.title' => 'nullable|string|max:255',
+            'packages.*.price' => 'nullable|string|max:50',
+            'packages.*.includes' => 'nullable|string',
         ]);
 
         if ($request->hasFile('icon')) {
@@ -93,6 +124,8 @@ class AdminController extends Controller
         } else {
             unset($validated['icon']);
         }
+
+        $validated['packages'] = $this->cleanPackages($validated['packages'] ?? []);
 
         $service->update($validated);
         return redirect()->route('admin.services.index')->with('success', 'Service updated successfully!');

@@ -16,6 +16,13 @@
         .label { color: #6b7280; font-weight: 600; }
         .value { color: #1f3b38; font-weight: 600; text-align: right; }
         .note { font-size: 14px; color: #555; line-height: 1.6; margin: 16px 0; }
+        .action-box { background: #e8f7f5; border: 2px solid #2FA9A3; border-radius: 12px; padding: 22px 24px; margin: 24px 0; text-align: center; }
+        .action-box h3 { margin: 0 0 6px; font-size: 16px; color: #1f3b38; }
+        .action-box p { margin: 0 0 18px; font-size: 13px; color: #4a7a75; }
+        .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .zoom-btn { display: inline-block; padding: 12px 24px; background: #2D8CFF; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
+        .gcal-btn { display: inline-block; padding: 12px 24px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
+        .zoom-link-text { display: block; margin-top: 12px; font-size: 12px; color: #4a7a75; word-break: break-all; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
         .footer a { color: #2FA9A3; text-decoration: none; }
     </style>
@@ -23,15 +30,15 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>✓ Booking Received</h2>
-            <p>Thank you for reaching out to Jiva Birth &amp; Beyond</p>
+            <h2>✓ Booking Confirmed</h2>
+            <p>Thank you for booking with Jiva Birth &amp; Beyond</p>
         </div>
 
         <div class="content">
             <p class="greeting">Hi {{ $booking->name }},</p>
 
             <p class="note">
-                Thank you for booking a consultation with us. I've received your request and will be in touch shortly to confirm your session. Here's a summary of your booking:
+                Your consultation has been booked! Here's a summary of your session details:
             </p>
 
             <div class="card">
@@ -43,13 +50,13 @@
                 @endif
                 @if($booking->preferred_date)
                 <div class="row">
-                    <span class="label">Preferred Date</span>
+                    <span class="label">Date</span>
                     <span class="value">{{ \Carbon\Carbon::parse($booking->preferred_date)->format('l, d M Y') }}</span>
                 </div>
                 @endif
                 @if($booking->preferred_time)
                 <div class="row">
-                    <span class="label">Preferred Time</span>
+                    <span class="label">Time</span>
                     <span class="value">{{ $booking->preferred_time }}</span>
                 </div>
                 @endif
@@ -64,6 +71,27 @@
                     <span class="value">{{ $booking->email }}</span>
                 </div>
             </div>
+
+            @if(!empty($zoomLink) || !empty($gcalLink))
+            <div class="action-box">
+                <h3>📅 Your Consultation is Confirmed</h3>
+                <p>Save it to your calendar and join the meeting at the scheduled time.</p>
+                <div class="btn-row">
+                    @if(!empty($gcalLink))
+                    <a href="{{ $gcalLink }}" class="gcal-btn">➕ Add to Google Calendar</a>
+                    @endif
+                    @if(!empty($zoomLink))
+                    <a href="{{ $zoomLink }}" class="zoom-btn">📹 Join Zoom Meeting</a>
+                    @endif
+                </div>
+                @if(!empty($zoomLink))
+                <span class="zoom-link-text">Zoom: {{ $zoomLink }}</span>
+                @endif
+                @if(!empty($gcalLink))
+                <span class="zoom-link-text" style="margin-top:4px;">Or open the <strong>consultation.ics</strong> attachment to add to any calendar app.</span>
+                @endif
+            </div>
+            @endif
 
             @if($booking->message)
             <p class="note"><strong>Your notes:</strong><br>{{ $booking->message }}</p>

@@ -36,6 +36,11 @@ class SettingsController extends Controller
             'youtube_link' => 'nullable|url|max:500',
             'map_embed' => 'nullable|string',
             'booking_time_slots' => 'nullable|string|max:1000',
+            'cal_link'           => 'nullable|string|max:255',
+            'zoom_link'          => 'nullable|url|max:500',
+            'google_analytics_id'   => 'nullable|string|max:50',
+            'ga4_property_id'       => 'nullable|string|max:30',
+            'ga4_credentials_json'  => 'nullable|string',
         ]);
 
         // Handle logo upload
@@ -95,6 +100,13 @@ class SettingsController extends Controller
         $this->saveSetting('youtube_link', $validated['youtube_link'] ?? null);
         $this->saveSetting('map_embed', $validated['map_embed'] ?? null);
         $this->saveSetting('booking_time_slots', $validated['booking_time_slots'] ?? null);
+        $this->saveSetting('cal_link', $validated['cal_link'] ?? null);
+        $this->saveSetting('zoom_link', $validated['zoom_link'] ?? null);
+        $this->saveSetting('google_analytics_id',  $validated['google_analytics_id']  ?? null);
+        $this->saveSetting('ga4_property_id',      $validated['ga4_property_id']       ?? null);
+        if (!empty($validated['ga4_credentials_json'])) {
+            $this->saveSetting('ga4_credentials_json', $validated['ga4_credentials_json']);
+        }
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
     }

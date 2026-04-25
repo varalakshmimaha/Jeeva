@@ -27,6 +27,7 @@
             <button type="button" class="st-tab" data-tab="logo">Logo & Favicon</button>
             <button type="button" class="st-tab" data-tab="backgrounds">Background Images</button>
             <button type="button" class="st-tab" data-tab="social">Footer & Social</button>
+            <button type="button" class="st-tab" data-tab="analytics">Analytics</button>
         </div>
 
         {{-- Panel: General --}}
@@ -89,11 +90,66 @@
             </div>
 
             <div class="adm-card">
-                <div class="adm-card-head">Consultation Booking Time Slots</div>
+                <div class="adm-card-head">Google Analytics</div>
+                <div class="adm-card-body">
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Measurement ID</td>
+                            <td class="adm-fi">
+                                <input type="text" name="google_analytics_id" class="adm-input"
+                                    value="{{ old('google_analytics_id', $settings['google_analytics_id'] ?? '') }}"
+                                    placeholder="G-XXXXXXXXXX">
+                                <p class="adm-hint">Enter your Google Analytics 4 Measurement ID (e.g. <strong>G-XXXXXXXXXX</strong>). Leave blank to disable tracking. Find it in Google Analytics → Admin → Data Streams → your stream.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Cal.com Booking Link</div>
+                <div class="adm-card-body">
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Cal.com Link</td>
+                            <td class="adm-fi">
+                                <input type="text" name="cal_link" class="adm-input"
+                                    value="{{ old('cal_link', $settings['cal_link'] ?? '') }}"
+                                    placeholder="e.g. anusuyaashok/consultation">
+                                <p class="adm-hint" style="margin-top:6px;">
+                                    Enter your Cal.com username/event-type (e.g. <strong>anusuyaashok/30min</strong>).
+                                    Sign up free at <strong>cal.com</strong> → create an event type → copy the link slug.
+                                    Leave blank to use the built-in date picker instead.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Zoom Meeting Link</div>
+                <div class="adm-card-body">
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Zoom Link</td>
+                            <td class="adm-fi">
+                                <input type="url" name="zoom_link" class="adm-input"
+                                    value="{{ old('zoom_link', $settings['zoom_link'] ?? '') }}"
+                                    placeholder="https://zoom.us/j/XXXXXXXXXX">
+                                <p class="adm-hint">Paste your Zoom personal meeting link. It will be included in the booking confirmation emails sent to both you and the client.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Consultation Booking Time Slots <small style="font-weight:400;color:var(--muted);font-size:12px;">(used when Cal.com link is empty)</small></div>
                 <div class="adm-card-body">
                     <textarea name="booking_time_slots" class="adm-input" rows="3"
                         placeholder="09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM">{{ old('booking_time_slots', $settings['booking_time_slots'] ?? '') }}</textarea>
-                    <p class="adm-hint">Comma-separated list of time slots shown in the "Pick a Time" dropdown on the Home and Contact booking forms. Already-booked slots are automatically hidden from visitors. Leave blank to use the default list.</p>
+                    <p class="adm-hint">Comma-separated time slots for the built-in picker. Only used when no Cal.com link is set above.</p>
                 </div>
             </div>
         </div>
@@ -317,6 +373,55 @@
                 </div>
             </div>
         </div>
+
+        {{-- Panel: Analytics --}}
+        <div class="st-panel" data-panel="analytics">
+            <div class="adm-card">
+                <div class="adm-card-head">Google Analytics 4 — Site Tracking</div>
+                <div class="adm-card-body">
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Measurement ID</td>
+                            <td class="adm-fi">
+                                <input type="text" name="google_analytics_id" class="adm-input"
+                                    value="{{ old('google_analytics_id', $settings['google_analytics_id'] ?? '') }}"
+                                    placeholder="G-XXXXXXXXXX">
+                                <p class="adm-hint">Tracks page views on the website. Find it in GA4 → Admin → Data Streams → your stream.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
+                <div class="adm-card-head">Google Analytics 4 — Admin Dashboard Data</div>
+                <div class="adm-card-body">
+                    <p class="adm-hint" style="margin:0 0 16px;padding:12px 14px;background:#fff8ec;border:1px solid #f0c060;border-radius:8px;color:#5a3e00;font-size:13px;">
+                        These two fields power the <strong>Analytics</strong> page in this admin panel where you can see visitors, sessions, top pages, traffic sources and countries — without leaving the admin.
+                    </p>
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">GA4 Property ID</td>
+                            <td class="adm-fi">
+                                <input type="text" name="ga4_property_id" class="adm-input"
+                                    value="{{ old('ga4_property_id', $settings['ga4_property_id'] ?? '') }}"
+                                    placeholder="123456789">
+                                <p class="adm-hint">Numbers only. Find it in GA4 → Admin → Property Settings → Property ID.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="adm-fl">Service Account JSON</td>
+                            <td class="adm-fi">
+                                <textarea name="ga4_credentials_json" rows="6" class="adm-input" style="font-family:monospace;font-size:12px;"
+                                    placeholder='{"type":"service_account","project_id":"...","private_key":"-----BEGIN PRIVATE KEY-----\n...","client_email":"...@...iam.gserviceaccount.com",...}'>{{ old('ga4_credentials_json', $settings['ga4_credentials_json'] ?? '') }}</textarea>
+                                <p class="adm-hint">Paste the entire contents of the JSON key file downloaded from Google Cloud Console → Service Accounts. <a href="{{ route('admin.analytics') }}" target="_blank">How to get this →</a></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
 

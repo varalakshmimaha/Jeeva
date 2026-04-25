@@ -16,8 +16,8 @@
           Supporting you through the intensity and beauty of birth, with grounding care that helps you feel calm, safe, and in control.
         </p>
         @if(!empty($siteSettings['certifications_image_url']))
-          <div style="margin-top:18px;">
-            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="max-width:220px;display:block;">
+          <div style="margin-top:0;">
+            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="max-width:100%;width:auto;display:block;">
           </div>
         @endif
       </div>
@@ -44,7 +44,7 @@
       </div>
 
       <!-- Column 4: Contact Us -->
-      <div class="site-footer-column" style="display:flex;flex-direction:column;gap:0;">
+      <div class="site-footer-column site-footer-column--wide">
         <h3 class="site-footer-title">Contact Us</h3>
         <div class="site-footer-contact-list">
           <div class="site-footer-contact-item footer-contact-icon-row">
@@ -93,7 +93,11 @@
   <!-- Copyright Bar -->
   <div class="site-footer-bottom">
     <div class="container site-footer-bottom-row">
-      <p>Copyright &copy; {{ $footerYear }} Jiva Birth & Beyond. All rights reserved.</p>
+      <p>&copy; {{ $footerYear }} Jiva Birth &amp; Beyond. All rights reserved.</p>
+      <div class="site-footer-bottom-links">
+        <a href="{{ route('privacy') }}">Privacy Policy</a>
+        <a href="{{ route('terms') }}">Terms &amp; Conditions</a>
+      </div>
     </div>
   </div>
 </footer>

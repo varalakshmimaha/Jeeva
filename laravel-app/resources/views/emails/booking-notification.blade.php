@@ -11,6 +11,13 @@
         .label { font-weight: bold; color: #4DB6AC; font-size: 12px; text-transform: uppercase; }
         .value { margin-top: 5px; color: #555; }
         .divider { border-top: 1px solid #e0e0e0; margin: 20px 0; }
+        .action-box { background: #e8f7f5; border: 2px solid #2FA9A3; border-radius: 10px; padding: 18px 20px; margin: 20px 0; text-align: center; }
+        .action-box h3 { margin: 0 0 6px; font-size: 15px; color: #1f3b38; }
+        .action-box p { margin: 0 0 14px; font-size: 13px; color: #4a7a75; }
+        .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .zoom-btn { display: inline-block; padding: 10px 22px; background: #2D8CFF; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 700; }
+        .gcal-btn { display: inline-block; padding: 10px 22px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 700; }
+        .zoom-link-text { display: block; margin-top: 8px; font-size: 11px; color: #4a7a75; word-break: break-all; }
         .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #999; text-align: center; }
     </style>
 </head>
@@ -70,8 +77,29 @@
             </div>
         </div>
 
+        @if(!empty($zoomLink) || !empty($gcalLink))
+        <div class="action-box">
+            <h3>📅 Add to Your Calendar &amp; Join Meeting</h3>
+            <p>Save this session to your calendar and join at the scheduled time.</p>
+            <div class="btn-row">
+                @if(!empty($gcalLink))
+                <a href="{{ $gcalLink }}" class="gcal-btn">➕ Add to Google Calendar</a>
+                @endif
+                @if(!empty($zoomLink))
+                <a href="{{ $zoomLink }}" class="zoom-btn">📹 Join Zoom Meeting</a>
+                @endif
+            </div>
+            @if(!empty($zoomLink))
+            <span class="zoom-link-text">Zoom: {{ $zoomLink }}</span>
+            @endif
+            @if(!empty($gcalLink))
+            <span class="zoom-link-text" style="margin-top:4px;">Or open the <strong>consultation.ics</strong> attachment to add to any calendar.</span>
+            @endif
+        </div>
+        @endif
+
         <div class="footer">
-            <p>This is an automated booking notification from Jiva Birth & Beyond</p>
+            <p>This is an automated booking notification from Jiva Birth &amp; Beyond</p>
         </div>
     </div>
 </body>
