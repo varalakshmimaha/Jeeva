@@ -375,10 +375,10 @@
     .bf-field { display: flex; flex-direction: column; }
     .bf-field label {
       font-family: 'Outfit', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 600;
       color: #1f3b38;
-      margin-bottom: 3px;
+      margin-bottom: 8px;
       letter-spacing: .3px;
       text-transform: uppercase;
     }
@@ -386,10 +386,10 @@
     .bf-field select,
     .bf-field textarea {
       width: 100%;
-      padding: 8px 14px;
+      padding: 14px 18px;
       border: 1.5px solid #ead9d1;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 14.5px;
       font-family: 'Outfit', sans-serif;
       font-weight: 400;
       background: #fdfaf8;
@@ -398,6 +398,21 @@
       letter-spacing: .2px;
     }
     .bf-field textarea {
+      border-radius: 18px;
+      min-height: 110px;
+    }
+    /* Compact styles scoped only to the booking form */
+    .book-form .bf-field label {
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+    .book-form .bf-field input,
+    .book-form .bf-field select,
+    .book-form .bf-field textarea {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+    .book-form .bf-field textarea {
       border-radius: 12px;
       min-height: 52px;
     }
@@ -723,6 +738,8 @@
       padding: 8px 16px !important;
       box-shadow: none !important;
     }
+    /* Override compact input size for phone group inside booking form */
+    .book-form .bf-phone-group { font-size: 13px; }
     .bf-phone-group .bf-phone-number:focus { outline: none; }
     .book-submit {
       margin-top: 10px;
