@@ -568,13 +568,15 @@
       gap: 4px;
     }
     .bf-cal-day {
-      aspect-ratio: 1;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       font-family: 'Outfit', sans-serif;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 500;
       color: #2b2b2b;
       cursor: pointer;
@@ -862,11 +864,12 @@
     }
     .bk-cal-card {
       background: #ffffff;
-      border-radius: 20px;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
+      align-items: stretch;
     }
     .bk-title {
       font-family: 'Playfair Display', serif;
@@ -910,6 +913,7 @@
       grid-template-columns: repeat(7, 1fr);
       background: #f2faf9;
       border-bottom: 1px solid #e5f5f3;
+      padding: 0 16px;
     }
     .bk-cal-dow span {
       text-align: center;
@@ -919,13 +923,15 @@
       color: #2FA9A3;
       text-transform: uppercase;
       letter-spacing: .5px;
-      padding: 5px 0;
+      padding: 6px 0;
     }
     .bk-cal-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      padding: 4px 8px 6px;
-      gap: 1px;
+      padding: 6px 16px 10px;
+      gap: 2px;
+      justify-items: center;
+      align-items: center;
     }
     .bk-ts-wrap {
       border-top: 1px solid #ede8e3;
