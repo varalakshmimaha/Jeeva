@@ -224,7 +224,7 @@
   <style>
     /* Book Consultation */
     .book-wrap {
-      padding: 40px 4% 60px;
+      padding: 28px 4% 36px;
       background: linear-gradient(180deg, #fcefe6 0%, #fdf6ef 100%);
     }
     .book-grid {
@@ -368,17 +368,17 @@
     .book-form {
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 8px;
       font-family: 'Outfit', sans-serif;
     }
     .bf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .bf-field { display: flex; flex-direction: column; }
     .bf-field label {
       font-family: 'Outfit', sans-serif;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       color: #1f3b38;
-      margin-bottom: 5px;
+      margin-bottom: 3px;
       letter-spacing: .3px;
       text-transform: uppercase;
     }
@@ -386,10 +386,10 @@
     .bf-field select,
     .bf-field textarea {
       width: 100%;
-      padding: 10px 16px;
+      padding: 8px 14px;
       border: 1.5px solid #ead9d1;
       border-radius: 999px;
-      font-size: 13.5px;
+      font-size: 13px;
       font-family: 'Outfit', sans-serif;
       font-weight: 400;
       background: #fdfaf8;
@@ -398,8 +398,8 @@
       letter-spacing: .2px;
     }
     .bf-field textarea {
-      border-radius: 14px;
-      min-height: 68px;
+      border-radius: 12px;
+      min-height: 52px;
     }
     .bf-field input::placeholder,
     .bf-field textarea::placeholder { color: #b0a59f; font-weight: 400; }
@@ -559,7 +559,7 @@
       justify-content: center;
       border-radius: 50%;
       font-family: 'Outfit', sans-serif;
-      font-size: 13.5px;
+      font-size: 12px;
       font-weight: 500;
       color: #2b2b2b;
       cursor: pointer;
@@ -704,15 +704,15 @@
       background: transparent !important;
       border-right: 1.5px solid #ead9d1 !important;
       border-radius: 0 !important;
-      padding: 10px 36px 10px 16px !important;
+      padding: 8px 32px 8px 14px !important;
       width: auto !important;
-      min-width: 100px;
+      min-width: 96px;
       font-weight: 600;
-      font-size: 13.5px;
+      font-size: 13px;
       color: #1f3b38;
       box-shadow: none !important;
       cursor: pointer;
-      background-position: right 12px center !important;
+      background-position: right 10px center !important;
     }
     .bf-phone-group .bf-phone-code:focus { outline: none; }
     .bf-phone-group .bf-phone-number {
@@ -720,7 +720,7 @@
       background: transparent !important;
       border-radius: 0 !important;
       flex: 1;
-      padding: 10px 18px !important;
+      padding: 8px 16px !important;
       box-shadow: none !important;
     }
     .bf-phone-group .bf-phone-number:focus { outline: none; }
@@ -839,8 +839,8 @@
     }
     .bk-form-card {
       background: #ffffff;
-      border-radius: 20px;
-      padding: 26px 24px;
+      border-radius: 16px;
+      padding: 20px 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
     .bk-cal-card {
@@ -853,16 +853,16 @@
     }
     .bk-title {
       font-family: 'Playfair Display', serif;
-      font-size: 20px;
+      font-size: 18px;
       color: #2b2b2b;
-      margin: 0 0 16px;
+      margin: 0 0 12px;
       font-weight: 700;
     }
     .bk-cal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 20px 14px;
+      padding: 12px 16px 10px;
       background: linear-gradient(135deg, #2FA9A3, #1f8c87);
     }
     .bk-cal-month-label {
@@ -897,31 +897,31 @@
     .bk-cal-dow span {
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: #2FA9A3;
       text-transform: uppercase;
       letter-spacing: .5px;
-      padding: 8px 0;
+      padding: 5px 0;
     }
     .bk-cal-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      padding: 8px 10px 12px;
-      gap: 2px;
+      padding: 4px 8px 6px;
+      gap: 1px;
     }
     .bk-ts-wrap {
       border-top: 1px solid #ede8e3;
-      padding: 14px 16px 16px;
+      padding: 10px 12px 12px;
       background: #fdfaf8;
     }
     .bk-ts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 6px;
     }
     .bk-ts-pill {
-      padding: 9px 10px;
+      padding: 7px 8px;
       border: 1.5px solid #ead9d1;
       background: #fff;
       color: #2b2b2b;
@@ -951,16 +951,16 @@
     .bk-cal-footer {
       text-align: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       color: #9d8f88;
-      padding: 10px 16px 14px;
+      padding: 7px 12px 10px;
       margin-top: auto;
       font-style: italic;
     }
     .bk-submit-btn {
       width: 100%;
-      margin-top: 6px;
-      padding: 13px 24px;
+      margin-top: 4px;
+      padding: 11px 20px;
       background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
       color: #ffffff;
       border: none;
