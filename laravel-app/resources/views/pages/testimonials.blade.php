@@ -40,6 +40,11 @@
 <!-- Testimonials Precision Grid -->
 <section class="testi-precision-sec">
   <div class="container">
+    <div class="tp-section-head">
+      <h2 class="tp-section-title">What Our Clients Say</h2>
+      <p class="tp-section-sub">Heartfelt words from the families I have had the honour of supporting through their birth journeys.</p>
+    </div>
+
     @php
       $categories = $testimonials->pluck('category')->filter()->unique()->values();
     @endphp
@@ -83,7 +88,7 @@
                 <div class="tp-author">
                   <div class="tp-auth-meta">
                     <div class="tp-auth-name">{{ $t->name }}</div>
-                    <div class="tp-auth-role">{{ $t->role ?? 'New Mother' }}</div>
+                    @if(!empty($t->role))<div class="tp-auth-role">{{ $t->role }}</div>@endif
                   </div>
                 </div>
               </div>
@@ -318,8 +323,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
 /* ===== Testimonials Precision Grid ===== */
 .testi-precision-sec {
-  padding: 80px 6%;
-  background: #fdfaf8; 
+  padding: 60px 6% 80px;
+  background: #fdfaf8;
+}
+.tp-section-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 48px;
+}
+.tp-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: #1f3b38;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.tp-section-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  color: #6b5a5a;
+  line-height: 1.7;
+  margin: 0;
 }
 .tp-grid {
   display: flex;
