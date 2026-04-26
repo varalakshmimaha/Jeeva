@@ -153,7 +153,7 @@ class AdminController extends Controller
     {
         $validated = $request->validate([
             'page' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',
@@ -185,7 +185,7 @@ class AdminController extends Controller
         $banner = Banner::findOrFail($id);
         $validated = $request->validate([
             'page' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',

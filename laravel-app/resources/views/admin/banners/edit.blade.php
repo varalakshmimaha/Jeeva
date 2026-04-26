@@ -35,8 +35,8 @@
                         </select>
                     </div>
                     <div class="adm-form-group">
-                        <label class="adm-label">Title *</label>
-                        <input type="text" name="title" value="{{ old('title', $banner->title) }}" required class="adm-input">
+                        <label class="adm-label">Title</label>
+                        <input type="text" name="title" value="{{ old('title', $banner->title) }}" class="adm-input" placeholder="Optional">
                     </div>
                 </div>
                 <div class="adm-form-group" style="margin-top:16px;">
