@@ -29,6 +29,10 @@ class SettingsController extends Controller
             'vision_mission_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'contact_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
             'expertise_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
+            'why_choose_image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'why_choose_image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'why_choose_image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'why_choose_image_4' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'whatsapp_link' => 'nullable|url|max:500',
             'instagram_link' => 'nullable|url|max:500',
             'facebook_link' => 'nullable|url|max:500',
@@ -79,6 +83,14 @@ class SettingsController extends Controller
         if ($request->hasFile('contact_image')) {
             $contactImgPath = $request->file('contact_image')->store('contact', 'public');
             $this->saveSetting('contact_image', 'storage/' . $contactImgPath);
+        }
+
+        // Handle "What Makes Us Different" card images
+        foreach ([1, 2, 3, 4] as $n) {
+            if ($request->hasFile("why_choose_image_{$n}")) {
+                $path = $request->file("why_choose_image_{$n}")->store('why-choose', 'public');
+                $this->saveSetting("why_choose_image_{$n}", 'storage/' . $path);
+            }
         }
 
         // Handle About-page Expertise yoga image upload

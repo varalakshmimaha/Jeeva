@@ -274,6 +274,29 @@
             </div>
 
             <div class="adm-card">
+                <div class="adm-card-head">What Makes Us Different — Card Images</div>
+                <div class="adm-card-body">
+                    <p class="adm-hint" style="margin-bottom:20px;">Upload icons/images for each of the 4 cards in the "What Makes Us Different" section on the Home page.</p>
+                    <div class="adm-form-grid">
+                        @foreach([1,2,3,4] as $n)
+                        <div class="adm-form-group">
+                            <label class="adm-label">Card {{ $n }} Image</label>
+                            @php $key = 'why_choose_image_' . $n; @endphp
+                            @if(isset($settings[$key]) && $settings[$key])
+                                <div class="adm-img-preview" style="margin-bottom:8px;">
+                                    <img src="{{ asset($settings[$key]) }}" alt="Card {{ $n }}" style="max-width:120px;border-radius:8px;">
+                                    <span class="adm-img-tag">Current</span>
+                                </div>
+                            @endif
+                            <input type="file" name="why_choose_image_{{ $n }}" accept="image/*" class="adm-input">
+                            <p class="adm-hint">PNG/WebP with transparent bg recommended. 200×200 px.</p>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="adm-card">
                 <div class="adm-card-head">About Page - Expertise Yoga Image</div>
                 <div class="adm-card-body">
                     @if(isset($settings['expertise_image']) && $settings['expertise_image'])
