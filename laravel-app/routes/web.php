@@ -3,10 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CalendlyWebhookController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\AdminSettingsController;
+
+// Calendly webhook — no CSRF, no auth
+Route::post('/webhooks/calendly', [CalendlyWebhookController::class, 'handle'])
+    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+    ->name('webhooks.calendly');
 
 // Page Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
