@@ -32,7 +32,7 @@
     font-weight: 400;
     font-size: 58px;
     line-height: 1.3;
-    max-width: 960px;
+    max-width: 780px;
     white-space: normal;
     text-wrap: balance;
     font-style: normal;
