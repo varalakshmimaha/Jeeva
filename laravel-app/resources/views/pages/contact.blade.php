@@ -11,119 +11,63 @@
     :breadcrumbs="[['label' => 'Contact Us']]"
   />
 
-  <!-- Book Consultation + Calendar -->
+  <!-- Book Consultation + Calendly -->
   <section class="book-wrap" id="book">
-    @php
-      $calLink   = trim($siteSettings['cal_link'] ?? '');
-      $useCalCom = !empty($calLink);
-      $rawSlots  = $siteSettings['booking_time_slots'] ?? '9:00 AM,10:00 AM,11:00 AM,12:00 PM,2:00 PM,3:00 PM,4:00 PM,5:00 PM';
-      $timeSlots = array_values(array_filter(array_map('trim', explode(',', $rawSlots))));
-    @endphp
-
     <div class="bk-split">
 
-      <!-- Left: Form -->
-      <div class="bk-form-card">
-        <h3 class="bk-title">Book Consultation</h3>
+      <!-- Left: Booking info + Calendly -->
+      <div class="bk-left-col">
+        <div class="bk-info-head">
+          <span class="bk-eyebrow">Schedule a Session</span>
+          <h2 class="bk-main-title">Book Your Consultation</h2>
+          <p class="bk-main-desc">Select a date and time that works for you. Calendly handles everything — no double bookings, instant confirmation sent to your email.</p>
+        </div>
 
-        @if(session('success'))
-          @php
-            $successKind = session('success_kind', 'booking');
-            $modalTitle  = $successKind === 'enquiry' ? 'Message Sent' : 'Slot Booked';
-            $modalSub    = $successKind === 'enquiry' ? 'We\'ll review your message and get back to you as soon as possible.' : '';
-          @endphp
-          <div id="bookingSuccessModal" class="booking-modal-overlay">
-            <div class="booking-modal-card">
-              <div class="booking-modal-icon">
-                <svg viewBox="0 0 52 52" width="46" height="46"><circle cx="26" cy="26" r="24" fill="none" stroke="#2FA9A3" stroke-width="3" class="bm-circle"/><path d="M14 27l8 8 16-18" fill="none" stroke="#2FA9A3" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="bm-check"/></svg>
-              </div>
-              <h3 class="booking-modal-title">{{ $modalTitle }}</h3>
-              <p class="booking-modal-text">{{ session('success') }}</p>
-              @if($modalSub)<p class="booking-modal-sub">{{ $modalSub }}</p>@endif
-              <button type="button" class="booking-modal-btn" onclick="document.getElementById('bookingSuccessModal').remove()">Got it</button>
+        <div class="bk-steps">
+          <div class="bk-step">
+            <span class="bk-step-num">1</span>
+            <div>
+              <strong>Pick a date &amp; time</strong>
+              <span>Choose from available slots below</span>
             </div>
           </div>
-        @endif
-
-        @if($errors->any())
-          <div class="book-alert book-alert--err">
-            @foreach($errors->all() as $error){{ $error }}<br>@endforeach
-          </div>
-        @endif
-
-        <form action="{{ route('contact.store') }}" method="POST" class="book-form" id="bookConsultationForm">
-          @csrf
-          <input type="hidden" name="subject" value="Contact Page Booking">
-          <input type="hidden" name="preferred_date" id="bfDate" value="{{ old('preferred_date') }}">
-          <input type="hidden" name="preferred_time" id="bfTime" value="{{ old('preferred_time') }}">
-
-          <div class="bf-field">
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Enter your name" value="{{ old('name') }}" required>
-          </div>
-
-          <div class="bf-field">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
-          </div>
-
-          <div class="bf-field">
-            <label>Phone</label>
-            <div class="bf-phone-group">
-              @include('partials.country-codes', ['default' => '+91'])
-              <input type="tel" name="phone" class="bf-phone-number" placeholder="Phone Number" value="{{ old('phone') }}" required>
+          <div class="bk-step">
+            <span class="bk-step-num">2</span>
+            <div>
+              <strong>Enter your details</strong>
+              <span>Name, email &amp; any notes</span>
             </div>
           </div>
-
-          <div class="bf-field">
-            <label>Purpose</label>
-            <select name="service_selected" required>
-              <option value="" disabled {{ old('service_selected') ? '' : 'selected' }}>Consultation</option>
-              @foreach(($services ?? []) as $service)
-                <option value="{{ $service->title }}" {{ old('service_selected') === $service->title ? 'selected' : '' }}>{{ $service->title }}</option>
-              @endforeach
-            </select>
+          <div class="bk-step">
+            <span class="bk-step-num">3</span>
+            <div>
+              <strong>Get confirmation</strong>
+              <span>Instant email confirmation with meeting details</span>
+            </div>
           </div>
+        </div>
 
-          <div class="bf-field">
-            <label>Selected Time</label>
-            <input type="text" id="bfSelectedTimeDisplay" placeholder="Select date and time" readonly class="bk-time-display">
-          </div>
-
-          <div class="bf-field">
-            <label>Notes</label>
-            <textarea name="message" rows="2" placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
-          </div>
-
-          <button type="submit" class="bk-submit-btn">Book Consultation</button>
-        </form>
+        <!-- Calendly inline widget -->
+        <div class="bk-calendly-wrap">
+          <div class="calendly-inline-widget"
+               data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3"
+               style="min-width:280px;height:700px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
       </div>
 
-      <!-- Right: Calendar (always visible) -->
-      <div class="bk-cal-card">
-        @if($useCalCom)
-          <div style="width:100%;height:680px;overflow:scroll;" id="bfCalComWidget"></div>
-        @else
-          <div class="bk-cal-header">
-            <button type="button" class="bk-cal-nav" id="bfCalPrev">&#8249;</button>
-            <span class="bk-cal-month-label" id="bfCalLabel"></span>
-            <button type="button" class="bk-cal-nav" id="bfCalNext">&#8250;</button>
-          </div>
-          <div class="bk-cal-dow">
-            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-          </div>
-          <div class="bk-cal-grid" id="bfCalGrid"></div>
-
-          <div class="bk-ts-wrap" id="bfTsWrap" style="display:none;">
-            <div class="bk-ts-grid" id="bfTsGrid">
-              @foreach($timeSlots as $slot)
-                <button type="button" class="bk-ts-pill" data-time="{{ $slot }}">{{ $slot }}</button>
-              @endforeach
+      <!-- Right: Contact image -->
+      <div class="bk-img-col">
+        @php $contactImg = $siteSettings['contact_image'] ?? ''; @endphp
+        <div class="bk-img-wrap">
+          <img src="{{ $contactImg ? asset($contactImg) : asset('storage/moutain.jpg') }}" alt="Book Consultation" class="bk-contact-img">
+          <div class="bk-img-overlay">
+            <div class="bk-img-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Free 30-min<br>Consultation</span>
             </div>
           </div>
-
-          <p class="bk-cal-footer" id="bfCalFooter">Select a Date</p>
-        @endif
+        </div>
       </div>
 
     </div>
@@ -226,11 +170,139 @@
   </section>
 
   <style>
-    /* Book Consultation */
+    /* ── Book Consultation (Calendly layout) ── */
     .book-wrap {
-      padding: 28px 4% 36px;
+      padding: 60px 5% 70px;
       background: linear-gradient(180deg, #fcefe6 0%, #fdf6ef 100%);
     }
+    .bk-split {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 55% 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .bk-left-col { display: flex; flex-direction: column; gap: 28px; }
+    .bk-info-head { }
+    .bk-eyebrow {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #4DB6AC;
+      margin-bottom: 10px;
+    }
+    .bk-main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 700;
+      color: #1f3b38;
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+    .bk-main-desc {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      color: #6b5a5a;
+      line-height: 1.75;
+      margin: 0;
+      max-width: 520px;
+    }
+    .bk-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .bk-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .bk-step-num {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2FA9A3, #1f8c87);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bk-step div { display: flex; flex-direction: column; gap: 2px; }
+    .bk-step strong {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f3b38;
+    }
+    .bk-step span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      color: #7a6b65;
+    }
+    .bk-calendly-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      background: #fff;
+    }
+    /* Right: Contact image */
+    .bk-img-col {
+      position: sticky;
+      top: 100px;
+    }
+    .bk-img-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+    .bk-contact-img {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+    .bk-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20,40,35,0.45) 0%, transparent 60%);
+    }
+    .bk-img-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(47,169,163,0.92);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    @media (max-width: 960px) {
+      .bk-split { grid-template-columns: 1fr; }
+      .bk-img-col { position: static; }
+      .bk-contact-img { min-height: 280px; }
+    }
+    @media (max-width: 560px) {
+      .book-wrap { padding: 40px 4% 50px; }
+    }
+
+    /* ── Shared field/input styles (used in Get in Touch) ── */
     .book-grid {
       max-width: 1100px;
       margin: 0 auto;
@@ -1139,226 +1211,5 @@
     }
   </style>
 
-@if(empty($siteSettings['cal_link']))
-<script>
-(function () {
-  var dateHidden  = document.getElementById('bfDate');
-  var timeHidden  = document.getElementById('bfTime');
-  var calGrid     = document.getElementById('bfCalGrid');
-  var calLabel    = document.getElementById('bfCalLabel');
-  var tsWrap      = document.getElementById('bfTsWrap');
-  var tsGrid      = document.getElementById('bfTsGrid');
-  var calFooter   = document.getElementById('bfCalFooter');
-  var timeDisplay = document.getElementById('bfSelectedTimeDisplay');
-  var form        = document.getElementById('bookConsultationForm');
-  var calCard     = document.querySelector('.bk-cal-card');
-
-  if (!calGrid) return;
-
-  var today    = new Date(); today.setHours(0,0,0,0);
-  var curYear  = today.getFullYear();
-  var curMonth = today.getMonth();
-  var selDate  = null;
-  var bookedMap = {};
-
-  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  function pad(n) { return ('0' + n).slice(-2); }
-  function isoDate(d) { return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
-
-  function renderCalendar() {
-    calLabel.innerHTML = MONTHS[curMonth] + ' <span style="color:#2FA9A3">' + curYear + '</span>';
-    calGrid.innerHTML = '';
-    var first = new Date(curYear, curMonth, 1);
-    var startDow = first.getDay();
-    var daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
-
-    for (var i = 0; i < startDow; i++) {
-      var blank = document.createElement('button');
-      blank.type = 'button';
-      blank.className = 'bf-cal-day is-empty';
-      calGrid.appendChild(blank);
-    }
-
-    for (var d = 1; d <= daysInMonth; d++) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'bf-cal-day';
-      btn.textContent = d;
-      var dt = new Date(curYear, curMonth, d);
-      var iso = isoDate(dt);
-      btn.dataset.iso = iso;
-
-      if (dt < today) {
-        btn.disabled = true;
-      } else {
-        if (dt.getTime() === today.getTime()) btn.classList.add('is-today');
-        if (selDate && iso === isoDate(selDate)) btn.classList.add('is-selected');
-        btn.addEventListener('click', function () { pickDate(this); });
-      }
-      calGrid.appendChild(btn);
-    }
-  }
-
-  function pickDate(btn) {
-    var iso = btn.dataset.iso;
-    selDate = new Date(iso + 'T00:00:00');
-    dateHidden.value = iso;
-    timeHidden.value = '';
-
-    document.querySelectorAll('.bk-ts-pill').forEach(function(p){ p.disabled = false; p.classList.remove('is-active'); });
-    tsWrap.style.display = 'block';
-
-    var dayLabel = selDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-    if (calFooter) calFooter.textContent = dayLabel + ' — pick a time below';
-    if (timeDisplay) { timeDisplay.value = ''; timeDisplay.placeholder = 'Now select a time slot →'; }
-
-    renderCalendar();
-
-    if (bookedMap[iso] !== undefined) {
-      applyBooked(iso, bookedMap[iso]);
-    } else {
-      fetch('/booked-slots?date=' + iso)
-        .then(function(r){ return r.json(); })
-        .then(function(data){
-          bookedMap[iso] = data.booked || [];
-          applyBooked(iso, bookedMap[iso]);
-        })
-        .catch(function(){});
-    }
-
-    tsWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  function applyBooked(iso, booked) {
-    if (!selDate || isoDate(selDate) !== iso) return;
-    document.querySelectorAll('.bk-ts-pill').forEach(function(p){
-      p.disabled = booked.indexOf(p.dataset.time) !== -1;
-    });
-  }
-
-  if (tsGrid) {
-    tsGrid.addEventListener('click', function(e) {
-      var pill = e.target.closest('.bk-ts-pill');
-      if (!pill || pill.disabled) return;
-      document.querySelectorAll('.bk-ts-pill').forEach(function(p){ p.classList.remove('is-active'); });
-      pill.classList.add('is-active');
-      timeHidden.value = pill.dataset.time;
-      showConfirm();
-    });
-  }
-
-  function showConfirm() {
-    if (!selDate || !timeHidden.value) return;
-    var label = selDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-    var full  = label + ' at ' + timeHidden.value;
-    if (timeDisplay) timeDisplay.value = full;
-    if (calFooter)   calFooter.textContent = '✓ ' + full;
-  }
-
-  document.getElementById('bfCalPrev').addEventListener('click', function() {
-    curMonth--; if (curMonth < 0) { curMonth = 11; curYear--; }
-    renderCalendar();
-  });
-  document.getElementById('bfCalNext').addEventListener('click', function() {
-    curMonth++; if (curMonth > 11) { curMonth = 0; curYear++; }
-    renderCalendar();
-  });
-
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      if (!dateHidden.value || !timeHidden.value) {
-        e.preventDefault();
-        if (calCard) calCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        alert('Please pick both a date and a time slot before booking.');
-      }
-    });
-  }
-
-  renderCalendar();
-})();
-</script>
-@endif
-
-@if(!empty($siteSettings['cal_link']))
-{{-- Cal.com embed script — only loaded when a link is configured --}}
-<script type="text/javascript">
-(function (C, A, L) {
-  let p = function (a, ar) { a.q.push(ar); };
-  let d = C.document;
-  C.Cal = C.Cal || function () {
-    let cal = C.Cal; let ar = arguments;
-    if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
-    if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar); return; }
-    p(cal, ar);
-  };
-})(window, "https://app.cal.com/embed/embed.js", "init");
-
-Cal("init", "jiva", { origin: "https://cal.com" });
-
-Cal.ns.jiva("inline", {
-  elementOrSelector: "#bfCalComWidget",
-  config: { layout: "month_view" },
-  calLink: "{{ $siteSettings['cal_link'] }}",
-});
-
-Cal.ns.jiva("ui", {
-  styles: { branding: { brandColor: "#2FA9A3" } },
-  hideEventTypeDetails: false,
-  layout: "month_view"
-});
-
-// Capture booking details from Cal.com postMessage event
-(function () {
-  var dateHidden  = document.getElementById('bfDate');
-  var timeHidden  = document.getElementById('bfTime');
-  var confirmBox  = document.getElementById('bfSlotConfirm');
-  var confirmText = document.getElementById('bfSlotConfirmText');
-  var form        = document.getElementById('bookConsultationForm');
-
-  window.addEventListener('message', function (e) {
-    if (!e || !e.data) return;
-    var data = e.data;
-    // Cal.com fires cal:bookingSuccessfulV2
-    if (data.type !== 'cal:bookingSuccessfulV2' && data.type !== 'booking_successful') return;
-
-    var booking = data.data || data.booking || {};
-    var startTime = booking.startTime || booking.start_time || '';
-    if (!startTime) return;
-
-    var d = new Date(startTime);
-    if (isNaN(d.getTime())) return;
-
-    var y   = d.getFullYear();
-    var mo  = ('0' + (d.getMonth() + 1)).slice(-2);
-    var day = ('0' + d.getDate()).slice(-2);
-    dateHidden.value = y + '-' + mo + '-' + day;
-
-    var h   = d.getHours();
-    var min = ('0' + d.getMinutes()).slice(-2);
-    var ap  = h >= 12 ? 'PM' : 'AM';
-    var h12 = ('0' + (h % 12 === 0 ? 12 : h % 12)).slice(-2);
-    timeHidden.value = h12 + ':' + min + ' ' + ap;
-
-    if (confirmBox) {
-      confirmBox.style.display = 'flex';
-      if (confirmText) {
-        confirmText.textContent = d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' at ' + h12 + ':' + min + ' ' + ap;
-      }
-    }
-  });
-
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      if (!dateHidden.value || !timeHidden.value) {
-        e.preventDefault();
-        document.getElementById('bfCalComWidget').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        alert('Please complete your booking on the calendar above before submitting.');
-      }
-    });
-  }
-})();
-</script>
-@endif
 
 @endsection
