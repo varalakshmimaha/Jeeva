@@ -7,7 +7,7 @@
 <x-page-banner
   class="testi-banner"
   :title="(isset($banner) && $banner) ? $banner->title : 'What our Client Says'"
-  :subtitle="(isset($banner) && $banner && $banner->description) ? $banner->description : 'Heartfelt words from the families I have had the honour of supporting through their birth journeys.'"
+  :subtitle="''"
   :image="(isset($banner) && $banner && $banner->image) ? asset($banner->image) : asset('storage/new born.jpg')"
   :breadcrumbs="[['label' => 'Testimonials']]"
 />
