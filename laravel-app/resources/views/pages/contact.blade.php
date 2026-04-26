@@ -1177,34 +1177,36 @@
       display: flex;
       align-items: stretch;
       gap: 0;
-      border: 1.5px solid #e5e0d8;
-      border-radius: 8px;
-      background: #ffffff;
-      transition: border-color .25s, box-shadow .25s;
+      border: 1.5px solid #ead9d1;
+      border-radius: 999px;
+      background: #fdfaf8;
+      transition: border-color .25s, box-shadow .25s, background .25s;
       position: relative;
     }
     .phone-row:focus-within {
       border-color: #4DB6AC;
-      box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
+      box-shadow: 0 0 0 4px rgba(77,182,172,0.14);
+      background: #ffffff;
     }
     .phone-row .cc-wrap {
       flex-shrink: 0;
-      border-right: 1.5px solid #e5e0d8;
+      border-right: 1.5px solid #ead9d1;
     }
     .phone-row .cc-trigger {
-      min-height: 46px;
-      padding: 0 12px;
-      background: #fafafa;
-      border-radius: 8px 0 0 8px;
+      min-height: 50px;
+      padding: 0 14px 0 18px;
+      background: transparent;
+      border-radius: 999px 0 0 999px;
       border: none;
     }
     .phone-row .phone-num {
       border: none !important;
-      border-radius: 0 8px 8px 0 !important;
+      border-radius: 0 999px 999px 0 !important;
       box-shadow: none !important;
-      flex: 1;
       background: transparent !important;
+      flex: 1;
       min-width: 0;
+      padding: 14px 18px !important;
     }
 
     /* Get in Touch */

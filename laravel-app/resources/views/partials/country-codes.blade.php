@@ -176,6 +176,15 @@
     <svg class="cc-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
   </button>
   <div class="cc-panel" id="{{ $ccUid }}_panel" style="display:none;">
+    <div class="cc-search-wrap">
+      <svg class="cc-search-ico" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text"
+             class="cc-search"
+             id="{{ $ccUid }}_search"
+             placeholder="Search country..."
+             autocomplete="off"
+             oninput="ccSearch('{{ $ccUid }}', this.value)">
+    </div>
     <div class="cc-list" id="{{ $ccUid }}_list" role="listbox">
       @foreach($countries as $c)
       <div class="cc-opt{{ $c['code']===$selCode && $c['iso']===$selCountry['iso'] ? ' cc-sel' : '' }}"
@@ -190,6 +199,7 @@
         <span class="cc-opt-code">{{ $c['code'] }}</span>
       </div>
       @endforeach
+      <div class="cc-no-results" id="{{ $ccUid }}_empty" style="display:none;">No results found</div>
     </div>
   </div>
 </div>
@@ -231,8 +241,34 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.13);
   overflow: hidden;
 }
+.cc-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+.cc-search-ico { flex-shrink: 0; }
+.cc-search {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: #1a1a1a;
+}
+.cc-search::placeholder { color: #b0aaa5; }
+.cc-no-results {
+  padding: 14px;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: #9ca3af;
+}
 .cc-list {
-  max-height: 240px;
+  max-height: 210px;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -303,19 +339,40 @@
 <script>
 (function(){
   function ccToggle(uid) {
-    var panel = document.getElementById(uid + '_panel');
-    var btn   = document.getElementById(uid + '_btn');
-    var open  = panel.style.display === 'none' || panel.style.display === '';
+    var panel  = document.getElementById(uid + '_panel');
+    var btn    = document.getElementById(uid + '_btn');
+    var search = document.getElementById(uid + '_search');
+    var open   = panel.style.display === 'none' || panel.style.display === '';
     /* close all other panels */
     document.querySelectorAll('.cc-panel').forEach(function(p){ p.style.display='none'; });
     document.querySelectorAll('.cc-trigger').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
     if (open) {
       panel.style.display = 'block';
       btn.setAttribute('aria-expanded','true');
-      /* scroll selected item into view */
-      var sel = panel.querySelector('.cc-sel');
-      if (sel) setTimeout(function(){ sel.scrollIntoView({ block: 'nearest' }); }, 30);
+      /* reset search */
+      if (search) { search.value = ''; ccSearch(uid, ''); }
+      /* focus search box */
+      setTimeout(function(){
+        if (search) search.focus();
+        /* scroll selected item into view */
+        var sel = panel.querySelector('.cc-sel');
+        if (sel) sel.scrollIntoView({ block: 'nearest' });
+      }, 30);
     }
+  }
+  function ccSearch(uid, q) {
+    var list  = document.getElementById(uid + '_list');
+    var empty = document.getElementById(uid + '_empty');
+    var term  = q.toLowerCase().trim();
+    var found = 0;
+    list.querySelectorAll('.cc-opt').forEach(function(el) {
+      var match = !term
+        || el.dataset.name.indexOf(term) !== -1
+        || el.dataset.code.indexOf(term) !== -1;
+      el.style.display = match ? '' : 'none';
+      if (match) found++;
+    });
+    if (empty) empty.style.display = found === 0 ? '' : 'none';
   }
   function ccPick(uid, el) {
     document.getElementById(uid + '_val').value   = el.dataset.code;
@@ -335,6 +392,7 @@
     }
   });
   window.ccToggle = ccToggle;
+  window.ccSearch = ccSearch;
   window.ccPick   = ccPick;
 })();
 </script>
