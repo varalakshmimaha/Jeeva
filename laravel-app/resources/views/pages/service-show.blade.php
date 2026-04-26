@@ -297,7 +297,7 @@
     display: grid;
     gap: 20px;
   }
-  .svc-packages-grid--count-1 { grid-template-columns: minmax(0, 420px); }
+  .svc-packages-grid--count-1 { grid-template-columns: minmax(0, 420px); justify-content: center; }
   .svc-packages-grid--count-2 { grid-template-columns: 1fr 1fr; }
   .svc-packages-grid--count-3 { grid-template-columns: repeat(3, 1fr); }
 
@@ -565,8 +565,17 @@ function selectPackage(card) {
   if (btn) {
     btn.disabled = false;
     btn.classList.add('is-ready');
+    btn.style.cursor = 'pointer';
   }
   if (hint) hint.textContent = 'Selected: ' + (card.dataset.pkg || 'Package');
 }
+
+// Auto-select if only one package
+document.addEventListener('DOMContentLoaded', function () {
+  var cards = document.querySelectorAll('.svc-pkg-card');
+  if (cards.length === 1) {
+    selectPackage(cards[0]);
+  }
+});
 </script>
 @endsection
