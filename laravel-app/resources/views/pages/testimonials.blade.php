@@ -19,6 +19,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: #1e2b30;
+    align-items: flex-end !important;
+  }
+  .page-banner.testi-banner .page-banner-content {
+    padding-bottom: 48px !important;
+    padding-top: 60px !important;
   }
   .page-banner.testi-banner .page-banner-overlay {
     background: linear-gradient(90deg, rgba(20,30,35,0.55) 0%, rgba(20,30,35,0.25) 45%, rgba(20,30,35,0) 70%);
