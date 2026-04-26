@@ -11,48 +11,83 @@
     :breadcrumbs="[['label' => 'Contact Us']]"
   />
 
-  <!-- Book Consultation + Calendly -->
+  <!-- Book Consultation -->
   <section class="book-wrap" id="book">
     <div class="bk-split">
 
-      <!-- Left: Booking info + Calendly -->
-      <div class="bk-left-col">
-        <div class="bk-info-head">
+      <!-- Left: Booking Form -->
+      <div class="bk-form-col">
+        <div class="bk-form-card">
           <span class="bk-eyebrow">Schedule a Session</span>
           <h2 class="bk-main-title">Book Your Consultation</h2>
-          <p class="bk-main-desc">Select a date and time that works for you. Calendly handles everything — no double bookings, instant confirmation sent to your email.</p>
-        </div>
 
-        <div class="bk-steps">
-          <div class="bk-step">
-            <span class="bk-step-num">1</span>
-            <div>
-              <strong>Pick a date &amp; time</strong>
-              <span>Choose from available slots below</span>
+          @if(session('success') && session('success_kind') !== 'enquiry')
+            <div class="bk-success-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              {{ session('success') }}
             </div>
-          </div>
-          <div class="bk-step">
-            <span class="bk-step-num">2</span>
-            <div>
-              <strong>Enter your details</strong>
-              <span>Name, email &amp; any notes</span>
-            </div>
-          </div>
-          <div class="bk-step">
-            <span class="bk-step-num">3</span>
-            <div>
-              <strong>Get confirmation</strong>
-              <span>Instant email confirmation with meeting details</span>
-            </div>
-          </div>
-        </div>
+          @endif
+          @if($errors->any())
+            <div class="bk-err-box">@foreach($errors->all() as $e){{ $e }}<br>@endforeach</div>
+          @endif
 
-        <!-- Calendly inline widget -->
-        <div class="bk-calendly-wrap">
-          <div class="calendly-inline-widget"
-               data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3"
-               style="min-width:280px;height:700px;"></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <form action="{{ route('contact.store') }}" method="POST" id="bkForm">
+            @csrf
+            <input type="hidden" name="subject" value="Consultation Booking">
+            <input type="hidden" name="preferred_date" id="bkDate" value="{{ old('preferred_date') }}">
+            <input type="hidden" name="preferred_time" id="bkTime" value="{{ old('preferred_time') }}">
+
+            {{-- Full Name --}}
+            <div class="bk-field">
+              <label class="bk-label">Full Name <span class="bk-req">*</span></label>
+              <input type="text" name="name" class="bk-input" placeholder="Your full name" value="{{ old('name') }}" required>
+            </div>
+
+            {{-- Phone --}}
+            <div class="bk-field">
+              <label class="bk-label">Phone <span class="bk-req">*</span></label>
+              <div class="bk-phone-row">
+                <div class="bk-cc-wrap">
+                  @include('partials.country-codes', ['default' => '+91'])
+                </div>
+                <input type="tel" name="phone" class="bk-input bk-phone-num" placeholder="Phone Number" value="{{ old('phone') }}" required>
+              </div>
+            </div>
+
+            {{-- Service --}}
+            <div class="bk-field">
+              <label class="bk-label">Service <span class="bk-req">*</span></label>
+              <select name="service_selected" class="bk-input bk-select" required>
+                <option value="" disabled {{ old('service_selected') ? '' : 'selected' }}>Choose a service</option>
+                @foreach(($services ?? []) as $service)
+                  <option value="{{ $service->title }}" {{ old('service_selected') === $service->title ? 'selected' : '' }}>{{ $service->title }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            {{-- Date & Time via Calendly --}}
+            <div class="bk-field">
+              <label class="bk-label">Pick a Date &amp; Time <span class="bk-req">*</span></label>
+              <div id="bkTimeConfirm" class="bk-time-confirm" style="display:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span id="bkTimeLabel">Slot selected</span>
+                <button type="button" class="bk-change-btn" id="bkChangeSlot">Change</button>
+              </div>
+              <div id="bkCalendlyWrap" class="bk-calendly-embed">
+                <div class="calendly-inline-widget"
+                     data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3"
+                     style="min-width:280px;height:660px;"></div>
+              </div>
+            </div>
+
+            {{-- Notes --}}
+            <div class="bk-field">
+              <label class="bk-label">Other Notes</label>
+              <textarea name="message" class="bk-input bk-textarea" rows="3" placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
+            </div>
+
+            <button type="submit" class="bk-submit-btn" id="bkSubmit">Book Consultation</button>
+          </form>
         </div>
       </div>
 
@@ -63,7 +98,7 @@
           <img src="{{ $contactImg ? asset($contactImg) : asset('storage/moutain.jpg') }}" alt="Book Consultation" class="bk-contact-img">
           <div class="bk-img-overlay">
             <div class="bk-img-badge">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               <span>Free 30-min<br>Consultation</span>
             </div>
           </div>
@@ -72,6 +107,51 @@
 
     </div>
   </section>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.event === 'calendly.event_scheduled') {
+      var payload = e.data.payload || {};
+      var startTime = (payload.event && payload.event.start_time) ? payload.event.start_time : '';
+      if (startTime) {
+        var d  = new Date(startTime);
+        var yr = d.getFullYear();
+        var mo = ('0'+(d.getMonth()+1)).slice(-2);
+        var dy = ('0'+d.getDate()).slice(-2);
+        var h  = d.getHours(), min = ('0'+d.getMinutes()).slice(-2);
+        var ap = h >= 12 ? 'PM' : 'AM';
+        var h12 = ('0'+(h % 12 === 0 ? 12 : h % 12)).slice(-2);
+        document.getElementById('bkDate').value = yr+'-'+mo+'-'+dy;
+        document.getElementById('bkTime').value = h12+':'+min+' '+ap;
+        var label = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+' at '+h12+':'+min+' '+ap;
+        document.getElementById('bkTimeLabel').textContent = label;
+        document.getElementById('bkTimeConfirm').style.display = 'flex';
+        document.getElementById('bkCalendlyWrap').style.display = 'none';
+      }
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var changeBtn = document.getElementById('bkChangeSlot');
+    if (changeBtn) {
+      changeBtn.addEventListener('click', function() {
+        document.getElementById('bkTimeConfirm').style.display = 'none';
+        document.getElementById('bkCalendlyWrap').style.display = 'block';
+        document.getElementById('bkDate').value = '';
+        document.getElementById('bkTime').value = '';
+      });
+    }
+    var form = document.getElementById('bkForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        if (!document.getElementById('bkDate').value || !document.getElementById('bkTime').value) {
+          e.preventDefault();
+          document.getElementById('bkCalendlyWrap').scrollIntoView({behavior:'smooth',block:'center'});
+          alert('Please select a date and time from the calendar above.');
+        }
+      });
+    }
+  });
+  </script>
 
 
 
@@ -1221,6 +1301,150 @@
       .touch-grid { grid-template-columns: 1fr !important; gap: 30px; }
       .touch-form-card { padding: 26px 20px; }
       .book-card { padding: 22px; }
+    }
+
+    /* ── New Booking Form Fields ── */
+    .bk-form-col { display: flex; flex-direction: column; }
+    .bk-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 18px;
+    }
+    .bk-label {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1f3b38;
+      margin-bottom: 7px;
+      letter-spacing: .2px;
+    }
+    .bk-req { color: #e05252; margin-left: 2px; }
+    .bk-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #e5e0d8;
+      border-radius: 10px;
+      background: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      color: #2b2b2b;
+      outline: none;
+      transition: border-color .25s, box-shadow .25s;
+      box-sizing: border-box;
+    }
+    .bk-input:focus {
+      border-color: #4DB6AC;
+      box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
+    }
+    .bk-input::placeholder { color: #b0a59f; }
+    select.bk-input, .bk-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a6060' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    .bk-textarea { resize: vertical; min-height: 80px; border-radius: 10px !important; }
+
+    /* Booking form phone row */
+    .bk-phone-row {
+      display: flex;
+      align-items: stretch;
+      border: 1.5px solid #e5e0d8;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .bk-phone-row:focus-within {
+      border-color: #4DB6AC;
+      box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
+    }
+    .bk-cc-wrap {
+      flex-shrink: 0;
+      border-right: 1.5px solid #e5e0d8;
+    }
+    .bk-cc-wrap .cc-trigger {
+      min-height: 46px;
+      padding: 0 12px;
+      background: #fafafa;
+      border-radius: 0;
+    }
+    .bk-phone-row .bk-phone-num {
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      flex: 1;
+      background: transparent !important;
+      min-width: 0;
+    }
+
+    /* Calendly embed */
+    .bk-calendly-embed {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      border: 1.5px solid #e5e0d8;
+    }
+
+    /* Time slot confirmation */
+    .bk-time-confirm {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: #eafaf4;
+      border: 1.5px solid #bfeadb;
+      color: #1d6b52;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .bk-change-btn {
+      margin-left: auto;
+      background: transparent;
+      border: 1.5px solid #4DB6AC;
+      color: #2FA9A3;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .18s, color .18s;
+      white-space: nowrap;
+    }
+    .bk-change-btn:hover { background: #2FA9A3; color: #fff; }
+
+    /* Alert boxes inside booking form */
+    .bk-success-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: #eafaf4;
+      border: 1px solid #bfeadb;
+      color: #1d6b52;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .bk-err-box {
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: #fde8e8;
+      border: 1px solid #f3c6c6;
+      color: #a22d2d;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13.5px;
+      margin-bottom: 16px;
+      line-height: 1.5;
     }
   </style>
 
