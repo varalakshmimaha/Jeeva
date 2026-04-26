@@ -29,7 +29,7 @@
     background: linear-gradient(90deg, rgba(20,30,35,0.55) 0%, rgba(20,30,35,0.25) 45%, rgba(20,30,35,0) 70%);
   }
   .page-banner.testi-banner .page-banner-title {
-    font-size: clamp(53px, 6vw, 79px) !important;
+    font-size: clamp(58px, 6vw, 84px) !important;
     text-shadow: 0 4px 20px rgba(0,0,0,0.55);
   }
   .page-banner.testi-banner .page-banner-subtitle {
