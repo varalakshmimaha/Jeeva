@@ -42,7 +42,6 @@
   <div class="container">
     <div class="tp-section-head">
       <h2 class="tp-section-title">What Our Clients Say</h2>
-      <p class="tp-section-sub">Heartfelt words from the families I have had the honour of supporting through their birth journeys.</p>
     </div>
 
     @php
