@@ -207,7 +207,11 @@
           <div class="bf-field">
             <label class="bf-label">Phone</label>
             <div class="phone-row">
-              @include('partials.country-codes', ['default' => '+91'])
+              <input type="hidden" name="country_code" value="+91">
+              <span class="cc-static">
+                <img src="https://flagcdn.com/20x15/in.png" width="20" height="15" alt="India" style="border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);">
+                <span>+91</span>
+              </span>
               <input type="tel" name="phone" class="bf-input phone-num" placeholder="Phone Number">
             </div>
           </div>
@@ -1027,17 +1031,28 @@
 
     /* Phone row */
     .phone-row {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 8px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
     }
-    .phone-cc {
-      padding: 11px 10px;
-      font-size: 12.5px;
-      padding-right: 28px;
+    .cc-static {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      border: 1.5px solid #e5e7eb;
+      border-right: none;
+      border-radius: 8px 0 0 8px;
+      background: #fafafa;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1f3b38;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .phone-cc option {
-      padding: 2px 6px;
+    .phone-row .phone-num {
+      border-radius: 0 8px 8px 0 !important;
     }
 
     /* Get in Touch */

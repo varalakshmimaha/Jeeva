@@ -19,27 +19,33 @@
   .home-banners-section .banner-slide-content {
     max-width: 820px;
     margin-top: auto;
-    margin-bottom: 12%;
+    margin-bottom: 32px;
   }
   .home-banners-section .banner-slide-title {
-    font-family: 'Playfair Display', 'Georgia', serif;
+    font-family: 'Brush Script MT', 'Brush Script Std', 'Kaushan Script', cursive;
     text-transform: none;
     color: #FFD357;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
     text-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 700;
-    font-size: clamp(22px, 2.6vw, 36px);
-    line-height: 1.3;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.25;
     max-width: 680px;
     text-wrap: balance;
-    font-style: italic;
+    font-style: normal;
+  }
+  .home-banners-section .banner-slide-button {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   @media (max-width: 992px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(20px, 3.2vw, 28px) !important; }
-    .home-banners-section .banner-slide-content { margin-bottom: 8%; }
+    .home-banners-section .banner-slide-title { font-size: clamp(28px, 5vw, 40px) !important; }
+    .home-banners-section .banner-slide-content { margin-bottom: 24px; }
   }
   @media (max-width: 560px) {
-    .home-banners-section .banner-slide-title { font-size: 18px !important; line-height: 1.35; }
+    .home-banners-section .banner-slide-title { font-size: 30px !important; line-height: 1.3; }
     .home-banners-section .banner-slide-content { margin-bottom: 40px; }
   }
   .home-banners-section .banner-slide-description {
