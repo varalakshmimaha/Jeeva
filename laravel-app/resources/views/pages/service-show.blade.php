@@ -23,7 +23,7 @@
   <div class="container">
     <div class="svc-detail-main reveal">
 
-        <!-- Hero split: image left, content right -->
+        <!-- Hero split: image left, all content right -->
         <div class="svc-hero-split">
           @if($service->icon)
             <div class="svc-hero-image">
@@ -36,38 +36,34 @@
             @endif
             <h2 class="svc-detail-title">{{ $service->title }}</h2>
             <p class="svc-detail-short">{{ $service->description }}</p>
+
+            @if($service->content)
+              <div class="svc-detail-full-content">
+                @php $blocks = preg_split('/\n\s*\n/', trim($service->content)); @endphp
+                @foreach($blocks as $block)
+                  @php $block = trim($block); @endphp
+                  @if($block === '') @continue @endif
+                  @if(\Illuminate\Support\Str::endsWith($block, '?') && strlen($block) < 100)
+                    <h3 class="svc-detail-heading">{{ $block }}</h3>
+                  @else
+                    <p>{{ $block }}</p>
+                  @endif
+                @endforeach
+              </div>
+            @endif
+
+            @if(!empty($benefitsList))
+              <div class="svc-benefits">
+                <h3 class="svc-detail-heading">Benefits</h3>
+                <ul class="svc-benefits-list">
+                  @foreach($benefitsList as $benefit)
+                    <li>{{ $benefit }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
           </div>
         </div>
-
-        <!-- Detailed content (paragraphs) -->
-        @if($service->content)
-          <div class="svc-detail-full-content reveal d1">
-            @php
-              $blocks = preg_split('/\n\s*\n/', trim($service->content));
-            @endphp
-            @foreach($blocks as $block)
-              @php $block = trim($block); @endphp
-              @if($block === '') @continue @endif
-              @if(\Illuminate\Support\Str::endsWith($block, '?') && strlen($block) < 100)
-                <h3 class="svc-detail-heading">{{ $block }}</h3>
-              @else
-                <p>{{ $block }}</p>
-              @endif
-            @endforeach
-          </div>
-        @endif
-
-        <!-- Benefits as bullets -->
-        @if(!empty($benefitsList))
-          <div class="svc-benefits reveal d2">
-            <h3 class="svc-detail-heading">Benefits</h3>
-            <ul class="svc-benefits-list">
-              @foreach($benefitsList as $benefit)
-                <li>{{ $benefit }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
 
         <!-- Packages (dynamic from admin) -->
         @if(!empty($servicePackages))
@@ -172,12 +168,12 @@
     min-width: 0;
   }
 
-  /* Hero split — image left, content right */
+  /* Hero split — image left, all content right */
   .svc-hero-split {
     display: grid;
-    grid-template-columns: 580px 1fr;
-    gap: 48px;
-    align-items: center;
+    grid-template-columns: 480px 1fr;
+    gap: 52px;
+    align-items: start;
     margin-bottom: 48px;
   }
   .svc-hero-text {
@@ -218,6 +214,8 @@
     width: 100%;
     aspect-ratio: 5 / 4;
     background: #f5f0ec;
+    position: sticky;
+    top: 100px;
   }
   .svc-hero-image img {
     width: 100%;
@@ -266,10 +264,8 @@
     font-size: 16px;
     color: #3d3d3d;
     line-height: 1.7;
-    padding: 10px 0;
-    border-bottom: 1px solid #f0ebe6;
+    padding: 8px 0;
   }
-  .svc-benefits-list li:last-child { border-bottom: none; }
   .svc-benefits-list li::before {
     content: '✓';
     display: inline-flex;
