@@ -29,8 +29,8 @@
     letter-spacing: 0.5px;
     text-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 700;
-    font-size: clamp(32px, 4vw, 56px);
-    line-height: 1.25;
+    font-size: clamp(14px, 1.6vw, 18px);
+    line-height: 1.4;
     max-width: 680px;
     text-wrap: balance;
     font-style: normal;
@@ -39,14 +39,14 @@
     display: block;
     width: fit-content;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0;
   }
   @media (max-width: 992px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(28px, 5vw, 40px) !important; }
+    .home-banners-section .banner-slide-title { font-size: clamp(13px, 2vw, 16px) !important; }
     .home-banners-section .banner-slide-shell { padding-bottom: 36px !important; }
   }
   @media (max-width: 560px) {
-    .home-banners-section .banner-slide-title { font-size: 30px !important; line-height: 1.3; }
+    .home-banners-section .banner-slide-title { font-size: 14px !important; line-height: 1.4; }
     .home-banners-section .banner-slide-shell { padding-bottom: 28px !important; }
   }
   .home-banners-section .banner-slide-description {
