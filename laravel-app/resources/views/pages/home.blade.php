@@ -30,7 +30,7 @@
     letter-spacing: 0.5px;
     text-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 400;
-    font-size: 30px;
+    font-size: 42px;
     line-height: 1.3;
     max-width: 860px;
     white-space: normal;
