@@ -13,13 +13,14 @@
     background-color: #1e2b30;
   }
   /* Home banner title — uppercase and bright for readability over photo */
-  .home-banners-section .banner-slide-content {
-    max-width: 1320px;
+  .home-banners-section .banner-slide-shell {
+    align-items: flex-end !important;
+    padding-bottom: 48px !important;
   }
   .home-banners-section .banner-slide-content {
     max-width: 820px;
     margin-top: auto;
-    margin-bottom: 32px;
+    margin-bottom: 0;
   }
   .home-banners-section .banner-slide-title {
     font-family: 'Brush Script MT', 'Brush Script Std', 'Kaushan Script', cursive;
@@ -42,11 +43,11 @@
   }
   @media (max-width: 992px) {
     .home-banners-section .banner-slide-title { font-size: clamp(28px, 5vw, 40px) !important; }
-    .home-banners-section .banner-slide-content { margin-bottom: 24px; }
+    .home-banners-section .banner-slide-shell { padding-bottom: 36px !important; }
   }
   @media (max-width: 560px) {
     .home-banners-section .banner-slide-title { font-size: 30px !important; line-height: 1.3; }
-    .home-banners-section .banner-slide-content { margin-bottom: 40px; }
+    .home-banners-section .banner-slide-shell { padding-bottom: 28px !important; }
   }
   .home-banners-section .banner-slide-description {
     color: #ffffff;
