@@ -23,13 +23,25 @@
   <div class="container">
     <div class="svc-detail-main reveal">
 
-        <!-- Hero split: image left, all content right -->
+        <!-- Hero split: image + benefits left, content right -->
         <div class="svc-hero-split">
-          @if($service->icon)
-            <div class="svc-hero-image">
-              <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}">
-            </div>
-          @endif
+          <div class="svc-hero-left">
+            @if($service->icon)
+              <div class="svc-hero-image">
+                <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}">
+              </div>
+            @endif
+            @if(!empty($benefitsList))
+              <div class="svc-benefits">
+                <h3 class="svc-detail-heading">Benefits</h3>
+                <ul class="svc-benefits-list">
+                  @foreach($benefitsList as $benefit)
+                    <li>{{ $benefit }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+          </div>
           <div class="svc-hero-text">
             @if($service->subtitle)
               <div class="svc-detail-cat">{{ $service->subtitle }}</div>
@@ -49,17 +61,6 @@
                     <p>{{ $block }}</p>
                   @endif
                 @endforeach
-              </div>
-            @endif
-
-            @if(!empty($benefitsList))
-              <div class="svc-benefits">
-                <h3 class="svc-detail-heading">Benefits</h3>
-                <ul class="svc-benefits-list">
-                  @foreach($benefitsList as $benefit)
-                    <li>{{ $benefit }}</li>
-                  @endforeach
-                </ul>
               </div>
             @endif
           </div>
@@ -208,14 +209,17 @@
     border-bottom: none;
     text-align: justify;
   }
+  .svc-hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
   .svc-hero-image {
     border-radius: 16px;
     overflow: hidden;
     width: 100%;
     aspect-ratio: 5 / 4;
     background: #f5f0ec;
-    position: sticky;
-    top: 100px;
   }
   .svc-hero-image img {
     width: 100%;
