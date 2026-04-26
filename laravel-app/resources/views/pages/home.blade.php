@@ -30,7 +30,7 @@
     letter-spacing: 0.5px;
     text-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 400;
-    font-size: 42px;
+    font-size: 44px;
     line-height: 1.3;
     max-width: 860px;
     white-space: normal;
@@ -41,7 +41,7 @@
     display: block;
     width: fit-content;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: auto;
   }
   @media (max-width: 992px) {
     .home-banners-section .banner-slide-title { font-size: clamp(22px, 3.8vw, 34px) !important; }
