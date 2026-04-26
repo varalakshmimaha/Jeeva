@@ -18,7 +18,7 @@
     padding-bottom: 48px !important;
   }
   .home-banners-section .banner-slide-content {
-    max-width: 100%;
+    max-width: 900px;
     width: 100%;
     margin-top: auto;
     margin-bottom: 0;
@@ -30,10 +30,11 @@
     letter-spacing: 0.5px;
     text-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 700;
-    font-size: clamp(32px, 4vw, 56px);
-    line-height: 1.25;
-    max-width: 100%;
-    white-space: nowrap;
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.3;
+    max-width: 860px;
+    white-space: normal;
+    text-wrap: balance;
     font-style: normal;
   }
   .home-banners-section .banner-slide-button {
@@ -43,11 +44,11 @@
     margin-right: 0;
   }
   @media (max-width: 992px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(20px, 3.5vw, 36px) !important; white-space: nowrap; }
+    .home-banners-section .banner-slide-title { font-size: clamp(22px, 3.8vw, 34px) !important; }
     .home-banners-section .banner-slide-shell { padding-bottom: 36px !important; }
   }
   @media (max-width: 560px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(13px, 4.5vw, 20px) !important; white-space: nowrap; }
+    .home-banners-section .banner-slide-title { font-size: clamp(18px, 5vw, 24px) !important; line-height: 1.35; }
     .home-banners-section .banner-slide-shell { padding-bottom: 28px !important; }
   }
   .home-banners-section .banner-slide-description {
