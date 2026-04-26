@@ -1106,15 +1106,24 @@
       display: flex;
       align-items: stretch;
       gap: 0;
+      border: 1.5px solid #e5e0d8;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .phone-row:focus-within {
+      border-color: #4DB6AC;
+      box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
     }
     .cc-static {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 0 12px;
-      border: 1.5px solid #e5e7eb;
-      border-right: none;
-      border-radius: 8px 0 0 8px;
+      border: none;
+      border-right: 1.5px solid #e5e0d8;
+      border-radius: 0;
       background: #fafafa;
       font-family: 'Outfit', sans-serif;
       font-size: 13px;
@@ -1124,7 +1133,11 @@
       flex-shrink: 0;
     }
     .phone-row .phone-num {
-      border-radius: 0 8px 8px 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      flex: 1;
+      background: transparent !important;
     }
 
     /* Get in Touch */
