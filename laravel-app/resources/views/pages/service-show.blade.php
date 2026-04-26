@@ -254,9 +254,9 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
   .svc-benefits-list li {
     display: flex;
@@ -267,7 +267,9 @@
     color: #3d3d3d;
     line-height: 1.7;
     padding: 10px 0;
+    border-bottom: 1px solid #f0ebe6;
   }
+  .svc-benefits-list li:last-child { border-bottom: none; }
   .svc-benefits-list li::before {
     content: '✓';
     display: inline-flex;
@@ -549,7 +551,7 @@
     .svc-hero-image { aspect-ratio: 4 / 3; max-width: 520px; margin: 0 auto; }
     .svc-packages-grid--count-2,
     .svc-packages-grid--count-3 { grid-template-columns: 1fr; }
-    .svc-benefits-list { grid-template-columns: 1fr; }
+    .svc-benefits-list { gap: 0; }
     .is-featured-wrap { padding-top: 14px; }
   }
 </style>
