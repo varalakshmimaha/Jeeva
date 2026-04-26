@@ -123,6 +123,63 @@ class SettingsController extends Controller
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');
     }
 
+    public function registerCalendlyWebhook(Request $request)
+    {
+        $token = trim($request->input('calendly_token', ''));
+        if (!$token) {
+            return back()->with('calendly_error', 'Please enter your Calendly Personal Access Token.');
+        }
+
+        // Save token
+        $this->saveSetting('calendly_token', $token);
+
+        // Get current user from Calendly API
+        $userResp = \Illuminate\Support\Facades\Http::withToken($token)
+            ->get('https://api.calendly.com/users/me');
+
+        if (!$userResp->successful()) {
+            return back()->with('calendly_error', 'Invalid token or Calendly API error: ' . $userResp->body());
+        }
+
+        $userData    = $userResp->json();
+        $userUri     = $userData['resource']['uri'] ?? '';
+        $orgUri      = $userData['resource']['current_organization'] ?? '';
+
+        $webhookUrl  = rtrim(config('app.url'), '/') . '/webhooks/calendly';
+
+        // Check if webhook already exists
+        $listResp = \Illuminate\Support\Facades\Http::withToken($token)
+            ->get('https://api.calendly.com/webhook_subscriptions', [
+                'organization' => $orgUri,
+                'scope'        => 'user',
+                'user'         => $userUri,
+            ]);
+
+        if ($listResp->successful()) {
+            foreach ($listResp->json()['collection'] ?? [] as $wh) {
+                if (($wh['callback_url'] ?? '') === $webhookUrl) {
+                    return back()->with('calendly_success', 'Webhook already registered! Bookings will appear in admin automatically.');
+                }
+            }
+        }
+
+        // Create webhook
+        $createResp = \Illuminate\Support\Facades\Http::withToken($token)
+            ->post('https://api.calendly.com/webhook_subscriptions', [
+                'url'          => $webhookUrl,
+                'events'       => ['invitee.created', 'invitee.canceled'],
+                'organization' => $orgUri,
+                'user'         => $userUri,
+                'scope'        => 'user',
+            ]);
+
+        if ($createResp->successful()) {
+            return back()->with('calendly_success', 'Calendly webhook registered! New bookings will now appear automatically in Admin → Messages.');
+        }
+
+        return back()->with('calendly_error', 'Failed to register webhook: ' . $createResp->body());
+    }
+
     private function saveSetting($key, $value)
     {
         SiteSetting::updateOrCreate(

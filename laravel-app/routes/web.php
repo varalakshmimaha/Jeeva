@@ -128,5 +128,6 @@ Route::prefix('admin')->group(function () {
         // Settings
         Route::get('/settings', [SettingsController::class, 'edit'])->name('admin.settings.edit');
         Route::put('/settings', [SettingsController::class, 'update'])->name('admin.settings.update');
+        Route::post('/settings/calendly-webhook', [SettingsController::class, 'registerCalendlyWebhook'])->name('admin.settings.calendly.webhook');
     });
 });

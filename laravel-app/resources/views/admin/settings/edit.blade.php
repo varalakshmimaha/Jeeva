@@ -28,6 +28,7 @@
             <button type="button" class="st-tab" data-tab="backgrounds">Background Images</button>
             <button type="button" class="st-tab" data-tab="social">Footer & Social</button>
             <button type="button" class="st-tab" data-tab="analytics">Analytics</button>
+            <button type="button" class="st-tab" data-tab="calendly">Calendly</button>
         </div>
 
         {{-- Panel: General --}}
@@ -429,6 +430,55 @@
         </div>
 
     </form>
+
+    {{-- Calendly Panel (separate form — outside main settings form) --}}
+    <div class="st-panel" data-panel="calendly">
+        @if(session('calendly_success'))
+            <div class="adm-alert adm-alert-ok">{{ session('calendly_success') }}</div>
+        @endif
+        @if(session('calendly_error'))
+            <div class="adm-alert adm-alert-err">{{ session('calendly_error') }}</div>
+        @endif
+
+        <div class="adm-card">
+            <div class="adm-card-head">Calendly Webhook — Auto-save Bookings to Admin</div>
+            <div class="adm-card-body">
+                <p class="adm-hint" style="margin-bottom:20px;padding:12px 14px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;color:#0369a1;font-size:13px;line-height:1.6;">
+                    When a client books through your Calendly link, the booking will automatically appear in <strong>Admin → Messages → Book Consultations</strong>.<br>
+                    <strong>One-time setup:</strong> Paste your Calendly Personal Access Token below and click Register.
+                </p>
+
+                <div class="adm-hint" style="margin-bottom:16px;font-size:13px;">
+                    <strong>How to get your token:</strong><br>
+                    1. Go to <strong>calendly.com/integrations/api_webhooks</strong><br>
+                    2. Click <strong>"Get a token now"</strong><br>
+                    3. Create a token named <em>Website Webhook</em> and copy it<br>
+                    4. Paste it below and click <strong>Register Webhook</strong>
+                </div>
+
+                <form action="{{ route('admin.settings.calendly.webhook') }}" method="POST">
+                    @csrf
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Personal Access Token</td>
+                            <td class="adm-fi">
+                                <input type="text" name="calendly_token" class="adm-input"
+                                    value="{{ old('calendly_token', $settings['calendly_token'] ?? '') }}"
+                                    placeholder="eyJraWQiOiIxY...">
+                                <p class="adm-hint">Your Calendly API token. It is stored securely and only used to register the webhook.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="margin-top:16px;">
+                        <button type="submit" class="adm-btn adm-btn-primary">Register Webhook</button>
+                        @if(!empty($settings['calendly_token']))
+                            <span style="margin-left:12px;font-size:13px;color:#16a34a;font-weight:600;">✓ Token saved</span>
+                        @endif
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style>
