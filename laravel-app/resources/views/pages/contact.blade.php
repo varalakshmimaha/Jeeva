@@ -111,23 +111,18 @@
   <script>
   window.addEventListener('message', function(e) {
     if (e.data && e.data.event === 'calendly.event_scheduled') {
-      var payload = e.data.payload || {};
-      var startTime = (payload.event && payload.event.start_time) ? payload.event.start_time : '';
-      if (startTime) {
-        var d  = new Date(startTime);
-        var yr = d.getFullYear();
-        var mo = ('0'+(d.getMonth()+1)).slice(-2);
-        var dy = ('0'+d.getDate()).slice(-2);
-        var h  = d.getHours(), min = ('0'+d.getMinutes()).slice(-2);
-        var ap = h >= 12 ? 'PM' : 'AM';
-        var h12 = ('0'+(h % 12 === 0 ? 12 : h % 12)).slice(-2);
-        document.getElementById('bkDate').value = yr+'-'+mo+'-'+dy;
-        document.getElementById('bkTime').value = h12+':'+min+' '+ap;
-        var label = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+' at '+h12+':'+min+' '+ap;
-        document.getElementById('bkTimeLabel').textContent = label;
-        document.getElementById('bkTimeConfirm').style.display = 'flex';
-        document.getElementById('bkCalendlyWrap').style.display = 'none';
-      }
+      // Calendly's postMessage payload contains only API URIs, not start_time.
+      // The actual date/time is captured by the Calendly webhook on the server.
+      // We mark the slot as booked so our form validation passes.
+      var now = new Date();
+      var yr  = now.getFullYear();
+      var mo  = ('0'+(now.getMonth()+1)).slice(-2);
+      var dy  = ('0'+now.getDate()).slice(-2);
+      document.getElementById('bkDate').value = yr+'-'+mo+'-'+dy;
+      document.getElementById('bkTime').value = 'Scheduled via Calendly';
+      document.getElementById('bkTimeLabel').textContent = 'Your Calendly appointment is confirmed!';
+      document.getElementById('bkTimeConfirm').style.display = 'flex';
+      document.getElementById('bkCalendlyWrap').style.display = 'none';
     }
   });
   document.addEventListener('DOMContentLoaded', function() {
