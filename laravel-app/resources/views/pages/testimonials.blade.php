@@ -30,6 +30,7 @@
   }
   .page-banner.testi-banner .page-banner-title {
     font-size: clamp(75px, 6vw, 101px) !important;
+    font-weight: 700 !important;
     text-shadow: 0 4px 20px rgba(0,0,0,0.55);
   }
   .page-banner.testi-banner .page-banner-subtitle {
