@@ -125,13 +125,26 @@ class SettingsController extends Controller
 
     public function registerCalendlyWebhook(Request $request)
     {
-        $token = trim($request->input('calendly_token', ''));
+        $token   = trim($request->input('calendly_token', ''));
+        $siteUrl = rtrim(trim($request->input('site_url', '')), '/');
+
+        if (!$siteUrl) {
+            $siteUrl = rtrim(SiteSetting::where('key', 'site_webhook_url')->value('value') ?? '', '/');
+        }
+        if (!$siteUrl) {
+            $siteUrl = 'https://jivabirthandbeyond.bestprime.live';
+        }
+
+        if (!$token) {
+            $token = SiteSetting::where('key', 'calendly_token')->value('value') ?? '';
+        }
         if (!$token) {
             return back()->with('calendly_error', 'Please enter your Calendly Personal Access Token.');
         }
 
-        // Save token
+        // Save token and site URL
         $this->saveSetting('calendly_token', $token);
+        $this->saveSetting('site_webhook_url', $siteUrl);
 
         // Get current user from Calendly API
         $userResp = \Illuminate\Support\Facades\Http::withToken($token)
@@ -145,7 +158,7 @@ class SettingsController extends Controller
         $userUri     = $userData['resource']['uri'] ?? '';
         $orgUri      = $userData['resource']['current_organization'] ?? '';
 
-        $webhookUrl  = rtrim(config('app.url'), '/') . '/webhooks/calendly';
+        $webhookUrl  = $siteUrl . '/webhooks/calendly';
 
         // Check if webhook already exists
         $listResp = \Illuminate\Support\Facades\Http::withToken($token)

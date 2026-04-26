@@ -460,6 +460,15 @@
                     @csrf
                     <table class="adm-form-table">
                         <tr>
+                            <td class="adm-fl">Live Site URL</td>
+                            <td class="adm-fi">
+                                <input type="url" name="site_url" class="adm-input"
+                                    value="{{ old('site_url', $settings['site_webhook_url'] ?? 'https://jivabirthandbeyond.bestprime.live') }}"
+                                    placeholder="https://jivabirthandbeyond.bestprime.live">
+                                <p class="adm-hint">Your live website URL — Calendly will send booking notifications here.</p>
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="adm-fl">Personal Access Token</td>
                             <td class="adm-fi">
                                 <input type="text" name="calendly_token" class="adm-input"
