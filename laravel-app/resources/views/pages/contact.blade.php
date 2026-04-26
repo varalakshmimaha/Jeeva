@@ -226,11 +226,7 @@
           <div class="bf-field">
             <label class="bf-label">Phone</label>
             <div class="phone-row">
-              <input type="hidden" name="country_code" value="+91">
-              <span class="cc-static">
-                <img src="https://flagcdn.com/20x15/in.png" width="20" height="15" alt="India" style="border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08);">
-                <span>+91</span>
-              </span>
+              @include('partials.country-codes', ['default' => '+91'])
               <input type="tel" name="phone" class="bf-input phone-num" placeholder="Phone Number">
             </div>
           </div>
@@ -1176,43 +1172,39 @@
       .bk-form-card { padding: 20px 16px; }
     }
 
-    /* Phone row */
+    /* Phone row (Get in Touch) */
     .phone-row {
       display: flex;
       align-items: stretch;
       gap: 0;
       border: 1.5px solid #e5e0d8;
       border-radius: 8px;
-      overflow: hidden;
       background: #ffffff;
       transition: border-color .25s, box-shadow .25s;
+      position: relative;
     }
     .phone-row:focus-within {
       border-color: #4DB6AC;
       box-shadow: 0 0 0 3px rgba(77,182,172,0.12);
     }
-    .cc-static {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 0 12px;
-      border: none;
-      border-right: 1.5px solid #e5e0d8;
-      border-radius: 0;
-      background: #fafafa;
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: #1f3b38;
-      white-space: nowrap;
+    .phone-row .cc-wrap {
       flex-shrink: 0;
+      border-right: 1.5px solid #e5e0d8;
+    }
+    .phone-row .cc-trigger {
+      min-height: 46px;
+      padding: 0 12px;
+      background: #fafafa;
+      border-radius: 8px 0 0 8px;
+      border: none;
     }
     .phone-row .phone-num {
       border: none !important;
-      border-radius: 0 !important;
+      border-radius: 0 8px 8px 0 !important;
       box-shadow: none !important;
       flex: 1;
       background: transparent !important;
+      min-width: 0;
     }
 
     /* Get in Touch */
