@@ -15,7 +15,7 @@
   /* Home banner title — uppercase and bright for readability over photo */
   .home-banners-section .banner-slide-shell {
     align-items: flex-end !important;
-    padding-bottom: 48px !important;
+    padding-bottom: 24px !important;
   }
   .home-banners-section .banner-slide-content {
     max-width: 900px;
@@ -30,9 +30,9 @@
     letter-spacing: 0.5px;
     text-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.5);
     font-weight: 400;
-    font-size: 44px;
+    font-size: 58px;
     line-height: 1.3;
-    max-width: 860px;
+    max-width: 960px;
     white-space: normal;
     text-wrap: balance;
     font-style: normal;
@@ -44,12 +44,12 @@
     margin-right: auto;
   }
   @media (max-width: 992px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(22px, 3.8vw, 34px) !important; }
-    .home-banners-section .banner-slide-shell { padding-bottom: 36px !important; }
+    .home-banners-section .banner-slide-title { font-size: clamp(28px, 4.5vw, 42px) !important; }
+    .home-banners-section .banner-slide-shell { padding-bottom: 24px !important; }
   }
   @media (max-width: 560px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(18px, 5vw, 24px) !important; line-height: 1.35; }
-    .home-banners-section .banner-slide-shell { padding-bottom: 28px !important; }
+    .home-banners-section .banner-slide-title { font-size: clamp(22px, 5.5vw, 28px) !important; line-height: 1.35; }
+    .home-banners-section .banner-slide-shell { padding-bottom: 16px !important; }
   }
   .home-banners-section .banner-slide-description {
     color: #ffffff;
