@@ -134,6 +134,7 @@
       var payload  = e.data.payload || {};
       var eventUri = (payload.event && payload.event.uri) ? payload.event.uri : '';
 
+      console.log('[Calendly] event_scheduled fired. eventUri:', eventUri, 'full payload:', JSON.stringify(e.data));
       if (eventUriHid && eventUri) eventUriHid.value = eventUri;
 
       function applyTime(date, time, label) {
@@ -175,6 +176,7 @@
             })
             .then(function (r) { return r.json(); })
             .then(function (data) {
+              console.log('[Calendly] event-time response (attempts left ' + attemptsLeft + '):', JSON.stringify(data));
               if (data.date && data.time) {
                 applyTime(data.date, data.time, data.label);
               } else if (attemptsLeft > 0) {
@@ -183,7 +185,8 @@
                 fallback();
               }
             })
-            .catch(function () {
+            .catch(function (err) {
+              console.log('[Calendly] fetch error (attempts left ' + attemptsLeft + '):', err);
               if (attemptsLeft > 0) { tryFetch(attemptsLeft - 1); } else { fallback(); }
             });
           }, 2500);
