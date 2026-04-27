@@ -124,7 +124,7 @@
     if (openBtn) {
       openBtn.addEventListener('click', function () {
         Calendly.initPopupWidget({
-          url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3'
+          url: 'https://calendly.com/varalakshmivaru231020/30min?hide_gdpr_banner=1&primary_color=2fa9a3'
         });
       });
     }
@@ -196,7 +196,7 @@
         if (confirm) confirm.style.display = 'none';
         if (openBtn) openBtn.style.display  = 'flex';
         Calendly.initPopupWidget({
-          url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3'
+          url: 'https://calendly.com/varalakshmivaru231020/30min?hide_gdpr_banner=1&primary_color=2fa9a3'
         });
       });
     }
