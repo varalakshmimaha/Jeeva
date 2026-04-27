@@ -36,6 +36,7 @@ class AnalyticsController extends Controller
                 'countries'  => $ga->getCountries(),
             ]);
         } catch (\Throwable $e) {
+            \Log::error('GA4 analytics error: ' . $e->getMessage());
             return view('admin.analytics.index', [
                 'configured' => true,
                 'error'      => $e->getMessage(),
