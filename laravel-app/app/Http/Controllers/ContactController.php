@@ -222,7 +222,7 @@ class ContactController extends Controller
 
     public function calendlyEventTime(Request $request)
     {
-        $eventUri = trim($request->input('event_uri', ''));
+        $eventUri = trim($request->query('event_uri', ''));
         if (!$eventUri) {
             return response()->json(['error' => 'missing uri'], 400);
         }

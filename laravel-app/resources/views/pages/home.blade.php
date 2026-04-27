@@ -710,17 +710,9 @@
         if (confirm) confirm.style.display = 'flex';
         if (openBtn) openBtn.style.display  = 'none';
 
-        var csrf = document.querySelector('meta[name="csrf-token"]');
         function tryFetch(attemptsLeft) {
           setTimeout(function () {
-            fetch('/calendly/event-time', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrf ? csrf.getAttribute('content') : ''
-              },
-              body: JSON.stringify({ event_uri: eventUri })
-            })
+            fetch('/calendly/event-time?event_uri=' + encodeURIComponent(eventUri))
             .then(function (r) { return r.json(); })
             .then(function (data) {
               if (data.date && data.time) {

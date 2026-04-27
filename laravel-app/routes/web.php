@@ -30,7 +30,7 @@ Route::get('/terms-and-conditions', [PageController::class, 'terms'])->name('ter
 // Contact Form Submission
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
-Route::post('/calendly/event-time', [ContactController::class, 'calendlyEventTime'])->name('calendly.event-time');
+Route::get('/calendly/event-time', [ContactController::class, 'calendlyEventTime'])->name('calendly.event-time');
 Route::get('/booked-slots', [PageController::class, 'bookedSlots'])->name('booked.slots');
 
 // Testing & Debugging
