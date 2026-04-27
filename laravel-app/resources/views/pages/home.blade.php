@@ -669,7 +669,7 @@
     var eventUriHid = document.getElementById('homeBfEventUri');
     var form        = document.getElementById('homeBookConsultationForm');
 
-    var calendlyUrl = 'https://calendly.com/varalakshmivaru231020/30min?hide_gdpr_banner=1&primary_color=2fa9a3';
+    var calendlyUrl = '{{ rtrim($siteSettings["calendly_booking_link"] ?? "https://calendly.com/varalakshmivaru231020/30min", "/") }}?hide_gdpr_banner=1&primary_color=2fa9a3';
 
     if (openBtn) {
       openBtn.addEventListener('click', function () {

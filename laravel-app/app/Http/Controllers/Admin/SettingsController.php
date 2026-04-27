@@ -125,8 +125,9 @@ class SettingsController extends Controller
 
     public function registerCalendlyWebhook(Request $request)
     {
-        $token   = trim($request->input('calendly_token', ''));
-        $siteUrl = rtrim(trim($request->input('site_url', '')), '/');
+        $token          = trim($request->input('calendly_token', ''));
+        $siteUrl        = rtrim(trim($request->input('site_url', '')), '/');
+        $bookingLink    = trim($request->input('calendly_booking_link', ''));
 
         if (!$siteUrl) {
             $siteUrl = rtrim(SiteSetting::where('key', 'site_webhook_url')->value('value') ?? '', '/');
@@ -142,9 +143,12 @@ class SettingsController extends Controller
             return back()->with('calendly_error', 'Please enter your Calendly Personal Access Token.');
         }
 
-        // Save token and site URL
+        // Save token, site URL, and booking link
         $this->saveSetting('calendly_token', $token);
         $this->saveSetting('site_webhook_url', $siteUrl);
+        if ($bookingLink) {
+            $this->saveSetting('calendly_booking_link', $bookingLink);
+        }
 
         // Get current user from Calendly API
         $userResp = \Illuminate\Support\Facades\Http::withToken($token)

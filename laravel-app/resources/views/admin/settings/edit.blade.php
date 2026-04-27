@@ -460,6 +460,15 @@
                     @csrf
                     <table class="adm-form-table">
                         <tr>
+                            <td class="adm-fl">Calendly Booking Link</td>
+                            <td class="adm-fi">
+                                <input type="url" name="calendly_booking_link" class="adm-input"
+                                    value="{{ old('calendly_booking_link', $settings['calendly_booking_link'] ?? 'https://calendly.com/varalakshmivaru231020/30min') }}"
+                                    placeholder="https://calendly.com/your-name/30min">
+                                <p class="adm-hint">Your Calendly meeting link — used in the booking forms on your website.</p>
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="adm-fl">Live Site URL</td>
                             <td class="adm-fi">
                                 <input type="url" name="site_url" class="adm-input"
