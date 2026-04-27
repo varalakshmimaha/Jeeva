@@ -195,6 +195,40 @@ class ContactController extends Controller
         }
     }
 
+    public function calendlyEventTime(Request $request)
+    {
+        $eventUri = trim($request->input('event_uri', ''));
+        if (!$eventUri) {
+            return response()->json(['error' => 'missing uri'], 400);
+        }
+
+        $token = \App\Models\SiteSetting::where('key', 'calendly_token')->value('value');
+        if (!$token) {
+            return response()->json(['error' => 'no token'], 400);
+        }
+
+        $uuid     = basename(parse_url($eventUri, PHP_URL_PATH));
+        $response = \Illuminate\Support\Facades\Http::withToken($token)
+            ->get("https://api.calendly.com/scheduled_events/{$uuid}");
+
+        if (!$response->successful()) {
+            return response()->json(['error' => 'api error'], 400);
+        }
+
+        $startTime = $response->json('resource.start_time');
+        if (!$startTime) {
+            return response()->json(['error' => 'no start_time'], 400);
+        }
+
+        $dt = \Carbon\Carbon::parse($startTime)->setTimezone('Asia/Kolkata');
+
+        return response()->json([
+            'date'  => $dt->format('Y-m-d'),
+            'time'  => $dt->format('h:i A'),
+            'label' => $dt->format('l, d M Y') . ' at ' . $dt->format('h:i A'),
+        ]);
+    }
+
     public function submit(Request $request)
     {
         $validated = $request->validate([

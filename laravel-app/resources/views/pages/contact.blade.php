@@ -129,12 +129,48 @@
 
     window.addEventListener('message', function (e) {
       if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
-      var now = new Date();
-      dateHid.value  = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2) + '-' + ('0'+now.getDate()).slice(-2);
-      timeHid.value  = 'Scheduled via Calendly';
-      timeLabel.textContent = 'Calendly appointment confirmed!';
-      if (openBtn)  openBtn.style.display  = 'none';
-      if (confirm)  confirm.style.display  = 'flex';
+      var payload  = e.data.payload || {};
+      var eventUri = (payload.event && payload.event.uri) ? payload.event.uri : '';
+
+      function applyTime(date, time, label) {
+        dateHid.value        = date;
+        timeHid.value        = time;
+        timeLabel.textContent = label;
+        if (openBtn) openBtn.style.display = 'none';
+        if (confirm) confirm.style.display = 'flex';
+      }
+
+      function fallback() {
+        var now = new Date();
+        applyTime(
+          now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2) + '-' + ('0'+now.getDate()).slice(-2),
+          'Scheduled via Calendly',
+          'Calendly appointment confirmed!'
+        );
+      }
+
+      if (eventUri) {
+        var csrf = document.querySelector('meta[name="csrf-token"]');
+        fetch('/calendly/event-time', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrf ? csrf.getAttribute('content') : ''
+          },
+          body: JSON.stringify({ event_uri: eventUri })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.date && data.time) {
+            applyTime(data.date, data.time, data.label);
+          } else {
+            fallback();
+          }
+        })
+        .catch(fallback);
+      } else {
+        fallback();
+      }
     });
 
     if (changeBtn) {
