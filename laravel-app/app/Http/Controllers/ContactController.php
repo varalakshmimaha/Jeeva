@@ -229,6 +229,7 @@ class ContactController extends Controller
 
         $token = \App\Models\SiteSetting::where('key', 'calendly_token')->value('value');
         if (!$token) {
+            \Log::warning('calendlyEventTime: no token in site_settings');
             return response()->json(['error' => 'no token'], 400);
         }
 
@@ -237,11 +238,13 @@ class ContactController extends Controller
             ->get("https://api.calendly.com/scheduled_events/{$uuid}");
 
         if (!$response->successful()) {
-            return response()->json(['error' => 'api error'], 400);
+            \Log::warning('calendlyEventTime: API error ' . $response->status() . ' — ' . $response->body());
+            return response()->json(['error' => 'api error', 'status' => $response->status()], 400);
         }
 
         $startTime = $response->json('resource.start_time');
         if (!$startTime) {
+            \Log::warning('calendlyEventTime: no start_time in response — ' . $response->body());
             return response()->json(['error' => 'no start_time'], 400);
         }
 

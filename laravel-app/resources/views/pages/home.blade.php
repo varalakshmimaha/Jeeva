@@ -702,21 +702,41 @@
       }
 
       if (eventUri) {
+        applyTime(
+          new Date().toISOString().slice(0,10),
+          'Scheduled via Calendly',
+          'Fetching your slot...'
+        );
+        if (confirm) confirm.style.display = 'flex';
+        if (openBtn) openBtn.style.display  = 'none';
+
         var csrf = document.querySelector('meta[name="csrf-token"]');
-        fetch('/calendly/event-time', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrf ? csrf.getAttribute('content') : ''
-          },
-          body: JSON.stringify({ event_uri: eventUri })
-        })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (data.date && data.time) { applyTime(data.date, data.time, data.label); }
-          else { fallback(); }
-        })
-        .catch(fallback);
+        function tryFetch(attemptsLeft) {
+          setTimeout(function () {
+            fetch('/calendly/event-time', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf ? csrf.getAttribute('content') : ''
+              },
+              body: JSON.stringify({ event_uri: eventUri })
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              if (data.date && data.time) {
+                applyTime(data.date, data.time, data.label);
+              } else if (attemptsLeft > 0) {
+                tryFetch(attemptsLeft - 1);
+              } else {
+                fallback();
+              }
+            })
+            .catch(function () {
+              if (attemptsLeft > 0) { tryFetch(attemptsLeft - 1); } else { fallback(); }
+            });
+          }, 2500);
+        }
+        tryFetch(2);
       } else {
         fallback();
       }
