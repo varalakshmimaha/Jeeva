@@ -77,6 +77,32 @@
                                     placeholder="Tippasandra, Bangalore 560075">
                             </td>
                         </tr>
+                        <tr>
+                            <td class="adm-fl">Admin Timezone</td>
+                            <td class="adm-fi">
+                                @php $adminTz = old('admin_timezone', $settings['admin_timezone'] ?? 'Asia/Kolkata'); @endphp
+                                <select name="admin_timezone" class="adm-input">
+                                    <optgroup label="Canada">
+                                        <option value="America/Toronto"   @selected($adminTz === 'America/Toronto')>Canada — Eastern (Toronto / Ottawa)</option>
+                                        <option value="America/Winnipeg"  @selected($adminTz === 'America/Winnipeg')>Canada — Central (Winnipeg)</option>
+                                        <option value="America/Edmonton"  @selected($adminTz === 'America/Edmonton')>Canada — Mountain (Edmonton / Calgary)</option>
+                                        <option value="America/Vancouver" @selected($adminTz === 'America/Vancouver')>Canada — Pacific (Vancouver)</option>
+                                        <option value="America/Halifax"   @selected($adminTz === 'America/Halifax')>Canada — Atlantic (Halifax)</option>
+                                        <option value="America/St_Johns"  @selected($adminTz === 'America/St_Johns')>Canada — Newfoundland (St. John's)</option>
+                                    </optgroup>
+                                    <optgroup label="India">
+                                        <option value="Asia/Kolkata" @selected($adminTz === 'Asia/Kolkata')>India — IST (Kolkata / Mumbai)</option>
+                                    </optgroup>
+                                    <optgroup label="Other">
+                                        <option value="UTC" @selected($adminTz === 'UTC')>UTC</option>
+                                        <option value="Europe/London" @selected($adminTz === 'Europe/London')>UK — London</option>
+                                        <option value="America/New_York" @selected($adminTz === 'America/New_York')>US — Eastern (New York)</option>
+                                        <option value="America/Los_Angeles" @selected($adminTz === 'America/Los_Angeles')>US — Pacific (Los Angeles)</option>
+                                    </optgroup>
+                                </select>
+                                <p class="adm-hint">All "Submitted" timestamps in Admin → Messages will display in this timezone.</p>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

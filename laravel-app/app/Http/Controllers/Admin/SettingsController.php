@@ -45,6 +45,7 @@ class SettingsController extends Controller
             'google_analytics_id'   => 'nullable|string|max:50',
             'ga4_property_id'       => 'nullable|string|max:30',
             'ga4_credentials_json'  => 'nullable|string',
+            'admin_timezone'        => 'nullable|string|max:60',
         ]);
 
         // Handle logo upload
@@ -118,6 +119,9 @@ class SettingsController extends Controller
         $this->saveSetting('ga4_property_id',      $validated['ga4_property_id']       ?? null);
         if (!empty($validated['ga4_credentials_json'])) {
             $this->saveSetting('ga4_credentials_json', $validated['ga4_credentials_json']);
+        }
+        if (!empty($validated['admin_timezone'])) {
+            $this->saveSetting('admin_timezone', $validated['admin_timezone']);
         }
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully!');

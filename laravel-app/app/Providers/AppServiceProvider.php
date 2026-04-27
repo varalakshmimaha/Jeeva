@@ -67,6 +67,12 @@ class AppServiceProvider extends ServiceProvider
                 // Keep frontend rendering with defaults when settings table is unavailable.
             }
 
+            // Apply admin-configured timezone globally so all timestamps display correctly
+            if (!empty($settings['admin_timezone'])) {
+                config(['app.timezone' => $settings['admin_timezone']]);
+                date_default_timezone_set($settings['admin_timezone']);
+            }
+
             if (! empty($settings['logo_path'])) {
                 $settings['logo_url'] = Storage::url($settings['logo_path']);
             }
