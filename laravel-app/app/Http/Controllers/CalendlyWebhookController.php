@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Traits\SendsBookingEmails;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class CalendlyWebhookController extends Controller
 {
+    use SendsBookingEmails;
     public function handle(Request $request)
     {
         $data = $request->json()->all();
@@ -69,7 +71,7 @@ class CalendlyWebhookController extends Controller
 
         $eventTypeName = $payload['event_type']['name'] ?? 'Calendly Booking';
 
-        ContactMessage::create([
+        $booking = ContactMessage::create([
             'name'                => $name,
             'email'               => $email,
             'phone'               => $phone ?: null,
@@ -81,5 +83,8 @@ class CalendlyWebhookController extends Controller
             'is_read'             => false,
             'consultation_status' => 'pending',
         ]);
+
+        $this->sendBookingEmail($booking);
+        $this->sendConfirmationEmail($booking);
     }
 }
