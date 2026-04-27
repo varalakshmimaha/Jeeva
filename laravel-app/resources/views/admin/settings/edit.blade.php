@@ -117,27 +117,6 @@
             </div>
 
             <div class="adm-card">
-                <div class="adm-card-head">Cal.com Booking Link</div>
-                <div class="adm-card-body">
-                    <table class="adm-form-table">
-                        <tr>
-                            <td class="adm-fl">Cal.com Link</td>
-                            <td class="adm-fi">
-                                <input type="text" name="cal_link" class="adm-input"
-                                    value="{{ old('cal_link', $settings['cal_link'] ?? '') }}"
-                                    placeholder="e.g. anusuyaashok/consultation">
-                                <p class="adm-hint" style="margin-top:6px;">
-                                    Enter your Cal.com username/event-type (e.g. <strong>anusuyaashok/30min</strong>).
-                                    Sign up free at <strong>cal.com</strong> → create an event type → copy the link slug.
-                                    Leave blank to use the built-in date picker instead.
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="adm-card">
                 <div class="adm-card-head">Zoom Meeting Link</div>
                 <div class="adm-card-body">
                     <table class="adm-form-table">
@@ -155,11 +134,11 @@
             </div>
 
             <div class="adm-card">
-                <div class="adm-card-head">Consultation Booking Time Slots <small style="font-weight:400;color:var(--muted);font-size:12px;">(used when Cal.com link is empty)</small></div>
+                <div class="adm-card-head">Consultation Booking Time Slots</div>
                 <div class="adm-card-body">
                     <textarea name="booking_time_slots" class="adm-input" rows="3"
                         placeholder="09:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 02:00 PM, 03:00 PM, 04:00 PM, 05:00 PM, 06:00 PM">{{ old('booking_time_slots', $settings['booking_time_slots'] ?? '') }}</textarea>
-                    <p class="adm-hint">Comma-separated time slots for the built-in picker. Only used when no Cal.com link is set above.</p>
+                    <p class="adm-hint">Comma-separated time slots shown in the booking form.</p>
                 </div>
             </div>
         </div>

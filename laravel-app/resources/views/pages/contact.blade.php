@@ -684,14 +684,6 @@
       text-decoration: line-through;
       cursor: not-allowed;
     }
-    /* ── Cal.com wrapper ── */
-    .bf-cal-com-wrap {
-      border: 1.5px solid #ead9d1;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #fff;
-      margin-bottom: 10px;
-    }
     .bf-slot-confirm {
       display: flex;
       align-items: center;
