@@ -17,14 +17,20 @@ class AdminController extends Controller
     // Dashboard
     public function dashboard()
     {
+        $isBooking = fn($q) => $q->where(function($q) {
+            $q->whereNotNull('preferred_date')->orWhereNotNull('preferred_time');
+        });
+
         $stats = [
-            'services' => Service::count(),
-            'banners' => Banner::count(),
-            'blogs' => Blog::count(),
-            'gallery' => GalleryItem::count(),
-            'testimonials' => Testimonial::count(),
-            'messages' => ContactMessage::count(),
-            'unread_messages' => ContactMessage::where('is_read', false)->count(),
+            'services'        => Service::count(),
+            'banners'         => Banner::count(),
+            'blogs'           => Blog::count(),
+            'gallery'         => GalleryItem::count(),
+            'testimonials'    => Testimonial::count(),
+            'bookings'        => ContactMessage::tap($isBooking)->count(),
+            'enquiries'       => ContactMessage::whereNull('preferred_date')->whereNull('preferred_time')->count(),
+            'unread_bookings' => ContactMessage::tap($isBooking)->where('is_read', false)->count(),
+            'unread_enquiries'=> ContactMessage::whereNull('preferred_date')->whereNull('preferred_time')->where('is_read', false)->count(),
         ];
         $recentMessages = ContactMessage::latest()->take(5)->get();
         $recentServices = Service::latest()->take(5)->get();

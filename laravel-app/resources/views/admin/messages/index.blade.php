@@ -65,7 +65,15 @@
                                 <div style="color:#2FA9A3;font-weight:600;">📅 {{ \Carbon\Carbon::parse($msg->preferred_date)->format('M d, Y') }}</div>
                             @endif
                             @if($msg->preferred_time)
-                                <div style="color:#2FA9A3;font-weight:600;">🕐 {{ $msg->preferred_time }}</div>
+                                @if(str_contains(strtolower($msg->preferred_time), 'calendly'))
+                                    <div style="margin-top:3px;">
+                                        <span style="display:inline-flex;align-items:center;gap:5px;background:#e8f5f4;color:#006BFF;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;">
+                                            📆 Booked via Calendly
+                                        </span>
+                                    </div>
+                                @else
+                                    <div style="color:#2FA9A3;font-weight:600;">🕐 {{ $msg->preferred_time }}</div>
+                                @endif
                             @endif
                             @if(!$msg->preferred_date && !$msg->preferred_time)
                                 <span style="color:var(--muted);">—</span>

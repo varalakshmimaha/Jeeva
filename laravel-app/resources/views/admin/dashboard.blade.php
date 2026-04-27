@@ -40,12 +40,32 @@
             </div>
         </a>
 
-        <a href="{{ route('admin.messages.index') }}" class="db-stat" style="border-left:4px solid #ef4444;">
+        <a href="{{ route('admin.messages.index') }}?tab=bookings" class="db-stat" style="border-left:4px solid #ef4444;">
             <div class="db-stat-body">
-                <span class="db-stat-num">{{ $messages ?? 0 }}</span>
-                <span class="db-stat-lbl">Contact Messages</span>
+                <span class="db-stat-num">
+                    {{ $bookings ?? 0 }}
+                    @if(($unread_bookings ?? 0) > 0)
+                        <span class="db-unread-dot">{{ $unread_bookings }}</span>
+                    @endif
+                </span>
+                <span class="db-stat-lbl">Book Consultations</span>
             </div>
             <div class="db-stat-ico" style="color:#ef4444;">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+        </a>
+
+        <a href="{{ route('admin.messages.index') }}?tab=enquiries" class="db-stat" style="border-left:4px solid #8b5cf6;">
+            <div class="db-stat-body">
+                <span class="db-stat-num">
+                    {{ $enquiries ?? 0 }}
+                    @if(($unread_enquiries ?? 0) > 0)
+                        <span class="db-unread-dot" style="background:#8b5cf6;">{{ $unread_enquiries }}</span>
+                    @endif
+                </span>
+                <span class="db-stat-lbl">Get in Touch</span>
+            </div>
+            <div class="db-stat-ico" style="color:#8b5cf6;">
                 <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
         </a>
@@ -91,11 +111,20 @@
                 </thead>
                 <tbody>
                     @forelse($recentMessages as $msg)
+                    @php $isBook = !empty($msg->preferred_date) || !empty($msg->preferred_time); @endphp
                     <tr>
                         <td>
-                            <a href="{{ route('admin.messages.show', $msg->id) }}" class="db-msg-name">{{ $msg->name }}</a>
+                            <a href="{{ route('admin.messages.show', $msg->id) }}" class="db-msg-name" style="font-weight:{{ !$msg->is_read ? '700' : '500' }};">{{ $msg->name }}</a>
+                            <div style="font-size:11px;color:var(--muted);">{{ $msg->email }}</div>
                         </td>
-                        <td class="db-msg-subj">{{ Str::limit($msg->subject ?? $msg->message, 35) }}</td>
+                        <td class="db-msg-subj">
+                            @if($isBook)
+                                <span class="db-type-badge" style="background:#e8f5f4;color:#2FA9A3;">📅 Booking</span>
+                            @else
+                                <span class="db-type-badge" style="background:#ede9fe;color:#7c3aed;">💬 Enquiry</span>
+                            @endif
+                            <div style="font-size:12px;color:var(--muted);margin-top:2px;">{{ Str::limit($msg->service_selected ?? $msg->subject ?? $msg->message, 30) }}</div>
+                        </td>
                         <td class="db-msg-date">{{ $msg->created_at->diffForHumans() }}</td>
                         <td>
                             @if(!$msg->is_read)
@@ -202,6 +231,30 @@
     font-weight: 800;
     color: var(--navy);
     line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.db-unread-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 999px;
+    line-height: 1;
+}
+.db-type-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
 }
 .db-stat-lbl {
     font-size: 13px;

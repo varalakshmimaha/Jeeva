@@ -56,7 +56,15 @@
                 @if($message->preferred_time)
                 <tr>
                     <td class="adm-fl">Preferred Time</td>
-                    <td class="adm-fi" style="font-weight:600;color:#2FA9A3;">🕐 {{ $message->preferred_time }}</td>
+                    <td class="adm-fi">
+                        @if(str_contains(strtolower($message->preferred_time), 'calendly'))
+                            <span style="display:inline-flex;align-items:center;gap:6px;background:#e8f5f4;color:#006BFF;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;">
+                                📆 Booked via Calendly
+                            </span>
+                        @else
+                            <span style="font-weight:600;color:#2FA9A3;">🕐 {{ $message->preferred_time }}</span>
+                        @endif
+                    </td>
                 </tr>
                 @endif
 
