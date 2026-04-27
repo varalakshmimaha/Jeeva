@@ -116,22 +116,6 @@
                 </div>
             </div>
 
-            <div class="adm-card">
-                <div class="adm-card-head">Zoom Meeting Link</div>
-                <div class="adm-card-body">
-                    <table class="adm-form-table">
-                        <tr>
-                            <td class="adm-fl">Zoom Link</td>
-                            <td class="adm-fi">
-                                <input type="url" name="zoom_link" class="adm-input"
-                                    value="{{ old('zoom_link', $settings['zoom_link'] ?? '') }}"
-                                    placeholder="https://zoom.us/j/XXXXXXXXXX">
-                                <p class="adm-hint">Paste your Zoom personal meeting link. It will be included in the booking confirmation emails sent to both you and the client.</p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
 
             <div class="adm-card">
                 <div class="adm-card-head">Consultation Booking Time Slots</div>

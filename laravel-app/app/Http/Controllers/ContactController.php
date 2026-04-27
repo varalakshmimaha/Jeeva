@@ -74,12 +74,7 @@ class ContactController extends Controller
             ->with('success_kind', $successKind);
     }
 
-    private function getZoomLink(): string
-    {
-        return \App\Models\SiteSetting::where('key', 'zoom_link')->value('value') ?? '';
-    }
-
-    private function buildIcs($booking, string $zoomLink): string
+    private function buildIcs($booking): string
     {
         if (!$booking->preferred_date || !$booking->preferred_time) {
             return '';
@@ -96,15 +91,8 @@ class ContactController extends Controller
             $dtStamp  = now()->format('Ymd\THis\Z');
             $uid      = uniqid('jiva-', true) . '@jivabirthandbeyond.com';
 
-            $title    = 'Consultation with Jiva Birth & Beyond';
-            $service  = $booking->service_selected ?? 'Consultation';
-            $location = $zoomLink ?: 'Zoom Meeting';
-
-            $description = "Service: {$service}\\n";
-            $description .= "Client: {$booking->name}\\n";
-            if ($zoomLink) {
-                $description .= "Join Zoom: {$zoomLink}\\n";
-            }
+            $service      = $booking->service_selected ?? 'Consultation';
+            $description  = "Service: {$service}\\nClient: {$booking->name}\\n";
 
             return implode("\r\n", [
                 'BEGIN:VCALENDAR',
@@ -117,9 +105,9 @@ class ContactController extends Controller
                 "DTEND:{$dtEnd}",
                 "DTSTAMP:{$dtStamp}",
                 "UID:{$uid}",
-                "SUMMARY:{$title}",
+                'SUMMARY:Consultation with Jiva Birth & Beyond',
                 "DESCRIPTION:{$description}",
-                "LOCATION:{$location}",
+                'LOCATION:Online Consultation',
                 'STATUS:CONFIRMED',
                 'END:VEVENT',
                 'END:VCALENDAR',
@@ -129,7 +117,7 @@ class ContactController extends Controller
         }
     }
 
-    private function buildGcalLink($booking, string $zoomLink): string
+    private function buildGcalLink($booking): string
     {
         if (!$booking->preferred_date || !$booking->preferred_time) {
             return '';
@@ -142,17 +130,13 @@ class ContactController extends Controller
             $end     = $start->copy()->addMinutes(30);
 
             $service = $booking->service_selected ?? 'Consultation';
-            $details = "Service: {$service}";
-            if ($zoomLink) {
-                $details .= "\nJoin Zoom: {$zoomLink}";
-            }
 
             return 'https://calendar.google.com/calendar/render?' . http_build_query([
                 'action'   => 'TEMPLATE',
                 'text'     => 'Consultation with Jiva Birth & Beyond',
                 'dates'    => $start->format('Ymd\THis') . '/' . $end->format('Ymd\THis'),
-                'details'  => $details,
-                'location' => $zoomLink ?: 'Zoom Meeting',
+                'details'  => "Service: {$service}",
+                'location' => 'Online Consultation',
             ]);
         } catch (\Exception $e) {
             return '';
@@ -164,14 +148,12 @@ class ContactController extends Controller
         $adminEmail = \App\Models\SiteSetting::where('key', 'company_email')->value('value')
                       ?: config('mail.from.address')
                       ?: 'noreply@jivabirthandbeyond.com';
-        $zoomLink   = $this->getZoomLink();
-        $icsContent = $this->buildIcs($booking, $zoomLink);
-        $gcalLink   = $this->buildGcalLink($booking, $zoomLink);
+        $icsContent = $this->buildIcs($booking);
+        $gcalLink   = $this->buildGcalLink($booking);
 
         try {
             Mail::send('emails.booking-notification', [
                 'booking'  => $booking,
-                'zoomLink' => $zoomLink,
                 'gcalLink' => $gcalLink,
             ], function ($message) use ($adminEmail, $booking, $icsContent) {
                 $message->to($adminEmail)
@@ -195,14 +177,12 @@ class ContactController extends Controller
             return;
         }
 
-        $zoomLink   = $this->getZoomLink();
-        $icsContent = $this->buildIcs($booking, $zoomLink);
-        $gcalLink   = $this->buildGcalLink($booking, $zoomLink);
+        $icsContent = $this->buildIcs($booking);
+        $gcalLink   = $this->buildGcalLink($booking);
 
         try {
             Mail::send('emails.booking-confirmation', [
                 'booking'  => $booking,
-                'zoomLink' => $zoomLink,
                 'gcalLink' => $gcalLink,
             ], function ($message) use ($booking, $icsContent) {
                 $message->to($booking->email, $booking->name)

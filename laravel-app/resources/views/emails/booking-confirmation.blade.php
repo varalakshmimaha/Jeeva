@@ -20,9 +20,8 @@
         .action-box h3 { margin: 0 0 6px; font-size: 16px; color: #1f3b38; }
         .action-box p { margin: 0 0 18px; font-size: 13px; color: #4a7a75; }
         .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .zoom-btn { display: inline-block; padding: 12px 24px; background: #2D8CFF; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
         .gcal-btn { display: inline-block; padding: 12px 24px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
-        .zoom-link-text { display: block; margin-top: 12px; font-size: 12px; color: #4a7a75; word-break: break-all; }
+        .gcal-hint { display: block; margin-top: 12px; font-size: 12px; color: #4a7a75; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
         .footer a { color: #2FA9A3; text-decoration: none; }
     </style>
@@ -72,24 +71,14 @@
                 </div>
             </div>
 
-            @if(!empty($zoomLink) || !empty($gcalLink))
+            @if(!empty($gcalLink))
             <div class="action-box">
-                <h3>📅 Your Consultation is Confirmed</h3>
-                <p>Save it to your calendar and join the meeting at the scheduled time.</p>
+                <h3>📅 Add to Your Calendar</h3>
+                <p>Save your session so you don't miss it.</p>
                 <div class="btn-row">
-                    @if(!empty($gcalLink))
                     <a href="{{ $gcalLink }}" class="gcal-btn">➕ Add to Google Calendar</a>
-                    @endif
-                    @if(!empty($zoomLink))
-                    <a href="{{ $zoomLink }}" class="zoom-btn">📹 Join Zoom Meeting</a>
-                    @endif
                 </div>
-                @if(!empty($zoomLink))
-                <span class="zoom-link-text">Zoom: {{ $zoomLink }}</span>
-                @endif
-                @if(!empty($gcalLink))
-                <span class="zoom-link-text" style="margin-top:4px;">Or open the <strong>consultation.ics</strong> attachment to add to any calendar app.</span>
-                @endif
+                <span class="gcal-hint">Or open the <strong>consultation.ics</strong> attachment to add to any calendar app.</span>
             </div>
             @endif
 
