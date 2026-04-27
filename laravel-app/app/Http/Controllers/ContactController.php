@@ -18,14 +18,39 @@ class ContactController extends Controller
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:1000',
             'preferred_date' => 'nullable|date',
-            'preferred_time' => 'nullable|string|max:50',
+            'preferred_time' => 'nullable|string|max:100',
             'service_selected' => 'nullable|string|max:255',
+            'calendly_event_uri' => 'nullable|string|max:500',
         ]);
 
         if (!empty($validated['phone']) && !empty($validated['country_code'])) {
             $validated['phone'] = trim($validated['country_code']) . ' ' . trim($validated['phone']);
         }
         unset($validated['country_code']);
+
+        $eventUri = $validated['calendly_event_uri'] ?? '';
+        unset($validated['calendly_event_uri']);
+
+        if ($eventUri && (!empty($validated['preferred_time'])) && str_contains(strtolower($validated['preferred_time']), 'calendly')) {
+            try {
+                $token = \App\Models\SiteSetting::where('key', 'calendly_token')->value('value');
+                if ($token) {
+                    $uuid = basename(parse_url($eventUri, PHP_URL_PATH));
+                    $resp = \Illuminate\Support\Facades\Http::withToken($token)
+                        ->get("https://api.calendly.com/scheduled_events/{$uuid}");
+                    if ($resp->successful()) {
+                        $startTime = $resp->json('resource.start_time');
+                        if ($startTime) {
+                            $dt = \Carbon\Carbon::parse($startTime)->setTimezone('Asia/Kolkata');
+                            $validated['preferred_date'] = $dt->format('Y-m-d');
+                            $validated['preferred_time'] = $dt->format('h:i A');
+                        }
+                    }
+                }
+            } catch (\Exception $e) {
+                \Log::warning('Could not resolve Calendly slot time at store: ' . $e->getMessage());
+            }
+        }
 
         $booking = ContactMessage::create($validated);
 

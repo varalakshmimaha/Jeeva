@@ -627,6 +627,7 @@
 
           <input type="hidden" name="preferred_date" id="homeBfDate" value="{{ old('preferred_date') }}">
           <input type="hidden" name="preferred_time" id="homeBfTime" value="{{ old('preferred_time') }}">
+          <input type="hidden" name="calendly_event_uri" id="homeBfEventUri" value="{{ old('calendly_event_uri') }}">
 
           <div class="bf-field">
             <label>Pick a Date &amp; Time *</label>
@@ -659,13 +660,14 @@
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
   <script>
   (function () {
-    var openBtn   = document.getElementById('homeBfOpenCal');
-    var confirm   = document.getElementById('homeBfTimeConfirm');
-    var timeLabel = document.getElementById('homeBfTimeLabel');
-    var changeBtn = document.getElementById('homeBfChangeSlot');
-    var dateHid   = document.getElementById('homeBfDate');
-    var timeHid   = document.getElementById('homeBfTime');
-    var form      = document.getElementById('homeBookConsultationForm');
+    var openBtn     = document.getElementById('homeBfOpenCal');
+    var confirm     = document.getElementById('homeBfTimeConfirm');
+    var timeLabel   = document.getElementById('homeBfTimeLabel');
+    var changeBtn   = document.getElementById('homeBfChangeSlot');
+    var dateHid     = document.getElementById('homeBfDate');
+    var timeHid     = document.getElementById('homeBfTime');
+    var eventUriHid = document.getElementById('homeBfEventUri');
+    var form        = document.getElementById('homeBookConsultationForm');
 
     var calendlyUrl = 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3';
 
@@ -679,6 +681,8 @@
       if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
       var payload  = e.data.payload || {};
       var eventUri = (payload.event && payload.event.uri) ? payload.event.uri : '';
+
+      if (eventUriHid && eventUri) eventUriHid.value = eventUri;
 
       function applyTime(date, time, label) {
         dateHid.value         = date;

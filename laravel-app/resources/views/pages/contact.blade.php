@@ -36,6 +36,7 @@
             <input type="hidden" name="subject" value="Consultation Booking">
             <input type="hidden" name="preferred_date" id="bkDate" value="{{ old('preferred_date') }}">
             <input type="hidden" name="preferred_time" id="bkTime" value="{{ old('preferred_time') }}">
+            <input type="hidden" name="calendly_event_uri" id="bkEventUri" value="{{ old('calendly_event_uri') }}">
 
             {{-- Full Name --}}
             <div class="bk-field">
@@ -111,13 +112,14 @@
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
   <script>
   (function () {
-    var openBtn   = document.getElementById('bkOpenCal');
-    var confirm   = document.getElementById('bkTimeConfirm');
-    var timeLabel = document.getElementById('bkTimeLabel');
-    var changeBtn = document.getElementById('bkChangeSlot');
-    var dateHid   = document.getElementById('bkDate');
-    var timeHid   = document.getElementById('bkTime');
-    var form      = document.getElementById('bkForm');
+    var openBtn    = document.getElementById('bkOpenCal');
+    var confirm    = document.getElementById('bkTimeConfirm');
+    var timeLabel  = document.getElementById('bkTimeLabel');
+    var changeBtn  = document.getElementById('bkChangeSlot');
+    var dateHid    = document.getElementById('bkDate');
+    var timeHid    = document.getElementById('bkTime');
+    var eventUriHid = document.getElementById('bkEventUri');
+    var form       = document.getElementById('bkForm');
 
     if (openBtn) {
       openBtn.addEventListener('click', function () {
@@ -132,9 +134,11 @@
       var payload  = e.data.payload || {};
       var eventUri = (payload.event && payload.event.uri) ? payload.event.uri : '';
 
+      if (eventUriHid && eventUri) eventUriHid.value = eventUri;
+
       function applyTime(date, time, label) {
-        dateHid.value        = date;
-        timeHid.value        = time;
+        dateHid.value         = date;
+        timeHid.value         = time;
         timeLabel.textContent = label;
         if (openBtn) openBtn.style.display = 'none';
         if (confirm) confirm.style.display = 'flex';
