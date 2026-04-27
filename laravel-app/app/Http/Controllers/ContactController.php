@@ -18,7 +18,7 @@ class ContactController extends Controller
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string|max:1000',
             'preferred_date' => 'nullable|date',
-            'preferred_time' => 'nullable|string|max:20',
+            'preferred_time' => 'nullable|string|max:50',
             'service_selected' => 'nullable|string|max:255',
         ]);
 

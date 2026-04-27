@@ -1337,37 +1337,33 @@
       border: 1.5px solid #ead9d1;
       border-radius: 999px;
       background: #fdfaf8;
-      overflow: hidden;
       transition: border-color .25s, box-shadow .25s, background .25s;
+      position: relative;
     }
     .bf-phone-group:focus-within {
       border-color: #4DB6AC;
       box-shadow: 0 0 0 4px rgba(77,182,172,0.14);
       background: #ffffff;
     }
-    .bf-phone-group .bf-phone-code {
-      border: none !important;
-      background: transparent !important;
-      border-right: 1.5px solid #ead9d1 !important;
-      border-radius: 0 !important;
-      padding: 14px 40px 14px 18px !important;
-      width: auto !important;
-      min-width: 108px;
-      font-weight: 600;
-      font-size: 14px;
-      color: #1f3b38;
-      box-shadow: none !important;
-      cursor: pointer;
-      background-position: right 14px center !important;
+    .bf-phone-group .cc-wrap {
+      flex-shrink: 0;
+      border-right: 1.5px solid #ead9d1;
     }
-    .bf-phone-group .bf-phone-code:focus { outline: none; }
+    .bf-phone-group .cc-trigger {
+      min-height: 52px;
+      padding: 0 14px 0 18px;
+      background: transparent;
+      border: none;
+      border-radius: 999px 0 0 999px;
+    }
     .bf-phone-group .bf-phone-number {
       border: none !important;
       background: transparent !important;
-      border-radius: 0 !important;
+      border-radius: 0 999px 999px 0 !important;
       flex: 1;
       padding: 14px 22px !important;
       box-shadow: none !important;
+      min-width: 0;
     }
     .bf-phone-group .bf-phone-number:focus { outline: none; }
     .book-submit {

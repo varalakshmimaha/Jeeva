@@ -303,37 +303,11 @@
 .cc-opt.cc-sel .cc-opt-name { color: #2FA9A3; font-weight: 600; }
 .cc-opt.cc-sel .cc-opt-code { color: #2FA9A3; }
 
-/* Inside the booking form phone group */
-.bf-phone-group .cc-wrap {
-  border-right: 1.5px solid #ead9d1;
+/* Generic: any phone-row wrapper that contains a cc-wrap */
+.phone-row .cc-wrap,
+.bf-phone-group .cc-wrap,
+.bk-cc-wrap {
   flex-shrink: 0;
-}
-.bf-phone-group .cc-trigger {
-  height: 100%;
-  min-height: 52px;
-  padding: 0 14px;
-}
-
-/* Inside the Get in Touch phone row */
-.phone-row {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-}
-.phone-row .cc-wrap {
-  flex-shrink: 0;
-}
-.phone-row .cc-trigger {
-  height: 100%;
-  min-height: 48px;
-  border: 1.5px solid #e5e7eb;
-  border-right: none;
-  border-radius: 10px 0 0 10px;
-  padding: 0 12px;
-  background: #fafafa;
-}
-.phone-row .phone-num {
-  border-radius: 0 10px 10px 0 !important;
 }
 </style>
 <script>

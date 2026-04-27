@@ -43,6 +43,12 @@
               <input type="text" name="name" class="bk-input" placeholder="Your full name" value="{{ old('name') }}" required>
             </div>
 
+            {{-- Email --}}
+            <div class="bk-field">
+              <label class="bk-label">Email Address <span class="bk-req">*</span></label>
+              <input type="email" name="email" class="bk-input" placeholder="you@example.com" value="{{ old('email') }}" required>
+            </div>
+
             {{-- Phone --}}
             <div class="bk-field">
               <label class="bk-label">Phone <span class="bk-req">*</span></label>
@@ -65,18 +71,18 @@
               </select>
             </div>
 
-            {{-- Date & Time via Calendly --}}
+            {{-- Date & Time via Calendly popup --}}
             <div class="bk-field">
               <label class="bk-label">Pick a Date &amp; Time <span class="bk-req">*</span></label>
+              <button type="button" class="bk-input bk-cal-trigger" id="bkOpenCal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span id="bkCalBtnText">Select a date &amp; time</span>
+                <svg class="bk-cal-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
               <div id="bkTimeConfirm" class="bk-time-confirm" style="display:none;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span id="bkTimeLabel">Slot selected</span>
+                <span id="bkTimeLabel">Appointment scheduled</span>
                 <button type="button" class="bk-change-btn" id="bkChangeSlot">Change</button>
-              </div>
-              <div id="bkCalendlyWrap" class="bk-calendly-embed">
-                <div class="calendly-inline-widget"
-                     data-url="https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3"
-                     style="min-width:280px;height:660px;"></div>
               </div>
             </div>
 
@@ -96,56 +102,63 @@
         @php $contactImg = $siteSettings['contact_image'] ?? ''; @endphp
         <div class="bk-img-wrap">
           <img src="{{ $contactImg ? asset($contactImg) : asset('storage/moutain.jpg') }}" alt="Book Consultation" class="bk-contact-img">
-          <div class="bk-img-overlay">
-            <div class="bk-img-badge">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span>Free 30-min<br>Consultation</span>
-            </div>
-          </div>
         </div>
       </div>
 
     </div>
   </section>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
   <script>
-  window.addEventListener('message', function(e) {
-    if (e.data && e.data.event === 'calendly.event_scheduled') {
-      // Calendly's postMessage payload contains only API URIs, not start_time.
-      // The actual date/time is captured by the Calendly webhook on the server.
-      // We mark the slot as booked so our form validation passes.
-      var now = new Date();
-      var yr  = now.getFullYear();
-      var mo  = ('0'+(now.getMonth()+1)).slice(-2);
-      var dy  = ('0'+now.getDate()).slice(-2);
-      document.getElementById('bkDate').value = yr+'-'+mo+'-'+dy;
-      document.getElementById('bkTime').value = 'Scheduled via Calendly';
-      document.getElementById('bkTimeLabel').textContent = 'Your Calendly appointment is confirmed!';
-      document.getElementById('bkTimeConfirm').style.display = 'flex';
-      document.getElementById('bkCalendlyWrap').style.display = 'none';
-    }
-  });
-  document.addEventListener('DOMContentLoaded', function() {
+  (function () {
+    var openBtn   = document.getElementById('bkOpenCal');
+    var confirm   = document.getElementById('bkTimeConfirm');
+    var timeLabel = document.getElementById('bkTimeLabel');
     var changeBtn = document.getElementById('bkChangeSlot');
-    if (changeBtn) {
-      changeBtn.addEventListener('click', function() {
-        document.getElementById('bkTimeConfirm').style.display = 'none';
-        document.getElementById('bkCalendlyWrap').style.display = 'block';
-        document.getElementById('bkDate').value = '';
-        document.getElementById('bkTime').value = '';
+    var dateHid   = document.getElementById('bkDate');
+    var timeHid   = document.getElementById('bkTime');
+    var form      = document.getElementById('bkForm');
+
+    if (openBtn) {
+      openBtn.addEventListener('click', function () {
+        Calendly.initPopupWidget({
+          url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3'
+        });
       });
     }
-    var form = document.getElementById('bkForm');
+
+    window.addEventListener('message', function (e) {
+      if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
+      var now = new Date();
+      dateHid.value  = now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2) + '-' + ('0'+now.getDate()).slice(-2);
+      timeHid.value  = 'Scheduled via Calendly';
+      timeLabel.textContent = 'Calendly appointment confirmed!';
+      if (openBtn)  openBtn.style.display  = 'none';
+      if (confirm)  confirm.style.display  = 'flex';
+    });
+
+    if (changeBtn) {
+      changeBtn.addEventListener('click', function () {
+        dateHid.value = '';
+        timeHid.value = '';
+        if (confirm) confirm.style.display = 'none';
+        if (openBtn) openBtn.style.display  = 'flex';
+        Calendly.initPopupWidget({
+          url: 'https://calendly.com/anusuyaashok/30min?hide_gdpr_banner=1&primary_color=2fa9a3'
+        });
+      });
+    }
+
     if (form) {
-      form.addEventListener('submit', function(e) {
-        if (!document.getElementById('bkDate').value || !document.getElementById('bkTime').value) {
+      form.addEventListener('submit', function (e) {
+        if (!dateHid.value || !timeHid.value) {
           e.preventDefault();
-          document.getElementById('bkCalendlyWrap').scrollIntoView({behavior:'smooth',block:'center'});
-          alert('Please select a date and time from the calendar above.');
+          if (openBtn) openBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          alert('Please select a date and time first.');
         }
       });
     }
-  });
+  })();
   </script>
 
 
@@ -324,21 +337,24 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.07);
       background: #fff;
     }
-    /* Right: Contact image */
+    /* Right: Contact image — fills full height of the grid row */
     .bk-img-col {
-      position: sticky;
-      top: 100px;
+      display: flex;
+      flex-direction: column;
     }
     .bk-img-wrap {
       position: relative;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      flex: 1;
+      min-height: 400px;
     }
     .bk-contact-img {
       width: 100%;
       height: 100%;
-      min-height: 500px;
+      position: absolute;
+      inset: 0;
       object-fit: cover;
       display: block;
     }
@@ -366,8 +382,7 @@
     }
     @media (max-width: 960px) {
       .bk-split { grid-template-columns: 1fr; }
-      .bk-img-col { position: static; }
-      .bk-contact-img { min-height: 280px; }
+      .bk-img-wrap { min-height: 280px; }
     }
     @media (max-width: 560px) {
       .book-wrap { padding: 40px 4% 50px; }
@@ -1012,6 +1027,7 @@
       gap: 24px;
       align-items: stretch;
     }
+    .bk-form-col { display: flex; flex-direction: column; }
     .bk-form-card {
       background: #ffffff;
       border-radius: 16px;
@@ -1344,9 +1360,9 @@
       align-items: stretch;
       border: 1.5px solid #e5e0d8;
       border-radius: 10px;
-      overflow: hidden;
       background: #ffffff;
       transition: border-color .25s, box-shadow .25s;
+      position: relative;
     }
     .bk-phone-row:focus-within {
       border-color: #4DB6AC;
@@ -1358,9 +1374,10 @@
     }
     .bk-cc-wrap .cc-trigger {
       min-height: 46px;
-      padding: 0 12px;
-      background: #fafafa;
-      border-radius: 0;
+      padding: 0 14px;
+      background: transparent;
+      border-radius: 10px 0 0 10px;
+      border: none;
     }
     .bk-phone-row .bk-phone-num {
       border: none !important;
@@ -1371,13 +1388,18 @@
       min-width: 0;
     }
 
-    /* Calendly embed */
-    .bk-calendly-embed {
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-      border: 1.5px solid #e5e0d8;
+    /* Calendly popup trigger button */
+    .bk-cal-trigger {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+      color: #b0a59f;
+      background: #ffffff;
     }
+    .bk-cal-trigger.has-value { color: #2b2b2b; }
+    .bk-cal-chev { margin-left: auto; flex-shrink: 0; color: #9ca3af; }
 
     /* Time slot confirmation */
     .bk-time-confirm {
