@@ -269,8 +269,10 @@ class AdminController extends Controller
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'slug' => 'required|string|unique:blogs,slug,' . $id,
-            'published' => 'boolean',
+            'published' => 'nullable|boolean',
         ]);
+
+        $validated['published'] = $request->has('published');
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
