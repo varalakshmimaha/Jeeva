@@ -28,7 +28,7 @@
   position: relative;
   min-height: 380px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -44,7 +44,7 @@
   z-index: 2;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 100px 6% 60px;
+  padding: 100px 6% 48px;
   width: 100%;
 }
 .page-banner-breadcrumb {
