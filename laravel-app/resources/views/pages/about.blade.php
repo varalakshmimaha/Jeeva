@@ -1070,7 +1070,7 @@
     .about-cta-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(30, 40, 35, 0.85) 0%, rgba(40, 55, 45, 0.7) 100%);
+      background: linear-gradient(135deg, rgba(30, 40, 35, 0.55) 0%, rgba(40, 55, 45, 0.45) 100%);
       border-radius: 40px;
       z-index: 1;
     }
