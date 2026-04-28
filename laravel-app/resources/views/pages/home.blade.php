@@ -610,7 +610,7 @@
           <div class="bf-field">
             <label>Phone *</label>
             <div class="bf-phone-group">
-              @include('partials.country-codes', ['default' => '+91'])
+              @include('partials.country-codes', ['default' => '+1'])
               <input type="tel" name="phone" class="bf-phone-number" placeholder="Phone Number" value="{{ old('phone') }}" required>
             </div>
           </div>

@@ -1,6 +1,6 @@
 @php
   $ccUid     = 'cc_' . substr(md5(uniqid()), 0, 8);
-  $defCode   = $default ?? '+91';
+  $defCode   = $default ?? '+1';
   $inputName = $inputName ?? 'country_code';
 
   $countries = [
