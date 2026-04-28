@@ -32,7 +32,7 @@
           <div class="founder-bio-content founder-bio-beyond">
             <h3 class="founder-beyond-inline-title"><strong>Beyond the Profession</strong></h3>
             <p class="founder-beyond-inline-sub">A Life of Strength &amp; Stillness</p>
-            <p>Beyond my work, I find strength in ultramarathons, mountain climbing, and exploring new places. These experiences have deeply shaped my resilience and mindset, allowing me to bring calm, steady, and grounded support to every birth journey.</p>
+            <p>Beyond my work, I find strength in running, mountain climbing, and exploring new places. These experiences have deeply shaped my resilience and mindset, allowing me to bring calm, steady, and grounded support to every birth journey.</p>
           </div>
 
           <!-- Founder quote, inline at end of this slide -->
