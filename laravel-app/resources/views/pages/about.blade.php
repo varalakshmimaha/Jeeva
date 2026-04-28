@@ -1040,7 +1040,6 @@
     <div class="container">
       <div class="about-cta-single">
         <div class="about-cta-content reveal">
-          <span class="about-cta-label">Let's Connect</span>
           <h2 class="about-cta-title">Begin Your Empowered Birth Journey</h2>
           <a href="{{ route('contact') }}" class="about-cta-submit">Book Consultation</a>
         </div>

@@ -139,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="container">
     <div class="testi-cta-single">
       <div class="testi-cta-content reveal">
-        <span class="testi-cta-label">Begin Your Journey</span>
         <h2 class="testi-cta-title">Ready to Begin Your Journey?</h2>
         <a href="{{ route('contact') }}" class="testi-cta-submit">Book Consultation</a>
       </div>

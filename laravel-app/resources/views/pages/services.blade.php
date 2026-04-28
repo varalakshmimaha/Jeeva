@@ -46,7 +46,6 @@
   <div class="container">
     <div class="svc-cta-single">
       <div class="svc-cta-content reveal">
-        <span class="svc-cta-label">Your Inquiry</span>
         <h2 class="svc-cta-title">Ready for Compassionate Support?</h2>
         <a href="{{ route('contact') }}" class="svc-cta-submit">Book Consultation</a>
       </div>
