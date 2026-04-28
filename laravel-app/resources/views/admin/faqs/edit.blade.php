@@ -48,11 +48,12 @@
         <div class="adm-form-actions">
             <button type="submit" class="adm-btn adm-btn-primary">Update FAQ</button>
             <a href="{{ route('admin.faqs.index') }}" class="adm-btn adm-btn-cancel">Cancel</a>
-            <form action="{{ route('admin.faqs.destroy', $faq->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this FAQ?')">
-                @csrf @method('DELETE')
-                <button type="submit" class="adm-btn adm-btn-danger">Delete</button>
-            </form>
         </div>
+    </form>
+
+    <form action="{{ route('admin.faqs.destroy', $faq->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this FAQ?')">
+        @csrf @method('DELETE')
+        <button type="submit" class="adm-btn adm-btn-danger" style="margin-top:8px;">Delete</button>
     </form>
 </div>
 @endsection
