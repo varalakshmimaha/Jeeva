@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="testi-cta-content reveal">
         <span class="testi-cta-label">Begin Your Journey</span>
         <h2 class="testi-cta-title">Ready to Begin Your Journey?</h2>
-        <p class="testi-cta-desc">Experience the compassionate support our families are talking about. Book your consultation and take the first step towards an empowered birth experience.</p>
         <a href="{{ route('contact') }}" class="testi-cta-submit">Book Consultation</a>
       </div>
     </div>

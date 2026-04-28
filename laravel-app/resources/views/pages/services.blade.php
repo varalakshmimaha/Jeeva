@@ -48,7 +48,6 @@
       <div class="svc-cta-content reveal">
         <span class="svc-cta-label">Your Inquiry</span>
         <h2 class="svc-cta-title">Ready for Compassionate Support?</h2>
-        <p class="svc-cta-desc">Discover which service is perfect for your journey. Book a consultation and let's create your personalized birth experience.</p>
         <a href="{{ route('contact') }}" class="svc-cta-submit">Book Consultation</a>
       </div>
     </div>

@@ -1042,7 +1042,6 @@
         <div class="about-cta-content reveal">
           <span class="about-cta-label">Let's Connect</span>
           <h2 class="about-cta-title">Begin Your Empowered Birth Journey</h2>
-          <p class="about-cta-desc">Let's create a birth experience that feels safe, supported, and truly yours. Reach out and we'll guide you with compassion and care.</p>
           <a href="{{ route('contact') }}" class="about-cta-submit">Book Consultation</a>
         </div>
       </div>
