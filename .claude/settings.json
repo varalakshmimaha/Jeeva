@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\({k:v for k,v in d.items\\(\\) if 'ga' in k.lower\\(\\) or 'analytics' in k.lower\\(\\) or 'google' in k.lower\\(\\)}\\)\")",
+      "Bash(php -r ' *)",
+      "Bash(net start *)",
+      "Bash(sc query *)",
+      "PowerShell(Get-Service | Where-Object { $_.Name -match 'mysql|maria|sql' -or $_.DisplayName -match 'mysql|maria|sql' } | Select-Object Name, DisplayName, Status)",
+      "Bash(tasklist)",
+      "Bash(\"C:\\\\xampp\\\\mysql\\\\bin\\\\mysqld.exe\" --standalone)",
+      "Bash(\"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -e \"SELECT 1;\")",
+      "Bash(xargs cat *)"
+    ]
+  }
+}

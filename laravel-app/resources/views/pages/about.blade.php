@@ -900,17 +900,17 @@
     <div class="vm-overlay"></div>
     <div class="container">
       <div class="vm-header">
-        <h2 class="section-title reveal d1" style="font-family: 'Playfair Display', serif; color: #ffffff; font-size: clamp(36px, 5vw, 56px); margin-bottom: 20px;">Our Mission & Vision</h2>
+        <h2 class="section-title reveal d1" style="font-family: 'Playfair Display', serif; color: #ffffff; font-size: clamp(36px, 5vw, 56px); margin-bottom: 20px;">My Why & My Roots</h2>
       </div>
       <div class="vm-grid">
         <!-- Mission Card -->
         <div class="vm-card reveal d1">
-          <h3 class="vm-title">Our Mission</h3>
+          <h3 class="vm-title">My Why</h3>
           <p class="vm-text">To provide compassionate, holistic birth support through doula care, prenatal yoga, childbirth education, and nutrition guidance — helping families navigate one of life's most transformative experiences with trust and love.</p>
         </div>
         <!-- Vision Card -->
         <div class="vm-card reveal d2">
-          <h3 class="vm-title">Our Vision</h3>
+          <h3 class="vm-title">My Roots</h3>
           <p class="vm-text">To create a world where every woman feels empowered, supported, and celebrated throughout her pregnancy, birth, and postpartum journey — embracing motherhood with confidence, strength, and joy.</p>
         </div>
       </div>

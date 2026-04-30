@@ -1907,7 +1907,7 @@ document.addEventListener('DOMContentLoaded', function() {
 .home-faq-touch-text {
   font-size: 14px;
   font-weight: 500;
-  color: #5a3a3a;
+  color: #ffffff;
   line-height: 1.5;
 }
 

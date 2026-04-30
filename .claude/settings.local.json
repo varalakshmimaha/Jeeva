@@ -13,7 +13,8 @@
       "Bash(taskkill /PID 13296 /F)",
       "Bash(cmd /c \"taskkill /PID 14028 /F & taskkill /PID 13296 /F\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8009)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(php -l app/Http/Controllers/Admin/AdminController.php)"
     ]
   }
 }
