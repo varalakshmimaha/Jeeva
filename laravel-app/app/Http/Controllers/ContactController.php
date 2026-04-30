@@ -56,9 +56,15 @@ class ContactController extends Controller
         $booking = ContactMessage::create($validated);
 
         $this->sendBookingEmail($booking);
-        $this->sendConfirmationEmail($booking);
 
         $isBooking = !empty($validated['preferred_date']) || !empty($validated['preferred_time']) || !empty($validated['service_selected']);
+
+        if ($isBooking) {
+            $this->sendConfirmationEmail($booking);
+        } else {
+            $this->sendEnquiryAutoReply($booking);
+        }
+
         $successMessage = $isBooking
             ? 'Thank you! Your slot has been booked successfully.'
             : 'Thank you! Your message has been submitted. We\'ll reach out to you shortly.';

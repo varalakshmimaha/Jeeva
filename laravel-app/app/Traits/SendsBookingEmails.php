@@ -120,4 +120,22 @@ trait SendsBookingEmails
             Log::error('Failed to send confirmation email: ' . $e->getMessage());
         }
     }
+
+    private function sendEnquiryAutoReply($booking): void
+    {
+        if (empty($booking->email)) {
+            return;
+        }
+
+        try {
+            Mail::send('emails.enquiry-auto-reply', [
+                'booking' => $booking,
+            ], function ($message) use ($booking) {
+                $message->to($booking->email, $booking->name)
+                        ->subject("We've Received Your Enquiry");
+            });
+        } catch (\Exception $e) {
+            Log::error('Failed to send enquiry auto-reply: ' . $e->getMessage());
+        }
+    }
 }
