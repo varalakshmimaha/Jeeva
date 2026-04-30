@@ -959,7 +959,7 @@
       font-size: clamp(18px, 2vw, 22px);
       color: rgba(255,255,255,0.95);
       line-height: 1.6;
-      margin: 30px 0 0;
+      margin: 130px 0 0;
       max-width: 700px;
       font-weight: 500;
     }
