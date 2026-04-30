@@ -7,7 +7,8 @@
         .container { max-width: 600px; margin: 24px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
         .header { background: linear-gradient(135deg, #4DB6AC 0%, #2FA9A3 100%); color: #fff; padding: 32px 24px; text-align: center; }
         .header h2 { margin: 0 0 8px; font-size: 24px; font-weight: 700; }
-        .header p { margin: 0; font-size: 13px; opacity: .95; line-height: 1.5; max-width: 500px; margin: 0 auto; }
+        .header-brand { font-weight: 700; display: block; margin-bottom: 6px; }
+        .header-services { color: #e0f2f1; font-size: 13px; opacity: 0.95; line-height: 1.5; max-width: 500px; margin: 0 auto; font-weight: 500; }
         .content { padding: 40px 32px; line-height: 1.8; color: #444; }
         .greeting { font-size: 18px; font-weight: 600; color: #1f3b38; margin-bottom: 24px; }
         .message-p { margin-bottom: 20px; font-size: 16px; }
@@ -21,7 +22,10 @@
     <div class="container">
         <div class="header">
             <h2>We've Received Your Enquiry</h2>
-            <p>JIVA birth & beyond — Prenatal Yoga, Birth Doula, Postpartum Rebalance, Labour Management & Comfort Measures, Fat Loss Program, Supporting your journey</p>
+            <div class="header-services">
+                <span class="header-brand">JIVA Birth & Beyond</span>
+                Prenatal Yoga, Birth Doula, Postpartum Rebalance, Labour Management & Comfort Measures, Fat Loss Program, Supporting your journey
+            </div>
         </div>
 
         <div class="content">
@@ -42,9 +46,9 @@
                     $logoPath = \App\Models\SiteSetting::where('key', 'logo_path')->value('value');
                 @endphp
                 @if($logoPath)
-                    <img src="{{ asset('storage/' . $logoPath) }}" alt="JIVA birth & beyond" class="signature-logo">
+                    <img src="{{ asset('storage/' . $logoPath) }}" alt="JIVA Birth & Beyond" class="signature-logo">
                 @else
-                    <p style="font-size: 14px; color: #2FA9A3; font-weight: 700; margin-top: 10px;">JIVA birth & beyond</p>
+                    <p style="font-size: 14px; color: #2FA9A3; font-weight: 700; margin-top: 10px;">JIVA Birth & Beyond</p>
                 @endif
             </div>
         </div>

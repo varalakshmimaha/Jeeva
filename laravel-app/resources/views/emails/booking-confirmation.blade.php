@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8">
     <style>
-        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0; background: #faf6f2; }
+        body { font-family: 'Outfit', sans-serif, Arial; color: #333; margin: 0; padding: 0; background: #faf6f2; }
         .container { max-width: 600px; margin: 24px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
-        .header { background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%); color: #fff; padding: 32px 24px; text-align: center; }
+        .header { background: linear-gradient(135deg, #4DB6AC 0%, #2FA9A3 100%); color: #fff; padding: 32px 24px; text-align: center; }
         .header h2 { margin: 0 0 8px; font-size: 24px; font-weight: 700; }
-        .header p { margin: 0; font-size: 14px; opacity: .9; }
+        .header-brand { font-weight: 700; display: block; margin-bottom: 6px; }
+        .header-services { color: #e0f2f1; font-size: 13px; opacity: 0.95; line-height: 1.5; max-width: 500px; margin: 0 auto; font-weight: 500; }
         .content { padding: 28px 24px; }
-        .greeting { font-size: 16px; margin-bottom: 18px; }
+        .greeting { font-size: 16px; margin-bottom: 18px; font-weight: 600; color: #1f3b38; }
         .card { background: #f8faf9; border: 1px solid #e3ece9; border-radius: 10px; padding: 18px 20px; margin: 16px 0; }
         .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eef2f1; font-size: 14px; }
         .row:last-child { border-bottom: none; }
@@ -21,16 +22,20 @@
         .action-box p { margin: 0 0 18px; font-size: 13px; color: #4a7a75; }
         .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .gcal-btn { display: inline-block; padding: 12px 24px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
-        .gcal-hint { display: block; margin-top: 12px; font-size: 12px; color: #4a7a75; }
+        .signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eef2f1; }
+        .signature-name { font-size: 16px; font-weight: 700; color: #2FA9A3; margin: 0; }
+        .signature-logo { margin-top: 10px; height: 40px; width: auto; object-fit: contain; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
-        .footer a { color: #2FA9A3; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h2>✓ Booking Confirmed</h2>
-            <p>Thank you for booking with Jiva Birth &amp; Beyond</p>
+            <div class="header-services">
+                <span class="header-brand">JIVA Birth & Beyond</span>
+                Prenatal Yoga, Birth Doula, Postpartum Rebalance, Labour Management & Comfort Measures, Fat Loss Program, Supporting your journey
+            </div>
         </div>
 
         <div class="content">
@@ -59,12 +64,6 @@
                     <span class="value">{{ $booking->preferred_time }}</span>
                 </div>
                 @endif
-                @if($booking->phone)
-                <div class="row">
-                    <span class="label">Phone</span>
-                    <span class="value">{{ $booking->phone }}</span>
-                </div>
-                @endif
                 <div class="row">
                     <span class="label">Email</span>
                     <span class="value">{{ $booking->email }}</span>
@@ -78,27 +77,27 @@
                 <div class="btn-row">
                     <a href="{{ $gcalLink }}" class="gcal-btn">➕ Add to Google Calendar</a>
                 </div>
-                <span class="gcal-hint">Or open the <strong>consultation.ics</strong> attachment to add to any calendar app.</span>
             </div>
-            @endif
-
-            @if($booking->message)
-            <p class="note"><strong>Your notes:</strong><br>{{ $booking->message }}</p>
             @endif
 
             <p class="note">
                 If anything changes or you have questions, simply reply to this email — I'll be happy to help.
             </p>
 
-            <p class="note">
-                Warmly,<br>
-                <strong>Anu</strong><br>
-                Jiva Birth &amp; Beyond
-            </p>
+            <div class="signature">
+                <p class="signature-name">Warmly,</p>
+                <p class="signature-name" style="margin-top: 6px;">Anu</p>
+                @php
+                    $logoPath = \App\Models\SiteSetting::where('key', 'logo_path')->value('value');
+                @endphp
+                @if($logoPath)
+                    <img src="{{ asset('storage/' . $logoPath) }}" alt="JIVA Birth & Beyond" class="signature-logo">
+                @endif
+            </div>
         </div>
 
         <div class="footer">
-            <p>This is an automated confirmation. Please don't reply if you received this in error.</p>
+            <p>This is an automated confirmation from JIVA Birth & Beyond.</p>
         </div>
     </div>
 </body>
