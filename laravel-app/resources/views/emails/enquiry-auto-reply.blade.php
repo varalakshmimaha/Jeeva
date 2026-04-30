@@ -39,10 +39,10 @@
                 <p class="signature-name">Warm regards,</p>
                 <p class="signature-name" style="margin-top: 8px;">Anu</p>
                 @php
-                    $logo = \App\Models\SiteSetting::where('key', 'logo_url')->value('value');
+                    $logoPath = \App\Models\SiteSetting::where('key', 'logo_path')->value('value');
                 @endphp
-                @if($logo)
-                    <img src="{{ $logo }}" alt="JIVA birth & beyond" class="signature-logo">
+                @if($logoPath)
+                    <img src="{{ asset('storage/' . $logoPath) }}" alt="JIVA birth & beyond" class="signature-logo">
                 @else
                     <p style="font-size: 14px; color: #2FA9A3; font-weight: 700; margin-top: 10px;">JIVA birth & beyond</p>
                 @endif
