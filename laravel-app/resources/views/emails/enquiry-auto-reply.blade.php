@@ -15,7 +15,6 @@
         .signature { margin-top: 40px; padding-top: 24px; border-top: 1px solid #eee; }
         .signature-name { font-size: 18px; font-weight: 600; color: #333; margin: 0; }
         .signature-logo { margin-top: 16px; height: 100px; width: auto; object-fit: contain; }
-        .signature-tagline { font-size: 14px; color: #555; line-height: 1.5; margin: 16px 0 8px; font-style: italic; }
         .signature-social { margin-top: 12px; display: flex; gap: 15px; align-items: center; }
         .social-icon { height: 24px; width: 24px; object-fit: contain; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
@@ -56,11 +55,6 @@
                 @else
                     <p style="font-size: 16px; color: #333; font-weight: 700; margin-top: 10px;">JIVA birth & beyond</p>
                 @endif
-
-                <div class="signature-tagline">
-                    Supporting women through mindful movement, nourishing practices, and empowered birth experiences.<br>
-                    Guiding every journey with yoga, nutrition, and compassionate doula care.
-                </div>
 
                 <div class="signature-social">
                     @if($instagram)
