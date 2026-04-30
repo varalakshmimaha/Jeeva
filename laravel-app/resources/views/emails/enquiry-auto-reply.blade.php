@@ -8,7 +8,7 @@
         .header { background: linear-gradient(135deg, #4DB6AC 0%, #2FA9A3 100%); color: #fff; padding: 32px 24px; text-align: center; }
         .header h2 { margin: 0 0 8px; font-size: 24px; font-weight: 700; }
         .header-brand { font-weight: 700; }
-        .header-services { color: #e0f2f1; font-size: 14px; opacity: 0.95; line-height: 1.5; max-width: 550px; margin: 0 auto; font-weight: 500; }
+        .header-services { color: #e0f2f1; font-size: 13px; opacity: 0.95; line-height: 1.5; max-width: 100%; margin: 0 auto; font-weight: 500; white-space: nowrap; }
         .content { padding: 40px 32px; line-height: 1.8; color: #444; }
         .greeting { font-size: 18px; font-weight: 600; color: #1f3b38; margin-bottom: 24px; }
         .message-p { margin-bottom: 20px; font-size: 16px; }
@@ -23,7 +23,7 @@
         <div class="header">
             <h2>We've Received Your Enquiry</h2>
             <div class="header-services">
-                <span class="header-brand">JIVA Birth & Beyond</span> Services --- Supporting your journey
+                <span class="header-brand">JIVA birth & beyond</span> services --- Supporting your journey
             </div>
         </div>
 
