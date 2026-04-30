@@ -1744,7 +1744,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="home-faq-touch">
           <a href="{{ route('contact') }}" class="home-faq-touch-btn">Get In Touch <span class="home-faq-touch-btn-icon">&rarr;</span></a>
-          <span class="home-faq-touch-text">Have Any Question<br>on Your Minds?</span>
+          <span class="home-faq-touch-text">Have any questions ?</span>
         </div>
       </div>
 
