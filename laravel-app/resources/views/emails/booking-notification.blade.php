@@ -23,7 +23,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>New Booking Request</h2>
+            <h2>{{ ($booking->preferred_date && $booking->preferred_time) ? 'New Booking Request' : 'New Enquiry Request' }}</h2>
         </div>
 
         <div class="content">

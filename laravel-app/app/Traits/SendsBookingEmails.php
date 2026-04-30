@@ -81,12 +81,15 @@ trait SendsBookingEmails
         $gcalLink   = $this->buildGcalLink($booking);
 
         try {
+            $isBooking = $booking->preferred_date && $booking->preferred_time;
+            $subjectPrefix = $isBooking ? 'New Booking Request: ' : 'New Enquiry Request: ';
+
             Mail::send('emails.booking-notification', [
                 'booking'  => $booking,
                 'gcalLink' => $gcalLink,
-            ], function ($message) use ($adminEmail, $booking, $icsContent) {
+            ], function ($message) use ($adminEmail, $booking, $icsContent, $subjectPrefix) {
                 $message->to($adminEmail)
-                        ->subject('New Booking Request: ' . ($booking->service_selected ?? $booking->subject ?? 'Contact Message'));
+                        ->subject($subjectPrefix . ($booking->service_selected ?? $booking->subject ?? 'Contact Message'));
                 if ($icsContent) {
                     $message->attachData($icsContent, 'consultation.ics', ['mime' => 'text/calendar']);
                 }
