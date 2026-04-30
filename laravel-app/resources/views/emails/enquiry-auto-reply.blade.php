@@ -14,7 +14,7 @@
         .message-p { margin-bottom: 20px; font-size: 16px; }
         .signature { margin-top: 40px; padding-top: 24px; border-top: 1px solid #eee; }
         .signature-name { font-size: 18px; font-weight: 700; color: #2FA9A3; margin: 0; }
-        .signature-logo { margin-top: 12px; height: 50px; width: auto; object-fit: contain; }
+        .signature-logo { margin-top: 12px; height: 80px; width: auto; object-fit: contain; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
     </style>
 </head>

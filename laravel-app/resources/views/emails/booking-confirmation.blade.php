@@ -24,7 +24,7 @@
         .gcal-btn { display: inline-block; padding: 12px 24px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
         .signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eef2f1; }
         .signature-name { font-size: 16px; font-weight: 700; color: #2FA9A3; margin: 0; }
-        .signature-logo { margin-top: 10px; height: 40px; width: auto; object-fit: contain; }
+        .signature-logo { margin-top: 10px; height: 80px; width: auto; object-fit: contain; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
     </style>
 </head>
