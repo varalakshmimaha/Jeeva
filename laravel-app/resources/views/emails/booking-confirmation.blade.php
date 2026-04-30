@@ -25,6 +25,8 @@
         .signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eef2f1; }
         .signature-name { font-size: 16px; font-weight: 700; color: #2FA9A3; margin: 0; }
         .signature-logo { margin-top: 10px; height: 100px; width: auto; object-fit: contain; }
+        .signature-social { margin-top: 12px; display: flex; gap: 10px; }
+        .social-link { display: inline-block; color: #2FA9A3; text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 10px; border: 1px solid #e3ece9; border-radius: 6px; background: #f8faf9; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
     </style>
 </head>
@@ -88,10 +90,19 @@
                 <p class="signature-name" style="margin-top: 6px;">Anu</p>
                 @php
                     $logoPath = \App\Models\SiteSetting::where('key', 'logo_path')->value('value');
+                    $instagram = \App\Models\SiteSetting::where('key', 'instagram_link')->value('value');
+                    $facebook = \App\Models\SiteSetting::where('key', 'facebook_link')->value('value');
+                    $whatsapp = \App\Models\SiteSetting::where('key', 'whatsapp_link')->value('value');
                 @endphp
                 @if($logoPath)
                     <img src="{{ asset('storage/' . $logoPath) }}" alt="JIVA Birth & Beyond" class="signature-logo">
                 @endif
+
+                <div class="signature-social">
+                    @if($instagram)<a href="{{ $instagram }}" class="social-link">Instagram</a>@endif
+                    @if($facebook)<a href="{{ $facebook }}" class="social-link">Facebook</a>@endif
+                    @if($whatsapp)<a href="{{ $whatsapp }}" class="social-link">WhatsApp</a>@endif
+                </div>
             </div>
         </div>
 
