@@ -57,16 +57,17 @@ class ContactController extends Controller
 
         $this->sendBookingEmail($booking);
 
-        $isBooking = !empty($validated['preferred_date']) || !empty($validated['preferred_time']) || !empty($validated['service_selected']);
+        $hasSlot = !empty($validated['preferred_date']) && !empty($validated['preferred_time']);
 
-        if ($isBooking) {
+        if ($hasSlot) {
             $this->sendConfirmationEmail($booking);
         } else {
             $this->sendEnquiryAutoReply($booking);
         }
 
+        $isBooking = $hasSlot || !empty($validated['service_selected']);
         $successMessage = $isBooking
-            ? 'Thank you! Your slot has been booked successfully.'
+            ? 'Thank you! Your request has been submitted successfully.'
             : 'Thank you! Your message has been submitted. We\'ll reach out to you shortly.';
         $successKind = $isBooking ? 'booking' : 'enquiry';
 
