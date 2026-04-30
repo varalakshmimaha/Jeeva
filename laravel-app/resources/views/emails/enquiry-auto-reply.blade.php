@@ -14,9 +14,9 @@
         .message-p { margin-bottom: 20px; font-size: 16px; }
         .signature { margin-top: 40px; padding-top: 24px; border-top: 1px solid #eee; }
         .signature-name { font-size: 17px; font-weight: 500; color: #444; margin: 0; }
-        .signature-logo { margin-top: 18px; height: 100px; width: auto; object-fit: contain; }
-        .signature-social { margin-top: 20px; display: flex; gap: 12px; align-items: center; }
-        .social-icon { height: 28px; width: 28px; object-fit: contain; border-radius: 6px; }
+        .signature-logo { margin-top: 18px; height: 130px; width: auto; object-fit: contain; }
+        .signature-social { margin-top: 20px; display: flex; gap: 14px; align-items: center; }
+        .social-icon { height: 36px; width: 36px; object-fit: contain; border-radius: 6px; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
     </style>
 </head>

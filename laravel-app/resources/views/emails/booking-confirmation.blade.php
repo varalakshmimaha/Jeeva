@@ -24,9 +24,9 @@
         .gcal-btn { display: inline-block; padding: 12px 24px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
         .signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eef2f1; }
         .signature-name { font-size: 16px; font-weight: 500; color: #444; margin: 0; }
-        .signature-logo { margin-top: 12px; height: 100px; width: auto; object-fit: contain; }
-        .signature-social { margin-top: 16px; display: flex; gap: 12px; align-items: center; }
-        .social-icon { height: 24px; width: 24px; object-fit: contain; border-radius: 6px; }
+        .signature-logo { margin-top: 12px; height: 130px; width: auto; object-fit: contain; }
+        .signature-social { margin-top: 16px; display: flex; gap: 14px; align-items: center; }
+        .social-icon { height: 36px; width: 36px; object-fit: contain; border-radius: 6px; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
     </style>
 </head>
