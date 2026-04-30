@@ -946,7 +946,7 @@
     }
     .why-roots-cta-content {
       text-align: left;
-      padding-top: 80px;
+      padding-top: 75px;
     }
     .why-roots-cta-title {
       font-family: 'Playfair Display', serif;
