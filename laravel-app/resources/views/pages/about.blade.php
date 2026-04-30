@@ -942,10 +942,10 @@
     }
     .why-roots-cta-single {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0;
     }
     .why-roots-cta-content {
-      text-align: center;
+      text-align: left;
     }
     .why-roots-cta-title {
       font-family: 'Playfair Display', serif;
@@ -958,7 +958,7 @@
       font-size: clamp(18px, 2vw, 22px);
       color: rgba(255,255,255,0.95);
       line-height: 1.6;
-      margin: 20px auto 0;
+      margin: 50px 0 0;
       max-width: 700px;
       font-weight: 500;
     }
