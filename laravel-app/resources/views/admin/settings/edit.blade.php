@@ -242,6 +242,28 @@
             </div>
 
             <div class="adm-card">
+                <div class="adm-card-head">My Why & My Roots Section Background Image</div>
+                <div class="adm-card-body">
+                    @if(isset($settings['my_why_roots_bg_image_path']) && $settings['my_why_roots_bg_image_path'])
+                        <div class="adm-img-preview">
+                            <img src="{{ asset('storage/' . $settings['my_why_roots_bg_image_path']) }}" alt="My Why & My Roots Background" style="max-width:400px; max-height:250px;">
+                            <span class="adm-img-tag">Current My Why & My Roots Background</span>
+                        </div>
+                    @endif
+
+                    <table class="adm-form-table">
+                        <tr>
+                            <td class="adm-fl">Upload Image</td>
+                            <td class="adm-fi">
+                                <input type="file" name="my_why_roots_bg_image" accept="image/*" class="adm-input">
+                                <p class="adm-hint">Background image for My Why & My Roots section on About page. Recommended: 1600x900px or larger. Max 5MB.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="adm-card">
                 <div class="adm-card-head">Contact Page - Book Consultation Image</div>
                 <div class="adm-card-body">
                     @if(isset($settings['contact_image']) && $settings['contact_image'])

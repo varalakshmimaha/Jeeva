@@ -27,6 +27,7 @@ class SettingsController extends Controller
             'certifications_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'cta_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'vision_mission_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'my_why_roots_bg_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'contact_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
             'expertise_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
             'why_choose_image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
@@ -76,6 +77,12 @@ class SettingsController extends Controller
         if ($request->hasFile('vision_mission_bg_image')) {
             $visionBgPath = $request->file('vision_mission_bg_image')->store('backgrounds/vision', 'public');
             $this->saveSetting('vision_mission_bg_image_path', $visionBgPath);
+        }
+
+        // Handle My Why / My Roots background image upload
+        if ($request->hasFile('my_why_roots_bg_image')) {
+            $whyRootsBgPath = $request->file('my_why_roots_bg_image')->store('backgrounds/whyroots', 'public');
+            $this->saveSetting('my_why_roots_bg_image_path', $whyRootsBgPath);
         }
 
         // Handle Contact page book consultation image upload
