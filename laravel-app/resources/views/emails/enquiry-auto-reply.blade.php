@@ -24,7 +24,7 @@
             <h2>We've Received Your Enquiry</h2>
             <div class="header-services">
                 <span class="header-brand">JIVA Birth & Beyond</span>
-                Prenatal Yoga, Birth Doula, Postpartum Rebalance, Labour Management & Comfort Measures, Fat Loss Program, Supporting your journey
+                Services --- Supporting your journey
             </div>
         </div>
 
