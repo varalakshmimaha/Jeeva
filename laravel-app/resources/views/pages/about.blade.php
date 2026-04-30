@@ -894,21 +894,22 @@
     }
   </style>
 
-  <!-- My Why / My Roots Section -->
+  <!-- My Why Section -->
   <section class="why-roots-cta">
     <div class="why-roots-cta-bg" style="background-image: url('{{ !empty($siteSettings['my_why_roots_bg_image_path']) ? asset('storage/' . $siteSettings['my_why_roots_bg_image_path']) : asset('storage/vi and mi.jpg') }}');"></div>
     <div class="why-roots-cta-overlay"></div>
     <div class="container">
       <div class="why-roots-cta-single">
         <div class="why-roots-cta-content reveal">
-          <h2 class="why-roots-cta-title">My Why / My Roots</h2>
+          <h2 class="why-roots-cta-title">My Why</h2>
+          <p class="why-roots-cta-desc">Rooted in care, compassion, and family values—my journey is inspired by my parents.</p>
         </div>
       </div>
     </div>
   </section>
 
   <style>
-    /* My Why / My Roots CTA */
+    /* My Why CTA */
     .why-roots-cta {
       position: relative;
       padding: 0 6%;
@@ -952,6 +953,14 @@
       color: #ffffff;
       line-height: 1.2;
       margin: 0;
+    }
+    .why-roots-cta-desc {
+      font-size: clamp(18px, 2vw, 22px);
+      color: rgba(255,255,255,0.95);
+      line-height: 1.6;
+      margin: 20px auto 0;
+      max-width: 700px;
+      font-weight: 500;
     }
     
     @media (max-width: 480px) {
