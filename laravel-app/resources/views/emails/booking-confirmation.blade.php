@@ -23,10 +23,10 @@
         .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .gcal-btn { display: inline-block; padding: 12px 24px; background: #2FA9A3; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
         .signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eef2f1; }
-        .signature-name { font-size: 16px; font-weight: 600; color: #333; margin: 0; }
-        .signature-logo { margin-top: 10px; height: 100px; width: auto; object-fit: contain; }
-        .signature-social { margin-top: 12px; display: flex; gap: 12px; align-items: center; }
-        .social-icon { height: 20px; width: 20px; object-fit: contain; }
+        .signature-name { font-size: 16px; font-weight: 500; color: #444; margin: 0; }
+        .signature-logo { margin-top: 12px; height: 100px; width: auto; object-fit: contain; }
+        .signature-social { margin-top: 16px; display: flex; gap: 12px; align-items: center; }
+        .social-icon { height: 24px; width: 24px; object-fit: contain; border-radius: 6px; }
         .footer { padding: 20px 24px; border-top: 1px solid #eef2f1; font-size: 12px; color: #9aa0a0; text-align: center; }
     </style>
 </head>
@@ -102,22 +102,22 @@
                 <div class="signature-social">
                     @if($instagram)
                         <a href="{{ $instagram }}">
-                            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" class="social-icon">
+                            <img src="https://img.icons8.com/color/96/instagram-new.png" alt="Instagram" class="social-icon">
                         </a>
                     @endif
                     @if($facebook)
                         <a href="{{ $facebook }}">
-                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="social-icon">
+                            <img src="https://img.icons8.com/color/96/facebook-new.png" alt="Facebook" class="social-icon">
                         </a>
                     @endif
                     @if($whatsapp)
                         <a href="{{ $whatsapp }}">
-                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="social-icon">
+                            <img src="https://img.icons8.com/color/96/whatsapp.png" alt="WhatsApp" class="social-icon">
                         </a>
                     @endif
                     @if($youtube)
                         <a href="{{ $youtube }}">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" class="social-icon">
+                            <img src="https://img.icons8.com/color/96/youtube-play.png" alt="YouTube" class="social-icon">
                         </a>
                     @endif
                 </div>
