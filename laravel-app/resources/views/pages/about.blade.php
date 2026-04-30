@@ -894,143 +894,73 @@
     }
   </style>
 
-  <!-- My Why & My Roots Section -->
-  <section class="why-roots-section">
-    <img src="{{ !empty($siteSettings['my_why_roots_bg_image_path']) ? asset('storage/' . $siteSettings['my_why_roots_bg_image_path']) : asset('storage/vi and mi.jpg') }}" alt="My Why & My Roots" class="why-roots-bg-img">
-    <div class="why-roots-overlay"></div>
+  <!-- My Why / My Roots Section -->
+  <section class="why-roots-cta">
+    <div class="why-roots-cta-bg" style="background-image: url('{{ !empty($siteSettings['my_why_roots_bg_image_path']) ? asset('storage/' . $siteSettings['my_why_roots_bg_image_path']) : asset('storage/vi and mi.jpg') }}');"></div>
+    <div class="why-roots-cta-overlay"></div>
     <div class="container">
-      <div class="why-roots-header">
-        <h2 class="section-title reveal d1" style="font-family: 'Playfair Display', serif; color: #ffffff; font-size: clamp(36px, 5vw, 56px); margin-bottom: 20px;">My Why & My Roots</h2>
-      </div>
-      <div class="why-roots-grid">
-        <!-- Why Card -->
-        <div class="why-roots-card reveal d1">
-          <h3 class="why-roots-title">My Why</h3>
-          <p class="why-roots-text">To provide compassionate, holistic birth support through doula care, prenatal yoga, childbirth education, and nutrition guidance — helping families navigate one of life's most transformative experiences with trust and love.</p>
+      <div class="why-roots-cta-single">
+        <div class="why-roots-cta-content reveal">
+          <h2 class="why-roots-cta-title">My Why / My Roots</h2>
         </div>
-        <!-- Roots Card -->
-        <div class="why-roots-card reveal d2">
-          <h3 class="why-roots-title">My Roots</h3>
-          <p class="why-roots-text">To create a world where every woman feels empowered, supported, and celebrated throughout her pregnancy, birth, and postpartum journey — embracing motherhood with confidence, strength, and joy.</p>
-        </div>
-      </div>
-      <div class="why-roots-cta-wrap reveal d3">
-        <a href="{{ route('services') }}" class="why-roots-cta-btn">Explore Our Services</a>
       </div>
     </div>
   </section>
 
   <style>
-    /* My Why & My Roots */
-    .why-roots-section {
-      display: grid;
+    /* My Why / My Roots CTA */
+    .why-roots-cta {
+      position: relative;
+      padding: 0 6%;
       overflow: hidden;
-      margin-bottom: 0px; /* Adjust if spacing is needed between the two sections */
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      border-radius: 40px;
+      margin: 0 4% 60px;
     }
-    .why-roots-bg-img {
-      grid-area: 1 / 1;
-      display: block;
-      width: 100%;
-      height: 560px;
-      object-fit: cover;
-      object-position: center top;
+    .why-roots-cta-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      border-radius: 40px;
       z-index: 0;
     }
-    .why-roots-overlay {
-      grid-area: 1 / 1;
+    .why-roots-cta-overlay {
+      position: absolute;
+      inset: 0;
       background: rgba(0, 0, 0, 0.45);
+      border-radius: 40px;
       z-index: 1;
     }
-    .why-roots-section .container {
-      grid-area: 1 / 1;
+    .why-roots-cta .container {
       position: relative;
       z-index: 2;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 6%;
-      box-sizing: border-box;
     }
-    .why-roots-header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-    .why-roots-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      max-width: 1200px;
+    .why-roots-cta-single {
+      max-width: 800px;
       margin: 0 auto;
     }
-    .why-roots-card {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 40px 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .why-roots-cta-content {
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-      transition: transform 0.4s ease;
     }
-    .why-roots-card:hover {
-      transform: translateY(-6px);
-    }
-    .why-roots-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
+    .why-roots-cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 64px);
       color: #ffffff;
-      margin-bottom: 16px;
-      letter-spacing: 0.5px;
-    }
-    .why-roots-text {
-      color: rgba(255, 255, 255, 0.92);
-      font-size: 16.5px;
-      line-height: 1.85;
+      line-height: 1.2;
       margin: 0;
     }
-    .why-roots-cta-wrap {
-      text-align: center;
-      margin-top: 32px;
-    }
-    .why-roots-cta-btn {
-      display: inline-block;
-      padding: 16px 42px;
-      background: #ffffff;
-      color: #4DB6AC;
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-    .why-roots-cta-btn:hover {
-      transform: translateY(-2px);
-      background: #4DB6AC;
-      color: #ffffff;
-      box-shadow: 0 14px 36px rgba(77,182,172,0.45);
-    }
-    @media (max-width: 900px) {
-      .why-roots-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    
+    @media (max-width: 480px) {
+      .why-roots-cta {
+        padding: 60px 5%;
+        border-radius: 24px;
+        margin: 0 3% 40px;
+        min-height: 300px;
       }
-      .why-roots-card {
-        padding: 40px 30px;
-      }
-      .why-roots-bg-img { height: 500px; }
-      .why-roots-section .container { padding: 40px 5%; }
-      .why-roots-cta-wrap { margin-top: 40px; }
     }
   </style>
 
