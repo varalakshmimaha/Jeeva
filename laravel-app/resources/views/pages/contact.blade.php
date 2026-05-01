@@ -305,6 +305,24 @@
     </div>
   </section>
 
+  {{-- Enquiry success modal --}}
+  @if(session('success') && session('success_kind') === 'enquiry')
+  <div class="booking-modal-overlay" id="enquirySuccessModal">
+    <div class="booking-modal-card">
+      <div class="booking-modal-icon">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+          <circle class="bm-circle" cx="26" cy="26" r="24" stroke="#2FA9A3" stroke-width="2.5" fill="none"/>
+          <polyline class="bm-check" points="14,27 22,35 38,18" stroke="#2FA9A3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <h2 class="booking-modal-title">Message Sent!</h2>
+      <p class="booking-modal-text">Thank you for reaching out.</p>
+      <p class="booking-modal-sub">We've received your enquiry and will get back to you shortly.</p>
+      <button class="booking-modal-btn" onclick="document.getElementById('enquirySuccessModal').remove()">Close</button>
+    </div>
+  </div>
+  @endif
+
   <style>
     /* ── Book Consultation (Calendly layout) ── */
     .book-wrap {
