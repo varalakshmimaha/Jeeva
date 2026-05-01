@@ -5,12 +5,17 @@
 @section('content')
 
 <style>
-  /* Home banner — show full uploaded image without zoom or crop */
+  /* Home banner — show full uploaded image without zoom, crop, or black gaps */
+  .home-banners-section .banner-slider,
+  .home-banners-section .banner-slider-track {
+    min-height: 0 !important;
+    background: transparent !important;
+  }
   .home-banners-section .banner-slide {
     background-size: 100% auto !important;
     background-position: top center !important;
     background-repeat: no-repeat !important;
-    background-color: #1e2b30;
+    background-color: transparent !important;
   }
   /* Home banner title — uppercase and bright for readability over photo */
   .home-banners-section .banner-slide-shell {
@@ -2013,6 +2018,29 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 
 <script>
+// Fit banner height to the uploaded image's natural aspect ratio (no black gaps, no zoom)
+(function() {
+  function setBannerHeight() {
+    var slide = document.querySelector('.home-banners-section .banner-slide.is-active');
+    if (!slide) return;
+    var bg = slide.style.backgroundImage || getComputedStyle(slide).backgroundImage;
+    if (!bg || bg === 'none') return;
+    var url = bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+    var img = new Image();
+    img.onload = function() {
+      var vw = document.documentElement.clientWidth;
+      var h = Math.round(vw * img.naturalHeight / img.naturalWidth);
+      var slider = document.querySelector('.home-banners-section .banner-slider');
+      var track = document.querySelector('.home-banners-section .banner-slider-track');
+      if (slider) slider.style.minHeight = h + 'px';
+      if (track) track.style.minHeight = h + 'px';
+    };
+    img.src = url;
+  }
+  document.addEventListener('DOMContentLoaded', setBannerHeight);
+  window.addEventListener('resize', setBannerHeight);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-faq]').forEach(item => {
     item.querySelector('.home-faq-question').addEventListener('click', () => {
