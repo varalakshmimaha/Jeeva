@@ -5,10 +5,10 @@
 @section('content')
 
 <style>
-  /* Home banner */
+  /* Home banner — show full uploaded image without zoom or crop */
   .home-banners-section .banner-slide {
-    background-size: cover !important;
-    background-position: center 30% !important;
+    background-size: 100% auto !important;
+    background-position: top center !important;
     background-repeat: no-repeat !important;
     background-color: #1e2b30;
   }
