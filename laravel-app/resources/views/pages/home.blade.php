@@ -5,12 +5,44 @@
 @section('content')
 
 <style>
-  /* Home banner — no zoom, full image visible, height matched by JS */
-  .home-banners-section .banner-slide {
-    background-size: 100% auto !important;
-    background-position: top center !important;
-    background-repeat: no-repeat !important;
-    background-color: #000 !important;
+  /* ── Home banner: full image via <img>, zero zoom, zero crop ── */
+  .home-banners-section .banner-slider,
+  .home-banners-section .banner-slider-track {
+    min-height: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+  /* Active slide is in normal flow → its img drives the container height */
+  .home-banners-section .banner-slide.is-active {
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    height: auto !important;
+    width: 100% !important;
+    background-image: none !important;
+  }
+  /* Inactive slides float behind at the same height */
+  .home-banners-section .banner-slide:not(.is-active) {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0 !important;
+    background-image: none !important;
+  }
+  /* The actual image — full width, auto height = original proportions */
+  .home-banners-section .banner-bg-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* Text/button overlay sits above the image */
+  .home-banners-section .banner-slide-shell {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+  }
+  /* Dark gradient for text readability */
+  .home-banners-section .banner-slide::after {
+    z-index: 1 !important;
   }
   /* Home banner title — uppercase and bright for readability over photo */
   .home-banners-section .banner-slide-shell {
@@ -68,7 +100,8 @@
               ? asset($banner->image)
               : asset('storage/Hero Banner.jpeg');
           @endphp
-          <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}" style="background-image: url('{{ $bannerImg }}');">
+          <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}">
+            <img src="{{ $bannerImg }}" alt="{{ $banner->title }}" class="banner-bg-img" loading="eager">
             <div class="banner-slide-shell">
               <div class="banner-slide-content">
                 <h1 class="banner-slide-title">{{ $banner->title }}</h1>
@@ -81,7 +114,8 @@
           </div>
         @endforeach
       @else
-        <div class="banner-slide is-active" style="background-image: url('{{ asset('storage/Hero Banner.jpeg') }}');">
+        <div class="banner-slide is-active">
+          <img src="{{ asset('storage/Hero Banner.jpeg') }}" alt="Empowering Your Birth Journey" class="banner-bg-img" loading="eager">
           <div class="banner-slide-shell">
             <div class="banner-slide-content">
               <h1 class="banner-slide-title">Empowering Your Birth Journey</h1>
@@ -2013,34 +2047,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 
 <script>
-// Resize banner container to the image's natural proportions — no zoom, no black gap
-(function () {
-  function fitBanner() {
-    var slide = document.querySelector('.home-banners-section .banner-slide.is-active');
-    if (!slide || !slide.style.backgroundImage) return;
-    var url = slide.style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    if (!url) return;
-    var img = new Image();
-    img.onload = function () {
-      if (!img.naturalWidth) return;
-      var vw   = document.documentElement.clientWidth;
-      var h    = Math.round(vw * img.naturalHeight / img.naturalWidth);
-      var sel  = '.home-banners-section .banner-slider, .home-banners-section .banner-slider-track';
-      document.querySelectorAll(sel).forEach(function (el) {
-        el.style.minHeight = h + 'px';
-        el.style.maxHeight = h + 'px';
-      });
-    };
-    img.src = url;
-  }
-  document.addEventListener('DOMContentLoaded', fitBanner);
-  window.addEventListener('resize', function () {
-    document.querySelectorAll(
-      '.home-banners-section .banner-slider, .home-banners-section .banner-slider-track'
-    ).forEach(function (el) { el.style.minHeight = ''; el.style.maxHeight = ''; });
-    fitBanner();
-  });
-})();
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-faq]').forEach(item => {
