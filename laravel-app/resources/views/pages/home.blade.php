@@ -5,11 +5,12 @@
 @section('content')
 
 <style>
-  /* Home banner — full viewport cover, anchored to top of image */
+  /* Home banner — no zoom, full image visible, height matched by JS */
   .home-banners-section .banner-slide {
-    background-size: cover !important;
-    background-position: center top !important;
+    background-size: 100% auto !important;
+    background-position: top center !important;
     background-repeat: no-repeat !important;
+    background-color: #000 !important;
   }
   /* Home banner title — uppercase and bright for readability over photo */
   .home-banners-section .banner-slide-shell {
@@ -2012,6 +2013,34 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 
 <script>
+// Resize banner container to the image's natural proportions — no zoom, no black gap
+(function () {
+  function fitBanner() {
+    var slide = document.querySelector('.home-banners-section .banner-slide.is-active');
+    if (!slide || !slide.style.backgroundImage) return;
+    var url = slide.style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+    if (!url) return;
+    var img = new Image();
+    img.onload = function () {
+      if (!img.naturalWidth) return;
+      var vw   = document.documentElement.clientWidth;
+      var h    = Math.round(vw * img.naturalHeight / img.naturalWidth);
+      var sel  = '.home-banners-section .banner-slider, .home-banners-section .banner-slider-track';
+      document.querySelectorAll(sel).forEach(function (el) {
+        el.style.minHeight = h + 'px';
+        el.style.maxHeight = h + 'px';
+      });
+    };
+    img.src = url;
+  }
+  document.addEventListener('DOMContentLoaded', fitBanner);
+  window.addEventListener('resize', function () {
+    document.querySelectorAll(
+      '.home-banners-section .banner-slider, .home-banners-section .banner-slider-track'
+    ).forEach(function (el) { el.style.minHeight = ''; el.style.maxHeight = ''; });
+    fitBanner();
+  });
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-faq]').forEach(item => {
