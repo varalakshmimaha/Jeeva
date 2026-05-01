@@ -5,10 +5,10 @@
 @section('content')
 
 <style>
-  /* Home banner: show the FULL uploaded hero image without cropping */
+  /* Home banner */
   .home-banners-section .banner-slide {
-    background-size: 100% 100% !important;
-    background-position: center center !important;
+    background-size: cover !important;
+    background-position: center 30% !important;
     background-repeat: no-repeat !important;
     background-color: #1e2b30;
   }
