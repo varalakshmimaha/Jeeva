@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     use SendsBookingEmails;
+
+    private function adminTimezone(): string
+    {
+        return \App\Models\SiteSetting::where('key', 'admin_timezone')->value('value') ?: config('app.timezone', 'UTC');
+    }
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -42,7 +47,7 @@ class ContactController extends Controller
                     if ($resp->successful()) {
                         $startTime = $resp->json('resource.start_time');
                         if ($startTime) {
-                            $dt = \Carbon\Carbon::parse($startTime)->setTimezone('Asia/Kolkata');
+                            $dt = \Carbon\Carbon::parse($startTime)->setTimezone($this->adminTimezone());
                             $validated['preferred_date'] = $dt->format('Y-m-d');
                             $validated['preferred_time'] = $dt->format('h:i A');
                         }
@@ -110,7 +115,7 @@ class ContactController extends Controller
             return response()->json(['error' => 'no start_time'], 400);
         }
 
-        $dt = \Carbon\Carbon::parse($startTime)->setTimezone('Asia/Kolkata');
+        $dt = \Carbon\Carbon::parse($startTime)->setTimezone($this->adminTimezone());
 
         return response()->json([
             'date'  => $dt->format('Y-m-d'),

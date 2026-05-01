@@ -17,7 +17,7 @@
     <div class="adm-card">
         <div class="adm-card-head" style="display:flex;justify-content:space-between;align-items:center;">
             <span>Booking Details</span>
-            <span style="font-size:12px;color:var(--muted);font-weight:400;">Submitted {{ $message->created_at->format('d M Y, h:i A') }}</span>
+            <span style="font-size:12px;color:var(--muted);font-weight:400;">Submitted {{ $message->created_at->setTimezone($siteSettings['admin_timezone'] ?? 'UTC')->format('d M Y, h:i A') }}</span>
         </div>
         <div class="adm-card-body">
             <table class="adm-form-table">

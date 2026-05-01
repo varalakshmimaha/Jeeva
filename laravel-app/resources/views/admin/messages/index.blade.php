@@ -79,7 +79,7 @@
                                 <span style="color:var(--muted);">—</span>
                             @endif
                         </td>
-                        <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->format('M d, Y h:i A') }}</td>
+                        <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->setTimezone($siteSettings['admin_timezone'] ?? 'UTC')->format('M d, Y h:i A') }}</td>
                         <td>
                             @php
                                 $statusConfig = [
@@ -137,7 +137,7 @@
                         </td>
                         <td style="color:var(--muted);font-size:13px;">{{ $msg->subject ?? 'General Enquiry' }}</td>
                         <td style="color:var(--muted);font-size:13px;">{{ Str::limit($msg->message, 60) }}</td>
-                        <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->format('M d, Y h:i A') }}</td>
+                        <td style="color:var(--muted);font-size:13px;">{{ $msg->created_at->setTimezone($siteSettings['admin_timezone'] ?? 'UTC')->format('M d, Y h:i A') }}</td>
                         <td class="col-center">
                             <div class="adm-actions" style="justify-content:center;">
                                 <a href="{{ route('admin.messages.show', $msg->id) }}" class="adm-btn adm-btn-dark adm-btn-sm">View</a>

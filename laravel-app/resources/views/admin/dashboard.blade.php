@@ -125,7 +125,7 @@
                             @endif
                             <div style="font-size:12px;color:var(--muted);margin-top:2px;">{{ Str::limit($msg->service_selected ?? $msg->subject ?? $msg->message, 30) }}</div>
                         </td>
-                        <td class="db-msg-date">{{ $msg->created_at->diffForHumans() }}</td>
+                        <td class="db-msg-date">{{ $msg->created_at->setTimezone($siteSettings['admin_timezone'] ?? 'UTC')->diffForHumans() }}</td>
                         <td>
                             @if(!$msg->is_read)
                                 <span class="db-badge db-badge-unread">Unread</span>
