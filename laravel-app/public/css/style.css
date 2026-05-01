@@ -3769,6 +3769,17 @@ footer{
   box-shadow: 0 15px 35px rgba(224, 103, 60, 0.5);
 }
 
+.youtube-float {
+  background-color: #FF0000;
+  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+}
+
+.youtube-float:hover {
+  transform: scale(1.1);
+  background-color: #cc0000;
+  box-shadow: 0 15px 35px rgba(255, 0, 0, 0.5);
+}
+
 .whatsapp-float {
   background-color: #25d366;
   box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
