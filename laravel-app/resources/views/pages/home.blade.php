@@ -5,12 +5,41 @@
 @section('content')
 
 <style>
-  /* Home banner — matches bestprime.live: full viewport, image from top */
-  .home-banners-section .banner-slide {
-    background-size: cover !important;
-    background-position: center top !important;
-    background-repeat: no-repeat !important;
+  /* ── Home banner: real <img> tag — zero zoom, zero crop, full image ── */
+  .home-banners-section .banner-slider,
+  .home-banners-section .banner-slider-track {
+    min-height: 0 !important;
+    height: auto !important;
+    background: transparent !important;
   }
+  /* Active slide drives container height (position: relative) */
+  .home-banners-section .banner-slide.is-active {
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    height: auto !important;
+    background-image: none !important;
+  }
+  /* Other slides sit behind */
+  .home-banners-section .banner-slide:not(.is-active) {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0 !important;
+    background-image: none !important;
+  }
+  /* Full-width image, height = natural proportions */
+  .home-banners-section .banner-bg-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  /* Text overlay sits on top of image */
+  .home-banners-section .banner-slide-shell {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+  }
+  .home-banners-section .banner-slide::after { z-index: 1 !important; }
   /* Home banner title — uppercase and bright for readability over photo */
   .home-banners-section .banner-slide-shell {
     align-items: flex-end !important;
@@ -67,7 +96,8 @@
               ? asset($banner->image)
               : asset('storage/Hero Banner.jpeg');
           @endphp
-          <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}" style="background-image: url('{{ $bannerImg }}');">
+          <div class="banner-slide {{ $index === 0 ? 'is-active' : '' }}">
+            <img src="{{ $bannerImg }}" alt="{{ $banner->title }}" class="banner-bg-img" loading="eager">
             <div class="banner-slide-shell">
               <div class="banner-slide-content">
                 <h1 class="banner-slide-title">{{ $banner->title }}</h1>
@@ -80,7 +110,8 @@
           </div>
         @endforeach
       @else
-        <div class="banner-slide is-active" style="background-image: url('{{ asset('storage/Hero Banner.jpeg') }}');">
+        <div class="banner-slide is-active">
+          <img src="{{ asset('storage/Hero Banner.jpeg') }}" alt="Empowering Your Birth Journey" class="banner-bg-img" loading="eager">
           <div class="banner-slide-shell">
             <div class="banner-slide-content">
               <h1 class="banner-slide-title">Empowering Your Birth Journey</h1>
