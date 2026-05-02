@@ -310,12 +310,12 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .nav-links{display:none!important}
   .nav-cta-btn{display:none!important}
   .hamburger{display:flex}
-  .nav-inner{height:72px}
-  .logo{width:72px!important;height:72px!important;margin-left:8px!important;margin-top:0!important;margin-bottom:0!important;}
-  .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.05) translate(2px, 2px);}
-  nav.scrolled .nav-inner{height:72px!important}
-  nav.scrolled .logo{width:72px!important;height:72px!important;margin-left:8px!important;margin-top:0!important;margin-bottom:0!important;}
-  nav.scrolled .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.05) translate(2px, 2px);}
+  .nav-inner{height:110px}
+  .logo{width:110px!important;height:110px!important;margin-left:8px!important;margin-top:0!important;margin-bottom:0!important;}
+  .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translate(5px, 8px);}
+  nav.scrolled .nav-inner{height:110px!important}
+  nav.scrolled .logo{width:110px!important;height:110px!important;margin-left:8px!important;margin-top:0!important;margin-bottom:0!important;}
+  nav.scrolled .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translate(5px, 8px);}
 }
 
 

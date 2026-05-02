@@ -91,11 +91,15 @@
   }
   @media (max-width: 560px) {
     .home-banners-section .banner-slide-title { font-size: clamp(20px, 5.5vw, 26px) !important; line-height: 1.35; }
-    .home-banners-section .banner-slide-shell { padding-bottom: 20px !important; padding-left: 16px !important; padding-right: 16px !important; }
+    .home-banners-section .banner-slide-shell {
+      padding-bottom: 80px !important;
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
     .home-banners-section .banner-slide-content { width: 100% !important; text-align: center; }
-    .home-banners-section .banner-slide.is-active { min-height: 280px !important; }
-    .home-banners-section .banner-bg-img { min-height: 280px; object-fit: cover; }
-    .home-banners-section .banner-slide-button { padding: 12px 22px !important; font-size: 15px !important; margin-top: 16px !important; }
+    .home-banners-section .banner-slide.is-active { min-height: 100svh !important; }
+    .home-banners-section .banner-bg-img { min-height: 100svh; object-fit: cover; width: 100%; }
+    .home-banners-section .banner-slide-button { padding: 14px 28px !important; font-size: 16px !important; margin-top: 18px !important; }
   }
   .home-banners-section .banner-slide-description {
     color: #ffffff;
