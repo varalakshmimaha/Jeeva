@@ -1786,7 +1786,7 @@ footer{
 /* Main footer area - logo pink */
 .site-footer-main{
   background:linear-gradient(180deg,#ffffff 0%,#fdf4f4 100%);
-  padding:48px 6% 0;
+  padding:48px 6% 24px;
   border-top:none;
 }
 .site-footer-grid{
