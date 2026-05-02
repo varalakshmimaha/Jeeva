@@ -29,7 +29,6 @@
           <li><a href="{{ route('home') }}"><span class="link-arrow">&rsaquo;</span> Home</a></li>
           <li><a href="{{ route('about') }}"><span class="link-arrow">&rsaquo;</span> About Us</a></li>
           <li><a href="{{ route('services') }}"><span class="link-arrow">&rsaquo;</span> Services</a></li>
-          <li><a href="{{ route('gallery') }}"><span class="link-arrow">&rsaquo;</span> Gallery</a></li>
         </ul>
       </div>
 

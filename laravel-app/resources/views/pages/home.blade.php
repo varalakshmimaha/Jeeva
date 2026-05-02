@@ -1255,7 +1255,7 @@
       box-shadow: 0 8px 24px rgba(77, 182, 172, 0.3);
       transition: all 0.3s;
       align-self: center;
-      min-width: 280px;
+      min-width: min(280px, 100%);
     }
     .appointment-btn:hover {
       transform: translateY(-2px);

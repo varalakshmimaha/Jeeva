@@ -1185,11 +1185,11 @@
     }
     .about-cta-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 3.2vw, 40px);
+      font-size: clamp(22px, 3.2vw, 40px);
       color: #ffffff;
       line-height: 1.2;
       margin-bottom: 20px;
-      white-space: nowrap;
+      white-space: normal;
     }
     .about-cta-desc {
       font-size: 16px;

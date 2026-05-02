@@ -105,7 +105,7 @@ nav.scrolled{
   border-radius:50%;
   margin:0;padding:0;
   line-height:1;
-  transform: scale(1.24) translateY(8px);
+  transform: scale(1.24) translate(5px, 8px);
 }
 nav.scrolled .nav-inner{
   height:90px;
@@ -119,7 +119,7 @@ nav.scrolled .logo-img{
   height:100%;width:100%;
   object-fit:contain;filter:none;border-radius:50%;
   line-height:1;margin:0;padding:0;
-  transform: scale(1.24) translateY(8px);
+  transform: scale(1.24) translate(5px, 8px);
 }
 
 .nav-links{
@@ -312,10 +312,10 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .hamburger{display:flex}
   .nav-inner{height:80px}
   .logo{width:140px!important;height:140px!important;margin-left:14px!important;margin-top:10px!important;margin-bottom:-10px!important;}
-  .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translateY(8px);}
+  .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translate(5px, 8px);}
   nav.scrolled .nav-inner{height:80px!important}
   nav.scrolled .logo{width:140px!important;height:140px!important;margin-left:14px!important;margin-top:10px!important;margin-bottom:-10px!important;}
-  nav.scrolled .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translateY(8px);}
+  nav.scrolled .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translate(5px, 8px);}
 }
 
 
@@ -4071,3 +4071,123 @@ footer{
 .jiva-pickdate__input:invalid { box-shadow: none; }
 .jiva-pickdate:has(.jiva-pickdate__input:invalid:required) { border-color: #e5e0d8; }
 
+
+/* =====================================================
+   MOBILE RESPONSIVE — ALL PAGES (≤768px & ≤480px)
+   ===================================================== */
+
+/* Prevent horizontal overflow site-wide */
+html, body { overflow-x: hidden; }
+* { box-sizing: border-box; }
+
+/* ── Why Choose Us grid: 4-col → 2-col → 1-col ── */
+@media (max-width: 768px) {
+  .why-journey-grid--four { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+  .why-journey-step { padding: 20px 16px !important; }
+}
+@media (max-width: 480px) {
+  .why-journey-grid--four { grid-template-columns: 1fr !important; gap: 16px !important; }
+}
+
+/* ── Home: About blob circle on very small screens ── */
+@media (max-width: 480px) {
+  .about-blob-bg { width: 220px !important; height: 220px !important; }
+  .about-blob-img { max-width: 240px !important; height: 240px !important; }
+  .about-wrapper { padding: 0 4% !important; }
+}
+
+/* ── Home: Services CTA row ── */
+@media (max-width: 560px) {
+  .services-cta-btn { white-space: normal !important; text-align: center; }
+}
+
+/* ── Home: Appointment form button full-width on mobile ── */
+@media (max-width: 560px) {
+  .appointment-btn { width: 100% !important; min-width: auto !important; }
+  .appt-form-row { grid-template-columns: 1fr !important; }
+}
+
+/* ── Why Choose grid numbers/stats section ── */
+@media (max-width: 640px) {
+  .why-numbers-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+  .why-number-val { font-size: 32px !important; }
+}
+@media (max-width: 360px) {
+  .why-numbers-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── About page: founder grid stacking at 640px ── */
+@media (max-width: 640px) {
+  .founder-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .founder-standing-img { max-width: 280px !important; height: auto !important; margin: 0 auto !important; }
+  .founder-beyond-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .cred-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
+}
+@media (max-width: 480px) {
+  .cred-grid { grid-template-columns: 1fr !important; }
+  .founder-bio-wrap { padding: 0 4% !important; }
+}
+
+/* ── Services page ── */
+@media (max-width: 640px) {
+  .svc-full-grid { grid-template-columns: 1fr !important; }
+  .svc-full-card { padding: 20px 18px !important; }
+}
+
+/* ── Contact page: booking form split layout ── */
+@media (max-width: 768px) {
+  .bk-split { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .bk-form-card { padding: 24px 20px !important; }
+  .touch-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .touch-form-card { padding: 24px 20px !important; }
+}
+@media (max-width: 480px) {
+  .bk-phone-row { flex-wrap: wrap !important; gap: 8px !important; }
+  .bk-cc-wrap { width: 100% !important; }
+  .bk-phone-num { width: 100% !important; }
+}
+
+/* ── Blog page ── */
+@media (max-width: 640px) {
+  .blog-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .blog-card { padding: 0 !important; }
+}
+
+/* ── Gallery grid gap ── */
+@media (max-width: 640px) {
+  .gallery-grid-showcase { gap: 14px !important; }
+}
+
+/* ── Testimonials ── */
+@media (max-width: 640px) {
+  .tp-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .tp-card { padding: 22px 18px !important; }
+}
+
+/* ── CTA modern cards: button row stacking ── */
+@media (max-width: 480px) {
+  .cta-modern-card { padding: 36px 18px !important; text-align: center; }
+  .cta-modern-card div[style*="display: flex"] { flex-direction: column !important; align-items: center !important; gap: 14px !important; }
+  .btn-ghost, .btn-white-solid { width: 100% !important; justify-content: center !important; text-align: center !important; }
+}
+
+/* ── Page banner title minimum size ── */
+@media (max-width: 480px) {
+  .page-banner-title { font-size: 22px !important; }
+  .page-banner-subtitle { font-size: 13px !important; padding: 0 4%; }
+}
+
+/* ── Floating social icons — smaller on mobile ── */
+@media (max-width: 480px) {
+  .floating-social { gap: 8px !important; right: 12px !important; bottom: 12px !important; }
+  .social-float { width: 38px !important; height: 38px !important; }
+}
+
+/* ── Footer contact strip ── */
+@media (max-width: 640px) {
+  .footer-contact-strip { flex-direction: column !important; gap: 10px !important; padding: 16px 5% !important; }
+  .footer-contact-item { justify-content: flex-start; font-size: 13px; }
+}
+
+/* ── Images always responsive ── */
+img { max-width: 100%; height: auto; }
