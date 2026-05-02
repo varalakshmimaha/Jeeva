@@ -38,18 +38,18 @@
     position: absolute !important;
     inset: 0 !important;
     z-index: 2 !important;
-  }
-  .home-banners-section .banner-slide::after { z-index: 1 !important; }
-  /* Home banner title — uppercase and bright for readability over photo */
-  .home-banners-section .banner-slide-shell {
-    align-items: flex-end !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
     padding-bottom: 24px !important;
   }
+  .home-banners-section .banner-slide::after { z-index: 1 !important; }
   .home-banners-section .banner-slide-content {
     max-width: 900px;
     width: 100%;
-    margin-top: auto;
-    margin-bottom: 0;
+    margin: 0 auto;
+    text-align: center;
   }
   .home-banners-section .banner-slide-title {
     font-family: 'Brush Script MT', 'Brush Script Std', 'Kaushan Script', cursive;
@@ -66,10 +66,24 @@
     font-style: normal;
   }
   .home-banners-section .banner-slide-button {
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 34px;
+    padding: 18px 34px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2FA9A3 0%, #1f8c87 100%);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 18px 36px rgba(47, 169, 163, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .home-banners-section .banner-slide-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 42px rgba(47, 169, 163, 0.45);
+    background: linear-gradient(135deg, #1f8c87 0%, #2FA9A3 100%);
   }
   @media (max-width: 992px) {
     .home-banners-section .banner-slide-title { font-size: clamp(28px, 4.5vw, 42px) !important; }
@@ -78,6 +92,7 @@
   @media (max-width: 560px) {
     .home-banners-section .banner-slide-title { font-size: clamp(22px, 5.5vw, 28px) !important; line-height: 1.35; }
     .home-banners-section .banner-slide-shell { padding-bottom: 16px !important; }
+    .home-banners-section .banner-slide-content { width: 90% !important; }
   }
   .home-banners-section .banner-slide-description {
     color: #ffffff;

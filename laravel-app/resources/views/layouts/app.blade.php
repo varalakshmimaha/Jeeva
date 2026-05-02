@@ -90,8 +90,8 @@
 
   <!-- CTA Buttons -->
   <div class="mob-menu-cta">
-    <a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond" target="_blank" rel="noopener noreferrer" class="mob-menu-cta-call">
-      📞 Call Now: 74832 11870
+    <a href="https://wa.me/14375534448?text=Hi%2C+I'd+like+to+connect+with+JIVA+birth+%26+beyond+services" target="_blank" rel="noopener noreferrer" class="mob-menu-cta-call">
+      📞 Call Now: +1 (437) 553-4448
     </a>
     <a href="#" class="mob-menu-cta-book" data-calendly>
       📅 Book Consultation
@@ -146,7 +146,7 @@
   @endif
 
   <!-- WhatsApp Button -->
-  <a href="https://wa.me/917483211870?text=Hi%2C+I'd+like+to+connect+with+Jiva+Birth+and+Beyond"
+  <a href="https://wa.me/14375534448?text=Hi%2C+I'd+like+to+connect+with+JIVA+birth+%26+beyond+services"
      class="social-float whatsapp-float"
      target="_blank"
      rel="noopener noreferrer"

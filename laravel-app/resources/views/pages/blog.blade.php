@@ -49,10 +49,10 @@
         <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(30px, 4vw, 48px); margin-bottom: 16px; color: white;">Have Questions About Your Journey?</h2>
         <p style="font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; line-height: 1.7;">Our experts are ready to answer. Schedule a free consultation today.</p>
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-          <a href="tel:+917483211870" class="btn-ghost">
+          <a href="tel:+14375534448" class="btn-ghost">
             📞 Call Us
           </a>
-          <a href="#" class="btn-white-solid" data-calendly>
+          <a href="{{ route('contact') }}" class="btn-white-solid">
             Book Consultation
           </a>
         </div>
@@ -60,5 +60,6 @@
     </div>
   </div>
 </section>
+
 
 @endsection
