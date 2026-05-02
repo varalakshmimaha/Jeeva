@@ -17,7 +17,7 @@
         </p>
         @if(!empty($siteSettings['certifications_image_url']))
           <div style="margin-top:0;">
-            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="width:100%;max-width:200px;max-height:90px;object-fit:contain;display:block;">
+            <img src="{{ $siteSettings['certifications_image_url'] }}" alt="Certifications" style="width:100%;max-width:260px;height:auto;display:block;">
           </div>
         @endif
       </div>
