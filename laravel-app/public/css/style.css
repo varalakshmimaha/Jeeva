@@ -305,16 +305,16 @@ nav.scrolled .hamburger span{background:var(--navy)}
 }
 
 @media(max-width:860px){
-  nav{top:12px;width:calc(100% - 24px);padding:0 14px 0 18px;border-radius:20px}
+  nav{top:12px;width:calc(100% - 24px);padding:0 14px 0 8px;border-radius:20px;overflow:visible;}
   nav.scrolled{top:8px}
   .nav-links{display:none!important}
   .nav-cta-btn{display:none!important}
   .hamburger{display:flex}
-  .nav-inner{height:110px}
-  .logo{width:110px!important;height:110px!important;margin-left:8px!important;margin-top:0!important;margin-bottom:0!important;}
+  .nav-inner{height:64px;overflow:visible;}
+  .logo{width:110px!important;height:110px!important;margin-left:6px!important;margin-top:-23px!important;margin-bottom:-23px!important;z-index:1000;}
   .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translate(5px, 8px);}
-  nav.scrolled .nav-inner{height:110px!important}
-  nav.scrolled .logo{width:110px!important;height:110px!important;margin-left:8px!important;margin-top:0!important;margin-bottom:0!important;}
+  nav.scrolled .nav-inner{height:64px!important;overflow:visible;}
+  nav.scrolled .logo{width:110px!important;height:110px!important;margin-left:6px!important;margin-top:-23px!important;margin-bottom:-23px!important;}
   nav.scrolled .logo-img{height:100%!important;width:100%!important;object-fit:contain;padding:0;transform:scale(1.24) translate(5px, 8px);}
 }
 
