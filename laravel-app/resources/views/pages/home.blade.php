@@ -90,9 +90,12 @@
     .home-banners-section .banner-slide-shell { padding-bottom: 24px !important; }
   }
   @media (max-width: 560px) {
-    .home-banners-section .banner-slide-title { font-size: clamp(22px, 5.5vw, 28px) !important; line-height: 1.35; }
-    .home-banners-section .banner-slide-shell { padding-bottom: 16px !important; }
-    .home-banners-section .banner-slide-content { width: 90% !important; }
+    .home-banners-section .banner-slide-title { font-size: clamp(20px, 5.5vw, 26px) !important; line-height: 1.35; }
+    .home-banners-section .banner-slide-shell { padding-bottom: 20px !important; padding-left: 16px !important; padding-right: 16px !important; }
+    .home-banners-section .banner-slide-content { width: 100% !important; text-align: center; }
+    .home-banners-section .banner-slide.is-active { min-height: 280px !important; }
+    .home-banners-section .banner-bg-img { min-height: 280px; object-fit: cover; }
+    .home-banners-section .banner-slide-button { padding: 12px 22px !important; font-size: 15px !important; margin-top: 16px !important; }
   }
   .home-banners-section .banner-slide-description {
     color: #ffffff;

@@ -4191,3 +4191,20 @@ html, body { overflow-x: hidden; }
 
 /* ── Images always responsive ── */
 img { max-width: 100%; height: auto; }
+
+/* ── Testimonials: justify message text on mobile ── */
+@media (max-width: 768px) {
+  .tp-msg { text-align: justify !important; }
+  .tp-top { align-items: flex-start !important; }
+}
+
+/* ── Footer: reduce gap between certifications and quick links on mobile ── */
+@media (max-width: 640px) {
+  .site-footer-grid { gap: 16px !important; }
+  .site-footer-brand { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  .site-footer-brand > div[style*="margin-top"] { margin-top: 8px !important; }
+  .footer-logo-img { height: 110px !important; }
+}
+@media (max-width: 480px) {
+  .site-footer-grid { gap: 14px !important; }
+}
