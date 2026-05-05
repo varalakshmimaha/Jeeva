@@ -281,6 +281,12 @@
       grid-template-columns: 1fr;
       gap: 20px;
     }
+    .svc-full-footer {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
     .svc-learn-btn {
       padding: 10px 16px;
       font-size: 13px;

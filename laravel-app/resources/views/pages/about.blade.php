@@ -1106,6 +1106,10 @@
       }
       .vm-card {
         padding: 40px 30px;
+        text-align: justify;
+      }
+      .vm-text {
+        text-align: justify;
       }
       .vm-bg-img { height: 500px; }
       .vm-section .container { padding: 40px 5%; }

@@ -88,6 +88,13 @@
 @media (max-width: 768px) {
   .page-banner { min-height: 300px; }
   .page-banner-content { padding: 90px 5% 40px; }
+  .page-banner-title { font-size: clamp(26px, 6vw, 38px); }
   .page-banner-subtitle { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .page-banner { min-height: 260px; }
+  .page-banner-content { padding: 80px 5% 32px; }
+  .page-banner-title { font-size: clamp(20px, 6vw, 26px) !important; line-height: 1.25; }
+  .page-banner-subtitle { font-size: 14px; }
 }
 </style>
