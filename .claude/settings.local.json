@@ -14,7 +14,23 @@
       "Bash(cmd /c \"taskkill /PID 14028 /F & taskkill /PID 13296 /F\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8009)",
       "Bash(python3 -c ' *)",
-      "Bash(php -l app/Http/Controllers/Admin/AdminController.php)"
+      "Bash(php -l app/Http/Controllers/Admin/AdminController.php)",
+      "Bash(powershell -command \"Get-Content 'laravel-app\\\\resources\\\\views\\\\pages\\\\home.blade.php' | Measure-Object -Line\")",
+      "Bash(powershell -command \"Select-String -Path 'laravel-app\\\\resources\\\\views\\\\pages\\\\home.blade.php' -Pattern '@endsection' | Select-Object -Last 5\")",
+      "Bash(powershell -command \"Select-String -Path 'laravel-app\\\\app\\\\Http\\\\Controllers\\\\*' -Pattern 'timezone|now\\\\\\(\\\\\\)|Carbon|created_at|submitted' -Recurse | Select-Object Filename, LineNumber, Line | Format-Table -AutoSize\")",
+      "Bash(powershell -command \"Select-String -Path 'laravel-app\\\\resources\\\\views\\\\pages\\\\contact.blade.php' -Pattern 'booking-modal|success_kind|session.*success|bm-' | Select-Object LineNumber, Line\")",
+      "Bash(powershell -command \"Get-Content 'laravel-app\\\\resources\\\\views\\\\pages\\\\contact.blade.php' | Measure-Object -Line\")",
+      "Bash(powershell -command \"Select-String -Path 'laravel-app\\\\resources\\\\views\\\\pages\\\\contact.blade.php' -Pattern '<script|booking-modal|showModal|bookingModal' | Select-Object LineNumber, Line\")",
+      "Bash(findstr /i blog)",
+      "PowerShell(Get-Service | Where-Object { $_.Name -match \"mysql|maria|wamp|xampp\" -or $_.DisplayName -match \"mysql|maria|wamp|xampp\" } -ErrorAction SilentlyContinue | Select-Object Name, DisplayName, Status)",
+      "PowerShell(Get-Process | Where-Object { $_.Name -match \"mysql|maria|xampp|wamp|httpd\" } | Select-Object Name, Id)",
+      "Read(//c/xampp/**)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysqld.exe\" --defaults-file=\"C:\\\\xampp\\\\mysql\\\\bin\\\\my.ini\" --standalone)",
+      "PowerShell(Get-Process -Name \"mysqld\" -ErrorAction SilentlyContinue)",
+      "Bash(cmd.exe /c \"C:\\\\xampp\\\\mysql_start.bat\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\varalakshmi\\\\Desktop\\\\Dental\\\\laravel-app\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000)"
     ]
   }
 }

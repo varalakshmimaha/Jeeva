@@ -1105,11 +1105,17 @@
         gap: 30px;
       }
       .vm-card {
-        padding: 40px 30px;
-        text-align: justify;
+        padding: 36px 22px;
+        text-align: center;
       }
       .vm-text {
-        text-align: justify;
+        text-align: center;
+      }
+      .vm-cta-btn {
+        font-size: 12px;
+        padding: 12px 24px;
+        letter-spacing: 1px;
+        white-space: nowrap;
       }
       .vm-bg-img { height: 500px; }
       .vm-section .container { padding: 40px 5%; }
