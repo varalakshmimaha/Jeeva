@@ -68,9 +68,16 @@
       .home-banners-section .banner-slide-shell {
         justify-content: flex-end !important;
         align-items: center !important;
-        padding-bottom: 100px !important;
+        padding-bottom: 180px !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
+      }
+
+      .home-banners-section .banner-slide-description {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        text-align: center !important;
+        margin-bottom: 12px !important;
       }
 
       .home-banners-section .banner-slide-button {
