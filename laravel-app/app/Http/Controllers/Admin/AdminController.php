@@ -477,6 +477,17 @@ class AdminController extends Controller
         return redirect()->route('admin.messages.index')->with('success', 'Message deleted.');
     }
 
+    public function messagesBulkDestroy(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return redirect()->route('admin.messages.index')->with('error', 'No messages selected.');
+        }
+        $count = ContactMessage::whereIn('id', $ids)->delete();
+        return redirect()->route('admin.messages.index', ['tab' => $request->input('tab', 'enquiries')])
+            ->with('success', $count . ' message(s) deleted.');
+    }
+
     public function messagesUpdateStatus(Request $request, $id)
     {
         $message = ContactMessage::findOrFail($id);
