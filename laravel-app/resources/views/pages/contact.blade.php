@@ -34,6 +34,7 @@
           <form action="{{ route('contact.store') }}" method="POST" id="bkForm">
             @csrf
             <input type="hidden" name="subject" value="Consultation Booking">
+            <input type="text" name="website" style="display:none !important;position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="preferred_date" id="bkDate" value="{{ old('preferred_date') }}">
             <input type="hidden" name="preferred_time" id="bkTime" value="{{ old('preferred_time') }}">
             <input type="hidden" name="calendly_event_uri" id="bkEventUri" value="{{ old('calendly_event_uri') }}">
@@ -280,6 +281,7 @@
         <form action="{{ route('contact.store') }}" method="POST" class="touch-form">
           @csrf
           <input type="hidden" name="subject" value="General Enquiry">
+          <input type="text" name="website" style="display:none !important;position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="bf-field">
             <label class="bf-label">Name</label>
             <input type="text" name="name" class="bf-input" placeholder="Name" required>

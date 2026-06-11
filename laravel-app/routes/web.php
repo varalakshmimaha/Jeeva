@@ -28,8 +28,8 @@ Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy
 Route::get('/terms-and-conditions', [PageController::class, 'terms'])->name('terms');
 
 // Contact Form Submission
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+Route::post('/contact-submit', [ContactController::class, 'submit'])->middleware('throttle:5,1')->name('contact.submit');
 Route::get('/calendly/event-time', [ContactController::class, 'calendlyEventTime'])->name('calendly.event-time');
 Route::get('/booked-slots', [PageController::class, 'bookedSlots'])->name('booked.slots');
 
