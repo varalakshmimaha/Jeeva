@@ -471,10 +471,11 @@ class AdminController extends Controller
         return view('admin.messages.show', compact('message'));
     }
 
-    public function messagesDestroy($id)
+    public function messagesDestroy(Request $request, $id)
     {
         ContactMessage::findOrFail($id)->delete();
-        return redirect()->route('admin.messages.index')->with('success', 'Message deleted.');
+        $tab = $request->input('tab', 'bookings');
+        return redirect()->route('admin.messages.index', ['tab' => $tab])->with('success', 'Message deleted.');
     }
 
     public function messagesBulkDestroy(Request $request)

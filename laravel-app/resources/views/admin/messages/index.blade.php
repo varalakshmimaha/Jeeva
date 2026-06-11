@@ -123,6 +123,7 @@
                                 <a href="{{ route('admin.messages.show', $msg->id) }}" class="adm-btn adm-btn-dark adm-btn-sm">View</a>
                                 <form action="{{ route('admin.messages.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Delete this booking?')">
                                     @csrf @method('DELETE')
+                                    <input type="hidden" name="tab" value="bookings">
                                     <button type="submit" class="adm-btn adm-btn-danger adm-btn-sm">Delete</button>
                                 </form>
                             </div>
@@ -179,6 +180,7 @@
                                 <a href="{{ route('admin.messages.show', $msg->id) }}" class="adm-btn adm-btn-dark adm-btn-sm">View</a>
                                 <form action="{{ route('admin.messages.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Delete this message?')">
                                     @csrf @method('DELETE')
+                                    <input type="hidden" name="tab" value="enquiries">
                                     <button type="submit" class="adm-btn adm-btn-danger adm-btn-sm">Delete</button>
                                 </form>
                             </div>
