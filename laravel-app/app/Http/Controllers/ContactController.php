@@ -93,8 +93,8 @@ class ContactController extends Controller
         $booking = ContactMessage::create($validated);
 
         // Lock this phone for 24 hours after successful save
-        if (!empty($booking->phone)) {
-            $phoneKey = 'phone_lock_' . md5(preg_replace('/\D/', '', $booking->phone));
+        if ($request->input('phone')) {
+            $phoneKey = 'phone_lock_' . md5(preg_replace('/\D/', '', $request->input('phone')));
             Cache::put($phoneKey, true, now()->addDay());
         }
 
