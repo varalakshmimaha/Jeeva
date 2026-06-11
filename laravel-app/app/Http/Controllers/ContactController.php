@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\ContactMessage;
 use App\Traits\SendsBookingEmails;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class ContactController extends Controller
 {
@@ -15,6 +14,19 @@ class ContactController extends Controller
     {
         return \App\Models\SiteSetting::where('key', 'admin_timezone')->value('value') ?: config('app.timezone', 'UTC');
     }
+
+    private function phoneAlreadySubmittedToday(string $phone): bool
+    {
+        $digits = preg_replace('/\D/', '', $phone);
+        if (strlen($digits) < 5) return false;
+
+        return ContactMessage::whereRaw("REPLACE(REPLACE(REPLACE(REPLACE(phone, ' ', ''), '-', ''), '(', ''), ')', '') LIKE ?", [
+                '%' . $digits . '%'
+            ])
+            ->where('created_at', '>=', now()->subDay())
+            ->exists();
+    }
+
     public function store(Request $request)
     {
         // Honeypot: bots fill this hidden field, real users never see it
@@ -24,17 +36,32 @@ class ContactController extends Controller
                 ->with('success_kind', 'enquiry');
         }
 
-        // Duplicate: same phone number — only one submission allowed per day (cache-based)
-        if ($request->input('phone')) {
-            $phoneKey = 'phone_lock_' . md5(preg_replace('/\D/', '', $request->input('phone')));
-            if (Cache::has($phoneKey)) {
-                return redirect()->back()
-                    ->with('success', 'Thank you! Your message has been submitted.')
-                    ->with('success_kind', 'enquiry');
-            }
+        $validated = $request->validate([
+            'name'              => 'required|string|max:255',
+            'email'             => 'required|email|max:255',
+            'country_code'      => 'nullable|string|max:6',
+            'phone'             => 'nullable|string|max:20',
+            'subject'           => 'nullable|string|max:255',
+            'message'           => 'nullable|string|max:1000',
+            'preferred_date'    => 'nullable|date',
+            'preferred_time'    => 'nullable|string|max:100',
+            'service_selected'  => 'nullable|string|max:255',
+            'calendly_event_uri'=> 'nullable|string|max:500',
+        ]);
+
+        if (!empty($validated['phone']) && !empty($validated['country_code'])) {
+            $validated['phone'] = trim($validated['country_code']) . ' ' . trim($validated['phone']);
+        }
+        unset($validated['country_code']);
+
+        // Block same phone number more than once per day
+        if (!empty($validated['phone']) && $this->phoneAlreadySubmittedToday($validated['phone'])) {
+            return redirect()->back()
+                ->with('success', 'Thank you! Your message has been submitted.')
+                ->with('success_kind', 'enquiry');
         }
 
-        // Duplicate: same email + message submitted within the last 5 minutes
+        // Duplicate: same email + same message within 5 minutes
         if ($request->input('email') && $request->input('message')) {
             $isDuplicate = ContactMessage::where('email', $request->input('email'))
                 ->where('message', $request->input('message'))
@@ -47,24 +74,6 @@ class ContactController extends Controller
                     ->with('success_kind', 'enquiry');
             }
         }
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'country_code' => 'nullable|string|max:6',
-            'phone' => 'nullable|string|max:20',
-            'subject' => 'nullable|string|max:255',
-            'message' => 'nullable|string|max:1000',
-            'preferred_date' => 'nullable|date',
-            'preferred_time' => 'nullable|string|max:100',
-            'service_selected' => 'nullable|string|max:255',
-            'calendly_event_uri' => 'nullable|string|max:500',
-        ]);
-
-        if (!empty($validated['phone']) && !empty($validated['country_code'])) {
-            $validated['phone'] = trim($validated['country_code']) . ' ' . trim($validated['phone']);
-        }
-        unset($validated['country_code']);
 
         $eventUri = $validated['calendly_event_uri'] ?? '';
         unset($validated['calendly_event_uri']);
@@ -91,12 +100,6 @@ class ContactController extends Controller
         }
 
         $booking = ContactMessage::create($validated);
-
-        // Lock this phone for 24 hours after successful save
-        if ($request->input('phone')) {
-            $phoneKey = 'phone_lock_' . md5(preg_replace('/\D/', '', $request->input('phone')));
-            Cache::put($phoneKey, true, now()->addDay());
-        }
 
         $this->sendBookingEmail($booking);
 
@@ -169,24 +172,21 @@ class ContactController extends Controller
             return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
         }
 
-        // Duplicate: same phone number — only one submission allowed per day (cache-based)
-        if ($request->input('phone')) {
-            $phoneKey = 'phone_lock_' . md5(preg_replace('/\D/', '', $request->input('phone')));
-            if (Cache::has($phoneKey)) {
-                return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
-            }
-        }
-
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'country_code' => 'required|string|max:20',
-            'phone' => 'required|string|max:20',
-            'datetime' => 'nullable|string',
-            'notes' => 'nullable|string|max:1000',
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email',
+            'country_code'=> 'required|string|max:20',
+            'phone'       => 'required|string|max:20',
+            'datetime'    => 'nullable|string',
+            'notes'       => 'nullable|string|max:1000',
         ]);
 
         $phone = trim($validated['country_code']) . ' ' . trim($validated['phone']);
+
+        // Block same phone number more than once per day
+        if ($this->phoneAlreadySubmittedToday($phone)) {
+            return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+        }
 
         $message = 'Consultation Booking Request';
         if (!empty($validated['datetime'])) {
@@ -203,10 +203,6 @@ class ContactController extends Controller
             'subject' => 'Consultation Booking',
             'message' => $message,
         ]);
-
-        // Lock this phone for 24 hours after successful save
-        $phoneKey = 'phone_lock_' . md5(preg_replace('/\D/', '', $validated['phone']));
-        Cache::put($phoneKey, true, now()->addDay());
 
         return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
     }
