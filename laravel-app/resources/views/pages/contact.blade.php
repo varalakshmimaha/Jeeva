@@ -109,8 +109,6 @@
 
     </div>
   </section>
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
   <script>
   (function () {
     var openBtn    = document.getElementById('bkOpenCal');
@@ -122,12 +120,58 @@
     var eventUriHid = document.getElementById('bkEventUri');
     var form       = document.getElementById('bkForm');
 
+    var calendlyLoading = false;
+    var calendlyUrl = '{{ rtrim($siteSettings["calendly_booking_link"] ?? "https://calendly.com/varalakshmivaru231020/30min", "/") }}?hide_gdpr_banner=1&primary_color=2fa9a3';
+
+    function loadCalendlyAndOpen() {
+      if (window.Calendly) {
+        window.Calendly.initPopupWidget({ url: calendlyUrl });
+        return;
+      }
+
+      if (calendlyLoading) return;
+      calendlyLoading = true;
+
+      if (!document.getElementById('calendly-widget-css')) {
+        var css = document.createElement('link');
+        css.id = 'calendly-widget-css';
+        css.rel = 'stylesheet';
+        css.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(css);
+      }
+
+      var js = document.createElement('script');
+      js.src = 'https://assets.calendly.com/assets/external/widget.js';
+      js.async = true;
+      js.onload = function () {
+        calendlyLoading = false;
+        window.Calendly.initPopupWidget({ url: calendlyUrl });
+      };
+      js.onerror = function () {
+        calendlyLoading = false;
+      };
+      document.head.appendChild(js);
+    }
+
     if (openBtn) {
       openBtn.addEventListener('click', function () {
-        Calendly.initPopupWidget({
-          url: '{{ rtrim($siteSettings["calendly_booking_link"] ?? "https://calendly.com/varalakshmivaru231020/30min", "/") }}?hide_gdpr_banner=1&primary_color=2fa9a3'
-        });
+        loadCalendlyAndOpen();
       });
+    }
+
+    function isFormComplete() {
+      if (!form) return false;
+      var nameVal    = (form.querySelector('[name="name"]') || {}).value || '';
+      var emailVal   = (form.querySelector('[name="email"]') || {}).value || '';
+      var phoneVal   = (form.querySelector('[name="phone"]') || {}).value || '';
+      var serviceVal = (form.querySelector('[name="service_selected"]') || {}).value || '';
+      return nameVal.trim() && emailVal.trim() && phoneVal.trim() && serviceVal && dateHid.value && timeHid.value;
+    }
+
+    function checkAndAutoSubmit() {
+      if (isFormComplete()) {
+        form.submit();
+      }
     }
 
     window.addEventListener('message', function (e) {
@@ -135,7 +179,6 @@
       var payload  = e.data.payload || {};
       var eventUri = (payload.event && payload.event.uri) ? payload.event.uri : '';
 
-      console.log('[Calendly] event_scheduled fired. eventUri:', eventUri, 'full payload:', JSON.stringify(e.data));
       if (eventUriHid && eventUri) eventUriHid.value = eventUri;
 
       function applyTime(date, time, label) {
@@ -146,48 +189,39 @@
         if (confirm) confirm.style.display = 'flex';
       }
 
-      function fallback() {
+      function todayDate() {
         var now = new Date();
-        applyTime(
-          now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2) + '-' + ('0'+now.getDate()).slice(-2),
-          'Scheduled via Calendly',
-          'Calendly appointment confirmed!'
-        );
+        return now.getFullYear() + '-' + ('0'+(now.getMonth()+1)).slice(-2) + '-' + ('0'+now.getDate()).slice(-2);
       }
 
-      if (eventUri) {
-        applyTime(
-          new Date().toISOString().slice(0,10),
-          'Scheduled via Calendly',
-          'Fetching your slot...'
-        );
-        if (confirm) confirm.style.display = 'flex';
-        if (openBtn) openBtn.style.display  = 'none';
+      // Close the Calendly popup automatically after scheduling
+      setTimeout(function () {
+        var overlay = document.querySelector('.calendly-overlay');
+        if (overlay) overlay.remove();
+      }, 500);
 
-        function tryFetch(attemptsLeft) {
-          setTimeout(function () {
-            fetch('/calendly/event-time?event_uri=' + encodeURIComponent(eventUri))
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-              console.log('[Calendly] event-time response (attempts left ' + attemptsLeft + '):', JSON.stringify(data));
-              if (data.date && data.time) {
-                applyTime(data.date, data.time, data.label);
-              } else if (attemptsLeft > 0) {
-                tryFetch(attemptsLeft - 1);
-              } else {
-                fallback();
-              }
-            })
-            .catch(function (err) {
-              console.log('[Calendly] fetch error (attempts left ' + attemptsLeft + '):', err);
-              if (attemptsLeft > 0) { tryFetch(attemptsLeft - 1); } else { fallback(); }
-            });
-          }, 2500);
+      // Fetch real date/time then auto-submit
+      setTimeout(function () {
+        if (!eventUri) {
+          applyTime(todayDate(), 'Scheduled via Calendly', 'Appointment confirmed ✓');
+          checkAndAutoSubmit();
+          return;
         }
-        tryFetch(2);
-      } else {
-        fallback();
-      }
+        fetch('/calendly/event-time?event_uri=' + encodeURIComponent(eventUri))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.date && data.time) {
+              applyTime(data.date, data.time, data.label || 'Appointment confirmed ✓');
+            } else {
+              applyTime(todayDate(), 'Scheduled via Calendly', 'Appointment confirmed ✓');
+            }
+            checkAndAutoSubmit();
+          })
+          .catch(function () {
+            applyTime(todayDate(), 'Scheduled via Calendly', 'Appointment confirmed ✓');
+            checkAndAutoSubmit();
+          });
+      }, 1500);
     });
 
     if (changeBtn) {
@@ -196,9 +230,7 @@
         timeHid.value = '';
         if (confirm) confirm.style.display = 'none';
         if (openBtn) openBtn.style.display  = 'flex';
-        Calendly.initPopupWidget({
-          url: '{{ rtrim($siteSettings["calendly_booking_link"] ?? "https://calendly.com/varalakshmivaru231020/30min", "/") }}?hide_gdpr_banner=1&primary_color=2fa9a3'
-        });
+        loadCalendlyAndOpen();
       });
     }
 

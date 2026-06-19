@@ -135,9 +135,10 @@ class ContactController extends Controller
             return response()->json(['error' => 'missing uri'], 400);
         }
 
-        $token = \App\Models\SiteSetting::where('key', 'calendly_token')->value('value');
+        $token = \App\Models\SiteSetting::where('key', 'calendly_token')->value('value')
+            ?: env('CALENDLY_TOKEN');
         if (!$token) {
-            \Log::warning('calendlyEventTime: no token in site_settings');
+            \Log::warning('calendlyEventTime: no token configured (set CALENDLY_TOKEN in .env)');
             return response()->json(['error' => 'no token'], 400);
         }
 

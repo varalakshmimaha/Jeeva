@@ -14,19 +14,17 @@
       gtag('config', '{{ $siteSettings['google_analytics_id'] }}');
     </script>
   @endif
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Kaushan+Script&display=swap"
-    rel="stylesheet" />
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Kaushan+Script&display=swap" rel="stylesheet" />
+  </noscript>
   @if(!empty($siteSettings['favicon_path']))
     <link rel="icon" href="{{ asset($siteSettings['favicon_path']) }}" type="image/png">
   @endif
   <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ @filemtime(public_path('css/style.css')) ?: time() }}">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/themes/airbnb.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
 </head>
 
 <body data-page-name="{{ $pageName ?? 'home' }}">
@@ -162,7 +160,6 @@
     </a>
   </div>
 
-  <script src="{{ asset('js/dental-data.js') }}"></script>
   <script src="{{ asset('js/script.js') }}"></script>
 
   <script>
