@@ -63,6 +63,7 @@ class AdminController extends Controller
             'packages.*.title' => 'nullable|string|max:255',
             'packages.*.price' => 'nullable|string|max:50',
             'packages.*.includes' => 'nullable|string',
+            'packages.*.featured' => 'nullable|boolean',
         ]);
 
         if ($request->hasFile('icon')) {
@@ -120,6 +121,7 @@ class AdminController extends Controller
             'packages.*.title' => 'nullable|string|max:255',
             'packages.*.price' => 'nullable|string|max:50',
             'packages.*.includes' => 'nullable|string',
+            'packages.*.featured' => 'nullable|boolean',
         ]);
 
         if ($request->hasFile('icon')) {
