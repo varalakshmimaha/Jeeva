@@ -460,8 +460,31 @@ class AdminController extends Controller
     // === CONTACT MESSAGES ===
     public function messagesIndex()
     {
-        $messages = ContactMessage::latest()->get();
-        return view('admin.messages.index', compact('messages'));
+        $columns = [
+            'id', 'name', 'email', 'phone', 'subject', 'is_read',
+            'preferred_date', 'preferred_time', 'service_selected',
+            'consultation_status', 'created_at',
+        ];
+
+        $bookings = ContactMessage::select($columns)
+            ->where(function ($query) {
+                $query->whereNotNull('preferred_date')
+                    ->orWhereNotNull('preferred_time');
+            })
+            ->latest()
+            ->paginate(25, ['*'], 'bookings_page')
+            ->withQueryString();
+
+        $enquiries = ContactMessage::select(array_merge($columns, [
+            \Illuminate\Support\Facades\DB::raw('LEFT(message, 500) as message'),
+        ]))
+            ->whereNull('preferred_date')
+            ->whereNull('preferred_time')
+            ->latest()
+            ->paginate(25, ['*'], 'enquiries_page')
+            ->withQueryString();
+
+        return view('admin.messages.index', compact('bookings', 'enquiries'));
     }
 
     public function messagesShow($id)

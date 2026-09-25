@@ -2,12 +2,6 @@
 
 @section('admin-content')
 @php
-    $bookings = $messages->filter(function ($m) {
-        return !empty($m->preferred_date) || !empty($m->preferred_time);
-    })->values();
-    $enquiries = $messages->reject(function ($m) {
-        return !empty($m->preferred_date) || !empty($m->preferred_time);
-    })->values();
     $activeTab = request('tab', 'bookings');
 @endphp
 
@@ -41,11 +35,11 @@
     <div class="msg-tabs">
         <button type="button" class="msg-tab {{ $activeTab === 'bookings' ? 'is-active' : '' }}" data-tab="bookings">
             📅 Book Consultations
-            <span class="msg-tab-count">{{ $bookings->count() }}</span>
+            <span class="msg-tab-count">{{ $bookings->total() }}</span>
         </button>
         <button type="button" class="msg-tab {{ $activeTab === 'enquiries' ? 'is-active' : '' }}" data-tab="enquiries">
             💬 Get in Touch
-            <span class="msg-tab-count">{{ $enquiries->count() }}</span>
+            <span class="msg-tab-count">{{ $enquiries->total() }}</span>
         </button>
     </div>
 
@@ -136,6 +130,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{ $bookings->appends(['tab' => 'bookings'])->links() }}
         </div>
     </div>
 
@@ -193,6 +188,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{ $enquiries->appends(['tab' => 'enquiries'])->links() }}
         </div>
     </div>
 </div>
