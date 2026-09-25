@@ -36,6 +36,8 @@ class ContactController extends Controller
                 ->with('success_kind', 'enquiry');
         }
 
+            $this->validateCaptcha($request);
+
         $validated = $request->validate([
             'name'              => 'required|string|max:255',
             'email'             => 'required|email|max:255',
@@ -47,7 +49,9 @@ class ContactController extends Controller
             'preferred_time'    => 'nullable|string|max:100',
             'service_selected'  => 'nullable|string|max:255',
             'calendly_event_uri'=> 'nullable|string|max:500',
+            'captcha_answer'    => 'required|integer',
         ]);
+        unset($validated['captcha_answer']);
 
         if (!empty($validated['phone']) && !empty($validated['country_code'])) {
             $validated['phone'] = trim($validated['country_code']) . ' ' . trim($validated['phone']);
@@ -173,6 +177,8 @@ class ContactController extends Controller
             return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
         }
 
+        $this->validateCaptcha($request);
+
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
             'email'       => 'required|email',
@@ -180,7 +186,9 @@ class ContactController extends Controller
             'phone'       => 'required|string|max:20',
             'datetime'    => 'nullable|string',
             'notes'       => 'nullable|string|max:1000',
+            'captcha_answer' => 'required|integer',
         ]);
+        unset($validated['captcha_answer']);
 
         $phone = trim($validated['country_code']) . ' ' . trim($validated['phone']);
 
@@ -206,5 +214,19 @@ class ContactController extends Controller
         ]);
 
         return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+    }
+
+    private function validateCaptcha(Request $request): void
+    {
+        $expected = $request->session()->get('anti_spam_answer');
+        $answer = $request->input('captcha_answer');
+
+        if ($expected === null || !ctype_digit((string) $answer) || (int) $answer !== (int) $expected) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'captcha_answer' => 'Please solve the verification question correctly.',
+            ]);
+        }
+
+        $request->session()->forget('anti_spam_answer');
     }
 }

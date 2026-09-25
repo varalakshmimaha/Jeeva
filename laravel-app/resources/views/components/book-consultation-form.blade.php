@@ -43,6 +43,11 @@
           <textarea name="notes" placeholder="Other Notes (Optional)" class="bcf-input bcf-textarea" rows="3"></textarea>
         </div>
 
+        <div class="bcf-field bcf-captcha-field">
+          <label class="bcf-label">Robot check: What is {{ $captchaQuestion ?? '2 + 7 = ?' }} *</label>
+          <input type="number" name="captcha_answer" class="bcf-input" min="0" max="18" inputmode="numeric" required>
+        </div>
+
         <button type="submit" class="bcf-submit-btn">Book Consultation</button>
       </form>
     </div>

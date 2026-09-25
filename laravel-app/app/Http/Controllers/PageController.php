@@ -10,6 +10,7 @@ class PageController extends Controller
 {
     public function home()
     {
+        $captchaQuestion = $this->refreshCaptcha();
         $banners = \App\Models\Banner::where('page', 'home')->orderBy('order', 'asc')->get();
         $services = \App\Models\Service::orderBy('order', 'asc')->get();
         $testimonials = \App\Models\Testimonial::where('published', true)->orderBy('order')->take(6)->get();
@@ -24,6 +25,7 @@ class PageController extends Controller
             'services'     => $services,
             'testimonials' => $testimonials,
             'faqs'         => $faqs,
+            'captchaQuestion' => $captchaQuestion,
         ]);
     }
 
@@ -104,13 +106,26 @@ class PageController extends Controller
 
     public function contact()
     {
+        $captchaQuestion = $this->refreshCaptcha();
         $banner = \App\Models\Banner::where('page', 'contact')->orderBy('order', 'asc')->first();
         $services = \App\Models\Service::orderBy('order', 'asc')->get();
         return view('pages.contact', [
             'pageName' => 'contact',
             'banner' => $banner,
             'services' => $services,
+            'captchaQuestion' => $captchaQuestion,
         ]);
+    }
+
+    private function refreshCaptcha(): string
+    {
+        $first = random_int(1, 9);
+        $second = random_int(1, 9);
+        session([
+            'anti_spam_answer' => $first + $second,
+        ]);
+
+        return $first . ' + ' . $second . ' = ?';
     }
 
     public function bookedSlots(\Illuminate\Http\Request $request)

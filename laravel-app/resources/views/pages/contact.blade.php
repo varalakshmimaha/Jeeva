@@ -94,6 +94,11 @@
               <textarea name="message" class="bk-input bk-textarea" rows="3" placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
             </div>
 
+            <div class="bk-field">
+              <label class="bk-label">Robot check: What is {{ $captchaQuestion }} <span class="bk-req">*</span></label>
+              <input type="number" name="captcha_answer" class="bk-input" min="0" max="18" inputmode="numeric" required>
+            </div>
+
             <button type="submit" class="bk-submit-btn" id="bkSubmit">Book Consultation</button>
           </form>
         </div>
@@ -332,6 +337,10 @@
           <div class="bf-field">
             <label class="bf-label">Message</label>
             <textarea name="message" class="bf-input bf-textarea" rows="4" placeholder="Write message..."></textarea>
+          </div>
+          <div class="bf-field">
+            <label class="bf-label">Robot check: What is {{ $captchaQuestion }} *</label>
+            <input type="number" name="captcha_answer" class="bf-input" min="0" max="18" inputmode="numeric" required>
           </div>
           <button type="submit" class="bf-submit">Send Message</button>
         </form>
