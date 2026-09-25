@@ -307,7 +307,7 @@
     flex-direction: column;
     position: relative;
   }
-  .is-featured-wrap { padding-top: 22px; }
+  .is-featured-wrap { padding-top: 18px; }
 
   /* Card fills its wrapper 100% — guarantees equal height */
   .svc-pkg-card {
@@ -339,21 +339,20 @@
   .svc-pkg-card.is-featured .svc-pkg-header { background: linear-gradient(135deg, #2FA9A3, #1f3b38); }
   .svc-pkg-popular-badge {
     position: absolute;
-    top: 22px;
-    right: -58px;
-    width: 220px;
-    transform: rotate(45deg);
-    background: #2FA9A3;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #2FA9A3, #1f8a85);
     color: #fff;
     font-family: 'Outfit', sans-serif;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    text-align: center;
-    padding: 7px 0;
+    padding: 5px 16px;
+    border-radius: 999px;
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(47,169,163,0.3);
+    box-shadow: 0 4px 12px rgba(47,169,163,0.4);
     z-index: 2;
   }
   .svc-pkg-header {
@@ -553,8 +552,7 @@
     .svc-packages-grid--count-2,
     .svc-packages-grid--count-3 { grid-template-columns: 1fr; }
     .svc-benefits-list { gap: 0; }
-    .is-featured-wrap { padding-top: 18px; }
-    .svc-pkg-popular-badge { top: 18px; right: -62px; }
+    .is-featured-wrap { padding-top: 14px; }
   }
 </style>
 
