@@ -48,6 +48,7 @@ class PageController extends Controller
             'pageName' => 'services',
             'service' => $service,
             'relatedServices' => $relatedServices,
+            'servicePackages' => is_array($service->packages) ? $service->packages : [],
         ]);
     }
 

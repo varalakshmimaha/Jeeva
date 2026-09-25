@@ -44,7 +44,7 @@
         </div>
 
         <div class="bcf-field bcf-captcha-field">
-          <label class="bcf-label">Robot check: What is {{ $captchaQuestion ?? '2 + 7 = ?' }} *</label>
+          <label class="bcf-label">What is {{ $captchaQuestion ?? '2 + 7 = ?' }} *</label>
           <input type="number" name="captcha_answer" class="bcf-input" min="0" max="18" inputmode="numeric" required>
         </div>
 

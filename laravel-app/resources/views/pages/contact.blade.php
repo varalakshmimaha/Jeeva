@@ -95,7 +95,7 @@
             </div>
 
             <div class="bk-field">
-              <label class="bk-label">Robot check: What is {{ $captchaQuestion }} <span class="bk-req">*</span></label>
+              <label class="bk-label">What is {{ $captchaQuestion }} <span class="bk-req">*</span></label>
               <input type="number" name="captcha_answer" class="bk-input" min="0" max="18" inputmode="numeric" required>
             </div>
 
@@ -339,7 +339,7 @@
             <textarea name="message" class="bf-input bf-textarea" rows="4" placeholder="Write message..."></textarea>
           </div>
           <div class="bf-field">
-            <label class="bf-label">Robot check: What is {{ $captchaQuestion }} *</label>
+            <label class="bf-label">What is {{ $captchaQuestion }} *</label>
             <input type="number" name="captcha_answer" class="bf-input" min="0" max="18" inputmode="numeric" required>
           </div>
           <button type="submit" class="bf-submit">Send Message</button>
