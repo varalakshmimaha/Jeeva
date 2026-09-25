@@ -333,8 +333,8 @@
   }
   .svc-pkg-card.is-selected .svc-pkg-header { background: #1f8a85; }
   .svc-pkg-card.is-featured {
-    border-color: #2563eb;
-    box-shadow: 0 8px 28px -8px rgba(37,99,235,0.22);
+    border-color: #2FA9A3;
+    box-shadow: 0 8px 28px -8px rgba(47,169,163,0.22);
   }
   .svc-pkg-card.is-featured .svc-pkg-header { background: linear-gradient(135deg, #2FA9A3, #1f3b38); }
   .svc-pkg-popular-badge {
@@ -342,7 +342,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #2FA9A3, #1f8a85);
     color: #fff;
     font-family: 'Outfit', sans-serif;
     font-size: 11.5px;
@@ -352,7 +352,7 @@
     padding: 5px 16px;
     border-radius: 999px;
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+    box-shadow: 0 4px 12px rgba(47,169,163,0.4);
     z-index: 2;
   }
   .svc-pkg-header {
