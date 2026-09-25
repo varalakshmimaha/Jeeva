@@ -130,7 +130,22 @@
                     @endforelse
                 </tbody>
             </table>
-            {{ $bookings->appends(['tab' => 'bookings'])->links() }}
+            @php($bookingsPaginator = $bookings->appends(['tab' => 'bookings']))
+            @if($bookingsPaginator->hasPages())
+                <nav class="msg-pagination" aria-label="Bookings pagination">
+                    @if($bookingsPaginator->onFirstPage())
+                        <span class="msg-page-link is-disabled">Previous</span>
+                    @else
+                        <a class="msg-page-link" href="{{ $bookingsPaginator->previousPageUrl() }}">Previous</a>
+                    @endif
+                    <span class="msg-page-summary">Showing {{ $bookingsPaginator->firstItem() }} to {{ $bookingsPaginator->lastItem() }} of {{ $bookingsPaginator->total() }}</span>
+                    @if($bookingsPaginator->hasMorePages())
+                        <a class="msg-page-link" href="{{ $bookingsPaginator->nextPageUrl() }}">Next</a>
+                    @else
+                        <span class="msg-page-link is-disabled">Next</span>
+                    @endif
+                </nav>
+            @endif
         </div>
     </div>
 
@@ -188,7 +203,22 @@
                     @endforelse
                 </tbody>
             </table>
-            {{ $enquiries->appends(['tab' => 'enquiries'])->links() }}
+            @php($enquiriesPaginator = $enquiries->appends(['tab' => 'enquiries']))
+            @if($enquiriesPaginator->hasPages())
+                <nav class="msg-pagination" aria-label="Enquiries pagination">
+                    @if($enquiriesPaginator->onFirstPage())
+                        <span class="msg-page-link is-disabled">Previous</span>
+                    @else
+                        <a class="msg-page-link" href="{{ $enquiriesPaginator->previousPageUrl() }}">Previous</a>
+                    @endif
+                    <span class="msg-page-summary">Showing {{ $enquiriesPaginator->firstItem() }} to {{ $enquiriesPaginator->lastItem() }} of {{ $enquiriesPaginator->total() }}</span>
+                    @if($enquiriesPaginator->hasMorePages())
+                        <a class="msg-page-link" href="{{ $enquiriesPaginator->nextPageUrl() }}">Next</a>
+                    @else
+                        <span class="msg-page-link is-disabled">Next</span>
+                    @endif
+                </nav>
+            @endif
         </div>
     </div>
 </div>
@@ -276,6 +306,37 @@
     padding: 10px 16px;
     margin-bottom: 16px;
     font-size: 14px;
+}
+.msg-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border, #e5e7eb);
+    color: var(--muted, #6b7280);
+    font-size: 13px;
+}
+.msg-page-link {
+    display: inline-flex;
+    align-items: center;
+    min-width: 76px;
+    justify-content: center;
+    padding: 8px 14px;
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 7px;
+    background: #fff;
+    color: #2FA9A3;
+    font-weight: 600;
+    text-decoration: none;
+}
+.msg-page-link:hover { background: #eef8f7; border-color: #2FA9A3; }
+.msg-page-link.is-disabled { color: #aeb7c2; background: #f8fafc; cursor: default; }
+.msg-page-summary { text-align: center; }
+@media (max-width: 560px) {
+    .msg-pagination { gap: 8px; padding: 12px; }
+    .msg-page-link { min-width: 64px; padding: 7px 9px; }
+    .msg-page-summary { font-size: 12px; }
 }
 </style>
 
