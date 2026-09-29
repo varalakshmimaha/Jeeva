@@ -245,5 +245,3 @@ if ('IntersectionObserver' in window) {
 
   startAuto();
 })();
-
-console.log('Jiva Birth and Beyond website loaded successfully!');

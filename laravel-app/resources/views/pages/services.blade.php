@@ -20,7 +20,7 @@
       @foreach($services as $index => $service)
       <article class="svc-full-card reveal d{{ ($index % 6) + 1 }}">
         <div class="svc-full-thumb">
-          <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}">
+          <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}" loading="lazy" decoding="async">
         </div>
         <div class="svc-full-body">
           <div class="svc-full-cat">{{ $service->subtitle }}</div>

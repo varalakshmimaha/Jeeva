@@ -77,7 +77,7 @@
               <div class="tp-left">
                 @php $imgExists = $t->image && file_exists(public_path($t->image)); @endphp
                 @if($imgExists)
-                  <div class="tp-left-photo"><img src="{{ asset($t->image) }}?v={{ @filemtime(public_path($t->image)) }}" alt="{{ $t->name }}" onerror="this.parentElement.classList.add('tp-left-photo-initial');this.parentElement.innerHTML='<span>{{ substr($t->name,0,1) }}</span>';"></div>
+                  <div class="tp-left-photo"><img src="{{ asset($t->image) }}?v={{ @filemtime(public_path($t->image)) }}" alt="{{ $t->name }}" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('tp-left-photo-initial');this.parentElement.innerHTML='<span>{{ substr($t->name,0,1) }}</span>';"></div>
                 @else
                   <div class="tp-left-photo tp-left-photo-initial"><span>{{ substr($t->name,0,1) }}</span></div>
                 @endif

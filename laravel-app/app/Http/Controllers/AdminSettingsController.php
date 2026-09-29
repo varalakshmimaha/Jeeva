@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 
 class AdminSettingsController extends Controller
 {
@@ -42,6 +43,8 @@ class AdminSettingsController extends Controller
                     'message' => 'Failed to write to file. Check file permissions on storage/app directory.'
                 ], 500);
             }
+
+            Cache::forget('site_settings');
 
             return response()->json([
                 'success' => true,

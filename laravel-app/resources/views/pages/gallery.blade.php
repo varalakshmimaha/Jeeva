@@ -31,7 +31,7 @@
       @forelse($galleryItems as $item)
           <article class="gallery-showcase-card reveal" data-gallery-category="{{ $item->category }}">
               <div class="gallery-showcase-surface">
-                  <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="gallery-image-full">
+                  <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="gallery-image-full" loading="lazy" decoding="async">
               </div>
           </article>
       @empty

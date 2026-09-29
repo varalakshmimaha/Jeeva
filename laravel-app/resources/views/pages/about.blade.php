@@ -688,7 +688,7 @@
       <div class="cred-layout">
         <!-- LEFT: Yoga Image -->
         <div class="cred-side-wrapper reveal">
-          <img src="{{ asset(!empty($siteSettings['expertise_image']) ? $siteSettings['expertise_image'] : 'storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img">
+          <img src="{{ asset(!empty($siteSettings['expertise_image']) ? $siteSettings['expertise_image'] : 'storage/yoga-pose.jpeg.jpeg') }}" alt="Anu practicing yoga" class="cred-yoga-img" loading="lazy" decoding="async">
         </div>
 
         <!-- RIGHT: All certifications stacked -->
@@ -976,7 +976,7 @@
 
   <!-- Vision & Mission Section -->
   <section class="vm-section">
-    <img src="{{ !empty($siteSettings['vision_mission_bg_image_path']) ? asset('storage/' . $siteSettings['vision_mission_bg_image_path']) : asset('storage/vi and mi.jpg') }}" alt="Our Mission & Vision" class="vm-bg-img">
+    <img src="{{ !empty($siteSettings['vision_mission_bg_image_path']) ? asset('storage/' . $siteSettings['vision_mission_bg_image_path']) : asset('storage/vi and mi.jpg') }}" alt="Our Mission & Vision" class="vm-bg-img" loading="lazy" decoding="async">
     <div class="vm-overlay"></div>
     <div class="container">
       <div class="vm-header">

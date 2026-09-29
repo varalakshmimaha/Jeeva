@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class SettingsController extends Controller
 {
@@ -210,5 +211,7 @@ class SettingsController extends Controller
             ['key' => $key],
             ['value' => $value]
         );
+
+        Cache::forget('site_settings');
     }
 }
