@@ -124,6 +124,7 @@ class PageController extends Controller
         $second = random_int(1, 9);
         session([
             'anti_spam_answer' => $first + $second,
+            'form_rendered_at' => time(),
         ]);
 
         return $first . ' + ' . $second . ' = ?';

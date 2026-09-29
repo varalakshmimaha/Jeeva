@@ -166,7 +166,7 @@
         <div class="about-image-col reveal d1">
           <div class="about-blob-wrap">
             <div class="about-blob-bg"></div>
-            <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="about-blob-img">
+            <img src="{{ asset('images/founder-portrait.jpeg') }}" alt="Anu - Birth Doula" class="about-blob-img" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -333,7 +333,7 @@
           <div class="why-img-wrap why-icon-wrap">
             <img
               src="{{ !empty($siteSettings['why_choose_image_1']) ? asset($siteSettings['why_choose_image_1']) : asset('images/why-choose/01_new.png') }}"
-              alt="Personalized, One-on-One Support" class="why-icon">
+              alt="Personalized, One-on-One Support" class="why-icon" loading="lazy" decoding="async">
             <div class="why-badge">01</div>
           </div>
           <div class="why-arrow d-none-mobile">
@@ -349,7 +349,7 @@
           <div class="why-img-wrap why-icon-wrap">
             <img
               src="{{ !empty($siteSettings['why_choose_image_2']) ? asset($siteSettings['why_choose_image_2']) : asset('images/why-choose/02_new.png') }}"
-              alt="Holistic Approach to Wellness & Birth" class="why-icon">
+              alt="Holistic Approach to Wellness & Birth" class="why-icon" loading="lazy" decoding="async">
             <div class="why-badge">02</div>
           </div>
           <div class="why-arrow d-none-mobile">
@@ -366,7 +366,7 @@
           <div class="why-img-wrap why-icon-wrap">
             <img
               src="{{ !empty($siteSettings['why_choose_image_3']) ? asset($siteSettings['why_choose_image_3']) : asset('images/why-choose/03_new.png') }}"
-              alt="Guided by Experience & Understanding" class="why-icon">
+              alt="Guided by Experience & Understanding" class="why-icon" loading="lazy" decoding="async">
             <div class="why-badge">03</div>
           </div>
           <div class="why-arrow d-none-mobile">
@@ -383,7 +383,7 @@
           <div class="why-img-wrap why-icon-wrap">
             <img
               src="{{ !empty($siteSettings['why_choose_image_4']) ? asset($siteSettings['why_choose_image_4']) : asset('images/why-choose/04_new.png') }}"
-              alt="Ongoing Support & Guidance" class="why-icon">
+              alt="Ongoing Support & Guidance" class="why-icon" loading="lazy" decoding="async">
             <div class="why-badge">04</div>
           </div>
           <h3 class="why-card-title">Ongoing Support &amp; Guidance</h3>
@@ -599,7 +599,7 @@
         @foreach($services->take(3) as $index => $service)
           <article class="svc-full-card reveal d{{ ($index % 6) + 1 }}">
             <div class="svc-full-thumb">
-              <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}">
+              <img src="{{ asset($service->icon) }}" alt="{{ $service->title }}" loading="lazy" decoding="async">
             </div>
             <div class="svc-full-body">
               <div class="svc-full-cat">{{ $service->subtitle }}</div>
@@ -677,7 +677,7 @@
 
         <div class="appointment-split">
           <div class="appointment-image reveal">
-            <img src="{{ asset('storage/Baby.jpeg') }}" alt="Book a complimentary consultation with Anu">
+            <img src="{{ asset('storage/Baby.jpeg') }}" alt="Book a complimentary consultation with Anu" loading="lazy" decoding="async">
           </div>
 
           <div class="appointment-form-col reveal d1">
@@ -786,6 +786,11 @@
                   placeholder="Anything you'd like us to know...">{{ old('message') }}</textarea>
               </div>
 
+              <div class="bf-field">
+                <label>What is {{ $captchaQuestion }} *</label>
+                <input type="number" name="captcha_answer" min="0" max="18" inputmode="numeric" required>
+              </div>
+
               <button type="submit" class="book-submit">Book Consultation</button>
             </form>
           </div>
@@ -793,9 +798,6 @@
       </div>
     </div>
 
-
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
     <script>
       (function () {
         var openBtn = document.getElementById('homeBfOpenCal');
@@ -808,10 +810,41 @@
         var form = document.getElementById('homeBookConsultationForm');
 
         var calendlyUrl = '{{ rtrim($siteSettings["calendly_booking_link"] ?? "https://calendly.com/varalakshmivaru231020/30min", "/") }}?hide_gdpr_banner=1&primary_color=2fa9a3';
+        var calendlyLoading = false;
+
+        function loadCalendlyAndOpen() {
+          if (window.Calendly) {
+            window.Calendly.initPopupWidget({ url: calendlyUrl });
+            return;
+          }
+
+          if (calendlyLoading) return;
+          calendlyLoading = true;
+
+          if (!document.getElementById('calendly-widget-css')) {
+            var css = document.createElement('link');
+            css.id = 'calendly-widget-css';
+            css.rel = 'stylesheet';
+            css.href = 'https://assets.calendly.com/assets/external/widget.css';
+            document.head.appendChild(css);
+          }
+
+          var js = document.createElement('script');
+          js.src = 'https://assets.calendly.com/assets/external/widget.js';
+          js.async = true;
+          js.onload = function () {
+            calendlyLoading = false;
+            window.Calendly.initPopupWidget({ url: calendlyUrl });
+          };
+          js.onerror = function () {
+            calendlyLoading = false;
+          };
+          document.head.appendChild(js);
+        }
 
         if (openBtn) {
           openBtn.addEventListener('click', function () {
-            Calendly.initPopupWidget({ url: calendlyUrl });
+            loadCalendlyAndOpen();
           });
         }
 
@@ -878,7 +911,7 @@
             timeHid.value = '';
             if (confirm) confirm.style.display = 'none';
             if (openBtn) openBtn.style.display = 'flex';
-            Calendly.initPopupWidget({ url: calendlyUrl });
+            loadCalendlyAndOpen();
           });
         }
 
@@ -1763,7 +1796,7 @@
                       <p class="htsd-msg">{{ Str::limit($t->message, 300) }}</p>
                       <div class="htsd-author">
                         <div class="htsd-auth-img">
-                          @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}">
+                          @if($t->image)<img src="{{ asset($t->image) }}" alt="{{ $t->name }}" loading="lazy" decoding="async">
                           @else<span>{{ strtoupper(substr($t->name, 0, 1)) }}</span>@endif
                         </div>
                         <div>
@@ -2267,7 +2300,7 @@
           <span class="home-faq-label">FAQ's</span>
           <h2 class="home-faq-heading">Frequently Asked<br>Questions</h2>
           <div class="home-faq-image-wrap">
-            <img src="{{ asset('images/founder-sitting.jpeg') }}" alt="Anu - Birth Doula" class="home-faq-image">
+            <img src="{{ asset('images/founder-sitting.jpeg') }}" alt="Anu - Birth Doula" class="home-faq-image" loading="lazy" decoding="async">
           </div>
           <div class="home-faq-touch">
             <a href="{{ route('contact') }}" class="home-faq-touch-btn">Get In Touch <span

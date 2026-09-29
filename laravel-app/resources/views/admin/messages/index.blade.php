@@ -9,11 +9,13 @@
 <form id="bulk-form-bookings" action="{{ route('admin.messages.bulk-destroy') }}" method="POST" style="display:none">
     @csrf
     <input type="hidden" name="tab" value="bookings">
+    <input type="hidden" name="all" value="0" id="bulk-all-bookings">
     <div id="bulk-ids-bookings"></div>
 </form>
 <form id="bulk-form-enquiries" action="{{ route('admin.messages.bulk-destroy') }}" method="POST" style="display:none">
     @csrf
     <input type="hidden" name="tab" value="enquiries">
+    <input type="hidden" name="all" value="0" id="bulk-all-enquiries">
     <div id="bulk-ids-enquiries"></div>
 </form>
 
@@ -47,6 +49,9 @@
     <div id="tab-bookings" class="msg-panel {{ $activeTab === 'bookings' ? '' : 'is-hidden' }}">
         <div class="bulk-toolbar" id="bulk-toolbar-bookings">
             <span class="bulk-count" id="bulk-count-bookings">0 selected</span>
+            @if($bookings->total() > $bookings->count())
+                <button type="button" class="bulk-select-all" id="bulk-select-all-bookings" data-total="{{ $bookings->total() }}" onclick="selectAllPages('bookings')">Select all {{ number_format($bookings->total()) }} Book Consultations messages</button>
+            @endif
             <button type="button" class="adm-btn adm-btn-danger adm-btn-sm" onclick="submitBulk('bookings')">🗑 Delete Selected</button>
             <button type="button" class="adm-btn adm-btn-sm" onclick="clearSelection('bookings')">Cancel</button>
         </div>
@@ -153,6 +158,9 @@
     <div id="tab-enquiries" class="msg-panel {{ $activeTab === 'enquiries' ? '' : 'is-hidden' }}">
         <div class="bulk-toolbar" id="bulk-toolbar-enquiries">
             <span class="bulk-count" id="bulk-count-enquiries">0 selected</span>
+            @if($enquiries->total() > $enquiries->count())
+                <button type="button" class="bulk-select-all" id="bulk-select-all-enquiries" data-total="{{ $enquiries->total() }}" onclick="selectAllPages('enquiries')">Select all {{ number_format($enquiries->total()) }} Get in Touch messages</button>
+            @endif
             <button type="button" class="adm-btn adm-btn-danger adm-btn-sm" onclick="submitBulk('enquiries')">🗑 Delete Selected</button>
             <button type="button" class="adm-btn adm-btn-sm" onclick="clearSelection('enquiries')">Cancel</button>
         </div>
@@ -287,6 +295,18 @@
     color: #92400e;
     margin-right: 4px;
 }
+.bulk-select-all {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2FA9A3;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.bulk-select-all.is-visible { display: inline; }
 .col-chk {
     width: 36px;
     text-align: center;
@@ -362,21 +382,36 @@ function toggleAll(tab, checked) {
     updateBulkBar(tab);
 }
 
+var allPagesSelected = { bookings: false, enquiries: false };
+
 function updateBulkBar(tab) {
     var selected = document.querySelectorAll('.chk-' + tab + ':checked').length;
     var total    = document.querySelectorAll('.chk-' + tab).length;
     var toolbar  = document.getElementById('bulk-toolbar-' + tab);
     var counter  = document.getElementById('bulk-count-' + tab);
     var allChk   = document.getElementById('chk-all-' + tab);
-    counter.textContent = selected + ' selected';
+    var allLink  = document.getElementById('bulk-select-all-' + tab);
+    var pageFull = total > 0 && selected === total;
+    if (!pageFull) allPagesSelected[tab] = false;
+    counter.textContent = allPagesSelected[tab]
+        ? 'All ' + Number(allLink.dataset.total).toLocaleString() + ' messages selected'
+        : selected + ' selected';
     toolbar.classList.toggle('is-visible', selected > 0);
+    if (allLink) allLink.classList.toggle('is-visible', pageFull && !allPagesSelected[tab]);
     if (allChk) {
         allChk.indeterminate = selected > 0 && selected < total;
-        allChk.checked = selected === total && total > 0;
+        allChk.checked = pageFull;
     }
 }
 
+function selectAllPages(tab) {
+    document.querySelectorAll('.chk-' + tab).forEach(function (chk) { chk.checked = true; });
+    allPagesSelected[tab] = true;
+    updateBulkBar(tab);
+}
+
 function clearSelection(tab) {
+    allPagesSelected[tab] = false;
     document.querySelectorAll('.chk-' + tab).forEach(function (chk) { chk.checked = false; });
     var allChk = document.getElementById('chk-all-' + tab);
     if (allChk) { allChk.checked = false; allChk.indeterminate = false; }
@@ -384,12 +419,23 @@ function clearSelection(tab) {
 }
 
 function submitBulk(tab) {
+    var form = document.getElementById('bulk-form-' + tab);
+    var container = document.getElementById('bulk-ids-' + tab);
+    container.innerHTML = '';
+
+    if (allPagesSelected[tab]) {
+        var total = Number(document.getElementById('bulk-select-all-' + tab).dataset.total).toLocaleString();
+        if (!confirm('Delete ALL ' + total + ' messages in this tab (every page)? This cannot be undone.')) return;
+        document.getElementById('bulk-all-' + tab).value = '1';
+        form.submit();
+        return;
+    }
+
     var checked = document.querySelectorAll('.chk-' + tab + ':checked');
     if (checked.length === 0) { alert('Please select at least one message to delete.'); return; }
     if (!confirm('Delete ' + checked.length + ' selected message(s)? This cannot be undone.')) return;
 
-    var container = document.getElementById('bulk-ids-' + tab);
-    container.innerHTML = '';
+    document.getElementById('bulk-all-' + tab).value = '0';
     checked.forEach(function (chk) {
         var input = document.createElement('input');
         input.type  = 'hidden';
@@ -397,7 +443,7 @@ function submitBulk(tab) {
         input.value = chk.value;
         container.appendChild(input);
     });
-    document.getElementById('bulk-form-' + tab).submit();
+    form.submit();
 }
 </script>
 @endsection

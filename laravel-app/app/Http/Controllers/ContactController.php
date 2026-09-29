@@ -10,6 +10,8 @@ class ContactController extends Controller
 {
     use SendsBookingEmails;
 
+    private const LINK_PATTERN = '/https?:\/\/|www\.|\b[a-z0-9-]+\.(top|xyz|ru|click|link|shop|site|online)\b/i';
+
     private function adminTimezone(): string
     {
         return \App\Models\SiteSetting::where('key', 'admin_timezone')->value('value') ?: config('app.timezone', 'UTC');
@@ -36,7 +38,13 @@ class ContactController extends Controller
                 ->with('success_kind', 'enquiry');
         }
 
-            $this->validateCaptcha($request);
+        if ($this->looksLikeSpam($request)) {
+            return redirect()->back()
+                ->with('success', 'Thank you! Your message has been submitted.')
+                ->with('success_kind', 'enquiry');
+        }
+
+        $this->validateCaptcha($request);
 
         $validated = $request->validate([
             'name'              => 'required|string|max:255',
@@ -44,12 +52,14 @@ class ContactController extends Controller
             'country_code'      => 'nullable|string|max:6',
             'phone'             => 'nullable|string|max:20',
             'subject'           => 'nullable|string|max:255',
-            'message'           => 'nullable|string|max:1000',
+            'message'           => ['nullable', 'string', 'max:1000', 'not_regex:' . self::LINK_PATTERN],
             'preferred_date'    => 'nullable|date',
             'preferred_time'    => 'nullable|string|max:100',
             'service_selected'  => 'nullable|string|max:255',
             'calendly_event_uri'=> 'nullable|string|max:500',
             'captcha_answer'    => 'required|integer',
+        ], [
+            'message.not_regex' => 'Please remove any links from your message.',
         ]);
         unset($validated['captcha_answer']);
 
@@ -185,8 +195,10 @@ class ContactController extends Controller
             'country_code'=> 'required|string|max:20',
             'phone'       => 'required|string|max:20',
             'datetime'    => 'nullable|string',
-            'notes'       => 'nullable|string|max:1000',
+            'notes'       => ['nullable', 'string', 'max:1000', 'not_regex:' . self::LINK_PATTERN],
             'captcha_answer' => 'required|integer',
+        ], [
+            'notes.not_regex' => 'Please remove any links from your notes.',
         ]);
         unset($validated['captcha_answer']);
 
@@ -214,6 +226,24 @@ class ContactController extends Controller
         ]);
 
         return redirect(route('contact') . '#book')->with('success', '✓ Thank you! We\'ll be in touch shortly.');
+    }
+
+    /**
+     * Bot signals that real visitors never trigger: a link or Cyrillic text in the
+     * name field, Cyrillic in the message, or submitting within 3 seconds of page load.
+     */
+    private function looksLikeSpam(Request $request): bool
+    {
+        $name = (string) $request->input('name', '');
+        $text = $name . ' ' . $request->input('message', '') . ' ' . $request->input('notes', '');
+
+        if (preg_match(self::LINK_PATTERN, $name) || preg_match('/\p{Cyrillic}/u', $text)) {
+            return true;
+        }
+
+        $renderedAt = $request->session()->get('form_rendered_at');
+
+        return $renderedAt && (time() - (int) $renderedAt) < 3;
     }
 
     private function validateCaptcha(Request $request): void

@@ -505,12 +505,29 @@ class AdminController extends Controller
 
     public function messagesBulkDestroy(Request $request)
     {
+        $tab = $request->input('tab') === 'bookings' ? 'bookings' : 'enquiries';
+
+        // "Select all" across every page: delete the whole tab, not just the checked ids
+        if ($request->boolean('all')) {
+            $query = ContactMessage::query();
+            if ($tab === 'bookings') {
+                $query->where(function ($q) {
+                    $q->whereNotNull('preferred_date')->orWhereNotNull('preferred_time');
+                });
+            } else {
+                $query->whereNull('preferred_date')->whereNull('preferred_time');
+            }
+            $count = $query->delete();
+            return redirect()->route('admin.messages.index', ['tab' => $tab])
+                ->with('success', number_format($count) . ' message(s) deleted.');
+        }
+
         $ids = $request->input('ids', []);
         if (empty($ids)) {
-            return redirect()->route('admin.messages.index')->with('error', 'No messages selected.');
+            return redirect()->route('admin.messages.index', ['tab' => $tab])->with('error', 'No messages selected.');
         }
         $count = ContactMessage::whereIn('id', $ids)->delete();
-        return redirect()->route('admin.messages.index', ['tab' => $request->input('tab', 'enquiries')])
+        return redirect()->route('admin.messages.index', ['tab' => $tab])
             ->with('success', $count . ' message(s) deleted.');
     }
 
