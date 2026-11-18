@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Privacy Policy')
+@section('meta_title', 'Privacy Policy | Jiva Birth & Beyond')
+@section('meta_description', 'How Jiva Birth & Beyond collects, uses and protects the personal information you share through this website and its enquiry and booking forms.')
 
 @section('content')
 

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'About Us - Anu | Birth Doula & Childbirth Educator')
+@section('meta_title', 'About Anu – Birth Doula & Educator | Jiva Birth & Beyond')
+@section('meta_description', 'Meet Anu, birth doula, childbirth educator and mother of two, offering warm, one-on-one support through pregnancy, birth and the early days with your baby.')
 
 @section('content')
 

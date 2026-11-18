@@ -4,7 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@yield('title') - Jiva Birth & Beyond</title>
+  @php
+    // Meta title and description: set per page with @section('meta_title') / @section('meta_description')
+    // (section values are already HTML-escaped). Pages without them fall back to "<title> | Jiva Birth & Beyond".
+    $metaTitle = trim($__env->yieldContent('meta_title'));
+    if ($metaTitle === '') {
+      $pageTitle = trim($__env->yieldContent('title'));
+      $metaTitle = $pageTitle !== '' ? $pageTitle . ' | Jiva Birth &amp; Beyond' : 'Jiva Birth &amp; Beyond';
+    }
+    $metaDescription = trim($__env->yieldContent('meta_description'))
+      ?: 'Jiva Birth &amp; Beyond offers birth doula support, prenatal yoga, childbirth education and postpartum care for a calm, empowered birth journey.';
+  @endphp
+  <title>{!! $metaTitle !!}</title>
+  <meta name="description" content="{!! $metaDescription !!}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Jiva Birth &amp; Beyond" />
+  <meta property="og:title" content="{!! $metaTitle !!}" />
+  <meta property="og:description" content="{!! $metaDescription !!}" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{!! $metaTitle !!}" />
+  <meta name="twitter:description" content="{!! $metaDescription !!}" />
   @if(!empty($siteSettings['google_analytics_id']))
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $siteSettings['google_analytics_id'] }}"></script>
     <script>

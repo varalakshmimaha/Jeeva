@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Terms & Conditions')
+@section('meta_title', 'Terms & Conditions | Jiva Birth & Beyond')
+@section('meta_description', 'The terms and conditions for using the Jiva Birth & Beyond website and booking our birth doula, prenatal yoga and wellness services.')
 
 @section('content')
 

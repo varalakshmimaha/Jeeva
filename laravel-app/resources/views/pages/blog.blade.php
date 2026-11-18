@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Blog - Jiva Birth and Beyond')
+@section('meta_title', 'Birth & Wellness Blog | Jiva Birth & Beyond')
+@section('meta_description', 'Articles on birth doulas, prenatal yoga, pregnancy nutrition and postpartum recovery to help you feel informed and confident through pregnancy and birth.')
 
 @section('content')
 

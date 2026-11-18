@@ -53,6 +53,8 @@ class AdminController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'content' => 'nullable|string',
@@ -111,6 +113,8 @@ class AdminController extends Controller
         $service = Service::findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'content' => 'nullable|string',

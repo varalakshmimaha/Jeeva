@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Home')
+@section('meta_title', 'Birth Doula & Prenatal Yoga | Jiva Birth & Beyond')
+@section('meta_description', 'Compassionate birth doula support, prenatal yoga, childbirth education and postpartum care for a calm, empowered birth. Book a complimentary consultation.')
 
 @section('content')
 

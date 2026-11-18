@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $article['title'])
+@section('meta_title', \App\Support\Seo::title($article['title']))
+@section('meta_description', \App\Support\Seo::excerpt($article['excerpt'] ?? $article['content'] ?? ''))
 
 @section('content')
 

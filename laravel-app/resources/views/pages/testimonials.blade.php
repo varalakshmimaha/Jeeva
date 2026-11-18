@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Testimonials - Jiva Birth and Beyond')
+@section('meta_title', 'Client Testimonials | Jiva Birth & Beyond')
+@section('meta_description', 'Read what mothers and families say about birth doula support, prenatal yoga and childbirth education with Jiva Birth & Beyond.')
 
 @section('content')
 

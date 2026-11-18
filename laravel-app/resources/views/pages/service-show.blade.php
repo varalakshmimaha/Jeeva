@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $service->title . ' - Jiva Birth and Beyond')
+@section('meta_title', $service->seoTitle())
+@section('meta_description', $service->seoDescription())
 
 @section('content')
 

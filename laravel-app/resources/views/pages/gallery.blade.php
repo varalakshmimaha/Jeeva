@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Gallery - Jiva Birth and Beyond')
+@section('meta_title', 'Gallery | Jiva Birth & Beyond')
+@section('meta_description', 'Moments from prenatal yoga sessions, childbirth education classes, nutrition guidance and birth support with Jiva Birth & Beyond.')
 
 @section('content')
 

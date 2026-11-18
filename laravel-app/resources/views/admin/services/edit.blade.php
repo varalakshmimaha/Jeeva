@@ -72,6 +72,20 @@
                             <input type="number" name="order" value="{{ old('order', $service->order) }}" class="adm-input">
                         </td>
                     </tr>
+                    <tr>
+                        <td class="adm-fl">Meta Title</td>
+                        <td class="adm-fi">
+                            <input type="text" name="meta_title" value="{{ old('meta_title', $service->meta_title) }}" maxlength="255" class="adm-input" placeholder="e.g. Birth Doula Support | Jiva Birth &amp; Beyond">
+                            <p class="adm-hint">The page title shown in Google search results and the browser tab. Best under <strong>60 characters</strong>. Leave empty to use "Service title | Jiva Birth &amp; Beyond".</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adm-fl">Meta Description</td>
+                        <td class="adm-fi">
+                            <textarea name="meta_description" rows="3" maxlength="500" class="adm-input" placeholder="A short summary of this service for Google search results">{{ old('meta_description', $service->meta_description) }}</textarea>
+                            <p class="adm-hint">The summary shown under the title in Google. Best <strong>120–160 characters</strong>. Leave empty to use the start of the Description above.</p>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>

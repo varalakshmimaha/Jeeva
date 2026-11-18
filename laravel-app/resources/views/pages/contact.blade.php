@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Contact Us - Jiva Birth and Beyond')
+@section('meta_title', 'Contact & Book a Consultation | Jiva Birth & Beyond')
+@section('meta_description', 'Get in touch with Jiva Birth & Beyond or book a complimentary consultation for birth doula support, prenatal yoga, childbirth education or postpartum care.')
 
 @section('content')
 
